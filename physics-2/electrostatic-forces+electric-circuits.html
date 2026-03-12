@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electrostatic Forces and Electric Circuits</title>
+<meta name="description" content="Interactive notes on electrostatic forces, Coulomb's law, Ohm's law, Kirchhoff's laws, and circuit design — by tutoringwithsruthi">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Dosis:wght@400;500;600;700&family=Bitter:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+:root{--white:#FFFFFF;--sage-l:#D0D6B3;--sage:#9BA06A;--slate:#525B76;--forest:#143109;--bg:#f5f6ee;--sage-m:#e4e8cc;--fh:'Young Serif',Georgia,serif;--fp:'Dosis','Trebuchet MS',Arial,sans-serif;--fb:'Bitter',Georgia,serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px 16px 52px;overflow-x:hidden}
+.page{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+.pg-head{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:20px;padding:44px 36px;text-align:center}
+.pg-head h1{font-family:var(--fh);font-size:2.3rem;color:var(--forest);margin-bottom:0}
+.card{background:var(--white);border:2px solid var(--sage-l);border-radius:20px;padding:32px 30px;box-shadow:0 2px 12px rgba(20,49,9,0.06)}
+.card-title{font-family:var(--fh);font-size:1.45rem;color:var(--forest);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.card-title .icon{font-size:1.5rem}
+.body-text{font-family:var(--fp);font-size:1.05rem;color:var(--forest);line-height:1.7;margin-bottom:12px}
+.body-text:last-child{margin-bottom:0}
+.highlight-box{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:14px;padding:20px 22px;margin:16px 0}
+.formula-box{background:var(--white);border:2px solid var(--sage);border-radius:14px;padding:22px;margin:16px 0;text-align:center;font-size:1.3rem;overflow-x:auto}
+.term-grid{display:grid;grid-template-columns:80px 1fr;gap:8px 16px;margin:12px 0}
+.term-sym{font-family:var(--fb);font-weight:700;font-size:1.1rem;color:var(--sage);text-align:right}
+.term-def{font-family:var(--fp);font-size:1rem;color:var(--forest);line-height:1.6}
+.interactive-area{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:18px;padding:24px;margin:18px 0;text-align:center}
+.interactive-area canvas{border-radius:12px;display:block;margin:0 auto;max-width:100%}
+.ia-label{font-family:var(--fb);font-size:1.05rem;color:var(--slate);margin-bottom:12px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0}
+.site-btn{font-family:var(--fp);font-weight:600;font-size:.98rem;border:none;border-radius:30px;padding:10px 22px;cursor:pointer;transition:background .18s,transform .18s;background:var(--sage);color:var(--white)}
+.site-btn:hover{background:var(--forest);transform:translateY(-1px)}
+.site-btn.active{background:var(--forest)}
+.site-btn.secondary{background:var(--white);color:var(--forest);border:2px solid var(--sage-l)}
+.site-btn.secondary:hover{background:var(--sage-m)}
+.worked-example{background:#f9faf4;border-left:4px solid var(--sage);border-radius:0 14px 14px 0;padding:20px 22px;margin:16px 0}
+.worked-example .step{font-family:var(--fp);font-size:1rem;color:var(--forest);margin-bottom:8px;line-height:1.7}
+.worked-example .step-label{font-family:var(--fb);font-weight:700;color:var(--sage)}
+.practice-box{background:var(--white);border:2px dashed var(--sage-l);border-radius:14px;padding:18px 20px;margin:10px 0}
+.practice-box .q{font-family:var(--fp);font-size:1rem;color:var(--forest);margin-bottom:8px;line-height:1.6}
+.practice-box .a{font-family:var(--fp);font-size:.95rem;color:var(--sage);display:none;margin-top:6px;padding:10px 14px;background:var(--sage-m);border-radius:10px;line-height:1.6}
+.practice-box .a.show{display:block;animation:fadeIn .25s ease}
+.show-ans-btn{font-family:var(--fp);font-weight:600;font-size:.88rem;border:2px solid var(--sage-l);border-radius:20px;padding:6px 16px;cursor:pointer;background:var(--white);color:var(--sage);transition:background .18s}
+.show-ans-btn:hover{background:var(--sage-m)}
+.sub-title{font-family:var(--fh);font-size:1.15rem;color:var(--forest);margin:18px 0 8px}
+table.voltage-table{width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--fp);font-size:.95rem}
+table.voltage-table th{background:var(--sage);color:var(--white);padding:8px 12px;text-align:left;font-weight:600}
+table.voltage-table td{padding:8px 12px;border-bottom:1px solid var(--sage-l)}
+table.voltage-table tr:nth-child(even) td{background:var(--sage-m)}
+table.circuit-table{width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--fp);font-size:.92rem}
+table.circuit-table th{background:var(--sage);color:var(--white);padding:6px 10px;text-align:center;font-weight:600}
+table.circuit-table td{padding:6px 10px;border:1px solid var(--sage-l);text-align:center}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.magnet-sim{display:flex;align-items:center;justify-content:center;gap:0;margin:16px 0;min-height:80px}
+.magnet{width:120px;height:60px;border-radius:8px;display:flex;font-family:var(--fb);font-weight:700;font-size:1.1rem;overflow:hidden;transition:transform .5s cubic-bezier(.4,1.6,.6,1);user-select:none;border:2px solid var(--forest)}
+.magnet .pole{flex:1;display:flex;align-items:center;justify-content:center}
+.pole-n{background:#e74c3c;color:#fff}
+.pole-s{background:#3498db;color:#fff}
+.magnet-gap{width:40px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;transition:width .5s}
+.magnet-status{font-family:var(--fb);font-size:1rem;color:var(--slate);margin-top:10px;min-height:24px}
+
+.unit-step{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:8px 0;font-family:var(--fb);font-size:1.05rem}
+.unit{display:inline-block;padding:4px 10px;border-radius:8px;background:var(--sage-m);transition:all .4s}
+.unit.cancel{text-decoration:line-through;opacity:.35;background:#fce4e4}
+.unit.remain{background:var(--sage);color:var(--white);font-weight:700}
+.unit-frac{display:inline-flex;flex-direction:column;align-items:center;gap:0;vertical-align:middle}
+.uf-num{text-align:center;padding:4px 12px;min-width:40px}
+.uf-bar{display:block;width:100%;height:2px;background:var(--forest);margin:2px 0;transition:opacity .4s}
+.uf-den{text-align:center;padding:4px 12px;min-width:40px;transition:opacity .4s}
+.unit-source{font-family:var(--fp);font-size:.78rem;color:var(--slate);margin-top:4px;font-style:italic;letter-spacing:.5px}
+
+.beaker{width:160px;height:180px;border:3px solid var(--slate);border-top:none;border-radius:0 0 20px 20px;position:relative;overflow:hidden;display:inline-block;margin:10px 20px;vertical-align:bottom}
+.beaker-water{position:absolute;bottom:0;left:0;width:100%;transition:background .5s}
+.beaker-label{text-align:center;font-family:var(--fb);font-size:.9rem;margin-top:6px}
+.beaker-bulb{font-size:2rem;transition:filter .3s}
+.beaker-bulb.on{filter:drop-shadow(0 0 12px #f1c40f)}
+
+.bb-wrap{width:100%;overflow-x:auto}
+.bb-wrap canvas{border-radius:12px;border:2px solid var(--sage-l);display:block;margin:0 auto}
+.bb-controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.bb-controls button{font-family:var(--fp);font-weight:600;font-size:.85rem;border:2px solid var(--sage-l);border-radius:14px;padding:6px 14px;cursor:pointer;background:var(--white);color:var(--forest);transition:background .18s}
+.bb-controls button:hover{background:var(--sage-m)}
+.bb-controls button.active{background:var(--sage);color:var(--white);border-color:var(--sage)}
+.bb-readout{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0;font-family:var(--fb);font-size:.95rem;text-align:center}
+.bb-readout div{background:var(--sage-m);padding:8px;border-radius:10px}
+.bb-readout .val{font-size:1.2rem;font-weight:700;color:var(--sage)}
+.bb-tooltip{position:absolute;background:var(--forest);color:#fff;font-family:var(--fp);font-size:.82rem;padding:4px 10px;border-radius:8px;pointer-events:none;display:none;z-index:10;white-space:nowrap}
+
+.maze-wrap{position:relative;display:inline-block}
+.maze-wrap canvas{border-radius:10px;border:2px solid var(--sage-l)}
+
+@media(max-width:600px){
+  .pg-head{padding:30px 18px}.pg-head h1{font-size:1.6rem}.card{padding:22px 16px}.card-title{font-size:1.2rem}
+  .term-grid{grid-template-columns:60px 1fr}.magnet{width:90px;height:48px;font-size:.9rem}.bb-readout{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="pg-head">
+  <h1>Electrostatic Forces and Electric Circuits</h1>
+</div>
+
+<!-- ===== INTRO ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9889;</span> What Are Electrostatic Forces?</div>
+  <p class="body-text">Everything around you is made of atoms, and atoms contain tiny charged particles: <strong>protons</strong> (positive charge) and <strong>electrons</strong> (negative charge). When objects gain or lose electrons, they become electrically charged. The force between these charged objects is called the <strong>electrostatic force</strong>.</p>
+  <p class="body-text">This force follows a simple rule: <strong>opposite charges attract</strong> (positive pulls toward negative) and <strong>like charges repel</strong> (positive pushes away positive, negative pushes away negative). This is the same idea behind why a balloon sticks to your hair after rubbing it, or why lightning strikes!</p>
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0;">Think of it like magnets: the north pole of one magnet pulls toward the south pole of another, but two north poles push each other away. Electric charges behave the same way!</p>
+  </div>
+</div>
+
+<!-- ===== MAGNET INTERACTIVE ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#129522;</span> Like Poles Repel, Opposite Poles Attract</div>
+  <p class="body-text">Choose a pole configuration below and watch how the magnets behave. This same principle governs electrostatic forces between charges.</p>
+  <div class="interactive-area">
+    <div class="ia-label">Select a configuration to see how the magnets respond</div>
+    <div class="btn-row" id="magnetBtns">
+      <button class="site-btn active" onclick="setMagnets('repelN',this)">N &#8596; N (Like)</button>
+      <button class="site-btn secondary" onclick="setMagnets('repelS',this)">S &#8596; S (Like)</button>
+      <button class="site-btn secondary" onclick="setMagnets('attractNS',this)">N &#8596; S (Opposite)</button>
+      <button class="site-btn secondary" onclick="setMagnets('attractSN',this)">S &#8596; N (Opposite)</button>
+    </div>
+    <div class="magnet-sim" id="magnetSim">
+      <div class="magnet" id="magL"><div class="pole pole-n">N</div><div class="pole pole-s">S</div></div>
+      <div class="magnet-gap" id="magGap">&#8644;</div>
+      <div class="magnet" id="magR"><div class="pole pole-n">N</div><div class="pole pole-s">S</div></div>
+    </div>
+    <div class="magnet-status" id="magnetStatus">Like poles (N-N) &mdash; they <strong>repel</strong>!</div>
+  </div>
+</div>
+
+<!-- ===== COULOMB'S LAW ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#128220;</span> Coulomb's Law &mdash; The Electrostatic Force Formula</div>
+  <p class="body-text">The exact strength of the electrostatic force between two charged objects is given by <strong>Coulomb's Law</strong>:</p>
+  <div class="formula-box">
+    $$F = \frac{k \cdot |q_1| \cdot |q_2|}{r^2}$$
+  </div>
+  <p class="body-text">Let's break down every term:</p>
+  <div class="term-grid">
+    <div class="term-sym">$F$</div>
+    <div class="term-def"><strong>Electrostatic Force</strong> &mdash; the force between the two charges, measured in <strong>Newtons (N)</strong>. A positive value means repulsion; negative means attraction.</div>
+    <div class="term-sym">$k$</div>
+    <div class="term-def"><strong>Coulomb's Constant</strong> &mdash; a fixed value: $k = 8.99 \times 10^{9} \;\dfrac{\text{N} \cdot \text{m}^2}{\text{C}^2}$. It tells us how strong electrostatic forces are in our universe. Think of it as a "conversion factor" that connects charges and distance to force.</div>
+    <div class="term-sym">$q_1$</div>
+    <div class="term-def"><strong>Charge of object 1</strong> &mdash; measured in <strong>Coulombs (C)</strong>. A proton has charge $+1.6 \times 10^{-19}$ C.</div>
+    <div class="term-sym">$q_2$</div>
+    <div class="term-def"><strong>Charge of object 2</strong> &mdash; also in Coulombs. Electrons have charge $-1.6 \times 10^{-19}$ C.</div>
+    <div class="term-sym">$r$</div>
+    <div class="term-def"><strong>Distance</strong> between the centers of the two charges, measured in <strong>meters (m)</strong>. The force gets weaker as distance increases (inverse-square relationship).</div>
+  </div>
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0;"><strong>About the Electrostatic Constant ($k$):</strong> This constant comes from the fundamental properties of space itself: $k = \dfrac{1}{4\pi\epsilon_0}$ where $\epsilon_0$ is the permittivity of free space. It's enormous &mdash; electrostatic forces are incredibly strong at short distances!</p>
+  </div>
+</div>
+
+<!-- ===== UNIT CANCELLATION ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#128290;</span> How the Units Cancel in Coulomb's Law</div>
+  <p class="body-text">Click "Show Next Step" to walk through how the units cancel to leave us with Newtons:</p>
+  <div class="interactive-area" id="unitArea">
+    <div class="ia-label">Unit Cancellation: $F = \dfrac{k \cdot q_1 \cdot q_2}{r^2}$</div>
+    <div id="unitSteps">
+      <div class="unit-step" id="ustep0" style="align-items:flex-end;">
+        <div style="text-align:center;">
+          <div class="unit-frac" id="uf0">
+            <span class="unit uf-num" id="u0">N &middot; m&sup2;</span>
+            <span class="uf-bar"></span>
+            <span class="unit uf-den" id="u1">C&sup2;</span>
+          </div>
+          <div class="unit-source">k</div>
+        </div>
+        <span style="font-size:1.4rem;">&times;</span>
+        <div style="text-align:center;">
+          <span class="unit" id="u2" style="font-size:1.2rem;">C</span>
+          <div class="unit-source">q<sub>1</sub></div>
+        </div>
+        <span style="font-size:1.4rem;">&times;</span>
+        <div style="text-align:center;">
+          <span class="unit" id="u3" style="font-size:1.2rem;">C</span>
+          <div class="unit-source">q<sub>2</sub></div>
+        </div>
+        <span style="font-size:1.4rem;">&times;</span>
+        <div style="text-align:center;">
+          <div class="unit-frac" id="uf1">
+            <span class="uf-num" style="color:transparent;">1</span>
+            <span class="uf-bar"></span>
+            <span class="unit uf-den" id="u4">m&sup2;</span>
+          </div>
+          <div class="unit-source">r&sup2;</div>
+        </div>
+      </div>
+    </div>
+    <div id="unitExplain" class="body-text" style="margin-top:12px;min-height:50px;color:var(--slate);">
+      Start: we write out all units from $k$, $q_1$, $q_2$, and $r^2$.
+    </div>
+    <div class="btn-row" style="margin-top:14px;">
+      <button class="site-btn" id="unitNextBtn" onclick="nextUnitStep()">Show Next Step</button>
+      <button class="site-btn secondary" onclick="resetUnits()">Reset</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WORKED EXAMPLE ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9997;</span> Worked Example</div>
+  <p class="body-text"><strong>Problem:</strong> Two charges, $q_1 = +3 \times 10^{-6}$ C and $q_2 = -5 \times 10^{-6}$ C, are separated by $r = 0.2$ m. Find the electrostatic force between them.</p>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Step 1:</span> Write Coulomb's Law: $F = \dfrac{k \cdot |q_1| \cdot |q_2|}{r^2}$</div>
+    <div class="step"><span class="step-label">Step 2:</span> Plug in values: $F = \dfrac{(8.99 \times 10^{9})(3 \times 10^{-6})(5 \times 10^{-6})}{(0.2)^2}$</div>
+    <div class="step"><span class="step-label">Step 3:</span> Numerator: $8.99 \times 10^{9} \times 15 \times 10^{-12} = 0.13485$</div>
+    <div class="step"><span class="step-label">Step 4:</span> Denominator: $(0.2)^2 = 0.04$</div>
+    <div class="step"><span class="step-label">Step 5:</span> $F = \dfrac{0.13485}{0.04} = \mathbf{3.37 \text{ N}}$</div>
+    <div class="step"><span class="step-label">Step 6:</span> Since the charges are opposite signs, this force is <strong>attractive</strong> (they pull toward each other).</div>
+  </div>
+</div>
+
+<!-- ===== PRACTICE ELECTROSTATICS ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9998;</span> Practice: Electrostatic Forces</div>
+  <div class="practice-box">
+    <div class="q"><strong>1.</strong> Two charges of $+2 \times 10^{-6}$ C each are 0.5 m apart. Calculate the force. Is it attractive or repulsive?</div>
+    <button class="show-ans-btn" onclick="toggleAns('a1')">Show Answer</button>
+    <div class="a" id="a1">$F = \dfrac{(8.99\times10^{9})(2\times10^{-6})(2\times10^{-6})}{(0.5)^2} = \dfrac{0.03596}{0.25} = $ <strong>0.144 N, repulsive</strong> (both positive).</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>2.</strong> A charge of $+4 \times 10^{-6}$ C is 0.3 m from a charge of $-6 \times 10^{-6}$ C. What is the force?</div>
+    <button class="show-ans-btn" onclick="toggleAns('a2')">Show Answer</button>
+    <div class="a" id="a2">$F = \dfrac{(8.99\times10^{9})(4\times10^{-6})(6\times10^{-6})}{(0.3)^2} = \dfrac{0.21576}{0.09} = $ <strong>2.40 N, attractive</strong> (opposite charges).</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>3. (Word Problem)</strong> Two small metal spheres sit 0.1 m apart. Sphere A has $+8 \times 10^{-7}$ C and Sphere B has $+8 \times 10^{-7}$ C. They push apart. Calculate the force.</div>
+    <button class="show-ans-btn" onclick="toggleAns('a3')">Show Answer</button>
+    <div class="a" id="a3">$F = \dfrac{(8.99\times10^{9})(8\times10^{-7})^2}{(0.1)^2} = \dfrac{0.005754}{0.01} = $ <strong>0.0575 N</strong> (repulsive).</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>4. (Word Problem)</strong> A balloon rubbed on hair gets charge $-3 \times 10^{-8}$ C. It's held 0.05 m from a wall with charge $+5 \times 10^{-8}$ C. How strong is the attractive force?</div>
+    <button class="show-ans-btn" onclick="toggleAns('a4')">Show Answer</button>
+    <div class="a" id="a4">$F = \dfrac{(8.99\times10^{9})(3\times10^{-8})(5\times10^{-8})}{(0.05)^2} = \dfrac{1.349\times10^{-5}}{0.0025} = $ <strong>$5.39 \times 10^{-3}$ N</strong> (attractive).</div>
+  </div>
+</div>
+
+<!-- ===== ELECTROSTATICS TO CURRENT ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#128256;</span> From Electrostatic Forces to Electric Current</div>
+  <p class="body-text">Electrostatic forces are the <em>reason</em> electric current exists. When we create a path (a wire) and push charges with a force (a battery), those charges <em>flow</em>. That flow of electrons is <strong>electric current</strong>.</p>
+  <p class="body-text">To understand how current works in a circuit, we use <strong>Ohm's Law</strong>:</p>
+  <div class="formula-box">
+    $$V = I \times R \qquad I = \frac{V}{R} \qquad R = \frac{V}{I}$$
+  </div>
+  <div class="term-grid">
+    <div class="term-sym">$V$</div>
+    <div class="term-def"><strong>Voltage</strong> (Volts, V) &mdash; the "push" or electrical pressure that drives charges through the circuit.</div>
+    <div class="term-sym">$I$</div>
+    <div class="term-def"><strong>Current</strong> (Amperes, A) &mdash; the rate of flow of electric charge (how many electrons pass a point per second).</div>
+    <div class="term-sym">$R$</div>
+    <div class="term-def"><strong>Resistance</strong> ($\Omega$, Ohms) &mdash; how much the material opposes the flow of current.</div>
+  </div>
+</div>
+
+<!-- ===== HEART / BLOOD ANALOGY ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#10084;</span> Ohm's Law as Your Circulatory System</div>
+  <p class="body-text">Imagine your body's circulatory system as an electric circuit:</p>
+  <div class="highlight-box">
+    <div class="term-grid" style="grid-template-columns:auto 1fr;">
+      <div class="term-sym">Heart = $V$</div>
+      <div class="term-def">The heart pumps blood, creating <strong>pressure</strong> (voltage). Stronger heartbeat = higher voltage = more push.</div>
+      <div class="term-sym">Blood Flow = $I$</div>
+      <div class="term-def">The rate blood moves through vessels is like <strong>current</strong>. More pressure, more flow.</div>
+      <div class="term-sym">Plaque = $R$</div>
+      <div class="term-def">Plaque buildup in arteries <strong>resists</strong> blood flow. More plaque = higher resistance = less flow.</div>
+    </div>
+  </div>
+  <p class="body-text">Try it! Click the plaque (yellow buildup on the vessel walls) to clear it. Watch more red blood cells flow through as resistance drops:</p>
+  <div class="interactive-area">
+    <div class="ia-label">Click plaque on the walls to clear it &mdash; watch blood cells increase!</div>
+    <canvas id="vesselCanvas" width="520" height="160"></canvas>
+    <div style="display:flex;justify-content:space-around;margin-top:12px;font-family:var(--fb);font-size:.95rem;">
+      <div>Resistance: <strong id="vResist">High</strong></div>
+      <div>Flow (Current): <strong id="vFlow">Low</strong></div>
+    </div>
+    <div class="btn-row" style="margin-top:12px;">
+      <button class="site-btn secondary" onclick="resetPlaque()">Reset Plaque</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BATTERIES & ELECTRON FLOW ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#128267;</span> How Batteries Work &amp; Electron Flow</div>
+  <p class="body-text">A battery has two <strong>terminals</strong>:</p>
+  <div class="term-grid" style="grid-template-columns:auto 1fr;">
+    <div class="term-sym" style="color:#e74c3c;">+ (Positive)</div>
+    <div class="term-def">Where positive charge accumulates. Electrons are <em>attracted</em> here (opposite charges attract, just like opposite magnet poles!).</div>
+    <div class="term-sym" style="color:#3498db;">&minus; (Negative)</div>
+    <div class="term-def">Where excess electrons build up. Chemical reactions inside the battery push electrons out from this terminal.</div>
+  </div>
+  <p class="body-text">A circuit is simply a <strong>path for electrons to travel</strong> from the negative terminal, through wires and components, back to the positive terminal.</p>
+
+  <div class="highlight-box">
+    <p class="body-text"><strong>Why does the negative want to reach the positive?</strong> This connects directly to chemistry! Atoms want stable, full outer electron shells (valence shells). When a battery creates a charge imbalance, the negative terminal has <em>excess electrons</em> &mdash; atoms there are unstable. The positive terminal has a <em>deficit of electrons</em> &mdash; atoms there are also unstable. Just like in <strong>ionic bonding</strong>, where sodium (Na) gives up an electron to chlorine (Cl) because of chlorine's higher <strong>electronegativity</strong>, electrons in a circuit flow from where they're in excess to where they're needed. Nature always seeks balance!</p>
+    <p class="body-text" style="margin-bottom:0;"><strong>Batteries &amp; Magnets:</strong> Just like a magnet has N and S poles, a battery has + and &minus; terminals. The electrostatic force between excess electrons (&minus;) and the deficit (+) is what creates the "push" (voltage) that drives current!</p>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Watch electrons flow through the circuit &mdash; toggle the switch!</div>
+    <canvas id="circuitCanvas" width="480" height="300"></canvas>
+    <div class="btn-row" style="margin-top:10px;">
+      <button class="site-btn" id="circSwitchBtn" onclick="toggleCircuitSwitch()">Close Switch (Turn On)</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ELECTRON MAZE ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#127918;</span> Electron Maze: Help the Electron Get Home!</div>
+  <p class="body-text">Guide the electron (blue) from the <strong>negative terminal</strong> to the <strong>positive terminal</strong>. Use arrow keys or the buttons. Electrons always want to reach the positive side &mdash; driven by the electrostatic force between opposite charges!</p>
+  <div class="interactive-area">
+    <div class="maze-wrap"><canvas id="mazeCanvas" width="400" height="400"></canvas></div>
+    <div class="btn-row" style="margin-top:10px;"><button class="site-btn secondary" onclick="moveMaze('up')">&uarr;</button></div>
+    <div class="btn-row"><button class="site-btn secondary" onclick="moveMaze('left')">&larr;</button><button class="site-btn secondary" onclick="moveMaze('down')">&darr;</button><button class="site-btn secondary" onclick="moveMaze('right')">&rarr;</button></div>
+    <div class="btn-row"><button class="site-btn" onclick="resetMaze()">New Maze</button></div>
+    <div id="mazeStatus" class="magnet-status"></div>
+  </div>
+</div>
+
+<!-- ===== RESISTANCE REAL WORLD ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#128268;</span> Resistance in the Real World</div>
+  <p class="body-text">Resistance isn't just a physics concept &mdash; it's designed into every electronic device you use:</p>
+  <div class="highlight-box">
+    <p class="body-text"><strong>Why your laptop charger brick exists:</strong> Your laptop charges at higher wattage (65-100W), but your phone only needs 5-20W. The charging adapter contains resistors and circuitry that <strong>limit the voltage and current</strong> so it's safe for smaller devices. Without this resistance, too much current would fry your phone!</p>
+  </div>
+  <p class="body-text"><strong>Current is the flow of electrons.</strong> Specifically, $1 \text{ A} \approx 6.24 \times 10^{18}$ electrons per second.</p>
+  <p class="body-text">Different countries use different voltages:</p>
+  <table class="voltage-table">
+    <tr><th>Region</th><th>Voltage</th><th>Frequency</th></tr>
+    <tr><td>USA / Canada / Japan</td><td>120 V</td><td>60 Hz</td></tr>
+    <tr><td>Europe / UK / Australia</td><td>220-240 V</td><td>50 Hz</td></tr>
+    <tr><td>India</td><td>230 V</td><td>50 Hz</td></tr>
+    <tr><td>Brazil</td><td>127 V or 220 V</td><td>60 Hz</td></tr>
+  </table>
+  <p class="body-text">This is why you need a <strong>voltage converter</strong> when traveling &mdash; plugging a 120V device into a 240V outlet would push double the expected current through it!</p>
+</div>
+
+<!-- ===== CONDUCTIVITY & RESISTANCE ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#128167;</span> Conductivity vs. Resistance</div>
+  <p class="body-text"><strong>Conductivity</strong> is how easily a material lets charge flow through it. <strong>Resistance</strong> is the opposite. What makes something a good or bad conductor?</p>
+
+  <div class="highlight-box">
+    <p class="body-text"><strong>Good conductors</strong> (metals like copper, silver, gold) have <em>free electrons</em> in their outer shells that can move easily. The metallic bond lets valence electrons roam freely through the material, carrying charge.</p>
+    <p class="body-text"><strong>Poor conductors / Insulators</strong> (rubber, glass, plastic) have electrons tightly bound to their atoms. There are no free charge carriers, so current can't flow.</p>
+    <p class="body-text" style="margin-bottom:0;"><strong>Semiconductors</strong> (silicon, germanium) are in between &mdash; they can be made to conduct by adding impurities (doping), which is how computer chips work!</p>
+  </div>
+
+  <p class="sub-title">Why Salt Water Conducts but Pure Water Doesn't</p>
+  <p class="body-text">Pure (deionized) water has almost no free ions &mdash; it's actually a poor conductor! But water is excellent at <strong>dissociating ionic compounds</strong>. When you dissolve salt (NaCl), water's polar molecules pull the Na$^+$ and Cl$^-$ ions apart. These free ions become <strong>charge carriers</strong> &mdash; positive ions drift one way, negative ions the other &mdash; creating a current.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Add salt and watch ions appear &mdash; the bulb lights up as conductivity increases!</div>
+    <canvas id="saltCanvas" width="520" height="300"></canvas>
+    <div class="btn-row" style="margin-top:14px;">
+      <button class="site-btn" onclick="addSalt()">Add Salt</button>
+      <button class="site-btn secondary" onclick="resetSalt()">Reset</button>
+    </div>
+    <div id="saltExplain" class="body-text" style="margin-top:10px;color:var(--slate);min-height:24px;"></div>
+  </div>
+</div>
+
+<!-- ===== INSULATION & MYELIN ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#129504;</span> Insulation: From Phone Wires to Neurons</div>
+  <p class="body-text">We use materials with <strong>high resistance</strong> (poor conductors) as <strong>insulators</strong> to protect and direct electrical signals:</p>
+  <div class="highlight-box">
+    <p class="body-text"><strong>Phone &amp; data cables:</strong> The copper wire inside carries the signal, but it's wrapped in plastic insulation. Without it, the signal would leak to other wires or shock you!</p>
+    <p class="body-text" style="margin-bottom:0;"><strong>Myelin sheath in neurons:</strong> Your nervous system uses the same principle. Neurons are wrapped in a fatty insulating layer called the <strong>myelin sheath</strong>. It prevents signal leakage and speeds up nerve impulses. Without myelin, signals would be slow and scattered &mdash; diseases like Multiple Sclerosis damage myelin, disrupting signals.</p>
+  </div>
+  <div class="interactive-area">
+    <div class="ia-label">Watch the signal jump between nodes &mdash; toggle myelin to see the difference!</div>
+    <canvas id="neuronCanvas" width="580" height="200"></canvas>
+    <div class="btn-row" style="margin-top:10px;">
+      <button class="site-btn" onclick="fireNeuron()">Fire Signal!</button>
+      <button class="site-btn secondary" onclick="toggleMyelin()">Toggle Myelin</button>
+    </div>
+    <div id="neuronStatus" class="body-text" style="margin-top:8px;color:var(--slate);min-height:20px;">With myelin: signal jumps quickly between nodes (saltatory conduction)</div>
+  </div>
+</div>
+
+<!-- ===== KCL ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#128422;</span> Kirchhoff's Current Law (KCL)</div>
+  <p class="body-text"><strong>Kirchhoff's Current Law</strong> says: the total current entering a junction (node) equals the total current leaving it. No charge is created or destroyed!</p>
+  <div class="formula-box">$$\sum I_{\text{in}} = \sum I_{\text{out}}$$</div>
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0;">Think of a water pipe that splits into branches. The total water flowing in must equal the total flowing out. Similarly, a large artery splitting into tiny capillaries &mdash; the total blood flow is conserved!</p>
+  </div>
+  <div class="interactive-area">
+    <div class="ia-label">Turn the valve wheels to open or close pipes &mdash; watch the flow split!</div>
+    <canvas id="pipeCanvas" width="540" height="340"></canvas>
+    <div id="pipeStatus" class="body-text" style="margin-top:8px;color:var(--slate);">Click a valve wheel to toggle that pipe open/closed</div>
+  </div>
+</div>
+
+<!-- ===== SERIES & PARALLEL ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9879;</span> Series vs. Parallel Circuits</div>
+
+  <p class="sub-title">Series Circuits</p>
+  <p class="body-text">Components are connected <strong>end-to-end</strong> in a single path. Current is the <strong>same</strong> through every component, but voltage <strong>divides</strong>.</p>
+  <div class="formula-box">
+    $$R_{\text{total}} = R_1 + R_2 + R_3 + \ldots$$
+    $$I_{\text{total}} = I_1 = I_2 = \ldots$$
+    $$V_{\text{total}} = V_1 + V_2 + \ldots$$
+  </div>
+  <div class="interactive-area">
+    <div class="ia-label">Series Circuit Diagram</div>
+    <canvas id="seriesCanvas" width="520" height="200"></canvas>
+    <table class="circuit-table" id="seriesTable" style="margin-top:12px;">
+      <tr><th>Location</th><th>Voltage (V)</th><th>Current (A)</th><th>Resistance (&Omega;)</th></tr>
+      <tr><td>Battery</td><td>12 V</td><td>1 A</td><td>&mdash;</td></tr>
+      <tr><td>R1 (4&Omega;)</td><td>4 V</td><td>1 A</td><td>4 &Omega;</td></tr>
+      <tr><td>R2 (8&Omega;)</td><td>8 V</td><td>1 A</td><td>8 &Omega;</td></tr>
+      <tr><td><strong>Total</strong></td><td><strong>12 V</strong></td><td><strong>1 A</strong></td><td><strong>12 &Omega;</strong></td></tr>
+    </table>
+  </div>
+
+  <p class="sub-title">Parallel Circuits</p>
+  <p class="body-text">Components are connected <strong>across the same two points</strong>, creating multiple paths. Voltage is the <strong>same</strong> across each branch, but current <strong>divides</strong>.</p>
+  <div class="formula-box">
+    $$\frac{1}{R_{\text{total}}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \ldots$$
+    $$V_{\text{total}} = V_1 = V_2 = \ldots$$
+    $$I_{\text{total}} = I_1 + I_2 + \ldots$$
+  </div>
+  <div class="interactive-area">
+    <div class="ia-label">Parallel Circuit Diagram</div>
+    <canvas id="parallelCanvas" width="520" height="260"></canvas>
+    <table class="circuit-table" id="parallelTable" style="margin-top:12px;">
+      <tr><th>Branch</th><th>Voltage (V)</th><th>Current (A)</th><th>Resistance (&Omega;)</th></tr>
+      <tr><td>Battery</td><td>12 V</td><td>3 A (total)</td><td>&mdash;</td></tr>
+      <tr><td>Branch 1 (R1 = 6&Omega;)</td><td>12 V</td><td>2 A</td><td>6 &Omega;</td></tr>
+      <tr><td>Branch 2 (R2 = 12&Omega;)</td><td>12 V</td><td>1 A</td><td>12 &Omega;</td></tr>
+      <tr><td><strong>Total</strong></td><td><strong>12 V</strong></td><td><strong>2+1 = 3 A &#10003;</strong></td><td><strong>4 &Omega;</strong></td></tr>
+    </table>
+  </div>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0;"><strong>Key circuit elements:</strong> A <strong>battery</strong> provides voltage. A <strong>resistor</strong> opposes current. A <strong>switch</strong> opens/closes the circuit. A <strong>light bulb</strong> converts electrical energy to light (it's also a resistor!).</p>
+  </div>
+</div>
+
+<!-- ===== BREADBOARD ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#128899;</span> Interactive Circuit Breadboard</div>
+  <p class="body-text">Build your own circuit! Select a component and click to place it. To wire components, select "Wire", click a start point, then click an end point &mdash; a green wire connects them. The readout calculates V, I, R for connected components. Hover over elements to see branch values.</p>
+  <div class="interactive-area">
+    <div class="bb-controls" id="bbControls">
+      <button class="active" onclick="setBBTool('battery',this)">&#128267; Battery (9V)</button>
+      <button onclick="setBBTool('resistor',this)">&#9107; Resistor</button>
+      <button onclick="setBBTool('switch',this)">&#9744; Switch</button>
+      <button onclick="setBBTool('light',this)">&#128161; Light</button>
+      <button onclick="setBBTool('wire',this)">&#9135; Wire</button>
+      <button onclick="setBBTool('erase',this)">&#10006; Erase</button>
+    </div>
+    <div class="bb-readout" id="bbReadout">
+      <div>Voltage<br><span class="val" id="bbV">0 V</span></div>
+      <div>Current<br><span class="val" id="bbI">0 A</span></div>
+      <div>Resistance<br><span class="val" id="bbR">0 &Omega;</span></div>
+    </div>
+    <div class="bb-wrap" style="position:relative;">
+      <canvas id="bbCanvas" width="680" height="440"></canvas>
+      <div class="bb-tooltip" id="bbTooltip"></div>
+    </div>
+    <div class="btn-row" style="margin-top:10px;">
+      <button class="site-btn secondary" onclick="clearBB()">Clear Board</button>
+      <button class="site-btn secondary" onclick="toggleBBCircuit()">Series / Parallel</button>
+    </div>
+    <div id="bbStatus" class="body-text" style="margin-top:8px;color:var(--slate);min-height:20px;">Mode: Series &mdash; place components to build your circuit!</div>
+  </div>
+</div>
+
+<!-- ===== KVL ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9889;</span> Kirchhoff's Voltage Law (KVL)</div>
+  <p class="body-text"><strong>Kirchhoff's Voltage Law</strong> says: the sum of all voltage gains and drops around any closed loop equals zero.</p>
+  <div class="formula-box">
+    $$\sum V = 0 \qquad \Longrightarrow \qquad V_{\text{battery}} - V_{R_1} - V_{R_2} - \ldots = 0$$
+  </div>
+  <div class="interactive-area">
+    <div class="ia-label">Add or remove resistors &mdash; see how voltage distributes!</div>
+    <canvas id="kvlCanvas" width="500" height="280"></canvas>
+    <div class="btn-row" style="margin-top:10px;">
+      <button class="site-btn" onclick="addKVLResistor()">Add Resistor</button>
+      <button class="site-btn" onclick="removeKVLResistor()">Remove Resistor</button>
+      <button class="site-btn secondary" onclick="resetKVL()">Reset</button>
+    </div>
+    <div id="kvlStatus" class="body-text" style="margin-top:8px;color:var(--slate);">Battery: 12V | 2 resistors (10&Omega; each) | 6.0V drop each | Sum = 0 &#10003;</div>
+  </div>
+</div>
+
+<!-- ===== PRACTICE OHM'S ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9998;</span> Practice: Ohm's Law &amp; Circuits</div>
+  <div class="practice-box">
+    <div class="q"><strong>1.</strong> A 9V battery is connected to a 3&Omega; resistor. What is the current?</div>
+    <button class="show-ans-btn" onclick="toggleAns('b1')">Show Answer</button>
+    <div class="a" id="b1">$I = \dfrac{V}{R} = \dfrac{9}{3} = $ <strong>3 A</strong></div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>2.</strong> A circuit has 2A current and 10&Omega; resistance. What's the voltage?</div>
+    <button class="show-ans-btn" onclick="toggleAns('b2')">Show Answer</button>
+    <div class="a" id="b2">$V = IR = 2 \times 10 = $ <strong>20 V</strong></div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>3. (Word Problem)</strong> A student builds a circuit with a 12V battery and two resistors of 4&Omega; and 8&Omega; in series. Find total resistance, current, and voltage across each.</div>
+    <button class="show-ans-btn" onclick="toggleAns('b3')">Show Answer</button>
+    <div class="a" id="b3">$R_{\text{total}} = 4 + 8 = 12\Omega$. $I = \dfrac{12}{12} = $ <strong>1A</strong>. $V_1 = 1\times4 = $ <strong>4V</strong>. $V_2 = 1\times8 = $ <strong>8V</strong>. Check: $4+8 = 12\text{V}$ &#10003;</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>4.</strong> Two 6&Omega; resistors in parallel. What is total resistance?</div>
+    <button class="show-ans-btn" onclick="toggleAns('b4')">Show Answer</button>
+    <div class="a" id="b4">$\dfrac{1}{R} = \dfrac{1}{6} + \dfrac{1}{6} = \dfrac{2}{6} = \dfrac{1}{3}$. $R_{\text{total}} = $ <strong>3&Omega;</strong></div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>5. (Word Problem)</strong> Your phone charger converts 120V to 5V. If the phone draws 2A, how much effective resistance does the charger add?</div>
+    <button class="show-ans-btn" onclick="toggleAns('b5')">Show Answer</button>
+    <div class="a" id="b5">Charger drops $120 - 5 = 115\text{V}$. $R = \dfrac{V}{I} = \dfrac{115}{2} = $ <strong>57.5&Omega;</strong></div>
+  </div>
+</div>
+
+<!-- ===== PRACTICE KIRCHHOFF ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9998;</span> Practice: Kirchhoff's Laws</div>
+  <div class="practice-box">
+    <div class="q"><strong>1.</strong> At a junction, 5A flows in. One branch carries 2A out. How much in the other?</div>
+    <button class="show-ans-btn" onclick="toggleAns('c1')">Show Answer</button>
+    <div class="a" id="c1">KCL: $I_{\text{in}} = I_{\text{out}}$. $5 = 2 + I_2$. $I_2 = $ <strong>3A</strong></div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>2.</strong> A loop has a 24V battery and three equal resistors. Voltage drop across each?</div>
+    <button class="show-ans-btn" onclick="toggleAns('c2')">Show Answer</button>
+    <div class="a" id="c2">KVL: $24 - V_1 - V_2 - V_3 = 0$. Equal resistors: $V = \dfrac{24}{3} = $ <strong>8V each</strong></div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>3. (Word Problem)</strong> Water enters a pipe at 10 L/s and splits into 4 equal pipes. How much in each? Relate to a circuit with 10A and 4 equal branches.</div>
+    <button class="show-ans-btn" onclick="toggleAns('c3')">Show Answer</button>
+    <div class="a" id="c3">Each pipe: $\dfrac{10}{4} = $ <strong>2.5 L/s</strong>. By KCL each branch: $\dfrac{10}{4} = $ <strong>2.5A</strong>. Same conservation principle!</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>4. (Word Problem)</strong> 9V battery, three series resistors: 1&Omega;, 2&Omega;, 3&Omega;. Find current and verify KVL.</div>
+    <button class="show-ans-btn" onclick="toggleAns('c4')">Show Answer</button>
+    <div class="a" id="c4">$R_{\text{total}} = 6\Omega$. $I = \dfrac{9}{6} = 1.5\text{A}$. Drops: $1.5(1)=1.5\text{V}$, $1.5(2)=3\text{V}$, $1.5(3)=4.5\text{V}$. Check: $1.5+3+4.5=9\text{V}$ &#10003;</div>
+  </div>
+</div>
+
+<!-- ===== WRAP UP ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#127775;</span> Wrapping It All Together</div>
+  <p class="body-text">Let's connect everything we've learned:</p>
+  <div class="highlight-box">
+    <p class="body-text"><strong>1. Electrostatic forces</strong> are the foundation &mdash; opposite charges attract, like charges repel (Coulomb's Law).</p>
+    <p class="body-text"><strong>2. These forces drive current</strong> &mdash; a battery creates voltage (charge separation), pushing electrons through a circuit, just like electronegativity drives ionic bonds.</p>
+    <p class="body-text"><strong>3. Ohm's Law</strong> ($V = IR$) tells us the relationship between voltage, current, and resistance &mdash; like the heart pumping blood against plaque.</p>
+    <p class="body-text"><strong>4. Conductors vs. insulators</strong> &mdash; free electrons make metals conduct; dissolved ions make salt water conduct; myelin insulates neurons.</p>
+    <p class="body-text"><strong>5. Kirchhoff's Current Law</strong> &mdash; current is conserved at junctions, just like water splitting in pipes.</p>
+    <p class="body-text" style="margin-bottom:0;"><strong>6. Kirchhoff's Voltage Law</strong> &mdash; voltage gains equal voltage drops around any closed loop.</p>
+  </div>
+  <p class="body-text">From a balloon sticking to your hair, to the phone charger on your desk, to the signals firing in your brain &mdash; electrostatic forces and circuits are everywhere.</p>
+</div>
+
+</div>
+
+<script>
+/* ===== ANSWERS ===== */
+function toggleAns(id){document.getElementById(id).classList.toggle('show')}
+
+/* ===== MAGNETS ===== */
+function setMagnets(mode,btn){
+  var btns=document.getElementById('magnetBtns').querySelectorAll('.site-btn');
+  btns.forEach(function(b){b.classList.remove('active');b.classList.add('secondary')});
+  btn.classList.add('active');btn.classList.remove('secondary');
+  var magL=document.getElementById('magL'),magR=document.getElementById('magR'),gap=document.getElementById('magGap'),status=document.getElementById('magnetStatus');
+  if(mode==='repelN'){
+    magL.innerHTML='<div class="pole pole-n">N</div><div class="pole pole-s">S</div>';
+    magR.innerHTML='<div class="pole pole-n">N</div><div class="pole pole-s">S</div>';
+    gap.style.width='80px';gap.innerHTML='&#8668; &#8669;';magL.style.transform='translateX(-15px)';magR.style.transform='translateX(15px)';
+    status.innerHTML='Like poles (N-N) &mdash; they <strong>repel</strong>!';
+  }else if(mode==='repelS'){
+    magL.innerHTML='<div class="pole pole-n">N</div><div class="pole pole-s">S</div>';
+    magR.innerHTML='<div class="pole pole-s">S</div><div class="pole pole-n">N</div>';
+    gap.style.width='80px';gap.innerHTML='&#8668; &#8669;';magL.style.transform='translateX(-15px)';magR.style.transform='translateX(15px)';
+    status.innerHTML='Like poles (S-S) &mdash; they <strong>repel</strong>!';
+  }else if(mode==='attractNS'){
+    magL.innerHTML='<div class="pole pole-n">N</div><div class="pole pole-s">S</div>';
+    magR.innerHTML='<div class="pole pole-s">S</div><div class="pole pole-n">N</div>';
+    gap.style.width='0px';gap.innerHTML='';magL.style.transform='translateX(0)';magR.style.transform='translateX(0)';
+    status.innerHTML='Opposite poles (N\u2013S) &mdash; they <strong>attract</strong>!';
+  }else{
+    magL.innerHTML='<div class="pole pole-n">N</div><div class="pole pole-s">S</div>';
+    magR.innerHTML='<div class="pole pole-n">N</div><div class="pole pole-s">S</div>';
+    gap.style.width='0px';gap.innerHTML='';magL.style.transform='translateX(0)';magR.style.transform='translateX(0)';
+    status.innerHTML='Opposite poles (S\u2013N) &mdash; they <strong>attract</strong>!';
+  }
+}
+
+/* ===== UNITS ===== */
+var unitStep=0;
+function nextUnitStep(){
+  unitStep++;
+  var explain=document.getElementById('unitExplain');
+  if(unitStep===1){
+    // C^2 in denominator cancels with C x C from charges
+    document.getElementById('u1').classList.add('cancel');
+    document.getElementById('u2').classList.add('cancel');
+    document.getElementById('u3').classList.add('cancel');
+    explain.innerHTML='<strong>Step 1:</strong> The two C (from q\u2081 and q\u2082) cancel with C\u00B2 in the denominator of k. C \u00D7 C = C\u00B2, and C\u00B2 / C\u00B2 = 1.';
+  }else if(unitStep===2){
+    // m^2 in numerator cancels with m^2 from r^2
+    document.getElementById('u0').innerHTML='N';document.getElementById('u0').classList.add('remain');
+    document.getElementById('u4').classList.add('cancel');
+    // Hide the fraction bar for the k fraction since only N remains
+    document.getElementById('uf0').querySelector('.uf-bar').style.opacity='0';
+    document.getElementById('uf0').querySelector('.uf-den').style.opacity='0';
+    // Hide the 1/m^2 fraction bar
+    document.getElementById('uf1').querySelector('.uf-bar').style.opacity='0';
+    explain.innerHTML='<strong>Step 2:</strong> The m\u00B2 in the numerator (from k) cancels with m\u00B2 in the denominator (from r\u00B2). We are left with just <strong>Newtons (N)</strong>!';
+    document.getElementById('unitNextBtn').disabled=true;document.getElementById('unitNextBtn').textContent='Done!';
+  }
+}
+function resetUnits(){
+  unitStep=0;
+  var u0=document.getElementById('u0');u0.innerHTML='N &middot; m\u00B2';u0.className='unit uf-num';
+  var u1=document.getElementById('u1');u1.textContent='C\u00B2';u1.className='unit uf-den';
+  document.getElementById('u2').textContent='C';document.getElementById('u2').className='unit';
+  document.getElementById('u3').textContent='C';document.getElementById('u3').className='unit';
+  var u4=document.getElementById('u4');u4.textContent='m\u00B2';u4.className='unit uf-den';
+  // Restore fraction bars
+  document.getElementById('uf0').querySelector('.uf-bar').style.opacity='1';
+  document.getElementById('uf0').querySelector('.uf-den').style.opacity='1';
+  document.getElementById('uf1').querySelector('.uf-bar').style.opacity='1';
+  document.getElementById('unitExplain').innerHTML='Start: we write out all units from k, q\u2081, q\u2082, and r\u00B2.';
+  document.getElementById('unitNextBtn').disabled=false;document.getElementById('unitNextBtn').textContent='Show Next Step';
+}
+
+/* ===== BLOOD VESSEL WITH RBCs ===== */
+var plaques=[
+  // Top wall plaques (y near 20, bulge downward into vessel)
+  {x:40,y:10,w:70,h:35,cleared:false},
+  {x:150,y:8,w:80,h:40,cleared:false},
+  {x:280,y:10,w:65,h:32,cleared:false},
+  {x:400,y:8,w:75,h:38,cleared:false},
+  // Bottom wall plaques (y near bottom, bulge upward)
+  {x:80,y:105,w:75,h:38,cleared:false},
+  {x:210,y:108,w:85,h:35,cleared:false},
+  {x:340,y:105,w:70,h:40,cleared:false},
+  {x:450,y:110,w:60,h:32,cleared:false}
+];
+var rbcs=[];var vesselAnim;
+function initVessel(){
+  rbcs=[];
+  for(var i=0;i<25;i++) rbcs.push({x:Math.random()*520,y:40+Math.random()*80,speed:0.3+Math.random()*0.5});
+  drawVessel();animateVessel();
+}
+function getOpenFraction(){var c=0;plaques.forEach(function(p){if(p.cleared)c++});return c}
+function drawVessel(){
+  var c=document.getElementById('vesselCanvas'),ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  // Vessel wall tissue
+  ctx.fillStyle='#f5b7b1';ctx.fillRect(0,0,w,25);ctx.fillRect(0,h-25,w,25);
+  // Vessel interior
+  ctx.fillStyle='#fce4e4';ctx.fillRect(0,25,w,h-50);
+  // Vessel wall lines
+  ctx.strokeStyle='#e74c3c';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(0,25);ctx.lineTo(w,25);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(0,h-25);ctx.lineTo(w,h-25);ctx.stroke();
+  ctx.fillStyle='#143109';ctx.font='10px Dosis';ctx.textAlign='center';
+  ctx.fillText('Vessel Wall',260,16);ctx.fillText('Vessel Wall',260,h-8);
+  // Plaques on walls - thick buildup hugging the walls
+  var cleared=getOpenFraction();
+  plaques.forEach(function(p){
+    if(!p.cleared){
+      ctx.fillStyle='#f1c40f';ctx.strokeStyle='#d4a800';ctx.lineWidth=1.5;
+      // Determine if top or bottom wall plaque
+      var isTop=p.y<60;
+      ctx.beginPath();
+      if(isTop){
+        // Hangs from top wall
+        ctx.moveTo(p.x,25);
+        ctx.quadraticCurveTo(p.x+p.w*0.3,25+p.h*1.2,p.x+p.w/2,25+p.h);
+        ctx.quadraticCurveTo(p.x+p.w*0.7,25+p.h*1.2,p.x+p.w,25);
+        ctx.closePath();
+      }else{
+        // Bulges from bottom wall
+        var boty=h-25;
+        ctx.moveTo(p.x,boty);
+        ctx.quadraticCurveTo(p.x+p.w*0.3,boty-p.h*1.2,p.x+p.w/2,boty-p.h);
+        ctx.quadraticCurveTo(p.x+p.w*0.7,boty-p.h*1.2,p.x+p.w,boty);
+        ctx.closePath();
+      }
+      ctx.fill();ctx.stroke();
+      var labelY=isTop?25+p.h*0.55:h-25-p.h*0.55;
+      ctx.fillStyle='#d4a800';ctx.font='bold 8px Dosis';ctx.textAlign='center';ctx.fillText('Plaque',p.x+p.w/2,labelY+3);
+    }
+  });
+  // Red blood cells - only 2 when fully blocked, up to 25 when clear
+  var maxRBC=Math.floor(2+cleared*2.9);
+  for(var i=0;i<Math.min(rbcs.length,maxRBC);i++){
+    var r=rbcs[i];
+    // Squeeze RBCs into narrower channel when plaque present
+    var channelTop=25,channelBot=h-25;
+    // Keep RBCs away from uncleared plaque zones
+    ctx.fillStyle='#e74c3c';ctx.beginPath();ctx.ellipse(r.x,r.y,8,5,0,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#c0392b';ctx.beginPath();ctx.ellipse(r.x,r.y,3,2,0,0,Math.PI*2);ctx.fill();
+  }
+  // Update stats
+  var resistLabels=['Very High','Very High','High','Moderate','Low','Low','Very Low','Very Low','None'];
+  var flowL=['Very Low','Very Low','Low','Moderate','Moderate','Good','Good','Strong','Maximum'];
+  document.getElementById('vResist').textContent=resistLabels[cleared];
+  document.getElementById('vFlow').textContent=flowL[cleared];
+}
+function animateVessel(){
+  var cleared=getOpenFraction();
+  var speedMul=0.3+cleared*0.25;
+  var maxRBC=Math.floor(2+cleared*2.9);
+  for(var i=0;i<Math.min(rbcs.length,maxRBC);i++){
+    rbcs[i].x+=rbcs[i].speed*speedMul;
+    if(rbcs[i].x>530){rbcs[i].x=-10;rbcs[i].y=40+Math.random()*80;}
+  }
+  drawVessel();vesselAnim=requestAnimationFrame(animateVessel);
+}
+function vesselClick(e){
+  var c=document.getElementById('vesselCanvas'),rect=c.getBoundingClientRect();
+  var mx=(e.clientX-rect.left)*(c.width/rect.width),my=(e.clientY-rect.top)*(c.height/rect.height);
+  plaques.forEach(function(p){
+    if(!p.cleared){
+      var cx=p.x+p.w/2,cy=p.y+p.h/2;
+      if(Math.abs(mx-cx)<p.w/2+5&&Math.abs(my-cy)<p.h/2+5)p.cleared=true;
+    }
+  });
+}
+function resetPlaque(){plaques.forEach(function(p){p.cleared=false});}
+
+/* ===== CIRCUIT ===== */
+var circuitOn=false,circAnim,electrons=[];
+function getCircPos(t){
+  var pts=[{x:100,y:60},{x:380,y:60},{x:380,y:240},{x:100,y:240}];
+  var segs=[280,180,280,180],perimeter=920,d=t*perimeter,cumul=0;
+  for(var i=0;i<4;i++){
+    if(d<=cumul+segs[i]){var frac=(d-cumul)/segs[i],ni=(i+1)%4;return{x:pts[i].x+(pts[ni].x-pts[i].x)*frac,y:pts[i].y+(pts[ni].y-pts[i].y)*frac};}
+    cumul+=segs[i];
+  }
+  return pts[0];
+}
+function drawCircuit(ctx,w,h){
+  ctx.clearRect(0,0,w,h);ctx.fillStyle='#f5f6ee';ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle='#525B76';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(100,60);ctx.lineTo(380,60);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(380,60);ctx.lineTo(380,240);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(380,240);ctx.lineTo(100,240);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(100,240);ctx.lineTo(100,60);ctx.stroke();
+  ctx.fillStyle='#e74c3c';ctx.fillRect(85,120,30,12);ctx.fillStyle='#3498db';ctx.fillRect(85,168,30,12);
+  ctx.font='bold 14px Bitter';ctx.textAlign='center';ctx.fillStyle='#e74c3c';ctx.fillText('+',100,116);ctx.fillStyle='#3498db';ctx.fillText('\u2013',100,196);
+  ctx.fillStyle='#143109';ctx.font='12px Dosis';ctx.fillText('Battery',100,155);
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;ctx.beginPath();ctx.rect(210,48,60,24);ctx.stroke();ctx.fillStyle='#e4e8cc';ctx.fillRect(210,48,60,24);
+  ctx.fillStyle='#143109';ctx.font='11px Dosis';ctx.textAlign='center';ctx.fillText('Resistor',240,64);
+  ctx.beginPath();ctx.arc(380,150,18,0,Math.PI*2);ctx.strokeStyle='#d4a800';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle=circuitOn?'rgba(241,196,0,0.5)':'rgba(200,200,200,0.3)';ctx.fill();ctx.fillStyle='#143109';ctx.font='11px Dosis';ctx.fillText('Bulb',380,155);
+  ctx.fillStyle='#143109';ctx.font='11px Dosis';ctx.fillText('Switch',240,258);
+  if(circuitOn){
+    ctx.strokeStyle='#9BA06A';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(210,240);ctx.lineTo(270,240);ctx.stroke();
+    ctx.fillStyle='#9BA06A';ctx.beginPath();ctx.arc(210,240,4,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(270,240,4,0,Math.PI*2);ctx.fill();
+  }else{
+    ctx.strokeStyle='#e74c3c';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(210,240);ctx.lineTo(260,220);ctx.stroke();
+    ctx.fillStyle='#e74c3c';ctx.beginPath();ctx.arc(210,240,4,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(270,240,4,0,Math.PI*2);ctx.fill();
+  }
+  if(circuitOn){
+    for(var i=0;i<electrons.length;i++){
+      var p=getCircPos(electrons[i].t);ctx.beginPath();ctx.arc(p.x,p.y,5,0,Math.PI*2);ctx.fillStyle='#3498db';ctx.fill();
+      ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='#fff';ctx.font='bold 7px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('e\u207B',p.x,p.y);ctx.textBaseline='alphabetic';
+    }
+    ctx.fillStyle='#9BA06A';ctx.font='bold 13px Dosis';ctx.textAlign='center';ctx.fillText('e\u207B flow \u2192',240,38);
+  }
+}
+function animateCircuit(){
+  if(!circuitOn)return;var c=document.getElementById('circuitCanvas'),ctx=c.getContext('2d');
+  for(var i=0;i<electrons.length;i++){electrons[i].t+=electrons[i].speed;if(electrons[i].t>1)electrons[i].t-=1;}
+  drawCircuit(ctx,c.width,c.height);circAnim=requestAnimationFrame(animateCircuit);
+}
+function toggleCircuitSwitch(){
+  circuitOn=!circuitOn;document.getElementById('circSwitchBtn').textContent=circuitOn?'Open Switch (Turn Off)':'Close Switch (Turn On)';
+  if(circuitOn)animateCircuit();else{cancelAnimationFrame(circAnim);var c=document.getElementById('circuitCanvas');drawCircuit(c.getContext('2d'),c.width,c.height);}
+}
+
+/* ===== MAZE ===== */
+var maze,mazeW=20,mazeH=20,mazePlayer,mazeGoal;
+function generateMaze(){
+  maze=[];for(var y=0;y<mazeH;y++){maze[y]=[];for(var x=0;x<mazeW;x++)maze[y][x]={walls:{N:true,S:true,E:true,W:true},visited:false};}
+  var stack=[],cx=0,cy=0;maze[cy][cx].visited=true;stack.push({x:cx,y:cy});
+  while(stack.length>0){
+    var cur=stack[stack.length-1],neighbors=[],dirs=[{dx:0,dy:-1,w:'N',o:'S'},{dx:0,dy:1,w:'S',o:'N'},{dx:1,dy:0,w:'E',o:'W'},{dx:-1,dy:0,w:'W',o:'E'}];
+    for(var d=0;d<dirs.length;d++){var nx=cur.x+dirs[d].dx,ny=cur.y+dirs[d].dy;if(nx>=0&&nx<mazeW&&ny>=0&&ny<mazeH&&!maze[ny][nx].visited)neighbors.push(dirs[d]);}
+    if(neighbors.length>0){var pick=neighbors[Math.floor(Math.random()*neighbors.length)];maze[cur.y][cur.x].walls[pick.w]=false;var nx2=cur.x+pick.dx,ny2=cur.y+pick.dy;maze[ny2][nx2].walls[pick.o]=false;maze[ny2][nx2].visited=true;stack.push({x:nx2,y:ny2});}else stack.pop();
+  }
+  mazePlayer={x:0,y:0};mazeGoal={x:mazeW-1,y:mazeH-1};
+}
+function drawMaze(){
+  var c=document.getElementById('mazeCanvas'),ctx=c.getContext('2d'),cs=c.width/mazeW;
+  ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle='#f5f6ee';ctx.fillRect(0,0,c.width,c.height);
+  ctx.fillStyle='rgba(231,76,60,0.2)';ctx.fillRect(mazeGoal.x*cs,mazeGoal.y*cs,cs,cs);
+  ctx.fillStyle='#e74c3c';ctx.font='bold '+Math.floor(cs*0.5)+'px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('+',mazeGoal.x*cs+cs/2,mazeGoal.y*cs+cs/2);
+  ctx.fillStyle='rgba(52,152,219,0.15)';ctx.fillRect(0,0,cs,cs);
+  ctx.strokeStyle='#525B76';ctx.lineWidth=2;
+  for(var y=0;y<mazeH;y++)for(var x=0;x<mazeW;x++){var cell=maze[y][x];
+    if(cell.walls.N){ctx.beginPath();ctx.moveTo(x*cs,y*cs);ctx.lineTo((x+1)*cs,y*cs);ctx.stroke();}
+    if(cell.walls.S){ctx.beginPath();ctx.moveTo(x*cs,(y+1)*cs);ctx.lineTo((x+1)*cs,(y+1)*cs);ctx.stroke();}
+    if(cell.walls.E){ctx.beginPath();ctx.moveTo((x+1)*cs,y*cs);ctx.lineTo((x+1)*cs,(y+1)*cs);ctx.stroke();}
+    if(cell.walls.W){ctx.beginPath();ctx.moveTo(x*cs,y*cs);ctx.lineTo(x*cs,(y+1)*cs);ctx.stroke();}
+  }
+  ctx.beginPath();ctx.arc(mazePlayer.x*cs+cs/2,mazePlayer.y*cs+cs/2,cs*0.3,0,Math.PI*2);ctx.fillStyle='#3498db';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.stroke();
+  ctx.fillStyle='#fff';ctx.font='bold '+Math.floor(cs*0.3)+'px Arial';ctx.fillText('e\u207B',mazePlayer.x*cs+cs/2,mazePlayer.y*cs+cs/2);ctx.textBaseline='alphabetic';
+  ctx.fillStyle='#3498db';ctx.font='bold 11px Dosis';ctx.textAlign='left';ctx.textBaseline='top';ctx.fillText('\u2013 terminal',4,c.height-16);
+  ctx.fillStyle='#e74c3c';ctx.textAlign='right';ctx.fillText('+ terminal',c.width-4,c.height-16);ctx.textBaseline='alphabetic';
+}
+function moveMaze(dir){
+  var p=mazePlayer,cell=maze[p.y][p.x];
+  if(dir==='up'&&!cell.walls.N)p.y--;else if(dir==='down'&&!cell.walls.S)p.y++;else if(dir==='right'&&!cell.walls.E)p.x++;else if(dir==='left'&&!cell.walls.W)p.x--;
+  drawMaze();if(p.x===mazeGoal.x&&p.y===mazeGoal.y)document.getElementById('mazeStatus').innerHTML='<strong>You made it!</strong> The electron reached the + terminal!';
+}
+function resetMaze(){generateMaze();drawMaze();document.getElementById('mazeStatus').innerHTML='';}
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowUp'){moveMaze('up');e.preventDefault();}else if(e.key==='ArrowDown'){moveMaze('down');e.preventDefault();}
+  else if(e.key==='ArrowLeft'){moveMaze('left');e.preventDefault();}else if(e.key==='ArrowRight'){moveMaze('right');e.preventDefault();}
+});
+
+/* ===== SALT WATER WITH IONS ===== */
+var saltLevel=0,saltIons=[],saltAnim;
+function drawSaltBeakers(){
+  var c=document.getElementById('saltCanvas'),ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);ctx.fillStyle='#f5f6ee';ctx.fillRect(0,0,w,h);
+  // Pure water beaker
+  drawBeaker(ctx,40,40,160,180,'Pure Water','rgba(173,216,230,0.4)',false,[]);
+  // Salt water beaker
+  var saltColors=['rgba(173,216,230,0.4)','rgba(180,210,190,0.55)','rgba(200,215,160,0.65)','rgba(220,220,140,0.8)'];
+  drawBeaker(ctx,300,40,160,180,'Salt Water',saltColors[saltLevel],saltLevel>=2,saltIons);
+  // Bulbs
+  ctx.font='36px Arial';ctx.textAlign='center';
+  ctx.fillText('\uD83D\uDCA1',120,260);
+  ctx.fillText('\uD83D\uDCA1',380,260);
+  if(saltLevel>=2){ctx.shadowColor='#f1c40f';ctx.shadowBlur=16;ctx.fillText('\uD83D\uDCA1',380,260);ctx.shadowBlur=0;}
+  ctx.font='11px Dosis';ctx.fillStyle='var(--slate)';
+  ctx.fillText('Dim (poor conductor)',120,280);
+  ctx.fillText(saltLevel>=2?'Bright! (good conductor)':'Add salt to test',380,280);
+  // Electrodes
+  [120,380].forEach(function(bx){
+    ctx.strokeStyle='#525B76';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(bx-25,50);ctx.lineTo(bx-25,120);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(bx+25,50);ctx.lineTo(bx+25,120);ctx.stroke();
+    ctx.fillStyle='#e74c3c';ctx.font='bold 9px Arial';ctx.fillText('+',bx+25,45);
+    ctx.fillStyle='#3498db';ctx.fillText('\u2013',bx-25,45);
+  });
+  // Current arrow for salt water
+  if(saltLevel>=2){
+    ctx.strokeStyle='#27ae60';ctx.lineWidth=2;ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.moveTo(355,85);ctx.lineTo(405,85);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#27ae60';ctx.font='bold 10px Dosis';ctx.fillText('I \u2192',415,89);
+  }
+}
+function drawBeaker(ctx,x,y,w,h,label,waterColor,glowing,ions){
+  // Glass
+  ctx.strokeStyle='#525B76';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+h);ctx.quadraticCurveTo(x,y+h+20,x+w/2,y+h+20);ctx.quadraticCurveTo(x+w,y+h+20,x+w,y+h);ctx.lineTo(x+w,y);ctx.stroke();
+  // Water
+  ctx.fillStyle=waterColor;
+  ctx.beginPath();ctx.moveTo(x+2,y+40);ctx.lineTo(x+2,y+h);ctx.quadraticCurveTo(x+2,y+h+18,x+w/2,y+h+18);ctx.quadraticCurveTo(x+w-2,y+h+18,x+w-2,y+h);ctx.lineTo(x+w-2,y+40);ctx.closePath();ctx.fill();
+  // Ions
+  for(var i=0;i<ions.length;i++){
+    var ion=ions[i];
+    ctx.beginPath();ctx.arc(ion.x,ion.y,6,0,Math.PI*2);
+    ctx.fillStyle=ion.charge>0?'rgba(231,76,60,0.8)':'rgba(52,152,219,0.8)';ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 7px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(ion.charge>0?'Na+':'Cl\u2013',ion.x,ion.y);ctx.textBaseline='alphabetic';
+  }
+  // Label
+  ctx.fillStyle='#143109';ctx.font='bold 12px Dosis';ctx.textAlign='center';ctx.fillText(label,x+w/2,y+h+36);
+}
+function addSalt(){
+  if(saltLevel>=3)return;saltLevel++;
+  var bx=300,by=40;
+  for(var i=0;i<6;i++){
+    saltIons.push({x:bx+20+Math.random()*120,y:by+60+Math.random()*130,charge:1,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5});
+    saltIons.push({x:bx+20+Math.random()*120,y:by+60+Math.random()*130,charge:-1,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5});
+  }
+  var explains=['','Na\u207A and Cl\u207B ions begin to dissolve. Water\'s polar molecules pull them apart (dissociation). Some charge carriers now exist.','More ions = more charge carriers = better conductor. The ions carry charge between the electrodes, completing the circuit!','Highly conductive! Sea water (~35g salt/L). The free Na\u207A and Cl\u207B ions let current flow freely. This is why saltwater and electronics don\'t mix!'];
+  document.getElementById('saltExplain').textContent=explains[saltLevel];
+}
+function animateSalt(){
+  for(var i=0;i<saltIons.length;i++){
+    var ion=saltIons[i];ion.x+=ion.vx;ion.y+=ion.vy;
+    if(ion.x<320||ion.x>440)ion.vx*=-1;if(ion.y<100||ion.y>230)ion.vy*=-1;
+  }
+  drawSaltBeakers();saltAnim=requestAnimationFrame(animateSalt);
+}
+function resetSalt(){saltLevel=0;saltIons=[];document.getElementById('saltExplain').textContent='';}
+
+/* ===== NEURON ===== */
+var neuronHasMyelin=true,neuronAnimId,neuronSignalPos=-1;
+function drawNeuron(){
+  var c=document.getElementById('neuronCanvas'),ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);ctx.fillStyle='#f5f6ee';ctx.fillRect(0,0,w,h);
+  ctx.beginPath();ctx.arc(60,100,35,0,Math.PI*2);ctx.fillStyle='#D0D6B3';ctx.fill();ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#143109';ctx.font='bold 11px Dosis';ctx.textAlign='center';ctx.fillText('Cell Body',60,104);
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;
+  [[25,70],[25,100],[25,130],[35,60],[35,140]].forEach(function(d){ctx.beginPath();ctx.moveTo(60,100);ctx.lineTo(d[0],d[1]);ctx.stroke();});
+  ctx.strokeStyle='#525B76';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(95,100);ctx.lineTo(480,100);ctx.stroke();
+  if(neuronHasMyelin){
+    [{x:120,w:60},{x:200,w:60},{x:280,w:60},{x:360,w:60}].forEach(function(m){
+      ctx.fillStyle='rgba(241,196,0,0.35)';ctx.beginPath();ctx.ellipse(m.x+m.w/2,100,m.w/2,16,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#d4a800';ctx.lineWidth=1;ctx.stroke();
+    });
+    ctx.fillStyle='#d4a800';ctx.font='9px Dosis';ctx.textAlign='center';ctx.fillText('Myelin',150,80);
+    ctx.fillStyle='#525B76';ctx.font='8px Dosis';ctx.fillText('Node',190,120);ctx.fillText('Node',270,120);ctx.fillText('Node',350,120);
+  }
+  ctx.beginPath();ctx.arc(500,100,16,0,Math.PI*2);ctx.fillStyle='#D0D6B3';ctx.fill();ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#143109';ctx.font='bold 9px Dosis';ctx.textAlign='center';ctx.fillText('Terminal',500,104);
+  if(neuronSignalPos>=0){
+    var sx=95+neuronSignalPos*(480-95);ctx.beginPath();ctx.arc(sx,100,7,0,Math.PI*2);ctx.fillStyle='#e74c3c';ctx.fill();
+    ctx.shadowColor='#e74c3c';ctx.shadowBlur=12;ctx.beginPath();ctx.arc(sx,100,7,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;
+  }
+}
+function fireNeuron(){
+  if(neuronSignalPos>=0)return;neuronSignalPos=0;var speed=neuronHasMyelin?0.025:0.008;
+  document.getElementById('neuronStatus').textContent=neuronHasMyelin?'Signal jumping between nodes...':'Signal traveling slowly without myelin...';
+  function step(){neuronSignalPos+=speed;if(neuronSignalPos>1){neuronSignalPos=-1;drawNeuron();document.getElementById('neuronStatus').textContent=neuronHasMyelin?'Signal arrived quickly! Myelin enables saltatory conduction.':'Signal arrived slowly without myelin.';return;}drawNeuron();neuronAnimId=requestAnimationFrame(step);}step();
+}
+function toggleMyelin(){neuronHasMyelin=!neuronHasMyelin;neuronSignalPos=-1;cancelAnimationFrame(neuronAnimId);drawNeuron();document.getElementById('neuronStatus').textContent=neuronHasMyelin?'With myelin: signal jumps quickly between nodes (saltatory conduction)':'Without myelin: signal must travel slowly along entire axon';}
+
+/* ===== KCL PIPES ===== */
+var pipeStates=[true,true,true,false,false];
+var pipeTotal=12;
+function drawPipes(){
+  var c=document.getElementById('pipeCanvas'),ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);ctx.fillStyle='#f5f6ee';ctx.fillRect(0,0,w,h);
+  var openCount=pipeStates.filter(function(p){return p}).length;
+  var perBranch=openCount>0?(pipeTotal/openCount):0;
+  // Main pipe
+  drawRoundPipe(ctx,20,140,180,40,'#2980b9');
+  ctx.fillStyle='#fff';ctx.font='bold 15px Dosis';ctx.textAlign='center';ctx.fillText(pipeTotal+'A \u2192',110,165);
+  // Junction circle
+  ctx.beginPath();ctx.arc(215,160,20,0,Math.PI*2);
+  var jGrad=ctx.createRadialGradient(215,160,5,215,160,20);jGrad.addColorStop(0,'#9BA06A');jGrad.addColorStop(1,'#7a8050');
+  ctx.fillStyle=jGrad;ctx.fill();ctx.strokeStyle='#525B76';ctx.lineWidth=2;ctx.stroke();
+  // Branches
+  var branchY=[40,100,160,220,280];
+  for(var i=0;i<5;i++){
+    var by=branchY[i],isOpen=pipeStates[i];
+    // Connector curve
+    ctx.strokeStyle=isOpen?'#2980b9':'#bbb';ctx.lineWidth=isOpen?3:2;
+    ctx.beginPath();ctx.moveTo(235,160);ctx.quadraticCurveTo(250,by+15,270,by+15);ctx.stroke();
+    // Branch pipe
+    drawRoundPipe(ctx,270,by,220,30,isOpen?'#2980b9':'#ccc');
+    // Flow label
+    ctx.fillStyle=isOpen?'#fff':'#999';ctx.font=(isOpen?'bold ':'')+' 12px Dosis';ctx.textAlign='center';
+    ctx.fillText(isOpen?(perBranch.toFixed(1)+'A \u2192'):'Closed',380,by+19);
+    // Valve wheel
+    var vx=500,vy=by+15;
+    ctx.beginPath();ctx.arc(vx,vy,14,0,Math.PI*2);
+    ctx.fillStyle=isOpen?'#27ae60':'#e74c3c';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+    // Wheel spokes
+    ctx.strokeStyle='#fff';ctx.lineWidth=2;
+    for(var s=0;s<4;s++){
+      var ang=s*Math.PI/4;ctx.beginPath();ctx.moveTo(vx+Math.cos(ang)*6,vy+Math.sin(ang)*6);ctx.lineTo(vx+Math.cos(ang)*12,vy+Math.sin(ang)*12);ctx.stroke();
+    }
+    ctx.fillStyle='#fff';ctx.font='bold 8px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(isOpen?'O':'X',vx,vy);ctx.textBaseline='alphabetic';
+  }
+  // Totals
+  ctx.fillStyle='#143109';ctx.font='12px Dosis';ctx.textAlign='left';ctx.fillText('In: '+pipeTotal+'A',20,h-8);
+  ctx.textAlign='right';ctx.fillText('Out: '+(openCount>0?pipeTotal:0)+'A ('+openCount+' pipes)',w-20,h-8);
+  document.getElementById('pipeStatus').innerHTML=openCount+' pipe'+(openCount!==1?'s':'')+' open: '+pipeTotal+'A total \u2192 '+(openCount>0?perBranch.toFixed(1):'0')+'A per pipe';
+}
+function drawRoundPipe(ctx,x,y,w,h,color){
+  ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w,y);ctx.arcTo(x+w+h/2,y,x+w+h/2,y+h/2,h/2);ctx.arcTo(x+w+h/2,y+h,x+w,y+h,h/2);ctx.lineTo(x,y+h);ctx.arcTo(x-h/2,y+h,x-h/2,y+h/2,h/2);ctx.arcTo(x-h/2,y,x,y,h/2);ctx.closePath();ctx.fill();
+  // Highlight
+  ctx.fillStyle='rgba(255,255,255,0.15)';ctx.beginPath();ctx.ellipse(x+w/2,y+h*0.3,w/2-5,h*0.15,0,0,Math.PI*2);ctx.fill();
+}
+function pipeClick(e){
+  var c=document.getElementById('pipeCanvas'),rect=c.getBoundingClientRect();
+  var mx=(e.clientX-rect.left)*(c.width/rect.width),my=(e.clientY-rect.top)*(c.height/rect.height);
+  var branchY=[40,100,160,220,280];
+  for(var i=0;i<5;i++){
+    var vx=500,vy=branchY[i]+15;
+    if(Math.sqrt((mx-vx)*(mx-vx)+(my-vy)*(my-vy))<18){
+      var openCount=pipeStates.filter(function(p){return p}).length;
+      if(pipeStates[i]||openCount<5){pipeStates[i]=!pipeStates[i];if(pipeStates.filter(function(p){return p}).length<1)pipeStates[i]=true;}
+      drawPipes();return;
+    }
+  }
+}
+
+/* ===== SERIES & PARALLEL DIAGRAMS ===== */
+function drawSeriesDiagram(){
+  var c=document.getElementById('seriesCanvas'),ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);ctx.fillStyle='#f5f6ee';ctx.fillRect(0,0,w,h);
+  // Wire
+  ctx.strokeStyle='#525B76';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(60,100);ctx.lineTo(460,100);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(60,160);ctx.lineTo(460,160);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(60,100);ctx.lineTo(60,160);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(460,100);ctx.lineTo(460,160);ctx.stroke();
+  // Battery
+  ctx.fillStyle='#e74c3c';ctx.fillRect(48,118,24,8);ctx.fillStyle='#3498db';ctx.fillRect(48,136,24,8);
+  ctx.fillStyle='#143109';ctx.font='10px Dosis';ctx.textAlign='center';ctx.fillText('12V',60,170+16);
+  ctx.fillStyle='#e74c3c';ctx.font='bold 10px Arial';ctx.fillText('+',60,114);ctx.fillStyle='#3498db';ctx.fillText('\u2013',60,152);
+  // R1
+  ctx.fillStyle='#e4e8cc';ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;ctx.fillRect(170,90,60,20);ctx.strokeRect(170,90,60,20);
+  ctx.fillStyle='#143109';ctx.font='bold 11px Dosis';ctx.textAlign='center';ctx.fillText('R1 = 4\u03A9',200,84);ctx.fillText('4V',200,78+46);
+  // R2
+  ctx.fillStyle='#e4e8cc';ctx.fillRect(300,90,60,20);ctx.strokeRect(300,90,60,20);
+  ctx.fillStyle='#143109';ctx.fillText('R2 = 8\u03A9',330,84);ctx.fillText('8V',330,78+46);
+  // Current arrow
+  ctx.fillStyle='#9BA06A';ctx.font='bold 12px Dosis';ctx.fillText('I = 1A \u2192',260,56);
+}
+function drawParallelDiagram(){
+  var c=document.getElementById('parallelCanvas'),ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);ctx.fillStyle='#f5f6ee';ctx.fillRect(0,0,w,h);
+  // Main wires
+  ctx.strokeStyle='#525B76';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(60,130);ctx.lineTo(160,130);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(380,130);ctx.lineTo(460,130);ctx.stroke();
+  // Top branch
+  ctx.beginPath();ctx.moveTo(160,130);ctx.lineTo(160,70);ctx.lineTo(380,70);ctx.lineTo(380,130);ctx.stroke();
+  // Bottom branch
+  ctx.beginPath();ctx.moveTo(160,130);ctx.lineTo(160,190);ctx.lineTo(380,190);ctx.lineTo(380,130);ctx.stroke();
+  // Return wire
+  ctx.beginPath();ctx.moveTo(60,130);ctx.lineTo(60,230);ctx.lineTo(460,230);ctx.lineTo(460,130);ctx.stroke();
+  // Battery
+  ctx.fillStyle='#e74c3c';ctx.fillRect(48,160,24,8);ctx.fillStyle='#3498db';ctx.fillRect(48,178,24,8);
+  ctx.fillStyle='#143109';ctx.font='10px Dosis';ctx.textAlign='center';ctx.fillText('12V',40,245);
+  // R1 top
+  ctx.fillStyle='#e4e8cc';ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;ctx.fillRect(240,60,70,20);ctx.strokeRect(240,60,70,20);
+  ctx.fillStyle='#143109';ctx.font='bold 10px Dosis';ctx.fillText('R1 = 6\u03A9',275,56);ctx.fillText('I\u2081 = 2A \u2192',275,52-12);
+  // R2 bottom
+  ctx.fillStyle='#e4e8cc';ctx.fillRect(240,180,70,20);ctx.strokeRect(240,180,70,20);
+  ctx.fillStyle='#143109';ctx.fillText('R2 = 12\u03A9',275,176);ctx.fillText('I\u2082 = 1A \u2192',275,216);
+  // Total current
+  ctx.fillStyle='#9BA06A';ctx.font='bold 12px Dosis';ctx.fillText('I total = 3A',110,125);
+  // Junction dots
+  ctx.fillStyle='#9BA06A';ctx.beginPath();ctx.arc(160,130,5,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(380,130,5,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#525B76';ctx.font='9px Dosis';ctx.fillText('Node',160,145);ctx.fillText('Node',380,145);
+}
+
+/* ===== BREADBOARD ===== */
+var bbTool='battery',bbMode='series',bbComponents=[],bbWires=[];
+var bbCols=17,bbRows=11,bbCellSize=38;
+var bbDragging=false,bbDragStart=null,bbDragCurrent=null,bbDragPoints=[];
+function setBBTool(tool,btn){
+  bbTool=tool;bbDragging=false;bbDragStart=null;bbDragPoints=[];
+  var btns=document.getElementById('bbControls').querySelectorAll('button');
+  btns.forEach(function(b){b.classList.remove('active')});btn.classList.add('active');
+}
+function toggleBBCircuit(){
+  bbMode=bbMode==='series'?'parallel':'series';
+  document.getElementById('bbStatus').textContent='Mode: '+(bbMode==='series'?'Series':'Parallel')+' \u2014 place components to build your circuit!';
+  calcBB();drawBB();
+}
+function bbGetCell(e){
+  var c=document.getElementById('bbCanvas'),rect=c.getBoundingClientRect();
+  var mx=e.clientX-rect.left,my=e.clientY-rect.top;
+  var scaleX=c.width/rect.width,scaleY=c.height/rect.height;
+  return{col:Math.floor(mx*scaleX/bbCellSize),row:Math.floor(my*scaleY/bbCellSize),px:mx*scaleX,py:my*scaleY};
+}
+function bbGetPixel(e){
+  var c=document.getElementById('bbCanvas'),rect=c.getBoundingClientRect();
+  return{x:(e.clientX-rect.left)*(c.width/rect.width),y:(e.clientY-rect.top)*(c.height/rect.height)};
+}
+function drawBB(){
+  var c=document.getElementById('bbCanvas'),ctx=c.getContext('2d'),cs=bbCellSize;
+  ctx.clearRect(0,0,c.width,c.height);
+  ctx.fillStyle='#f5f0e0';ctx.fillRect(0,0,c.width,c.height);
+  // Power rails
+  ctx.fillStyle='rgba(231,76,60,0.08)';ctx.fillRect(0,0,c.width,cs);
+  ctx.fillStyle='rgba(52,152,219,0.08)';ctx.fillRect(0,(bbRows-1)*cs,c.width,cs);
+  ctx.fillStyle='#e74c3c';ctx.font='bold 11px Dosis';ctx.textAlign='left';ctx.fillText('+ Rail',4,cs/2+4);
+  ctx.fillStyle='#3498db';ctx.fillText('\u2013 Rail',4,(bbRows-1)*cs+cs/2+4);
+  // Holes
+  for(var r=0;r<bbRows;r++)for(var cl=0;cl<bbCols;cl++){
+    ctx.beginPath();ctx.arc(cl*cs+cs/2,r*cs+cs/2,4,0,Math.PI*2);ctx.fillStyle='#d5d5d0';ctx.fill();
+  }
+  // Divider
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(0,Math.floor(bbRows/2)*cs);ctx.lineTo(c.width,Math.floor(bbRows/2)*cs);ctx.stroke();ctx.setLineDash([]);
+  // Wires (green lines with glow)
+  for(var i=0;i<bbWires.length;i++){
+    var wi=bbWires[i];
+    // Draw wire path
+    ctx.strokeStyle='#27ae60';ctx.lineWidth=4;ctx.lineCap='round';ctx.lineJoin='round';
+    if(wi.points&&wi.points.length>1){
+      ctx.beginPath();ctx.moveTo(wi.points[0].col*cs+cs/2,wi.points[0].row*cs+cs/2);
+      for(var j=1;j<wi.points.length;j++) ctx.lineTo(wi.points[j].col*cs+cs/2,wi.points[j].row*cs+cs/2);
+      ctx.stroke();
+      // Glow
+      ctx.strokeStyle='rgba(39,174,96,0.25)';ctx.lineWidth=8;
+      ctx.beginPath();ctx.moveTo(wi.points[0].col*cs+cs/2,wi.points[0].row*cs+cs/2);
+      for(var j=1;j<wi.points.length;j++) ctx.lineTo(wi.points[j].col*cs+cs/2,wi.points[j].row*cs+cs/2);
+      ctx.stroke();
+      // End dots
+      ctx.fillStyle='#27ae60';
+      ctx.beginPath();ctx.arc(wi.points[0].col*cs+cs/2,wi.points[0].row*cs+cs/2,5,0,Math.PI*2);ctx.fill();
+      ctx.beginPath();ctx.arc(wi.points[wi.points.length-1].col*cs+cs/2,wi.points[wi.points.length-1].row*cs+cs/2,5,0,Math.PI*2);ctx.fill();
+    }else{
+      // Legacy simple wire
+      ctx.beginPath();ctx.moveTo(wi.c1*cs+cs/2,wi.r1*cs+cs/2);ctx.lineTo(wi.c2*cs+cs/2,wi.r2*cs+cs/2);ctx.stroke();
+    }
+  }
+  ctx.lineCap='butt';ctx.lineJoin='miter';
+  // Wire currently being dragged
+  if(bbDragging&&bbDragPoints.length>0){
+    ctx.strokeStyle='rgba(39,174,96,0.6)';ctx.lineWidth=4;ctx.lineCap='round';ctx.lineJoin='round';ctx.setLineDash([6,4]);
+    ctx.beginPath();ctx.moveTo(bbDragPoints[0].col*cs+cs/2,bbDragPoints[0].row*cs+cs/2);
+    for(var j=1;j<bbDragPoints.length;j++) ctx.lineTo(bbDragPoints[j].col*cs+cs/2,bbDragPoints[j].row*cs+cs/2);
+    if(bbDragCurrent) ctx.lineTo(bbDragCurrent.x,bbDragCurrent.y);
+    ctx.stroke();ctx.setLineDash([]);ctx.lineCap='butt';ctx.lineJoin='miter';
+    // Start dot
+    ctx.fillStyle='#27ae60';ctx.beginPath();ctx.arc(bbDragPoints[0].col*cs+cs/2,bbDragPoints[0].row*cs+cs/2,6,0,Math.PI*2);ctx.fill();
+  }
+  // Components (bigger, with connection nubs)
+  for(var i=0;i<bbComponents.length;i++){
+    var comp=bbComponents[i],x=comp.col*cs+cs/2,y=comp.row*cs+cs/2;
+    // Connection nubs on left and right edges
+    ctx.fillStyle='#888';
+    ctx.beginPath();ctx.arc(x-cs/2+2,y,4,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(x+cs/2-2,y,4,0,Math.PI*2);ctx.fill();
+    if(comp.type==='battery'){
+      ctx.fillStyle='#e74c3c';ctx.fillRect(x-16,y-14,14,28);ctx.fillStyle='#3498db';ctx.fillRect(x+2,y-14,14,28);
+      ctx.fillStyle='#fff';ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.fillText('+',x-9,y+4);ctx.fillText('\u2013',x+9,y+4);
+      ctx.fillStyle='#143109';ctx.font='bold 10px Dosis';ctx.fillText('9V',x,y+26);
+    }else if(comp.type==='resistor'){
+      ctx.fillStyle='#e4e8cc';ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;
+      ctx.fillRect(x-18,y-12,36,24);ctx.strokeRect(x-18,y-12,36,24);
+      ctx.fillStyle='#e74c3c';ctx.fillRect(x-12,y-12,4,24);ctx.fillStyle='#9BA06A';ctx.fillRect(x-4,y-12,4,24);ctx.fillStyle='#d4a800';ctx.fillRect(x+4,y-12,4,24);
+      ctx.fillStyle='#143109';ctx.font='bold 9px Dosis';ctx.textAlign='center';ctx.fillText((comp.value||100)+'\u03A9',x,y+24);
+    }else if(comp.type==='switch'){
+      ctx.fillStyle=comp.on?'#27ae60':'#e74c3c';
+      ctx.beginPath();ctx.roundRect(x-16,y-10,32,20,4);ctx.fill();
+      ctx.fillStyle='#fff';ctx.font='bold 10px Arial';ctx.textAlign='center';ctx.fillText(comp.on?'ON':'OFF',x,y+4);
+    }else if(comp.type==='light'){
+      ctx.beginPath();ctx.arc(x,y,14,0,Math.PI*2);ctx.fillStyle=comp.lit?'rgba(241,196,0,0.7)':'rgba(200,200,200,0.4)';ctx.fill();
+      ctx.strokeStyle='#d4a800';ctx.lineWidth=2;ctx.stroke();
+      if(comp.lit){ctx.shadowColor='#f1c40f';ctx.shadowBlur=12;ctx.beginPath();ctx.arc(x,y,14,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;}
+      ctx.fillStyle='#143109';ctx.font='bold 15px Arial';ctx.textAlign='center';ctx.fillText('\u2600',x,y+6);
+    }
+  }
+}
+function bbMouseDown(e){
+  if(bbTool!=='wire')return;
+  var cell=bbGetCell(e);
+  if(cell.col<0||cell.col>=bbCols||cell.row<0||cell.row>=bbRows)return;
+  bbDragging=true;
+  bbDragPoints=[{row:cell.row,col:cell.col}];
+  bbDragCurrent={x:cell.col*bbCellSize+bbCellSize/2,y:cell.row*bbCellSize+bbCellSize/2};
+  drawBB();
+}
+function bbMouseMove(e){
+  // Hover tooltip
+  var cell=bbGetCell(e);var tip=document.getElementById('bbTooltip');
+  if(cell.col>=0&&cell.col<bbCols&&cell.row>=0&&cell.row<bbRows){
+    var found=null;
+    for(var i=0;i<bbComponents.length;i++){if(bbComponents[i].row===cell.row&&bbComponents[i].col===cell.col){found=bbComponents[i];break;}}
+    if(found){
+      var txt='';
+      if(found.type==='battery')txt='Battery: 9V';
+      else if(found.type==='resistor')txt='Resistor: '+(found.value||100)+'\u03A9';
+      else if(found.type==='switch')txt='Switch: '+(found.on?'ON':'OFF');
+      else if(found.type==='light')txt='Light: '+(found.lit?'ON':'OFF')+' (10\u03A9)';
+      var rect=document.getElementById('bbCanvas').getBoundingClientRect();
+      tip.textContent=txt;tip.style.display='block';tip.style.left=((e.clientX-rect.left)+10)+'px';tip.style.top=((e.clientY-rect.top)-20)+'px';
+    }else{tip.style.display='none';}
+  }
+  // Dragging wire
+  if(!bbDragging)return;
+  var px=bbGetPixel(e);
+  bbDragCurrent=px;
+  // Snap to grid cells as we drag through them
+  if(cell.col>=0&&cell.col<bbCols&&cell.row>=0&&cell.row<bbRows){
+    var last=bbDragPoints[bbDragPoints.length-1];
+    if(cell.row!==last.row||cell.col!==last.col){
+      // Only add if adjacent or same row/col (keep wire clean)
+      bbDragPoints.push({row:cell.row,col:cell.col});
+    }
+  }
+  drawBB();
+}
+function bbMouseUp(e){
+  if(!bbDragging)return;
+  bbDragging=false;bbDragCurrent=null;
+  if(bbDragPoints.length>=2){
+    // Simplify: remove duplicate consecutive points
+    var simplified=[bbDragPoints[0]];
+    for(var i=1;i<bbDragPoints.length;i++){
+      var prev=simplified[simplified.length-1];
+      if(bbDragPoints[i].row!==prev.row||bbDragPoints[i].col!==prev.col) simplified.push(bbDragPoints[i]);
+    }
+    if(simplified.length>=2){
+      bbWires.push({points:simplified,
+        c1:simplified[0].col,r1:simplified[0].row,
+        c2:simplified[simplified.length-1].col,r2:simplified[simplified.length-1].row});
+    }
+  }
+  bbDragPoints=[];
+  calcBB();drawBB();
+}
+function bbClick(e){
+  if(bbTool==='wire')return; // handled by drag
+  var cell=bbGetCell(e);
+  if(cell.col<0||cell.col>=bbCols||cell.row<0||cell.row>=bbRows)return;
+  if(bbTool==='erase'){
+    bbComponents=bbComponents.filter(function(c){return !(c.row===cell.row&&c.col===cell.col)});
+    bbWires=bbWires.filter(function(w){
+      if(w.points){
+        for(var p=0;p<w.points.length;p++){if(w.points[p].row===cell.row&&w.points[p].col===cell.col)return false;}return true;
+      }
+      return !((w.r1===cell.row&&w.c1===cell.col)||(w.r2===cell.row&&w.c2===cell.col));
+    });
+  }else{
+    bbComponents=bbComponents.filter(function(c){return !(c.row===cell.row&&c.col===cell.col)});
+    var comp={type:bbTool,row:cell.row,col:cell.col};
+    if(bbTool==='resistor')comp.value=[100,220,330,470,1000][Math.floor(Math.random()*5)];
+    if(bbTool==='switch')comp.on=true;
+    if(bbTool==='light')comp.lit=false;
+    bbComponents.push(comp);
+  }
+  calcBB();drawBB();
+}
+function calcBB(){
+  var totalV=0,totalR=0,resistors=[],hasSwitch=true,hasBattery=false,hasLight=false;
+  // Build set of all cells touched by wires
+  var connectedCells=new Set();
+  bbWires.forEach(function(w){
+    if(w.points){w.points.forEach(function(p){connectedCells.add(p.row+','+p.col);});}
+    else{connectedCells.add(w.r1+','+w.c1);connectedCells.add(w.r2+','+w.c2);}
+  });
+  for(var i=0;i<bbComponents.length;i++){
+    var comp=bbComponents[i],key=comp.row+','+comp.col;
+    var isConnected=connectedCells.has(key)||bbWires.length===0;
+    if(!isConnected&&bbWires.length>0)continue;
+    if(comp.type==='battery'){totalV+=9;hasBattery=true;}
+    if(comp.type==='resistor')resistors.push(comp.value||100);
+    if(comp.type==='switch'&&!comp.on)hasSwitch=false;
+    if(comp.type==='light')hasLight=true;
+  }
+  if(resistors.length===0)totalR=0;
+  else if(bbMode==='series')totalR=resistors.reduce(function(a,b){return a+b},0);
+  else{var inv=resistors.reduce(function(a,b){return a+1/b},0);totalR=inv>0?1/inv:0;}
+  if(hasLight)totalR+=10;
+  var totalI=(totalR>0&&hasBattery&&hasSwitch)?(totalV/totalR):0;
+  for(var i=0;i<bbComponents.length;i++){if(bbComponents[i].type==='light')bbComponents[i].lit=(totalI>0);}
+  document.getElementById('bbV').textContent=totalV.toFixed(1)+' V';
+  document.getElementById('bbI').textContent=totalI.toFixed(3)+' A';
+  document.getElementById('bbR').innerHTML=totalR.toFixed(1)+' &Omega;';
+}
+function clearBB(){bbComponents=[];bbWires=[];bbDragging=false;bbDragPoints=[];calcBB();drawBB();}
+
+/* ===== KVL ===== */
+var kvlResistors=2,kvlBattery=12;
+function drawKVL(){
+  var c=document.getElementById('kvlCanvas'),ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);ctx.fillStyle='#f5f6ee';ctx.fillRect(0,0,w,h);
+  var n=kvlResistors,vDrop=n>0?(kvlBattery/n):0,totalR=n*10,current=totalR>0?(kvlBattery/totalR):0;
+  var lx=60,ly=40,lw=380,lh=180;
+  ctx.strokeStyle='#525B76';ctx.lineWidth=3;ctx.strokeRect(lx,ly,lw,lh);
+  ctx.fillStyle='#e74c3c';ctx.fillRect(lx-4,ly+60,8,20);ctx.fillStyle='#3498db';ctx.fillRect(lx-4,ly+100,8,20);
+  ctx.fillStyle='#143109';ctx.font='bold 12px Dosis';ctx.textAlign='right';ctx.fillText('+'+kvlBattery+'V',lx-10,ly+75);ctx.fillText('\u2013',lx-10,ly+115);
+  if(n>0){var spacing=lw/(n+1);for(var i=0;i<n;i++){var rx=lx+spacing*(i+1);ctx.fillStyle='#e4e8cc';ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.5;ctx.fillRect(rx-20,ly-4,40,8);ctx.strokeRect(rx-20,ly-4,40,8);ctx.fillStyle='#e74c3c';ctx.font='bold 11px Dosis';ctx.textAlign='center';ctx.fillText('-'+vDrop.toFixed(1)+'V',rx,ly-12);ctx.fillStyle='#525B76';ctx.font='10px Dosis';ctx.fillText('10\u03A9',rx,ly+20);}}
+  ctx.fillStyle='#9BA06A';ctx.font='bold 12px Dosis';ctx.textAlign='center';ctx.fillText('I = '+current.toFixed(2)+'A \u2192',lx+lw/2,ly+lh+25);
+  ctx.fillStyle='#143109';ctx.font='13px Bitter';ctx.textAlign='center';
+  var eq='+'+kvlBattery+'V';for(var i=0;i<n;i++)eq+=' \u2013 '+vDrop.toFixed(1)+'V';eq+=' = 0';ctx.fillText(eq,w/2,h-10);
+  document.getElementById('kvlStatus').innerHTML='Battery: '+kvlBattery+'V | '+n+' resistor'+(n>1?'s':'')+' (10&Omega; each) | '+vDrop.toFixed(1)+'V drop each | Sum = 0 &#10003;';
+}
+function addKVLResistor(){if(kvlResistors<6){kvlResistors++;drawKVL();}}
+function removeKVLResistor(){if(kvlResistors>1){kvlResistors--;drawKVL();}}
+function resetKVL(){kvlResistors=2;drawKVL();}
+
+/* ===== INIT ===== */
+window.addEventListener('load',function(){
+  // Circuit electrons (slower speed)
+  electrons=[];for(var i=0;i<12;i++)electrons.push({t:i/12,speed:0.0015});
+  var cc=document.getElementById('circuitCanvas');drawCircuit(cc.getContext('2d'),cc.width,cc.height);
+  // Vessel
+  document.getElementById('vesselCanvas').addEventListener('click',vesselClick);
+  initVessel();
+  // Maze
+  generateMaze();drawMaze();
+  // Salt
+  drawSaltBeakers();animateSalt();
+  // Neuron
+  drawNeuron();
+  // Pipes
+  document.getElementById('pipeCanvas').addEventListener('click',pipeClick);
+  drawPipes();
+  // Series & parallel diagrams
+  drawSeriesDiagram();drawParallelDiagram();
+  // Breadboard
+  drawBB();
+  var bbc=document.getElementById('bbCanvas');
+  bbc.addEventListener('click',bbClick);
+  bbc.addEventListener('mousedown',bbMouseDown);
+  bbc.addEventListener('mousemove',bbMouseMove);
+  bbc.addEventListener('mouseup',bbMouseUp);
+  bbc.addEventListener('mouseleave',function(){document.getElementById('bbTooltip').style.display='none';if(bbDragging){bbMouseUp({clientX:0,clientY:0});}});
+  bbc.addEventListener('touchstart',function(e){e.preventDefault();var t=e.touches[0];if(bbTool==='wire'){bbMouseDown({clientX:t.clientX,clientY:t.clientY});}else{bbClick({clientX:t.clientX,clientY:t.clientY});}});
+  bbc.addEventListener('touchmove',function(e){e.preventDefault();var t=e.touches[0];bbMouseMove({clientX:t.clientX,clientY:t.clientY});});
+  bbc.addEventListener('touchend',function(e){e.preventDefault();bbMouseUp(e);});
+  // KVL
+  drawKVL();
+});
+</script>
+</body>
+</html>
