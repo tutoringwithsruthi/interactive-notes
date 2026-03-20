@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHM, Reflection &amp; Superposition</title>
+<meta name="description" content="Interactive notes on simple harmonic motion, wave reflection, superposition, standing waves, and beats — by tutoringwithsruthi">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Dosis:wght@400;500;600;700&family=Bitter:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+:root{--white:#FFFFFF;--sage-l:#D0D6B3;--sage:#9BA06A;--slate:#525B76;--forest:#143109;--bg:#f5f6ee;--sage-m:#e4e8cc;--fh:'Young Serif',Georgia,serif;--fp:'Dosis','Trebuchet MS',Arial,sans-serif;--fb:'Bitter',Georgia,serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px 16px 52px;overflow-x:hidden}
+.page{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+.pg-head{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:20px;padding:44px 36px;text-align:center}
+.pg-head h1{font-family:var(--fh);font-size:2.3rem;color:var(--forest);margin-bottom:0}
+.card{background:var(--white);border:2px solid var(--sage-l);border-radius:20px;padding:32px 30px;box-shadow:0 2px 12px rgba(20,49,9,0.06)}
+.card-title{font-family:var(--fh);font-size:1.45rem;color:var(--forest);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.card-title .icon{font-size:1.5rem}
+.body-text{font-family:var(--fp);font-size:1.05rem;color:var(--forest);line-height:1.7;margin-bottom:12px}
+.body-text:last-child{margin-bottom:0}
+.highlight-box{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:14px;padding:20px 22px;margin:16px 0}
+.formula-box{background:var(--white);border:2px solid var(--sage);border-radius:14px;padding:22px;margin:16px 0;text-align:center;font-size:1.3rem;overflow-x:auto}
+.term-grid{display:grid;grid-template-columns:80px 1fr;gap:8px 16px;margin:12px 0}
+.term-sym{font-family:var(--fb);font-weight:700;font-size:1.1rem;color:var(--sage);text-align:right}
+.term-def{font-family:var(--fp);font-size:1rem;color:var(--forest);line-height:1.6}
+.interactive-area{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:18px;padding:24px;margin:18px 0;text-align:center}
+.interactive-area canvas{border-radius:12px;display:block;margin:0 auto;max-width:100%}
+.ia-label{font-family:var(--fb);font-size:1.05rem;color:var(--slate);margin-bottom:12px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0}
+.site-btn{font-family:var(--fp);font-weight:600;font-size:.98rem;border:none;border-radius:30px;padding:10px 22px;cursor:pointer;transition:background .18s,transform .18s;background:var(--sage);color:var(--white)}
+.site-btn:hover{background:var(--forest);transform:translateY(-1px)}
+.site-btn.active{background:var(--forest)}
+.site-btn.secondary{background:var(--white);color:var(--forest);border:2px solid var(--sage-l)}
+.site-btn.secondary:hover{background:var(--sage-m)}
+.worked-example{background:#f9faf4;border-left:4px solid var(--sage);border-radius:0 14px 14px 0;padding:20px 22px;margin:16px 0}
+.worked-example .step{font-family:var(--fp);font-size:1rem;color:var(--forest);margin-bottom:8px;line-height:1.7}
+.worked-example .step-label{font-family:var(--fb);font-weight:700;color:var(--sage)}
+.practice-box{background:var(--white);border:2px dashed var(--sage-l);border-radius:14px;padding:18px 20px;margin:10px 0}
+.practice-box .q{font-family:var(--fp);font-size:1rem;color:var(--forest);margin-bottom:8px;line-height:1.6}
+.practice-box .a{font-family:var(--fp);font-size:.95rem;color:var(--sage);display:none;margin-top:6px;padding:10px 14px;background:var(--sage-m);border-radius:10px;line-height:1.6}
+.practice-box .a.show{display:block;animation:fadeIn .25s ease}
+.show-ans-btn{font-family:var(--fp);font-weight:600;font-size:.88rem;border:2px solid var(--sage-l);border-radius:20px;padding:6px 16px;cursor:pointer;background:var(--white);color:var(--sage);transition:background .18s}
+.show-ans-btn:hover{background:var(--sage-m)}
+.sub-title{font-family:var(--fh);font-size:1.15rem;color:var(--forest);margin:18px 0 8px}
+.slider-row{display:flex;align-items:center;gap:12px;justify-content:center;margin:8px 0;flex-wrap:wrap}
+.slider-row label{font-family:var(--fp);font-weight:600;font-size:.95rem}
+.slider-row input[type=range]{width:180px;accent-color:var(--sage)}
+.slider-row .val{font-family:var(--fb);font-weight:700;color:var(--sage);min-width:48px}
+.status-text{font-family:var(--fb);font-size:.95rem;color:var(--slate);margin-top:8px}
+/* explorer */
+.exp-chip{font-family:var(--fb);font-size:.78rem;background:var(--white);border:1.5px solid var(--sage-l);border-radius:10px;padding:3px 12px;color:var(--slate);cursor:pointer;transition:background .18s,border-color .18s,transform .15s;user-select:none}
+.exp-chip:hover{background:var(--sage-m);border-color:var(--sage);transform:translateY(-1px)}
+.exp-chip strong{color:var(--forest)}
+.exp-slider-card{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:12px 14px 10px}
+.exp-sl-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+.exp-sl-name{font-family:var(--fh);font-size:1.05rem}
+.exp-sl-val{font-family:var(--fb);font-size:.82rem;background:var(--sage-m);padding:2px 10px;border-radius:8px;color:var(--forest);min-width:44px;text-align:center}
+.exp-sl-desc{font-family:var(--fp);font-size:.72rem;color:var(--slate);margin-bottom:8px;font-weight:500}
+.exp-slider-card input[type=range]{width:100%;height:5px;border-radius:4px;outline:none;cursor:pointer}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){
+  .pg-head{padding:30px 18px}.pg-head h1{font-size:1.6rem}.card{padding:22px 16px}.card-title{font-size:1.2rem}
+  .term-grid{grid-template-columns:60px 1fr}
+  #expSliders{grid-template-columns:1fr 1fr !important}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="pg-head">
+  <h1>SHM, Reflection &amp; Superposition</h1>
+</div>
+
+<!-- ======== 0 — MECHANICAL WAVES BASICS ======== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x3030;</span> Mechanical Waves — The Basics</div>
+
+  <p class="body-text">Imagine dropping a pebble into a still pond. Ripples spread outward in circles. But here's the thing — the water itself doesn't travel across the pond. Each bit of water just bobs up and down in place. What <em>does</em> travel is the <strong>pattern</strong> — the shape of the ripple moves outward and carries energy with it.</p>
+  <p class="body-text">That moving pattern is a <strong>wave</strong>. A wave is energy moving through stuff (we call that stuff the <strong>medium</strong> — water, air, a rope, etc.) without the stuff itself going anywhere.</p>
+
+  <div class="sub-title">Two Types of Waves</div>
+  <div class="highlight-box">
+    <strong>Transverse wave — "the rope wave"</strong><br>
+    Grab a rope and flick it up and down. The wave travels <em>along</em> the rope, but each piece of rope moves <em>up and down</em> — at a right angle to where the wave is heading. Waves on a string, water surface waves, and light all work this way.<br><br>
+    <strong>Longitudinal wave — "the Slinky wave"</strong><br>
+    Push one end of a Slinky forward and pull it back. The wave travels <em>along</em> the Slinky, and each coil moves <em>back and forth</em> in the <em>same direction</em> the wave travels. Sound waves work this way — air molecules bunch together and spread apart.
+  </div>
+
+  <div class="sub-title">The Six Key Quantities</div>
+  <p class="body-text">There are six numbers that describe any wave. They're all connected to each other — if you know some, you can figure out the rest.</p>
+
+  <div class="term-grid">
+    <span class="term-sym">$\lambda$</span><span class="term-def"><strong>Wavelength</strong> (lambda) — The length of one complete wave. Measure from one peak to the very next peak, or one valley to the next valley. Think of it as the "size" of one wave. Unit: meters (m).</span>
+    <span class="term-sym">$f$</span><span class="term-def"><strong>Frequency</strong> — How many complete waves pass by you every second. If you stand still and count 5 waves going past in one second, the frequency is 5 Hz. You control this by how fast you shake the source. Unit: hertz (Hz) = waves per second.</span>
+    <span class="term-sym">$T$</span><span class="term-def"><strong>Period</strong> — How long it takes for ONE complete wave to pass by you. If frequency is "how many per second," period is "how many seconds per one." They are just flips of each other: $T = 1/f$. If 4 waves pass per second ($f = 4$), each one takes $1/4 = 0.25$ seconds ($T = 0.25$ s). Unit: seconds (s).</span>
+    <span class="term-sym">$v$</span><span class="term-def"><strong>Wave speed</strong> — How fast the wave pattern itself moves forward through the medium. Not how fast the rope jiggles — how fast the ripple travels. Unit: m/s.</span>
+    <span class="term-sym">$d$</span><span class="term-def"><strong>Distance</strong> — How far the wave has traveled. If a sound wave goes from you to a wall, $d$ is the distance to that wall. Unit: meters (m).</span>
+    <span class="term-sym">$t$</span><span class="term-def"><strong>Time</strong> — How long the wave has been traveling. Unit: seconds (s).</span>
+  </div>
+
+  <div class="sub-title">How They're All Connected</div>
+  <p class="body-text">Here's the key insight: if each wave is 2 meters long ($\lambda = 2$ m), and 3 waves pass you every second ($f = 3$ Hz), then the wave pattern must be covering $2 \times 3 = 6$ meters every second. That's the wave speed!</p>
+
+  <div class="formula-box">
+    $$v = f \cdot \lambda$$
+  </div>
+  <p class="body-text">In plain English: <strong>speed = frequency &times; wavelength</strong>. You can also rearrange this to find any piece: $f = v/\lambda$ or $\lambda = v/f$.</p>
+
+  <p class="body-text">And since speed is just distance over time:</p>
+  <div class="formula-box">
+    $$v = \frac{d}{t}$$
+  </div>
+
+  <div class="highlight-box">
+    <strong>The big rule:</strong> Wave speed depends on the <em>medium</em> (what the wave travels through), NOT on how fast you shake. Sound in air is always ~343 m/s whether you whisper or shout, whether the pitch is high or low. If you shake faster (increase $f$), each wave just gets shorter ($\lambda$ goes down) so that $v$ stays the same. Try it in the explorer below!
+  </div>
+
+  <!-- Wave Quantity Explorer -->
+  <div class="interactive-area">
+    <div class="ia-label">Wave Quantity Explorer — See How They Connect</div>
+    <canvas id="waveQCanvas" width="780" height="260"></canvas>
+    <div style="display:flex;justify-content:center;gap:8px;margin:10px 0;flex-wrap:wrap;">
+      <span class="exp-chip">Speed: <strong id="wqSpeed">3.0 m/s</strong></span>
+      <span class="exp-chip">Wavelength: <strong id="wqLambda">1.5 m</strong></span>
+      <span class="exp-chip">Frequency: <strong id="wqFreq">2.0 Hz</strong></span>
+      <span class="exp-chip">Period: <strong id="wqPeriod">0.50 s</strong></span>
+    </div>
+    <div class="slider-row">
+      <label>Frequency (how fast you shake):</label>
+      <input type="range" id="wqFreqSlider" min="0.5" max="5" step="0.1" value="2">
+      <span class="val" id="wqFreqVal">2.0</span>
+    </div>
+    <div class="slider-row">
+      <label>Wave speed (set by medium):</label>
+      <input type="range" id="wqSpeedSlider" min="1" max="6" step="0.1" value="3">
+      <span class="val" id="wqSpeedVal">3.0</span>
+    </div>
+    <p class="status-text" id="wqStatus">Wavelength auto-adjusts: &lambda; = v / f</p>
+  </div>
+
+  <div class="sub-title">Echoes — Sound Bouncing Like Light in a Mirror</div>
+  <p class="body-text">Stand in front of a mirror and shine a flashlight at it. The light travels from you to the mirror, bounces off, and comes straight back to your eyes. An <strong>echo</strong> works exactly the same way, but with sound instead of light.</p>
+  <p class="body-text">You shout toward a cliff. The sound travels <em>to</em> the cliff, bounces off, and travels all the way <em>back</em> to your ears. That return trip is the echo you hear.</p>
+
+  <div class="highlight-box">
+    <strong>The key:</strong> The sound has to go THERE and BACK. If the cliff is 100 m away, the sound travels 100 m forward + 100 m back = <strong>200 m total</strong>. That's why we use $2d$ (two times the distance to the reflecting surface), not just $d$.
+  </div>
+
+  <div class="formula-box">
+    $$v = \frac{2d}{t}$$
+  </div>
+  <p class="body-text">Where $d$ is the distance to the wall/cliff, and $t$ is the total time from when you make the sound to when you hear the echo.</p>
+
+  <!-- Echo Diagram -->
+  <div class="interactive-area">
+    <div class="ia-label">Echo Animation — Watch the Sound Bounce</div>
+    <canvas id="echoCanvas" width="700" height="200"></canvas>
+    <div class="btn-row">
+      <button class="site-btn" onclick="sendEcho()">Shout!</button>
+      <button class="site-btn secondary" onclick="resetEcho()">Reset</button>
+    </div>
+    <p class="status-text" id="echoStatus">Press "Shout!" to send a sound pulse</p>
+  </div>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Example: </span>A hiker shouts toward a cliff 543 m away. The echo is heard 3.15 s later. What is the speed of sound?</div>
+    <div class="step"><span class="step-label">Step 1: </span>The sound goes from the hiker to the cliff AND back. So the total distance is $2 \times 543 = 1086$ m.</div>
+    <div class="step"><span class="step-label">Step 2: </span>We know distance (1086 m) and time (3.15 s), so: $v = d/t = 1086 / 3.15 \approx 344.8$ m/s.</div>
+    <div class="step"><span class="step-label">Check: </span>The accepted speed of sound in air is ~343 m/s. Our answer is right in that range!</div>
+  </div>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Example: </span>A sound wave has a wavelength of 0.753 m. What is its frequency? What is the period?</div>
+    <div class="step"><span class="step-label">Step 1: </span>Sound travels at about 345 m/s in air. We know $v$ and $\lambda$, so we can find $f$: $f = v/\lambda = 345/0.753 \approx 458$ Hz.</div>
+    <div class="step"><span class="step-label">Step 2: </span>Period is just the flip of frequency: $T = 1/f = 1/458 \approx 0.00218$ s, which is about 2.18 milliseconds. Each wave takes just over 2 thousandths of a second to pass.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">Anna and Stan hold a 5.5 m elastic cord. They create a wave traveling at 2.6 m/s with a frequency of 1.6 Hz. If they <strong>double the frequency</strong> (shake twice as fast), what happens to the wavelength? What happens to the wave speed?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ansW1')">Show Answer</button>
+    <div class="a" id="ansW1">
+      Original: $\lambda = v/f = 2.6/1.6 = 1.625$ m<br>
+      Doubled frequency ($f = 3.2$ Hz): $\lambda = v/f = 2.6/3.2 = 0.8125$ m<br>
+      The wavelength <strong>halves</strong> — each wave gets squished shorter. The speed stays the same (2.6 m/s) because speed depends on the cord (the medium), not how fast they shake.
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">Ashley shakes a Snakey at a steady rate. The distance between two peaks is 2.99 m. She counts 10 peaks passing the classroom door in 17.6 seconds. Find the speed of the waves (in cm/s).</div>
+    <button class="show-ans-btn" onclick="toggleAns('ansW2')">Show Answer</button>
+    <div class="a" id="ansW2">
+      Peak-to-peak distance is the wavelength: $\lambda = 2.99$ m<br>
+      10 peaks in 17.6 s &rarr; frequency: $f = 10/17.6 \approx 0.568$ Hz<br>
+      $v = f\lambda = 0.568 \times 2.99 \approx 1.70$ m/s $= 170$ cm/s
+    </div>
+  </div>
+</div>
+
+<!-- ======== FORMULA GUIDE ======== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x1F4D6;</span> Key Formulas — What They Mean</div>
+  <p class="body-text">Every formula here connects a few simple ideas. This card breaks down each one so you know <em>what</em> each variable is, <em>why</em> it's there, and <em>how</em> to think about it.</p>
+
+  <div class="sub-title">1. Wave Speed &nbsp; $v = f\lambda$</div>
+  <div class="highlight-box">
+    <strong>Think of it like:</strong> A conveyor belt of waves. If more waves pass you each second ($f$ is bigger) <em>or</em> each wave is longer ($\lambda$ is bigger), the pattern moves faster.
+  </div>
+  <div class="term-grid">
+    <span class="term-sym">$v$</span><span class="term-def">Wave speed — how fast the wave pattern travels through the medium (m/s). Depends on the medium (e.g., sound is faster in water than air), <em>not</em> on how hard you shake.</span>
+    <span class="term-sym">$f$</span><span class="term-def">Frequency — how many complete waves pass a fixed point each second (Hz). You control this by how fast you shake the source.</span>
+    <span class="term-sym">$\lambda$</span><span class="term-def">Wavelength — crest-to-crest distance (m). If you shake faster ($f$ up) but the medium doesn't change ($v$ fixed), each wave gets squished shorter ($\lambda$ down).</span>
+  </div>
+
+  <div class="sub-title">2. Hooke's Law &nbsp; $F = -kx$</div>
+  <div class="highlight-box">
+    <strong>Think of it like:</strong> A rubber band. The farther you stretch it ($x$), the harder it pulls back ($F$). The minus sign means the force always points <em>back toward center</em>.
+  </div>
+  <div class="term-grid">
+    <span class="term-sym">$F$</span><span class="term-def">Restoring force — the push/pull back toward equilibrium (N). Always opposes the displacement.</span>
+    <span class="term-sym">$k$</span><span class="term-def">Spring constant — stiffness (N/m). A steel spring has a huge $k$; a Slinky has a tiny one. Bigger $k$ = harder to stretch = snaps back faster.</span>
+    <span class="term-sym">$x$</span><span class="term-def">Displacement — how far the object is from its rest position (m). Positive one way, negative the other.</span>
+  </div>
+
+  <div class="sub-title">3. Mass-Spring Period &nbsp; $T = 2\pi\sqrt{m/k}$</div>
+  <div class="highlight-box">
+    <strong>Think of it like:</strong> A heavy kid on a trampoline vs. a light kid. The heavy kid ($m$ big) bounces slowly (big $T$). A stiff trampoline ($k$ big) bounces you back fast (small $T$). Gravity and how far you pull don't matter — only mass and stiffness.
+  </div>
+  <div class="term-grid">
+    <span class="term-sym">$T$</span><span class="term-def">Period — time for one full bounce, out-and-back (s).</span>
+    <span class="term-sym">$m$</span><span class="term-def">Mass of the oscillating object (kg). More mass = more inertia = slower oscillation.</span>
+    <span class="term-sym">$k$</span><span class="term-def">Spring constant (N/m). Stiffer spring = stronger restoring force = faster oscillation.</span>
+    <span class="term-sym">$2\pi$</span><span class="term-def">Shows up because one full cycle is one full circle ($2\pi$ radians) of the motion.</span>
+  </div>
+
+  <div class="sub-title">4. Pendulum Period &nbsp; $T = 2\pi\sqrt{L/g}$</div>
+  <div class="highlight-box">
+    <strong>Think of it like:</strong> Same idea as the spring, but now the "stiffness" comes from gravity. A longer rope ($L$ big) means a wider arc and slower swing. Stronger gravity ($g$ big) pulls harder and speeds it up. Mass cancels out — a bowling ball and a tennis ball on the same string swing at the same rate.
+  </div>
+
+  <div class="sub-title">5. SHM Position &nbsp; $x(t) = A\cos(\omega t + \phi)$</div>
+  <div class="highlight-box">
+    <strong>Think of it like:</strong> Watching a carousel horse from the side. It looks like it bobs up and down sinusoidally. This formula describes that: $A$ is how high the horse goes, $\omega$ is how fast the carousel spins, and $\phi$ is where the horse was when you started watching.
+  </div>
+  <div class="term-grid">
+    <span class="term-sym">$A$</span><span class="term-def">Amplitude — maximum displacement. How far the object swings from center (m).</span>
+    <span class="term-sym">$\omega$</span><span class="term-def">Angular frequency — how fast the object cycles, in rad/s. Related to period: $\omega = 2\pi/T$. Bigger $\omega$ = faster oscillation.</span>
+    <span class="term-sym">$\phi$</span><span class="term-def">Phase constant — where in the cycle the object starts at $t = 0$. If $\phi = 0$, it starts at maximum displacement (cosine). If $\phi = \pi/2$, it starts at equilibrium (like a sine).</span>
+  </div>
+
+  <div class="sub-title">6. Standing Wave Harmonics &nbsp; $f_n = \dfrac{n}{2L}\sqrt{\dfrac{T}{\mu}}$</div>
+  <div class="highlight-box">
+    <strong>Think of it like:</strong> Only certain waves "fit" on a guitar string — like only certain numbers of half-arches fit between two walls. The first harmonic ($n = 1$) is one half-arch. The second ($n = 2$) is two. Each higher $n$ packs more wiggles in the same length and vibrates at a higher pitch.
+  </div>
+  <div class="term-grid">
+    <span class="term-sym">$n$</span><span class="term-def">Harmonic number (1, 2, 3, …). Tells you how many half-wavelengths fit in the string.</span>
+    <span class="term-sym">$L$</span><span class="term-def">Length of the string or pipe (m).</span>
+    <span class="term-sym">$T$</span><span class="term-def">Tension in the string (N). Tighter = faster wave speed = higher pitch.</span>
+    <span class="term-sym">$\mu$</span><span class="term-def">Linear mass density — mass per unit length (kg/m). Thicker string = heavier per meter = lower pitch.</span>
+  </div>
+</div>
+
+<!-- ======== SINUSOIDAL / TRIG REVIEW ======== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x1F4C8;</span> Sinusoidal Waves &amp; Trig Review</div>
+  <p class="body-text">Waves in physics are described by sine and cosine functions. These come straight from the <strong>unit circle</strong> — the same trig you already know.</p>
+
+  <div class="sub-title">The Unit Circle Connection</div>
+  <p class="body-text">Imagine a point moving around a circle at constant speed. If you track its <strong>vertical position</strong> over time, you get a sine wave. Track the <strong>horizontal position</strong> and you get a cosine wave. That's all a sinusoidal wave is — circular motion "unwrapped" onto a timeline.</p>
+
+  <div class="highlight-box">
+    <strong>Key trig facts:</strong><br>
+    $\sin(0) = 0$, &ensp; $\sin(\pi/2) = 1$, &ensp; $\sin(\pi) = 0$, &ensp; $\sin(3\pi/2) = -1$<br>
+    $\cos(0) = 1$, &ensp; $\cos(\pi/2) = 0$, &ensp; $\cos(\pi) = -1$, &ensp; $\cos(3\pi/2) = 0$<br><br>
+    Cosine is just sine shifted left by $\pi/2$: &ensp; $\cos(\theta) = \sin(\theta + \pi/2)$
+  </div>
+
+  <div class="sub-title">The General Sinusoidal Form</div>
+  <div class="formula-box">
+    $$y = \underbrace{a}_{\text{amplitude}} \cdot \sin\!\Big(\underbrace{b}_{\text{frequency}} \cdot (\theta + \underbrace{c}_{\text{phase shift}})\Big) + \underbrace{d}_{\text{vertical shift}}$$
+  </div>
+
+  <div class="term-grid">
+    <span class="term-sym">$a$</span><span class="term-def"><strong>Amplitude</strong> — stretches the wave vertically. $|a|$ = max height from midline. If $a$ is negative, the wave flips upside down.</span>
+    <span class="term-sym">$b$</span><span class="term-def"><strong>Frequency / period control</strong> — squishes or stretches horizontally. Period $= 2\pi/|b|$. Bigger $|b|$ = more waves packed in = shorter period.</span>
+    <span class="term-sym">$c$</span><span class="term-def"><strong>Phase shift</strong> — slides the wave left or right. Positive $c$ shifts left, negative shifts right. In physics this is $\phi$.</span>
+    <span class="term-sym">$d$</span><span class="term-def"><strong>Vertical shift</strong> — moves the entire wave up or down. The midline sits at $y = d$ instead of $y = 0$.</span>
+  </div>
+
+  <div class="highlight-box">
+    <strong>Connecting to physics:</strong> In $x(t) = A\cos(\omega t + \phi)$, the mapping is: $a = A$ (amplitude), $b = \omega$ (angular frequency), $c = \phi/\omega$ (phase shift), $d = 0$ (oscillates around equilibrium).
+  </div>
+
+  <!-- Anatomy Diagram -->
+  <div class="interactive-area">
+    <div class="ia-label">Anatomy of a Sinusoidal Wave</div>
+    <canvas id="anatomyCanvas" width="780" height="300"></canvas>
+  </div>
+
+  <!-- Sinusoidal Explorer -->
+  <div class="interactive-area" style="padding:16px 12px;">
+    <div class="ia-label">Sinusoidal Graph Explorer — Unit Circle &harr; Wave</div>
+    <canvas id="explorerCanvas" width="860" height="400"></canvas>
+
+    <div style="display:flex;justify-content:center;gap:8px;margin:10px 0;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:5px;font-size:.78rem;color:var(--slate);">
+        <span style="display:inline-block;width:16px;height:3px;border-radius:2px;background:#9BA06A;"></span> sin
+      </div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:.78rem;color:var(--slate);">
+        <span style="display:inline-block;width:16px;height:3px;border-radius:2px;background:#525B76;"></span> cos
+      </div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:.78rem;color:var(--slate);">
+        <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--sage-l);"></span> circle point
+      </div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:.78rem;color:var(--slate);">
+        <span style="display:inline-block;width:16px;height:2px;border-radius:2px;background:var(--sage);"></span> midline
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:center;gap:6px;margin:8px 0;flex-wrap:wrap;" id="expInfoBar">
+      <span class="exp-chip" data-hl="midline" onmouseenter="expHL='midline'" onmouseleave="expHL=null">Midline: y = <strong id="expInfoMid">0</strong></span>
+      <span class="exp-chip" data-hl="amplitude" onmouseenter="expHL='amplitude'" onmouseleave="expHL=null">Amplitude: <strong id="expInfoAmp">1</strong></span>
+      <span class="exp-chip" data-hl="period" onmouseenter="expHL='period'" onmouseleave="expHL=null">Period: <strong id="expInfoPer">2&pi;</strong></span>
+      <span class="exp-chip" data-hl="phase" onmouseenter="expHL='phase'" onmouseleave="expHL=null">Phase: <strong id="expInfoPhs">0</strong></span>
+    </div>
+
+    <div class="btn-row">
+      <button class="site-btn secondary exp-speed" data-speed="0" onclick="setExpSpeed(0)">Pause</button>
+      <button class="site-btn secondary exp-speed" data-speed="0.01" onclick="setExpSpeed(0.01)">Slow</button>
+      <button class="site-btn exp-speed active" data-speed="0.025" onclick="setExpSpeed(0.025)">Normal</button>
+      <button class="site-btn secondary exp-speed" data-speed="0.06" onclick="setExpSpeed(0.06)">Fast</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px auto 0;max-width:740px;" id="expSliders">
+      <div class="exp-slider-card">
+        <div class="exp-sl-top"><span class="exp-sl-name" style="color:#9BA06A;">a</span><span class="exp-sl-val" id="expValA">1</span></div>
+        <div class="exp-sl-desc">Amplitude</div>
+        <input type="range" id="expA" min="-4" max="4" step="0.1" value="1" style="accent-color:#9BA06A;">
+      </div>
+      <div class="exp-slider-card">
+        <div class="exp-sl-top"><span class="exp-sl-name" style="color:#525B76;">b</span><span class="exp-sl-val" id="expValB">1</span></div>
+        <div class="exp-sl-desc">Period = 2&pi;/|b|</div>
+        <input type="range" id="expB" min="-4" max="4" step="0.1" value="1" style="accent-color:#525B76;">
+      </div>
+      <div class="exp-slider-card">
+        <div class="exp-sl-top"><span class="exp-sl-name" style="color:#6b7f4e;">c</span><span class="exp-sl-val" id="expValC">0</span></div>
+        <div class="exp-sl-desc">Phase shift</div>
+        <input type="range" id="expC" min="-6.28" max="6.28" step="0.01" value="0" style="accent-color:#6b7f4e;">
+      </div>
+      <div class="exp-slider-card">
+        <div class="exp-sl-top"><span class="exp-sl-name" style="color:#143109;">d</span><span class="exp-sl-val" id="expValD">0</span></div>
+        <div class="exp-sl-desc">Vertical shift</div>
+        <input type="range" id="expD" min="-4" max="4" step="0.1" value="0" style="accent-color:#143109;">
+      </div>
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">A wave is described by $y = 3\sin(2\theta - \pi) + 1$. Identify the amplitude, period, phase shift, and midline.</div>
+    <button class="show-ans-btn" onclick="toggleAns('ansTrig1')">Show Answer</button>
+    <div class="a" id="ansTrig1">
+      Rewrite as $y = 3\sin\!\big(2(\theta - \pi/2)\big) + 1$<br>
+      Amplitude $= |a| = 3$<br>
+      Period $= 2\pi/|b| = 2\pi/2 = \pi$<br>
+      Phase shift $= \pi/2$ to the right<br>
+      Midline $= y = 1$ (vertical shift $d = 1$)
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">How is the graph of $y = -2\cos(3\theta)$ different from $y = \cos(\theta)$?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ansTrig2')">Show Answer</button>
+    <div class="a" id="ansTrig2">
+      Compared to the parent $\cos$:<br>
+      &bull; Amplitude is $2$ (stretched vertically by factor of 2)<br>
+      &bull; The negative sign <strong>flips it</strong> upside down (reflected over x-axis)<br>
+      &bull; Period $= 2\pi/3$ (three full waves fit where one used to)<br>
+      &bull; No phase shift, no vertical shift — midline stays at $y = 0$
+    </div>
+  </div>
+</div>
+
+<!-- ======== 1 — SIMPLE HARMONIC MOTION ======== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x1f504;</span> Simple Harmonic Motion</div>
+  <p class="body-text">Simple harmonic motion (SHM) is oscillatory motion where the restoring force is directly proportional to the displacement from equilibrium and acts in the opposite direction.</p>
+
+  <div class="highlight-box">
+    <strong>Key idea:</strong> In SHM the acceleration is always directed toward the equilibrium position. The motion repeats with a fixed period $T$ regardless of amplitude (for ideal systems).
+  </div>
+
+  <div class="formula-box">
+    $$F = -kx \qquad\Rightarrow\qquad a = -\omega^2 x$$
+  </div>
+
+  <p class="body-text">Position, velocity, and acceleration as functions of time:</p>
+
+  <div class="formula-box">
+    $$x(t) = A\cos(\omega t + \phi)$$
+    $$v(t) = -A\omega\sin(\omega t + \phi)$$
+    $$a(t) = -A\omega^2\cos(\omega t + \phi)$$
+  </div>
+
+  <div class="sub-title">Mass-Spring System</div>
+  <div class="formula-box">
+    $$T = 2\pi\sqrt{\frac{m}{k}} \qquad f = \frac{1}{2\pi}\sqrt{\frac{k}{m}}$$
+  </div>
+
+  <div class="highlight-box">
+    <strong>Notice:</strong> A stiffer spring (larger $k$) oscillates faster. A heavier mass (larger $m$) oscillates slower. Neither amplitude nor gravity affects the period of a mass-spring system.
+  </div>
+
+  <div class="term-grid">
+    <span class="term-sym">$A$</span><span class="term-def">Amplitude — maximum displacement from equilibrium (m)</span>
+    <span class="term-sym">$\omega$</span><span class="term-def">Angular frequency — $\omega = 2\pi f = \frac{2\pi}{T}$ (rad/s)</span>
+    <span class="term-sym">$T$</span><span class="term-def">Period — time for one complete oscillation (s)</span>
+    <span class="term-sym">$f$</span><span class="term-def">Frequency — oscillations per second; $f = 1/T$ (Hz)</span>
+    <span class="term-sym">$\phi$</span><span class="term-def">Phase constant — determines starting point in the cycle (rad)</span>
+    <span class="term-sym">$k$</span><span class="term-def">Spring constant — stiffness of the restoring force (N/m)</span>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">A 200.0 g air track glider is attached to a spring with $k = 33.5$ N/m. What frequency will the glider oscillate at if set into vibrational motion?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ansSHM1')">Show Answer</button>
+    <div class="a" id="ansSHM1">
+      $m = 0.200$ kg<br>
+      $f = \frac{1}{2\pi}\sqrt{\frac{k}{m}} = \frac{1}{2\pi}\sqrt{\frac{33.5}{0.200}} = \frac{1}{2\pi}\sqrt{167.5} \approx \frac{12.94}{6.283} \approx 2.06$ Hz
+    </div>
+  </div>
+
+  <!-- Mass-Spring Simulation -->
+  <div class="interactive-area">
+    <div class="ia-label">Mass-Spring Oscillator</div>
+    <canvas id="shmCanvas" width="500" height="220"></canvas>
+    <div class="slider-row">
+      <label>Amplitude:</label>
+      <input type="range" id="shmAmp" min="20" max="120" value="80">
+      <span class="val" id="shmAmpVal">80</span>
+    </div>
+    <div class="slider-row">
+      <label>Angular frequency:</label>
+      <input type="range" id="shmFreq" min="1" max="8" value="3">
+      <span class="val" id="shmFreqVal">3</span>
+    </div>
+    <div class="btn-row">
+      <button class="site-btn" onclick="toggleSHM()" id="shmBtn">Start</button>
+      <button class="site-btn secondary" onclick="resetSHM()">Reset</button>
+    </div>
+    <p class="status-text" id="shmStatus">Paused</p>
+  </div>
+</div>
+
+<!-- ======== 2 — ENERGY IN SHM ======== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x26A1;</span> Energy in SHM</div>
+  <p class="body-text">In an ideal SHM system with no friction, total mechanical energy is conserved. Energy continuously converts between kinetic and potential forms.</p>
+
+  <div class="formula-box">
+    $$E_{\text{total}} = \tfrac{1}{2}kA^2 = \tfrac{1}{2}kx^2 + \tfrac{1}{2}mv^2$$
+  </div>
+
+  <div class="highlight-box">
+    <strong>At equilibrium</strong> ($x = 0$): all energy is kinetic, speed is maximum.<br>
+    <strong>At extremes</strong> ($x = \pm A$): all energy is potential, speed is zero.
+  </div>
+
+  <!-- Energy Bar Chart -->
+  <div class="interactive-area">
+    <div class="ia-label">Energy vs. Position</div>
+    <canvas id="energyCanvas" width="500" height="200"></canvas>
+    <div class="slider-row">
+      <label>Position $x$:</label>
+      <input type="range" id="energyPos" min="-100" max="100" value="0" oninput="drawEnergy()">
+      <span class="val" id="energyPosVal">0</span>
+    </div>
+  </div>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Example: </span>A 0.5 kg mass on a spring ($k = 200$ N/m) oscillates with amplitude 0.1 m. Find the maximum speed.</div>
+    <div class="step"><span class="step-label">Step 1: </span>Total energy: $E = \frac{1}{2}kA^2 = \frac{1}{2}(200)(0.1)^2 = 1$ J</div>
+    <div class="step"><span class="step-label">Step 2: </span>At equilibrium all energy is kinetic: $\frac{1}{2}mv_{\max}^2 = 1$ J</div>
+    <div class="step"><span class="step-label">Step 3: </span>$v_{\max} = \sqrt{\frac{2(1)}{0.5}} = 2$ m/s</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">A mass-spring system has $k = 50$ N/m and $m = 2$ kg. If the amplitude is 0.3 m, what is the total energy and the period?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ans1')">Show Answer</button>
+    <div class="a" id="ans1">
+      $E = \frac{1}{2}(50)(0.3)^2 = 2.25$ J<br>
+      $\omega = \sqrt{k/m} = \sqrt{50/2} = 5$ rad/s<br>
+      $T = 2\pi/\omega = 2\pi/5 \approx 1.26$ s
+    </div>
+  </div>
+</div>
+
+<!-- ======== 3 — SIMPLE PENDULUM ======== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x1F570;</span> The Simple Pendulum</div>
+  <p class="body-text">A simple pendulum approximates SHM for small angles ($\theta \lesssim 15°$). The restoring torque comes from the tangential component of gravity.</p>
+
+  <div class="formula-box">
+    $$T = 2\pi\sqrt{\frac{L}{g}}$$
+  </div>
+
+  <div class="highlight-box">
+    <strong>Notice:</strong> The period depends only on length $L$ and gravitational acceleration $g$ — <em>not</em> on mass or amplitude (for small angles).
+  </div>
+
+  <!-- Pendulum Simulation -->
+  <div class="interactive-area">
+    <div class="ia-label">Pendulum Simulation</div>
+    <canvas id="pendCanvas" width="500" height="280"></canvas>
+    <div class="slider-row">
+      <label>Length:</label>
+      <input type="range" id="pendLen" min="60" max="200" value="140">
+      <span class="val" id="pendLenVal">140</span>
+    </div>
+    <div class="btn-row">
+      <button class="site-btn" onclick="togglePend()" id="pendBtn">Start</button>
+      <button class="site-btn secondary" onclick="resetPend()">Reset</button>
+    </div>
+    <p class="status-text" id="pendStatus">Paused</p>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">A pendulum has a length of 2.0 m. What is its period on Earth ($g = 9.8$ m/s$^2$)? On the Moon ($g = 1.6$ m/s$^2$)?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ans2')">Show Answer</button>
+    <div class="a" id="ans2">
+      Earth: $T = 2\pi\sqrt{2.0/9.8} \approx 2.84$ s<br>
+      Moon: $T = 2\pi\sqrt{2.0/1.6} \approx 7.02$ s<br>
+      The pendulum swings much more slowly where gravity is weaker.
+    </div>
+  </div>
+</div>
+
+<!-- ======== 4 — WAVE REFLECTION ======== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x1FA9E;</span> Wave Reflection</div>
+  <p class="body-text">When a wave reaches a boundary it reflects back. The behaviour of the reflected pulse depends on whether the boundary is <strong>fixed</strong> or <strong>free</strong>.</p>
+
+  <div class="highlight-box">
+    <strong>Fixed end:</strong> The reflected wave is <em>inverted</em> (180° phase shift). The boundary point cannot move.<br><br>
+    <strong>Free end:</strong> The reflected wave returns <em>upright</em> (no phase shift). The boundary point is free to oscillate.
+  </div>
+
+  <p class="body-text">When a wave passes from one medium to another (e.g., light string → heavy string), <strong>partial reflection and partial transmission</strong> occur. The transmitted wave always stays upright; the reflected wave inverts only if the wave enters a denser (slower) medium.</p>
+
+  <!-- Reflection Simulation -->
+  <div class="interactive-area">
+    <div class="ia-label">Wave Reflection — Fixed vs. Free End</div>
+    <canvas id="reflCanvas" width="500" height="200"></canvas>
+    <div class="btn-row">
+      <button class="site-btn active" onclick="setReflMode('fixed')" id="btnFixed">Fixed End</button>
+      <button class="site-btn secondary" onclick="setReflMode('free')" id="btnFree">Free End</button>
+      <button class="site-btn secondary" onclick="sendPulse()">Send Pulse</button>
+    </div>
+    <p class="status-text" id="reflStatus">Fixed end — pulse inverts on reflection</p>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">A wave pulse on a string hits a wall (fixed end). Describe what happens to the pulse.</div>
+    <button class="show-ans-btn" onclick="toggleAns('ans3')">Show Answer</button>
+    <div class="a" id="ans3">
+      The pulse reflects and <strong>inverts</strong>. If the incoming pulse was above the string, the reflected pulse returns below the string with the same amplitude (ideal case). It now travels in the opposite direction.
+    </div>
+  </div>
+</div>
+
+<!-- ======== 5 — SUPERPOSITION ======== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x1F30A;</span> Superposition of Waves</div>
+  <p class="body-text">The <strong>principle of superposition</strong> states that when two or more waves overlap, the resultant displacement at any point is the algebraic sum of the individual displacements.</p>
+
+  <div class="formula-box">
+    $$y_{\text{net}}(x,t) = y_1(x,t) + y_2(x,t)$$
+  </div>
+
+  <div class="highlight-box">
+    <strong>Constructive interference:</strong> Waves in phase add up &rarr; larger amplitude.<br><br>
+    <strong>Destructive interference:</strong> Waves out of phase cancel &rarr; smaller (or zero) amplitude.
+  </div>
+
+  <!-- Superposition Simulation -->
+  <div class="interactive-area">
+    <div class="ia-label">Add Two Waves Together</div>
+    <canvas id="supCanvas" width="500" height="300"></canvas>
+    <div class="slider-row">
+      <label>Wave 2 frequency:</label>
+      <input type="range" id="supFreq2" min="1" max="10" value="3" oninput="updateSupLabel()">
+      <span class="val" id="supFreq2Val">3</span>
+    </div>
+    <div class="slider-row">
+      <label>Wave 2 phase shift:</label>
+      <input type="range" id="supPhase" min="0" max="360" value="0" oninput="updateSupLabel()">
+      <span class="val" id="supPhaseVal">0&deg;</span>
+    </div>
+    <div class="slider-row">
+      <label>Wave 2 amplitude:</label>
+      <input type="range" id="supAmp2" min="5" max="50" value="30" oninput="updateSupLabel()">
+      <span class="val" id="supAmp2Val">30</span>
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">Two identical waves with amplitude 4 cm meet. One case: they are perfectly in phase. Other case: they are 180° out of phase. What is the resulting amplitude in each case?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ans4')">Show Answer</button>
+    <div class="a" id="ans4">
+      In phase (constructive): $A_{\text{net}} = 4 + 4 = 8$ cm<br>
+      Out of phase (destructive): $A_{\text{net}} = 4 - 4 = 0$ cm (complete cancellation)
+    </div>
+  </div>
+</div>
+
+<!-- ======== 6 — STANDING WAVES ======== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x1F3B8;</span> Standing Waves</div>
+  <p class="body-text">When two identical waves travel in <strong>opposite directions</strong> and superpose, they create a <strong>standing wave</strong>. Certain points (<strong>nodes</strong>) stay stationary while others (<strong>antinodes</strong>) oscillate with maximum amplitude.</p>
+
+  <div class="formula-box">
+    $$y(x,t) = 2A\sin(kx)\cos(\omega t)$$
+  </div>
+
+  <div class="term-grid">
+    <span class="term-sym">Node</span><span class="term-def">Point of zero displacement — occurs where $\sin(kx) = 0$</span>
+    <span class="term-sym">Antinode</span><span class="term-def">Point of maximum displacement — occurs where $|\sin(kx)| = 1$</span>
+  </div>
+
+  <div class="sub-title">Wavelength and harmonic number</div>
+  <div class="formula-box">
+    $$\lambda_n = \frac{2L}{n}$$
+  </div>
+  <p class="body-text">The $n$th harmonic has $n$ half-wavelengths fitting inside the string length. As $n$ increases, wavelength decreases and frequency increases.</p>
+
+  <div class="sub-title">Resonant frequencies — string fixed at both ends</div>
+
+  <div class="formula-box">
+    $$f_n = \frac{n}{2L}\sqrt{\frac{T}{\mu}} = nf_1 \qquad n = 1,\,2,\,3,\,\ldots$$
+  </div>
+
+  <!-- Standing Wave Simulation -->
+  <div class="interactive-area">
+    <div class="ia-label">Standing Wave — Harmonics</div>
+    <canvas id="standCanvas" width="500" height="180"></canvas>
+    <div class="slider-row">
+      <label>Harmonic $n$:</label>
+      <input type="range" id="standN" min="1" max="7" value="1" oninput="updateStandLabel()">
+      <span class="val" id="standNVal">1</span>
+    </div>
+    <p class="status-text" id="standStatus">n = 1 &mdash; Fundamental: 1 antinode, 2 nodes</p>
+  </div>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Example: </span>A guitar string is 0.65 m long with $\mu = 0.005$ kg/m and tension $T = 100$ N. Find the fundamental frequency and the 3rd harmonic.</div>
+    <div class="step"><span class="step-label">Step 1: </span>Wave speed: $v = \sqrt{T/\mu} = \sqrt{100/0.005} \approx 141.4$ m/s</div>
+    <div class="step"><span class="step-label">Step 2: </span>Fundamental: $f_1 = v/(2L) = 141.4/(2\times0.65) \approx 108.8$ Hz</div>
+    <div class="step"><span class="step-label">Step 3: </span>3rd harmonic: $f_3 = 3f_1 \approx 326.4$ Hz</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">Mr. H stretches a steel wire to a length of 1.73 m and braces both ends so they cannot vibrate. He attaches an oscillator and tunes the frequency to 705 Hz. The wire vibrates in the <strong>sixth harmonic</strong>. (a) What is the wavelength? (b) What is the wave speed? (c) What are the 1st and 2nd harmonic frequencies?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ansST1')">Show Answer</button>
+    <div class="a" id="ansST1">
+      (a) 6th harmonic → 6 half-wavelengths fit in $L$: $\lambda_6 = 2L/n = 2(1.73)/6 \approx 0.577$ m<br>
+      (b) $v = f\lambda = 705 \times 0.577 \approx 406.8$ m/s<br>
+      (c) $f_1 = v/(2L) = 406.8/(2\times1.73) \approx 117.5$ Hz<br>
+      $f_2 = 2f_1 \approx 235.0$ Hz
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">A pipe open at both ends is 0.85 m long. The speed of sound is 343 m/s. Find the first three resonant frequencies.</div>
+    <button class="show-ans-btn" onclick="toggleAns('ans5')">Show Answer</button>
+    <div class="a" id="ans5">
+      Open-open pipe: $f_n = nv/(2L)$<br>
+      $f_1 = 343/(2\times0.85) \approx 201.8$ Hz<br>
+      $f_2 \approx 403.5$ Hz<br>
+      $f_3 \approx 605.3$ Hz<br>
+      All integer harmonics are present for an open-open pipe.
+    </div>
+  </div>
+</div>
+
+<!-- ======== 7 — BEATS ======== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x1F941;</span> Beats</div>
+  <p class="body-text">When two waves with <strong>slightly different frequencies</strong> superpose, the result is a wave whose amplitude oscillates periodically — this is called <strong>beats</strong>.</p>
+
+  <div class="formula-box">
+    $$f_{\text{beat}} = |f_1 - f_2|$$
+  </div>
+
+  <div class="highlight-box">
+    <strong>Hearing beats:</strong> You hear a "wah-wah-wah" pulsation at the beat frequency. Musicians use beats to tune instruments — when the beat frequency reaches zero, the two sources are perfectly in tune.
+  </div>
+
+  <div class="practice-box">
+    <div class="q">Two tuning forks produce 440 Hz and 444 Hz. What beat frequency do you hear? What if one fork is adjusted to 442 Hz?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ans6')">Show Answer</button>
+    <div class="a" id="ans6">
+      $f_{\text{beat}} = |440 - 444| = 4$ Hz — you hear 4 pulses per second.<br>
+      Adjusted to 442 Hz: $f_{\text{beat}} = |440 - 442| = 2$ Hz — slower pulsation, closer to being in tune.
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center;font-family:var(--fb);font-size:.82rem;color:var(--slate);padding:18px 0 0">
+  &copy; 2026 tutoringwithsruthi. All rights reserved. These notes are for personal educational use only and may not be reproduced or distributed without written permission from tutoringwithsruthi.
+</div>
+
+</div><!-- /page -->
+
+<script>
+/* ---- helpers ---- */
+function toggleAns(id){document.getElementById(id).classList.toggle('show')}
+
+/* ====================
+   SHM SPRING SIM
+   ==================== */
+var shmCtx,shmAnim,shmRunning=false,shmT=0;
+(function(){shmCtx=document.getElementById('shmCanvas').getContext('2d');drawSHM()})();
+
+function getShmAmp(){return +document.getElementById('shmAmp').value}
+function getShmFreq(){return +document.getElementById('shmFreq').value}
+document.getElementById('shmAmp').oninput=function(){document.getElementById('shmAmpVal').textContent=this.value;if(!shmRunning)drawSHM()};
+document.getElementById('shmFreq').oninput=function(){document.getElementById('shmFreqVal').textContent=this.value};
+
+function drawSHM(){
+  var c=document.getElementById('shmCanvas'),ctx=shmCtx,w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  var amp=getShmAmp(),freq=getShmFreq();
+  var x=250+amp*Math.cos(freq*shmT*0.04);
+
+  /* wall */
+  ctx.fillStyle='#525B76';
+  ctx.fillRect(0,80,14,60);
+  for(var i=0;i<6;i++){ctx.beginPath();ctx.moveTo(0,80+i*12);ctx.lineTo(14,86+i*12);ctx.strokeStyle='#525B76';ctx.lineWidth=1.5;ctx.stroke()}
+
+  /* spring coils */
+  ctx.beginPath();
+  var coils=12,sx=14,ex=x-20,segW=(ex-sx)/coils;
+  ctx.moveTo(sx,110);
+  for(var i=0;i<coils;i++){
+    var cx1=sx+(i+0.25)*segW,cy1=i%2===0?88:132;
+    ctx.quadraticCurveTo(cx1,cy1,sx+(i+0.5)*segW,110)
+  }
+  ctx.lineTo(ex,110);
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=3;ctx.stroke();
+
+  /* mass */
+  ctx.fillStyle='#143109';
+  ctx.beginPath();ctx.roundRect(x-20,85,40,50,8);ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='bold 14px Dosis';ctx.textAlign='center';
+  ctx.fillText('m',x,115);
+
+  /* equilibrium */
+  ctx.setLineDash([5,5]);ctx.strokeStyle='#9BA06A80';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(250,70);ctx.lineTo(250,150);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.font='12px Dosis';ctx.fillStyle='#525B76';ctx.fillText('x = 0',250,165);
+
+  /* displacement arrow */
+  if(Math.abs(x-250)>5){
+    ctx.beginPath();ctx.moveTo(250,55);ctx.lineTo(x,55);ctx.strokeStyle='#143109';ctx.lineWidth=2;ctx.stroke();
+    var dir=x>250?-1:1;
+    ctx.beginPath();ctx.moveTo(x,55);ctx.lineTo(x+dir*8,50);ctx.lineTo(x+dir*8,60);ctx.fillStyle='#143109';ctx.fill()
+  }
+
+  /* x(t) trace */
+  ctx.beginPath();
+  for(var px=0;px<w;px++){
+    var ty=195+18*Math.cos(freq*(shmT-px*0.3)*0.04);
+    if(px===0)ctx.moveTo(px,ty);else ctx.lineTo(px,ty)
+  }
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;ctx.stroke()
+}
+function stepSHM(){shmT++;drawSHM();shmAnim=requestAnimationFrame(stepSHM)}
+function toggleSHM(){
+  shmRunning=!shmRunning;
+  document.getElementById('shmBtn').textContent=shmRunning?'Pause':'Start';
+  document.getElementById('shmStatus').textContent=shmRunning?'Running':'Paused';
+  if(shmRunning)stepSHM();else cancelAnimationFrame(shmAnim)
+}
+function resetSHM(){shmRunning=false;cancelAnimationFrame(shmAnim);shmT=0;drawSHM();document.getElementById('shmBtn').textContent='Start';document.getElementById('shmStatus').textContent='Paused'}
+
+/* ====================
+   ENERGY BAR CHART
+   ==================== */
+(function(){drawEnergy()})();
+function drawEnergy(){
+  var c=document.getElementById('energyCanvas'),ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  var pos=+document.getElementById('energyPos').value;
+  document.getElementById('energyPosVal').textContent=pos;
+  var frac=Math.abs(pos)/100;
+  var pe=frac*frac,ke=1-pe;
+  var barH=140,barW=80,y0=h-20;
+
+  ctx.fillStyle='#9BA06A';ctx.fillRect(140,y0-pe*barH,barW,pe*barH);
+  ctx.strokeStyle='#143109';ctx.lineWidth=1.5;ctx.strokeRect(140,y0-barH,barW,barH);
+  ctx.fillStyle='#143109';ctx.font='bold 13px Dosis';ctx.textAlign='center';
+  ctx.fillText('PE',180,y0+16);
+  ctx.fillText((pe*100).toFixed(0)+'%',180,y0-pe*barH-6);
+
+  ctx.fillStyle='#525B76';ctx.fillRect(280,y0-ke*barH,barW,ke*barH);
+  ctx.strokeStyle='#143109';ctx.strokeRect(280,y0-barH,barW,barH);
+  ctx.fillText('KE',320,y0+16);
+  ctx.fillText((ke*100).toFixed(0)+'%',320,y0-ke*barH-6);
+
+  ctx.fillStyle='#143109';ctx.font='12px Bitter';
+  ctx.fillText('x = '+(pos>0?'+':'')+pos+'% A',w/2,14)
+}
+
+/* ====================
+   PENDULUM
+   ==================== */
+var pendCtx,pendAnim,pendRunning=false,pendAngle=0.4,pendVel=0;
+(function(){pendCtx=document.getElementById('pendCanvas').getContext('2d');drawPend()})();
+function getPendLen(){return +document.getElementById('pendLen').value}
+document.getElementById('pendLen').oninput=function(){document.getElementById('pendLenVal').textContent=this.value;if(!pendRunning)drawPend()};
+
+function drawPend(){
+  var c=document.getElementById('pendCanvas'),ctx=pendCtx,w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  var L=getPendLen(),px=250,py=20;
+  var bx=px+L*Math.sin(pendAngle),by=py+L*Math.cos(pendAngle);
+
+  ctx.fillStyle='#525B76';ctx.beginPath();ctx.arc(px,py,5,0,Math.PI*2);ctx.fill();
+
+  ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(bx,by);ctx.strokeStyle='#143109';ctx.lineWidth=2;ctx.stroke();
+
+  ctx.beginPath();ctx.arc(bx,by,16,0,Math.PI*2);ctx.fillStyle='#9BA06A';ctx.fill();ctx.strokeStyle='#143109';ctx.lineWidth=2;ctx.stroke();
+
+  ctx.setLineDash([4,4]);ctx.strokeStyle='#9BA06A60';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px,py+L+20);ctx.stroke();
+  ctx.setLineDash([]);
+
+  if(Math.abs(pendAngle)>0.02){
+    ctx.beginPath();ctx.arc(px,py,40,Math.PI/2-pendAngle,Math.PI/2,pendAngle>0);
+    ctx.strokeStyle='#525B76';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle='#525B76';ctx.font='12px Bitter';ctx.textAlign='center';
+    ctx.fillText((pendAngle*180/Math.PI).toFixed(1)+'\u00B0',px+(pendAngle>0?25:-25),py+55)
+  }
+}
+function stepPend(){
+  var g=9.8,L=getPendLen()/100,dt=0.02;
+  var acc=-g/L*Math.sin(pendAngle);
+  pendVel+=acc*dt;pendVel*=0.999;pendAngle+=pendVel*dt;
+  drawPend();pendAnim=requestAnimationFrame(stepPend)
+}
+function togglePend(){
+  pendRunning=!pendRunning;
+  document.getElementById('pendBtn').textContent=pendRunning?'Pause':'Start';
+  document.getElementById('pendStatus').textContent=pendRunning?'Running':'Paused';
+  if(pendRunning)stepPend();else cancelAnimationFrame(pendAnim)
+}
+function resetPend(){pendRunning=false;cancelAnimationFrame(pendAnim);pendAngle=0.4;pendVel=0;drawPend();document.getElementById('pendBtn').textContent='Start';document.getElementById('pendStatus').textContent='Paused'}
+
+/* ====================
+   WAVE REFLECTION
+   ==================== */
+var reflCtx,reflAnim,reflMode='fixed',reflPulses=[];
+(function(){reflCtx=document.getElementById('reflCanvas').getContext('2d');drawRefl();stepRefl()})();
+
+function setReflMode(m){
+  reflMode=m;
+  document.getElementById('btnFixed').className=m==='fixed'?'site-btn active':'site-btn secondary';
+  document.getElementById('btnFree').className=m==='free'?'site-btn active':'site-btn secondary';
+  document.getElementById('reflStatus').textContent=m==='fixed'?'Fixed end \u2014 pulse inverts on reflection':'Free end \u2014 pulse reflects upright'
+}
+function sendPulse(){reflPulses.push({x:30,dx:2,amp:50,reflected:false})}
+
+function drawRefl(){
+  var c=document.getElementById('reflCanvas'),ctx=reflCtx,w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  var mid=h/2;
+
+  ctx.beginPath();ctx.moveTo(20,mid);ctx.lineTo(w-20,mid);
+  ctx.strokeStyle='#D0D6B380';ctx.lineWidth=2;ctx.stroke();
+
+  if(reflMode==='fixed'){
+    ctx.fillStyle='#525B76';ctx.fillRect(w-24,mid-30,8,60);
+    for(var i=0;i<5;i++){ctx.beginPath();ctx.moveTo(w-16,mid-30+i*14);ctx.lineTo(w-10,mid-24+i*14);ctx.strokeStyle='#525B76';ctx.lineWidth=1.5;ctx.stroke()}
+  }else{
+    ctx.beginPath();ctx.arc(w-20,mid,8,0,Math.PI*2);ctx.fillStyle='#9BA06A';ctx.fill();ctx.strokeStyle='#143109';ctx.lineWidth=2;ctx.stroke()
+  }
+
+  for(var i=0;i<reflPulses.length;i++){
+    var p=reflPulses[i];
+    ctx.beginPath();
+    for(var px=0;px<w;px++){
+      var dist=px-p.x;
+      var y=mid-p.amp*Math.exp(-dist*dist/800);
+      if(px===0)ctx.moveTo(px,y);else ctx.lineTo(px,y)
+    }
+    ctx.strokeStyle=p.reflected?'#525B76':'#143109';ctx.lineWidth=3;ctx.stroke()
+  }
+}
+function stepRefl(){
+  var w=document.getElementById('reflCanvas').width;
+  for(var i=reflPulses.length-1;i>=0;i--){
+    var p=reflPulses[i];
+    p.x+=p.dx;
+    if(!p.reflected&&p.x>=w-40){
+      p.reflected=true;p.dx=-Math.abs(p.dx);
+      if(reflMode==='fixed')p.amp=-Math.abs(p.amp);else p.amp=Math.abs(p.amp)
+    }
+    if(p.x<-60)reflPulses.splice(i,1)
+  }
+  drawRefl();reflAnim=requestAnimationFrame(stepRefl)
+}
+
+/* ====================
+   SUPERPOSITION
+   ==================== */
+var supCtx,supAnim,supT=0;
+(function(){supCtx=document.getElementById('supCanvas').getContext('2d');stepSup()})();
+
+function updateSupLabel(){
+  document.getElementById('supFreq2Val').textContent=document.getElementById('supFreq2').value;
+  document.getElementById('supPhaseVal').textContent=document.getElementById('supPhase').value+'\u00B0';
+  document.getElementById('supAmp2Val').textContent=document.getElementById('supAmp2').value
+}
+function drawSup(){
+  var c=document.getElementById('supCanvas'),ctx=supCtx,w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  var f1=3,a1=30;
+  var f2=+document.getElementById('supFreq2').value;
+  var phase=(+document.getElementById('supPhase').value)*Math.PI/180;
+  var a2=+document.getElementById('supAmp2').value;
+  var rows=[{y:60,label:'Wave 1',col:'#9BA06A'},{y:150,label:'Wave 2',col:'#525B76'},{y:245,label:'Sum',col:'#143109'}];
+
+  for(var r=0;r<3;r++){
+    var row=rows[r],by=row.y;
+    ctx.beginPath();ctx.moveTo(20,by);ctx.lineTo(w-20,by);ctx.strokeStyle='#D0D6B380';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle=row.col;ctx.font='bold 12px Dosis';ctx.textAlign='left';ctx.fillText(row.label,24,by-38);
+
+    ctx.beginPath();
+    for(var px=20;px<w-20;px++){
+      var xn=(px-20)/(w-40);
+      var y1=a1*Math.sin(2*Math.PI*f1*xn-supT*0.05);
+      var y2=a2*Math.sin(2*Math.PI*f2*xn-supT*0.05*f2/f1+phase);
+      var val;
+      if(r===0)val=y1;else if(r===1)val=y2;else val=y1+y2;
+      if(px===20)ctx.moveTo(px,by-val);else ctx.lineTo(px,by-val)
+    }
+    ctx.strokeStyle=row.col;ctx.lineWidth=2.5;ctx.stroke()
+  }
+}
+function stepSup(){supT++;drawSup();supAnim=requestAnimationFrame(stepSup)}
+
+/* ====================
+   STANDING WAVE
+   ==================== */
+var standCtx,standAnim,standT=0;
+(function(){standCtx=document.getElementById('standCanvas').getContext('2d');stepStand()})();
+
+function updateStandLabel(){
+  var n=+document.getElementById('standN').value;
+  document.getElementById('standNVal').textContent=n;
+  var names=['Fundamental','2nd harmonic','3rd harmonic','4th harmonic','5th harmonic','6th harmonic','7th harmonic'];
+  document.getElementById('standStatus').textContent='n = '+n+' \u2014 '+names[n-1]+': '+n+' antinode'+(n>1?'s':'')+', '+(n+1)+' nodes'
+}
+function drawStand(){
+  var c=document.getElementById('standCanvas'),ctx=standCtx,w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  var n=+document.getElementById('standN').value;
+  var mid=h/2,amp=55,pad=30;
+
+  ctx.setLineDash([3,3]);
+  for(var s=-1;s<=1;s+=2){
+    ctx.beginPath();
+    for(var px=pad;px<=w-pad;px++){
+      var xn=(px-pad)/(w-2*pad);
+      var y=mid-s*amp*Math.abs(Math.sin(n*Math.PI*xn));
+      if(px===pad)ctx.moveTo(px,y);else ctx.lineTo(px,y)
+    }
+    ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1.5;ctx.stroke()
+  }
+  ctx.setLineDash([]);
+
+  ctx.beginPath();
+  for(var px=pad;px<=w-pad;px++){
+    var xn=(px-pad)/(w-2*pad);
+    var y=mid-amp*Math.sin(n*Math.PI*xn)*Math.cos(standT*0.06);
+    if(px===pad)ctx.moveTo(px,y);else ctx.lineTo(px,y)
+  }
+  ctx.strokeStyle='#143109';ctx.lineWidth=3;ctx.stroke();
+
+  for(var i=0;i<=n;i++){
+    var nx=pad+i*(w-2*pad)/n;
+    ctx.beginPath();ctx.arc(nx,mid,5,0,Math.PI*2);ctx.fillStyle='#525B76';ctx.fill()
+  }
+
+  ctx.fillStyle='#525B76';
+  ctx.fillRect(pad-6,mid-20,6,40);
+  ctx.fillRect(w-pad,mid-20,6,40)
+}
+function stepStand(){standT++;drawStand();standAnim=requestAnimationFrame(stepStand)}
+
+/* ====================
+   SINUSOIDAL EXPLORER
+   ==================== */
+(function(){
+var ec=document.getElementById('explorerCanvas'),ectx=ec.getContext('2d');
+var EW=ec.width,EH=ec.height;
+var eA=document.getElementById('expA'),eB=document.getElementById('expB'),eC=document.getElementById('expC'),eD=document.getElementById('expD');
+var expTheta=0,expSpeed=0.025;
+
+window.setExpSpeed=function(s){
+  expSpeed=s;
+  document.querySelectorAll('.exp-speed').forEach(function(b){
+    var bs=parseFloat(b.dataset.speed);
+    if(bs===s){b.className='site-btn exp-speed active';}
+    else{b.className='site-btn secondary exp-speed';}
+  });
+};
+
+function eP(){return{a:parseFloat(eA.value),b:parseFloat(eB.value),c:parseFloat(eC.value),d:parseFloat(eD.value)}}
+function efmt(n){if(Math.abs(n)<0.005)return'0';return n%1===0?n.toString():n.toFixed(2)}
+function efmtPi(n){
+  if(Math.abs(n)<0.02)return'0';
+  var r=n/Math.PI;
+  if(Math.abs(r-Math.round(r))<0.06){var ri=Math.round(r);if(ri===1)return'\u03C0';if(ri===-1)return'-\u03C0';return ri+'\u03C0';}
+  return n.toFixed(2);
+}
+
+// Colors matching sage palette on dark canvas
+var EC={
+  bg:'#FFFFFF',grid:'#e4e8cc',axis:'#D0D6B3',axisBright:'#9BA06A',
+  sage:'#9BA06A',olive:'#9BA06A',slate:'#525B76',white:'#FFFFFF',
+  sin:'#9BA06A',sinFade:'#9BA06A18',cos:'#525B76',cosFade:'#525B7618',
+  dot:'#143109',midline:'#9BA06A',amp:'#143109',divider:'#D0D6B3'
+};
+
+var circR={cx:155,cy:EH/2,baseR:105};
+var graphR={left:338,right:EW-20,top:30,bottom:EH-30};
+
+function eUpdateInfo(p){
+  document.getElementById('expValA').textContent=efmt(p.a);
+  document.getElementById('expValB').textContent=efmt(p.b);
+  document.getElementById('expValC').textContent=efmt(p.c);
+  document.getElementById('expValD').textContent=efmt(p.d);
+  document.getElementById('expInfoMid').textContent=efmt(p.d);
+  document.getElementById('expInfoAmp').textContent=efmt(Math.abs(p.a));
+  var per=p.b!==0?Math.abs(2*Math.PI/p.b):Infinity;
+  document.getElementById('expInfoPer').textContent=isFinite(per)?efmtPi(per):'\u221E';
+  document.getElementById('expInfoPhs').textContent=efmt(-p.c);
+}
+
+function eDraw(){
+  var p=eP();eUpdateInfo(p);
+  ectx.clearRect(0,0,EW,EH);
+  ectx.fillStyle=EC.bg;ectx.fillRect(0,0,EW,EH);
+
+  var cCx=circR.cx,cCy=circR.cy-p.d*circR.baseR,unitR=circR.baseR;
+  var ampR=Math.max(Math.abs(p.a),0.12)*circR.baseR;
+
+  // circle grid
+  ectx.strokeStyle=EC.grid;ectx.lineWidth=1;
+  for(var i=-2;i<=2;i++){
+    var gx=cCx+i*52;ectx.beginPath();ectx.moveTo(gx,14);ectx.lineTo(gx,EH-14);ectx.stroke();
+    var gy=circR.cy+i*52;ectx.beginPath();ectx.moveTo(14,gy);ectx.lineTo(305,gy);ectx.stroke();
+  }
+
+  // fixed axes
+  ectx.strokeStyle=EC.axis;ectx.lineWidth=1.5;
+  ectx.beginPath();ectx.moveTo(14,circR.cy);ectx.lineTo(305,circR.cy);ectx.stroke();
+  ectx.beginPath();ectx.moveTo(cCx,14);ectx.lineTo(cCx,EH-14);ectx.stroke();
+
+  // d shift line
+  if(Math.abs(p.d)>0.05){
+    ectx.strokeStyle=EC.midline+'66';ectx.lineWidth=1.5;ectx.setLineDash([5,4]);
+    ectx.beginPath();ectx.moveTo(14,cCy);ectx.lineTo(305,cCy);ectx.stroke();ectx.setLineDash([]);
+    ectx.fillStyle=EC.midline;ectx.font='500 10px Dosis';ectx.fillText('d = '+efmt(p.d),20,cCy-6);
+  }
+
+  // unit circle ref
+  ectx.strokeStyle=EC.sage+'18';ectx.lineWidth=1.5;
+  ectx.beginPath();ectx.arc(cCx,circR.cy,unitR,0,Math.PI*2);ectx.stroke();
+
+  // transformed circle
+  ectx.strokeStyle=EC.amp+'88';ectx.lineWidth=2;
+  ectx.beginPath();ectx.arc(cCx,cCy,ampR,0,Math.PI*2);ectx.stroke();
+
+  // point calcs
+  var theta=expTheta;
+  var inner=p.b*(theta+p.c);
+  var cosV=Math.cos(inner),sinV=Math.sin(inner);
+  var sinOut=p.a*sinV+p.d,cosOut=p.a*cosV+p.d;
+  var ptX=cCx+p.a*cosV*circR.baseR,ptY=cCy-p.a*sinV*circR.baseR;
+
+  // angle arc
+  ectx.strokeStyle=EC.sage+'55';ectx.lineWidth=1.5;
+  ectx.beginPath();ectx.arc(cCx,cCy,22,0,-inner,inner>0);ectx.stroke();
+  ectx.fillStyle=EC.sage+'88';ectx.font='500 9px Bitter';ectx.fillText('\u03B8',cCx+26,cCy-4);
+
+  // radius
+  ectx.strokeStyle=EC.sage+'cc';ectx.lineWidth=2;
+  ectx.beginPath();ectx.moveTo(cCx,cCy);ectx.lineTo(ptX,ptY);ectx.stroke();
+
+  // sin projection vertical
+  ectx.strokeStyle=EC.sin+'77';ectx.lineWidth=2;ectx.setLineDash([4,3]);
+  ectx.beginPath();ectx.moveTo(ptX,cCy);ectx.lineTo(ptX,ptY);ectx.stroke();ectx.setLineDash([]);
+
+  // cos projection horizontal
+  ectx.strokeStyle=EC.cos+'77';ectx.lineWidth=2;ectx.setLineDash([4,3]);
+  ectx.beginPath();ectx.moveTo(cCx,ptY);ectx.lineTo(ptX,ptY);ectx.stroke();ectx.setLineDash([]);
+
+  // circle dot
+  ectx.fillStyle='#143109';ectx.shadowColor='#14310944';ectx.shadowBlur=10;
+  ectx.beginPath();ectx.arc(ptX,ptY,7,0,Math.PI*2);ectx.fill();
+  ectx.shadowBlur=0;ectx.strokeStyle='#D0D6B3';ectx.lineWidth=2.5;ectx.stroke();
+
+  // ===== GRAPH =====
+  var gl=graphR.left,gr=graphR.right,gt=graphR.top,gb=graphR.bottom;
+  var gw=gr-gl,gh=gb-gt;
+  var yExt=Math.max(Math.abs(p.a)+Math.abs(p.d),1.2)+0.8;
+  var yMax=yExt,yMin=-yExt;
+  var xMinG=-0.3,xMaxG=4*Math.PI+0.3;
+  function sx(x){return gl+(x-xMinG)/(xMaxG-xMinG)*gw}
+  function sy(y){return gt+(yMax-y)/(yMax-yMin)*gh}
+
+  // graph grid
+  ectx.strokeStyle=EC.grid;ectx.lineWidth=1;
+  for(var x=0;x<=4*Math.PI;x+=Math.PI/2){var xx=sx(x);ectx.beginPath();ectx.moveTo(xx,gt);ectx.lineTo(xx,gb);ectx.stroke();}
+  for(var y=Math.ceil(yMin);y<=Math.floor(yMax);y++){var yy=sy(y);ectx.beginPath();ectx.moveTo(gl,yy);ectx.lineTo(gr,yy);ectx.stroke();}
+
+  // graph axes
+  ectx.strokeStyle=EC.axisBright;ectx.lineWidth=1.5;
+  var xAx=sy(0);ectx.beginPath();ectx.moveTo(gl,xAx);ectx.lineTo(gr,xAx);ectx.stroke();
+  var yAx=sx(0);if(yAx>=gl&&yAx<=gr){ectx.beginPath();ectx.moveTo(yAx,gt);ectx.lineTo(yAx,gb);ectx.stroke();}
+
+  // midline on graph
+  if(Math.abs(p.d)>0.05){
+    var midY=sy(p.d);ectx.strokeStyle=EC.midline+'55';ectx.lineWidth=1.5;ectx.setLineDash([6,4]);
+    ectx.beginPath();ectx.moveTo(gl,midY);ectx.lineTo(gr,midY);ectx.stroke();ectx.setLineDash([]);
+    ectx.fillStyle=EC.midline+'99';ectx.font='500 9px Bitter';ectx.textAlign='right';
+    ectx.fillText('y = '+efmt(p.d),gr-3,midY-5);ectx.textAlign='left';
+  }
+
+  // parent curves faded
+  ectx.strokeStyle=EC.sinFade;ectx.lineWidth=1.5;ectx.beginPath();
+  for(var px=0;px<=gw;px+=2){var x=xMinG+(px/gw)*(xMaxG-xMinG);var y=Math.sin(x);if(px===0)ectx.moveTo(gl+px,sy(y));else ectx.lineTo(gl+px,sy(y));}
+  ectx.stroke();
+  ectx.strokeStyle=EC.cosFade;ectx.lineWidth=1.5;ectx.beginPath();
+  for(var px=0;px<=gw;px+=2){var x=xMinG+(px/gw)*(xMaxG-xMinG);var y=Math.cos(x);if(px===0)ectx.moveTo(gl+px,sy(y));else ectx.lineTo(gl+px,sy(y));}
+  ectx.stroke();
+
+  // transformed sin
+  ectx.strokeStyle=EC.sin;ectx.lineWidth=2.8;ectx.lineCap='round';ectx.beginPath();
+  var first=true;
+  for(var px=0;px<=gw;px+=1.5){
+    var x=xMinG+(px/gw)*(xMaxG-xMinG);var inn=p.b*(x+p.c);var y=p.a*Math.sin(inn)+p.d;var scrY=sy(y);
+    if(scrY<gt-5||scrY>gb+5){first=true;continue;}
+    if(first){ectx.moveTo(gl+px,scrY);first=false;}else ectx.lineTo(gl+px,scrY);
+  }
+  ectx.stroke();
+
+  // transformed cos
+  ectx.strokeStyle=EC.cos;ectx.lineWidth=2.8;ectx.beginPath();first=true;
+  for(var px=0;px<=gw;px+=1.5){
+    var x=xMinG+(px/gw)*(xMaxG-xMinG);var inn=p.b*(x+p.c);var y=p.a*Math.cos(inn)+p.d;var scrY=sy(y);
+    if(scrY<gt-5||scrY>gb+5){first=true;continue;}
+    if(first){ectx.moveTo(gl+px,scrY);first=false;}else ectx.lineTo(gl+px,scrY);
+  }
+  ectx.stroke();ectx.lineCap='butt';
+
+  // x labels
+  ectx.fillStyle=EC.slate;ectx.font='500 9px Bitter';ectx.textAlign='center';
+  var piLab=[[Math.PI/2,'\u03C0/2'],[Math.PI,'\u03C0'],[3*Math.PI/2,'3\u03C0/2'],[2*Math.PI,'2\u03C0'],[5*Math.PI/2,'5\u03C0/2'],[3*Math.PI,'3\u03C0'],[7*Math.PI/2,'7\u03C0/2'],[4*Math.PI,'4\u03C0']];
+  for(var i=0;i<piLab.length;i++){var xx=sx(piLab[i][0]);if(xx>gl+12&&xx<gr-10)ectx.fillText(piLab[i][1],xx,gb+14);}
+  ectx.textAlign='left';
+
+  // y labels
+  ectx.textAlign='right';
+  for(var y=Math.ceil(yMin);y<=Math.floor(yMax);y++){if(y===0)continue;var yy=sy(y);if(yy>gt+8&&yy<gb-8)ectx.fillText(y.toString(),gl-5,yy+3);}
+  ectx.textAlign='left';
+
+  // mapping lines + dots
+  var sinSx=sx(theta),sinSy=sy(sinOut),cosSy=sy(cosOut);
+  if(sinSx>=gl&&sinSx<=gr){
+    var edgeX=310;
+    // sin mapping
+    ectx.strokeStyle=EC.sin+'44';ectx.lineWidth=1.8;ectx.setLineDash([5,4]);
+    ectx.beginPath();ectx.moveTo(ptX,ptY);ectx.bezierCurveTo(edgeX+8,ptY,sinSx-50,sinSy,sinSx,sinSy);ectx.stroke();
+    // cos mapping
+    ectx.strokeStyle=EC.cos+'44';
+    ectx.beginPath();ectx.moveTo(ptX,ptY);ectx.bezierCurveTo(edgeX+8,ptY,sinSx-50,cosSy,sinSx,cosSy);ectx.stroke();
+    ectx.setLineDash([]);
+
+    // sin dot
+    if(sinSy>=gt-3&&sinSy<=gb+3){
+      ectx.fillStyle=EC.sin;ectx.shadowColor=EC.sin+'55';ectx.shadowBlur=8;
+      ectx.beginPath();ectx.arc(sinSx,sinSy,6,0,Math.PI*2);ectx.fill();
+      ectx.shadowBlur=0;ectx.strokeStyle='#FFFFFF';ectx.lineWidth=2;ectx.stroke();
+    }
+    // cos dot
+    if(cosSy>=gt-3&&cosSy<=gb+3){
+      ectx.fillStyle=EC.cos;ectx.shadowColor=EC.cos+'55';ectx.shadowBlur=8;
+      ectx.beginPath();ectx.arc(sinSx,cosSy,6,0,Math.PI*2);ectx.fill();
+      ectx.shadowBlur=0;ectx.strokeStyle='#FFFFFF';ectx.lineWidth=2;ectx.stroke();
+    }
+  }
+
+  // readout
+  ectx.fillStyle='#e4e8ccdd';
+  ectx.fillRect(12,EH-58,115,48);
+  ectx.strokeStyle='#D0D6B3';ectx.lineWidth=1;ectx.strokeRect(12,EH-58,115,48);
+  ectx.font='600 10px Bitter';
+  ectx.fillStyle='#143109';ectx.fillText('\u03B8 = '+efmt(theta),22,EH-40);
+  ectx.fillStyle=EC.sin;ectx.fillText('sin = '+efmt(sinOut),22,EH-26);
+  ectx.fillStyle=EC.cos;ectx.fillText('cos = '+efmt(cosOut),22,EH-12);
+
+  // divider
+  ectx.strokeStyle=EC.divider;ectx.lineWidth=1.5;
+  ectx.beginPath();ectx.moveTo(322,10);ectx.lineTo(322,EH-10);ectx.stroke();
+
+  // labels
+  ectx.fillStyle='#9BA06A';ectx.font='600 9px Dosis';
+  ectx.fillText('UNIT CIRCLE',16,16);ectx.fillText('GRAPH',gl+2,18);
+
+  // ===== HOVER HIGHLIGHTS =====
+  if(typeof expHL!=='undefined'&&expHL){
+    var hlCol='#143109';
+    if(expHL==='midline'){
+      var mY=sy(p.d);
+      ectx.strokeStyle='#9BA06A';ectx.lineWidth=3;ectx.setLineDash([8,4]);
+      ectx.beginPath();ectx.moveTo(gl,mY);ectx.lineTo(gr,mY);ectx.stroke();ectx.setLineDash([]);
+      // label
+      ectx.fillStyle='#e4e8ccee';
+      ectx.fillRect(gl+gw/2-60,mY-28,120,22);
+      ectx.strokeStyle='#9BA06A';ectx.lineWidth=1;ectx.strokeRect(gl+gw/2-60,mY-28,120,22);
+      ectx.fillStyle='#143109';ectx.font='bold 12px Dosis';ectx.textAlign='center';
+      ectx.fillText('Midline: y = '+efmt(p.d),gl+gw/2,mY-12);ectx.textAlign='left';
+    }
+    if(expHL==='amplitude'){
+      var mY=sy(p.d),topY=sy(p.d+Math.abs(p.a)),botY=sy(p.d-Math.abs(p.a));
+      var arrX=gl+gw*0.15;
+      // amplitude arrows
+      ectx.strokeStyle='#9BA06A';ectx.lineWidth=2.5;
+      ectx.beginPath();ectx.moveTo(arrX,mY);ectx.lineTo(arrX,topY);ectx.stroke();
+      ectx.beginPath();ectx.moveTo(arrX-5,topY+8);ectx.lineTo(arrX,topY);ectx.lineTo(arrX+5,topY+8);ectx.stroke();
+      ectx.beginPath();ectx.moveTo(arrX,mY);ectx.lineTo(arrX,botY);ectx.stroke();
+      ectx.beginPath();ectx.moveTo(arrX-5,botY-8);ectx.lineTo(arrX,botY);ectx.lineTo(arrX+5,botY-8);ectx.stroke();
+      // shaded band
+      ectx.fillStyle='#9BA06A15';ectx.fillRect(gl,topY,gw,botY-topY);
+      // max/min lines
+      ectx.strokeStyle='#9BA06Aaa';ectx.lineWidth=1.5;ectx.setLineDash([4,3]);
+      ectx.beginPath();ectx.moveTo(gl,topY);ectx.lineTo(gr,topY);ectx.stroke();
+      ectx.beginPath();ectx.moveTo(gl,botY);ectx.lineTo(gr,botY);ectx.stroke();ectx.setLineDash([]);
+      // labels
+      ectx.fillStyle='#e4e8ccee';ectx.fillRect(arrX+8,mY-(mY-topY)/2-10,80,20);
+      ectx.strokeStyle='#9BA06A';ectx.lineWidth=1;ectx.strokeRect(arrX+8,mY-(mY-topY)/2-10,80,20);
+      ectx.fillStyle='#143109';ectx.font='bold 12px Dosis';ectx.textAlign='center';
+      ectx.fillText('A = '+efmt(Math.abs(p.a)),arrX+48,mY-(mY-topY)/2+4);ectx.textAlign='left';
+    }
+    if(expHL==='period'){
+      // find first full period on sin curve
+      var perVal=p.b!==0?Math.abs(2*Math.PI/p.b):0;
+      if(perVal>0){
+        var x0=Math.max(0,-p.c);
+        var x1=x0+perVal;
+        var px0=sx(x0),px1=sx(x1);
+        if(px0>=gl&&px1<=gr){
+          var mY=sy(p.d);
+          // bracket
+          ectx.strokeStyle='#525B76';ectx.lineWidth=2.5;
+          ectx.beginPath();ectx.moveTo(px0,gb+2);ectx.lineTo(px0,gb+18);ectx.stroke();
+          ectx.beginPath();ectx.moveTo(px1,gb+2);ectx.lineTo(px1,gb+18);ectx.stroke();
+          ectx.beginPath();ectx.moveTo(px0,gb+10);ectx.lineTo(px1,gb+10);ectx.stroke();
+          // arrows
+          ectx.beginPath();ectx.moveTo(px0+6,gb+6);ectx.lineTo(px0,gb+10);ectx.lineTo(px0+6,gb+14);ectx.stroke();
+          ectx.beginPath();ectx.moveTo(px1-6,gb+6);ectx.lineTo(px1,gb+10);ectx.lineTo(px1-6,gb+14);ectx.stroke();
+          // shaded region
+          ectx.fillStyle='#525B7610';ectx.fillRect(px0,gt,px1-px0,gh);
+          // label
+          var midPx=(px0+px1)/2;
+          ectx.fillStyle='#e4e8ccee';ectx.fillRect(midPx-50,gb+18,100,20);
+          ectx.strokeStyle='#525B76';ectx.lineWidth=1;ectx.strokeRect(midPx-50,gb+18,100,20);
+          ectx.fillStyle='#143109';ectx.font='bold 12px Dosis';ectx.textAlign='center';
+          ectx.fillText('Period = '+efmtPi(perVal),midPx,gb+32);ectx.textAlign='left';
+        }
+      }
+    }
+    if(expHL==='phase'){
+      var shift=-p.c;
+      if(Math.abs(shift)>0.02){
+        var px0=sx(0),pxS=sx(shift);
+        var arrY=gt+20;
+        ectx.strokeStyle='#6b7f4e';ectx.lineWidth=2.5;
+        ectx.beginPath();ectx.moveTo(px0,arrY);ectx.lineTo(pxS,arrY);ectx.stroke();
+        // arrow head
+        var dir=shift>0?-1:1;
+        ectx.beginPath();ectx.moveTo(pxS,arrY);ectx.lineTo(pxS+dir*7,arrY-5);ectx.lineTo(pxS+dir*7,arrY+5);ectx.fillStyle='#6b7f4e';ectx.fill();
+        // vertical markers
+        ectx.setLineDash([3,3]);ectx.strokeStyle='#6b7f4e88';ectx.lineWidth=1.5;
+        ectx.beginPath();ectx.moveTo(px0,gt);ectx.lineTo(px0,gb);ectx.stroke();
+        ectx.beginPath();ectx.moveTo(pxS,gt);ectx.lineTo(pxS,gb);ectx.stroke();ectx.setLineDash([]);
+        // label
+        var midPx=(px0+pxS)/2;
+        ectx.fillStyle='#e4e8ccee';ectx.fillRect(midPx-55,arrY-24,110,18);
+        ectx.strokeStyle='#6b7f4e';ectx.lineWidth=1;ectx.strokeRect(midPx-55,arrY-24,110,18);
+        ectx.fillStyle='#143109';ectx.font='bold 11px Dosis';ectx.textAlign='center';
+        ectx.fillText('Phase shift = '+efmt(shift),midPx,arrY-10);ectx.textAlign='left';
+      } else {
+        ectx.fillStyle='#e4e8ccee';ectx.fillRect(gl+gw/2-50,gt+10,100,20);
+        ectx.strokeStyle='#6b7f4e';ectx.lineWidth=1;ectx.strokeRect(gl+gw/2-50,gt+10,100,20);
+        ectx.fillStyle='#143109';ectx.font='bold 11px Dosis';ectx.textAlign='center';
+        ectx.fillText('No phase shift',gl+gw/2,gt+24);ectx.textAlign='left';
+      }
+    }
+  }
+}
+
+function eStep(){expTheta+=expSpeed;if(expTheta>4*Math.PI)expTheta=0;eDraw();requestAnimationFrame(eStep)}
+[eA,eB,eC,eD].forEach(function(s){s.addEventListener('input',eDraw)});
+eStep();
+})();
+
+/* global highlight var */
+var expHL=null;
+
+/* ====================
+   WAVE QUANTITY EXPLORER
+   ==================== */
+(function(){
+var wc=document.getElementById('waveQCanvas'),wctx=wc.getContext('2d');
+var WW=wc.width,WH=wc.height,wt=0;
+var wqFS=document.getElementById('wqFreqSlider'),wqSS=document.getElementById('wqSpeedSlider');
+
+function getWQ(){
+  var f=parseFloat(wqFS.value),v=parseFloat(wqSS.value);
+  var lam=v/f,T=1/f;
+  return{f:f,v:v,lam:lam,T:T};
+}
+function updateWQInfo(q){
+  document.getElementById('wqFreqVal').textContent=q.f.toFixed(1);
+  document.getElementById('wqSpeedVal').textContent=q.v.toFixed(1);
+  document.getElementById('wqSpeed').textContent=q.v.toFixed(1)+' m/s';
+  document.getElementById('wqLambda').textContent=q.lam.toFixed(2)+' m';
+  document.getElementById('wqFreq').textContent=q.f.toFixed(1)+' Hz';
+  document.getElementById('wqPeriod').textContent=q.T.toFixed(2)+' s';
+}
+
+function drawWQ(){
+  var q=getWQ();updateWQInfo(q);
+  wctx.clearRect(0,0,WW,WH);
+  wctx.fillStyle='#FFFFFF';wctx.fillRect(0,0,WW,WH);
+
+  var pad=60,gw=WW-pad*2,midY=WH/2+10,amp=70;
+
+  // grid
+  wctx.strokeStyle='#e4e8cc';wctx.lineWidth=1;
+  wctx.beginPath();wctx.moveTo(pad,midY);wctx.lineTo(WW-pad,midY);wctx.stroke();
+
+  // wave
+  wctx.strokeStyle='#9BA06A';wctx.lineWidth=3;wctx.lineCap='round';wctx.beginPath();
+  var pixPerMeter=gw/6;
+  for(var px=0;px<=gw;px++){
+    var xMeters=px/pixPerMeter;
+    var y=amp*Math.sin(2*Math.PI*(xMeters/q.lam)-wt*q.f*0.1);
+    if(px===0)wctx.moveTo(pad+px,midY-y);else wctx.lineTo(pad+px,midY-y);
+  }
+  wctx.stroke();wctx.lineCap='butt';
+
+  // wavelength bracket
+  var lamPx=q.lam*pixPerMeter;
+  if(lamPx>30&&lamPx<gw){
+    // find a crest position
+    var phase=wt*q.f*0.1;
+    var crestX=(phase/(2*Math.PI))*q.lam;
+    crestX=crestX%q.lam;
+    var cx1=pad+crestX*pixPerMeter;
+    // make sure bracket is visible
+    while(cx1<pad)cx1+=lamPx;
+    while(cx1>WW-pad-lamPx)cx1-=lamPx;
+    var cx2=cx1+lamPx;
+
+    if(cx1>=pad&&cx2<=WW-pad){
+      var by=midY+amp+18;
+      wctx.strokeStyle='#525B76';wctx.lineWidth=2;
+      wctx.beginPath();wctx.moveTo(cx1,by-8);wctx.lineTo(cx1,by+4);wctx.stroke();
+      wctx.beginPath();wctx.moveTo(cx2,by-8);wctx.lineTo(cx2,by+4);wctx.stroke();
+      wctx.beginPath();wctx.moveTo(cx1,by);wctx.lineTo(cx2,by);wctx.stroke();
+      // arrows
+      wctx.beginPath();wctx.moveTo(cx1+6,by-3);wctx.lineTo(cx1,by);wctx.lineTo(cx1+6,by+3);wctx.stroke();
+      wctx.beginPath();wctx.moveTo(cx2-6,by-3);wctx.lineTo(cx2,by);wctx.lineTo(cx2-6,by+3);wctx.stroke();
+      // label
+      wctx.fillStyle='#525B76';wctx.font='bold 12px Dosis';wctx.textAlign='center';
+      wctx.fillText('\u03BB = '+q.lam.toFixed(2)+' m',(cx1+cx2)/2,by+18);wctx.textAlign='left';
+    }
+  }
+
+  // amplitude arrow
+  var aX=pad+15;
+  wctx.strokeStyle='#9BA06A';wctx.lineWidth=2;
+  wctx.beginPath();wctx.moveTo(aX,midY);wctx.lineTo(aX,midY-amp);wctx.stroke();
+  wctx.beginPath();wctx.moveTo(aX-4,midY-amp+7);wctx.lineTo(aX,midY-amp);wctx.lineTo(aX+4,midY-amp+7);wctx.stroke();
+  wctx.fillStyle='#9BA06A';wctx.font='bold 11px Dosis';wctx.textAlign='left';
+  wctx.fillText('A',aX+6,midY-amp/2+4);
+
+  // speed arrow at top
+  wctx.strokeStyle='#143109';wctx.lineWidth=2;
+  var arrY=22;
+  wctx.beginPath();wctx.moveTo(pad+gw*0.3,arrY);wctx.lineTo(pad+gw*0.3+q.v*20,arrY);wctx.stroke();
+  wctx.beginPath();
+  var tip=pad+gw*0.3+q.v*20;
+  wctx.moveTo(tip-7,arrY-4);wctx.lineTo(tip,arrY);wctx.lineTo(tip-7,arrY+4);wctx.fillStyle='#143109';wctx.fill();
+  wctx.fillStyle='#143109';wctx.font='bold 12px Dosis';
+  wctx.fillText('v = '+q.v.toFixed(1)+' m/s  \u27F6',pad+gw*0.3-80,arrY+4);
+
+  // formula reminder
+  wctx.fillStyle='#525B76';wctx.font='600 11px Bitter';wctx.textAlign='center';
+  wctx.fillText('v = f \u00D7 \u03BB    |    '+q.v.toFixed(1)+' = '+q.f.toFixed(1)+' \u00D7 '+q.lam.toFixed(2),WW/2,WH-8);
+  wctx.textAlign='left';
+}
+
+function stepWQ(){wt++;drawWQ();requestAnimationFrame(stepWQ)}
+wqFS.oninput=function(){drawWQ()};
+wqSS.oninput=function(){drawWQ()};
+stepWQ();
+})();
+
+/* ====================
+   ECHO ANIMATION
+   ==================== */
+var echoPulse=null,echoAnim=null;
+(function(){
+var ec=document.getElementById('echoCanvas'),ectx2=ec.getContext('2d');
+var EW2=ec.width,EH2=ec.height;
+drawEchoFrame();
+
+window.sendEcho=function(){
+  if(echoPulse&&!echoPulse.done)return;
+  echoPulse={x:90,dx:4,reflected:false,done:false,startTime:Date.now()};
+  document.getElementById('echoStatus').textContent='Sound traveling to the cliff...';
+  stepEcho();
+};
+window.resetEcho=function(){
+  echoPulse=null;if(echoAnim)cancelAnimationFrame(echoAnim);
+  document.getElementById('echoStatus').textContent='Press "Shout!" to send a sound pulse';
+  drawEchoFrame();
+};
+
+function drawEchoFrame(){
+  ectx2.clearRect(0,0,EW2,EH2);
+  ectx2.fillStyle='#FFFFFF';ectx2.fillRect(0,0,EW2,EH2);
+  var groundY=EH2-35;
+
+  // ground
+  ectx2.strokeStyle='#D0D6B3';ectx2.lineWidth=2;
+  ectx2.beginPath();ectx2.moveTo(30,groundY);ectx2.lineTo(EW2-30,groundY);ectx2.stroke();
+
+  // person
+  var px=70,py=groundY;
+  ectx2.fillStyle='#143109';
+  ectx2.beginPath();ectx2.arc(px,py-60,12,0,Math.PI*2);ectx2.fill(); // head
+  ectx2.strokeStyle='#143109';ectx2.lineWidth=3;
+  ectx2.beginPath();ectx2.moveTo(px,py-48);ectx2.lineTo(px,py-15);ectx2.stroke(); // body
+  ectx2.beginPath();ectx2.moveTo(px,py-15);ectx2.lineTo(px-10,py);ectx2.stroke(); // left leg
+  ectx2.beginPath();ectx2.moveTo(px,py-15);ectx2.lineTo(px+10,py);ectx2.stroke(); // right leg
+  ectx2.beginPath();ectx2.moveTo(px,py-40);ectx2.lineTo(px+18,py-50);ectx2.stroke(); // arm up (shouting)
+  ectx2.beginPath();ectx2.moveTo(px,py-38);ectx2.lineTo(px-12,py-28);ectx2.stroke(); // arm down
+  ectx2.fillStyle='#143109';ectx2.font='bold 12px Dosis';ectx2.textAlign='center';
+  ectx2.fillText('You',px,py+16);
+
+  // cliff/wall
+  var wallX=EW2-60;
+  ectx2.fillStyle='#525B76';
+  ectx2.fillRect(wallX,groundY-90,20,90);
+  // brick pattern
+  ectx2.strokeStyle='#3d4a63';ectx2.lineWidth=1;
+  for(var i=0;i<6;i++){
+    var by2=groundY-90+i*15;
+    ectx2.beginPath();ectx2.moveTo(wallX,by2);ectx2.lineTo(wallX+20,by2);ectx2.stroke();
+    if(i%2===0){ectx2.beginPath();ectx2.moveTo(wallX+10,by2);ectx2.lineTo(wallX+10,by2+15);ectx2.stroke();}
+  }
+  ectx2.fillStyle='#525B76';ectx2.font='bold 12px Dosis';ectx2.textAlign='center';
+  ectx2.fillText('Cliff',wallX+10,py+16);
+
+  // distance labels
+  var midX=(px+wallX)/2;
+  ectx2.fillStyle='#9BA06A';ectx2.font='bold 13px Dosis';
+
+  // "d" arrow going right
+  var arrY2=groundY-95;
+  ectx2.strokeStyle='#9BA06A';ectx2.lineWidth=2;
+  ectx2.beginPath();ectx2.moveTo(px+20,arrY2);ectx2.lineTo(wallX-5,arrY2);ectx2.stroke();
+  ectx2.beginPath();ectx2.moveTo(wallX-12,arrY2-4);ectx2.lineTo(wallX-5,arrY2);ectx2.lineTo(wallX-12,arrY2+4);ectx2.stroke();
+  ectx2.textAlign='center';
+  ectx2.fillText('d',midX,arrY2-6);
+
+  // "d" arrow going left (return path)
+  var arrY3=groundY-108;
+  ectx2.strokeStyle='#525B76';ectx2.lineWidth=2;ectx2.setLineDash([4,3]);
+  ectx2.beginPath();ectx2.moveTo(wallX-5,arrY3);ectx2.lineTo(px+20,arrY3);ectx2.stroke();
+  ectx2.setLineDash([]);
+  ectx2.beginPath();ectx2.moveTo(px+27,arrY3-4);ectx2.lineTo(px+20,arrY3);ectx2.lineTo(px+27,arrY3+4);ectx2.stroke();
+  ectx2.fillStyle='#525B76';
+  ectx2.fillText('d',midX,arrY3-6);
+
+  // total 2d label
+  ectx2.fillStyle='#143109';ectx2.font='bold 14px Bitter';
+  ectx2.fillText('Total distance = 2d',midX,arrY3-22);
+
+  // draw pulse if active
+  if(echoPulse&&!echoPulse.done){
+    var pulseColor=echoPulse.reflected?'#525B76':'#9BA06A';
+    // expanding rings
+    for(var r=0;r<3;r++){
+      var rr=12+r*10;
+      ectx2.strokeStyle=pulseColor;ectx2.lineWidth=2.5-r*0.6;ectx2.globalAlpha=1-r*0.3;
+      ectx2.beginPath();ectx2.arc(echoPulse.x,groundY-45,rr,echoPulse.reflected?0.6*Math.PI:1.4*Math.PI,echoPulse.reflected?-0.6*Math.PI:-1.4*Math.PI);ectx2.stroke();
+    }
+    ectx2.globalAlpha=1;
+  }
+}
+
+function stepEcho(){
+  if(!echoPulse||echoPulse.done)return;
+  var wallX=EW2-60;
+  echoPulse.x+=echoPulse.dx;
+
+  if(!echoPulse.reflected&&echoPulse.x>=wallX-15){
+    echoPulse.reflected=true;
+    echoPulse.dx=-Math.abs(echoPulse.dx);
+    document.getElementById('echoStatus').textContent='Sound bounced! Traveling back...';
+  }
+  if(echoPulse.reflected&&echoPulse.x<=90){
+    echoPulse.done=true;
+    var elapsed=((Date.now()-echoPulse.startTime)/1000).toFixed(1);
+    document.getElementById('echoStatus').textContent='Echo heard! The sound traveled there AND back (2d) in '+elapsed+'s';
+    drawEchoFrame();
+    return;
+  }
+  drawEchoFrame();
+  echoAnim=requestAnimationFrame(stepEcho);
+}
+})();
+
+/* ====================
+   ANATOMY DIAGRAM
+   ==================== */
+(function(){
+var ac=document.getElementById('anatomyCanvas'),actx=ac.getContext('2d');
+var AW=ac.width,AH=ac.height;
+var pad={l:70,r:30,t:40,b:50};
+var gw=AW-pad.l-pad.r,gh=AH-pad.t-pad.b;
+var midY=pad.t+gh/2;
+
+function sx(frac){return pad.l+frac*gw}
+function sy(val){return midY-val*(gh/2)*0.8}
+
+actx.fillStyle='#FFFFFF';actx.fillRect(0,0,AW,AH);
+
+// grid
+actx.strokeStyle='#e4e8cc';actx.lineWidth=1;
+for(var i=0;i<=8;i++){var x=sx(i/8);actx.beginPath();actx.moveTo(x,pad.t);actx.lineTo(x,AH-pad.b);actx.stroke();}
+for(var v=-1;v<=1;v++){var y=sy(v);actx.beginPath();actx.moveTo(pad.l,y);actx.lineTo(AW-pad.r,y);actx.stroke();}
+
+// axes
+actx.strokeStyle='#D0D6B3';actx.lineWidth=2;
+actx.beginPath();actx.moveTo(pad.l,midY);actx.lineTo(AW-pad.r,midY);actx.stroke();
+actx.beginPath();actx.moveTo(pad.l,pad.t-5);actx.lineTo(pad.l,AH-pad.b+5);actx.stroke();
+
+// sine wave
+actx.strokeStyle='#9BA06A';actx.lineWidth=3;actx.lineCap='round';actx.beginPath();
+for(var px=0;px<=gw;px++){
+  var t=px/gw;var y=Math.sin(2*Math.PI*t);
+  if(px===0)actx.moveTo(sx(t),sy(y));else actx.lineTo(sx(t),sy(y));
+}
+actx.stroke();actx.lineCap='butt';
+
+// crest dot
+var crestX=sx(0.25),crestY=sy(1);
+actx.fillStyle='#143109';actx.beginPath();actx.arc(crestX,crestY,5,0,Math.PI*2);actx.fill();
+actx.fillStyle='#143109';actx.font='bold 12px Dosis';actx.textAlign='center';
+actx.fillText('Crest',crestX,crestY-12);
+
+// trough dot
+var troughX=sx(0.75),troughY=sy(-1);
+actx.fillStyle='#143109';actx.beginPath();actx.arc(troughX,troughY,5,0,Math.PI*2);actx.fill();
+actx.fillText('Trough',troughX,troughY+22);
+
+// AMPLITUDE arrows (right side)
+var ampX=sx(0.18);
+actx.strokeStyle='#9BA06A';actx.lineWidth=2;
+// up arrow from midline to crest
+actx.beginPath();actx.moveTo(ampX,midY);actx.lineTo(ampX,sy(1));actx.stroke();
+actx.beginPath();actx.moveTo(ampX-4,sy(1)+7);actx.lineTo(ampX,sy(1));actx.lineTo(ampX+4,sy(1)+7);actx.stroke();
+// down arrow from midline to trough
+actx.beginPath();actx.moveTo(ampX,midY);actx.lineTo(ampX,sy(-1));actx.stroke();
+actx.beginPath();actx.moveTo(ampX-4,sy(-1)-7);actx.lineTo(ampX,sy(-1));actx.lineTo(ampX+4,sy(-1)-7);actx.stroke();
+// label
+actx.fillStyle='#9BA06A';actx.font='bold 13px Dosis';actx.textAlign='right';
+actx.fillText('Amplitude (A)',ampX-8,midY-((midY-sy(1))/2)+4);
+actx.textAlign='left';
+
+// MIDLINE label
+actx.fillStyle='#525B76';actx.font='bold 12px Dosis';actx.textAlign='left';
+actx.fillText('Midline (y = d)',AW-pad.r-100,midY-8);
+
+// PERIOD bracket at bottom
+var perStart=sx(0),perEnd=sx(1);
+var bracketY=AH-pad.b+18;
+actx.strokeStyle='#525B76';actx.lineWidth=2;
+actx.beginPath();actx.moveTo(perStart,AH-pad.b+4);actx.lineTo(perStart,bracketY);actx.stroke();
+actx.beginPath();actx.moveTo(perEnd,AH-pad.b+4);actx.lineTo(perEnd,bracketY);actx.stroke();
+actx.beginPath();actx.moveTo(perStart,bracketY);actx.lineTo(perEnd,bracketY);actx.stroke();
+// arrows
+actx.beginPath();actx.moveTo(perStart+6,bracketY-4);actx.lineTo(perStart,bracketY);actx.lineTo(perStart+6,bracketY+4);actx.stroke();
+actx.beginPath();actx.moveTo(perEnd-6,bracketY-4);actx.lineTo(perEnd,bracketY);actx.lineTo(perEnd-6,bracketY+4);actx.stroke();
+// label
+actx.fillStyle='#525B76';actx.font='bold 13px Dosis';actx.textAlign='center';
+actx.fillText('Period (T = 2\u03C0/b)',sx(0.5),bracketY+18);
+
+// WAVELENGTH bracket (second measure)
+var wlStart=sx(0),wlEnd=sx(0.5);
+var wlY=AH-pad.b+8;
+
+// PHASE SHIFT arrow at top
+var phaseX0=sx(0),phaseX1=sx(0.125);
+actx.strokeStyle='#6b7f4e';actx.lineWidth=2;
+actx.beginPath();actx.moveTo(phaseX0,pad.t+10);actx.lineTo(phaseX1,pad.t+10);actx.stroke();
+actx.beginPath();actx.moveTo(phaseX1-6,pad.t+6);actx.lineTo(phaseX1,pad.t+10);actx.lineTo(phaseX1-6,pad.t+14);actx.fillStyle='#6b7f4e';actx.fill();
+// dashed vertical from origin
+actx.setLineDash([3,3]);actx.strokeStyle='#6b7f4eaa';actx.lineWidth=1;
+actx.beginPath();actx.moveTo(phaseX0,pad.t);actx.lineTo(phaseX0,AH-pad.b);actx.stroke();actx.setLineDash([]);
+actx.fillStyle='#6b7f4e';actx.font='bold 12px Dosis';actx.textAlign='left';
+actx.fillText('Phase shift (c)',phaseX1+6,pad.t+14);
+
+// EQUILIBRIUM & zero crossings
+var z1=sx(0),z2=sx(0.5);
+actx.fillStyle='#143109';
+actx.beginPath();actx.arc(z1,midY,4,0,Math.PI*2);actx.fill();
+actx.beginPath();actx.arc(z2,midY,4,0,Math.PI*2);actx.fill();
+actx.beginPath();actx.arc(sx(1),midY,4,0,Math.PI*2);actx.fill();
+actx.font='11px Dosis';actx.textAlign='center';
+actx.fillText('0',z1,midY+18);
+actx.fillText('\u03C0',z2,midY+18);
+actx.fillText('2\u03C0',sx(1),midY+18);
+
+// y-axis labels
+actx.textAlign='right';actx.font='bold 12px Bitter';actx.fillStyle='#143109';
+actx.fillText('+A',pad.l-10,sy(1)+4);
+actx.fillText('\u2212A',pad.l-10,sy(-1)+4);
+actx.fillText('0',pad.l-10,midY+4);
+actx.textAlign='left';
+
+// title formula
+actx.fillStyle='#143109';actx.font='bold 14px Bitter';actx.textAlign='center';
+actx.fillText('y = A \u00B7 sin( b(\u03B8 + c) ) + d',AW/2,pad.t-14);
+actx.textAlign='left';
+})();
+</script>
+</body>
+</html>
