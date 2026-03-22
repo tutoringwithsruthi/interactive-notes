@@ -1,0 +1,2677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigonometric Functions &mdash; Interactive Notes</title>
+<meta name="description" content="Interactive notes on trigonometric functions, the unit circle, sine, cosine, tangent, cotangent, secant, and cosecant — by tutoringwithsruthi">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Dosis:wght@400;500;600;700&family=Bitter:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+:root{--white:#FFFFFF;--sage-l:#D0D6B3;--sage:#9BA06A;--slate:#525B76;--forest:#143109;--bg:#f5f6ee;--sage-m:#e4e8cc;--fh:'Young Serif',Georgia,serif;--fp:'Dosis','Trebuchet MS',Arial,sans-serif;--fb:'Bitter',Georgia,serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px 16px 52px;overflow-x:hidden}
+.page{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+.pg-head{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:20px;padding:44px 36px;text-align:center}
+.pg-head h1{font-family:var(--fh);font-size:2.3rem;color:var(--forest);margin-bottom:0}
+.card{background:var(--white);border:2px solid var(--sage-l);border-radius:20px;padding:32px 30px;box-shadow:0 2px 12px rgba(20,49,9,0.06)}
+.card-title{font-family:var(--fh);font-size:1.45rem;color:var(--forest);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.card-title .icon{font-size:1.5rem}
+.body-text{font-family:var(--fp);font-size:1.05rem;color:var(--forest);line-height:1.7;margin-bottom:12px}
+.body-text:last-child{margin-bottom:0}
+.highlight-box{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:14px;padding:20px 22px;margin:16px 0}
+.formula-box{background:var(--white);border:2px solid var(--sage);border-radius:14px;padding:22px;margin:16px 0;text-align:center;font-size:1.3rem;overflow-x:auto}
+.term-grid{display:grid;grid-template-columns:80px 1fr;gap:8px 16px;margin:12px 0}
+.term-sym{font-family:var(--fb);font-weight:700;font-size:1.1rem;color:var(--sage);text-align:right}
+.term-def{font-family:var(--fp);font-size:1rem;color:var(--forest);line-height:1.6}
+.interactive-area{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:18px;padding:24px;margin:18px 0;text-align:center}
+.interactive-area canvas{border-radius:12px;display:block;margin:0 auto;max-width:100%}
+.ia-label{font-family:var(--fb);font-size:1.05rem;color:var(--slate);margin-bottom:12px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0}
+.site-btn{font-family:var(--fp);font-weight:600;font-size:.98rem;border:none;border-radius:30px;padding:10px 22px;cursor:pointer;transition:background .18s,transform .18s;background:var(--sage);color:var(--white)}
+.site-btn:hover{background:var(--forest);transform:translateY(-1px)}
+.site-btn.active{background:var(--forest)}
+.site-btn.secondary{background:var(--white);color:var(--forest);border:2px solid var(--sage-l)}
+.site-btn.secondary:hover{background:var(--sage-m)}
+.worked-example{background:#f9faf4;border-left:4px solid var(--sage);border-radius:0 14px 14px 0;padding:20px 22px;margin:16px 0}
+.worked-example .step{font-family:var(--fp);font-size:1rem;color:var(--forest);margin-bottom:8px;line-height:1.7}
+.worked-example .step-label{font-family:var(--fb);font-weight:700;color:var(--sage)}
+.practice-box{background:var(--white);border:2px dashed var(--sage-l);border-radius:14px;padding:18px 20px;margin:10px 0}
+.practice-box .q{font-family:var(--fp);font-size:1rem;color:var(--forest);margin-bottom:8px;line-height:1.6}
+.practice-box .a{font-family:var(--fp);font-size:.95rem;color:var(--sage);display:none;margin-top:6px;padding:10px 14px;background:var(--sage-m);border-radius:10px;line-height:1.6}
+.practice-box .a.show{display:block;animation:fadeIn .25s ease}
+.show-ans-btn{font-family:var(--fp);font-weight:600;font-size:.88rem;border:2px solid var(--sage-l);border-radius:20px;padding:6px 16px;cursor:pointer;background:var(--white);color:var(--sage);transition:background .18s}
+.show-ans-btn:hover{background:var(--sage-m)}
+.sub-title{font-family:var(--fh);font-size:1.15rem;color:var(--forest);margin:18px 0 8px}
+.slider-row{display:flex;align-items:center;gap:12px;margin:8px 0;font-family:var(--fp);font-size:.95rem}
+.slider-row label{min-width:100px;font-weight:600;color:var(--forest)}
+.slider-row input[type="range"]{flex:1;height:6px;border-radius:3px;outline:none;cursor:pointer}
+.slider-row .slider-val{min-width:52px;text-align:center;font-family:var(--fb);font-weight:700;color:var(--sage);font-size:1rem}
+.status-text{font-family:var(--fp);font-size:.92rem;color:var(--slate);text-align:center;margin:8px 0;min-height:22px}
+.exp-chip{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:30px;font-family:var(--fp);font-size:.88rem;font-weight:600;border:2px solid var(--sage-l);background:var(--white);color:var(--forest);cursor:default;transition:background .2s,border-color .2s}
+.exp-chip:hover,.exp-chip.hl{background:var(--sage-m);border-color:var(--sage)}
+.exp-chip .chip-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.exp-slider-card{background:var(--bg);border:2px solid var(--sage-l);border-radius:14px;padding:14px 18px;margin:6px 0}
+.exp-sl-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.exp-sl-name{font-family:var(--fb);font-weight:700;font-size:1rem;color:var(--forest)}
+.exp-sl-val{font-family:var(--fb);font-weight:700;font-size:1.05rem;color:var(--sage)}
+.exp-sl-desc{font-family:var(--fp);font-size:.82rem;color:var(--slate);margin-top:4px;line-height:1.5}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* Trig summary table */
+table.trig-summary{width:100%;border-collapse:collapse;margin:12px 0;font-family:var(--fp);font-size:.92rem}
+table.trig-summary th{background:var(--sage);color:var(--white);padding:8px 10px;text-align:center;font-weight:600}
+table.trig-summary td{padding:8px 10px;border:1px solid var(--sage-l);text-align:center}
+table.trig-summary tr:nth-child(even) td{background:var(--sage-m)}
+
+@media(max-width:600px){
+  .pg-head{padding:30px 18px}.pg-head h1{font-size:1.6rem}.card{padding:22px 16px}.card-title{font-size:1.2rem}
+  .term-grid{grid-template-columns:60px 1fr}.slider-row{flex-direction:column;align-items:flex-start;gap:6px}
+  .exp-slider-card{padding:10px 12px}.btn-row{gap:6px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ===== HEADER ===== -->
+<div class="pg-head"><h1>Trigonometric Functions</h1></div>
+
+<!-- ===== CARD 0A: PYTHAGOREAN THEOREM ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x1F4D0;</span> The Pythagorean Theorem</div>
+
+  <p class="body-text">Before we get into trig, we need one big idea: the <strong>Pythagorean theorem</strong>. It says that in any <strong>right triangle</strong> (a triangle with a 90&deg; angle), the three sides are connected by this relationship:</p>
+
+  <div class="formula-box">
+    $$a^2 + b^2 = c^2$$
+  </div>
+
+  <p class="body-text">where $c$ is the <strong>hypotenuse</strong> (the longest side, across from the right angle) and $a$ and $b$ are the other two sides (called <strong>legs</strong>).</p>
+
+  <div class="highlight-box">
+    <strong>Think of it like:</strong> If you know any two sides of a right triangle, you can always find the third. It's the most fundamental relationship in geometry, and trig is built entirely on it.
+  </div>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Example: </span>A right triangle has legs of 3 and 4. Find the hypotenuse.</div>
+    <div class="step"><span class="step-label">Step 1: </span>$a^2 + b^2 = c^2 \implies 3^2 + 4^2 = c^2 \implies 9 + 16 = 25$</div>
+    <div class="step"><span class="step-label">Step 2: </span>$c = \sqrt{25} = 5$</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">A right triangle has a hypotenuse of 13 and one leg of 5. What is the other leg?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ansPyth1')">Show Answer</button>
+    <div class="a" id="ansPyth1">$5^2 + b^2 = 13^2 \implies 25 + b^2 = 169 \implies b^2 = 144 \implies b = 12$</div>
+  </div>
+</div>
+
+<!-- ===== CARD 0B: SPECIAL RIGHT TRIANGLES ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x1F4D0;</span> Special Right Triangles</div>
+
+  <p class="body-text">Two right triangles show up <em>constantly</em> in trig. If you memorize their side ratios, the entire unit circle falls into place.</p>
+
+  <!-- Side-by-side triangle diagrams -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;">
+    <div class="interactive-area" style="margin:0;">
+      <div class="ia-label">45-45-90 Triangle</div>
+      <canvas id="tri4545Canvas" width="280" height="240"></canvas>
+      <p style="font-family:var(--fb);font-size:.9rem;color:var(--forest);margin-top:8px;"><strong>Side ratio:</strong> $1 : 1 : \sqrt{2}$</p>
+    </div>
+    <div class="interactive-area" style="margin:0;">
+      <div class="ia-label">30-60-90 Triangle</div>
+      <canvas id="tri3060Canvas" width="280" height="240"></canvas>
+      <p style="font-family:var(--fb);font-size:.9rem;color:var(--forest);margin-top:8px;"><strong>Side ratio:</strong> $1 : \sqrt{3} : 2$</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <strong>45-45-90:</strong> Two equal legs. If each leg is 1, the hypotenuse is $\sqrt{2}$. Both acute angles are 45&deg;.<br><br>
+    <strong>30-60-90:</strong> Cut an equilateral triangle in half. Short side (opposite 30&deg;) is 1, hypotenuse is 2, long side (opposite 60&deg;) is $\sqrt{3}$.
+  </div>
+
+  <div class="highlight-box">
+    <strong>Why do these matter?</strong> Every angle on the unit circle (30&deg;, 45&deg;, 60&deg;, and their reflections) creates one of these two triangles. The side lengths directly give you the sine and cosine values. Memorize these two triangles, and you know the entire unit circle.
+  </div>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Example: </span>In a 45-45-90 triangle, the hypotenuse is 8. Find the legs.</div>
+    <div class="step"><span class="step-label">Step 1: </span>The ratio is $1 : 1 : \sqrt{2}$, so each leg $= \frac{\text{hyp}}{\sqrt{2}} = \frac{8}{\sqrt{2}} = \frac{8\sqrt{2}}{2} = 4\sqrt{2} \approx 5.66$</div>
+  </div>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Example: </span>In a 30-60-90 triangle, the hypotenuse is 10. Find both legs.</div>
+    <div class="step"><span class="step-label">Step 1: </span>Short leg (opposite 30&deg;) $= \frac{\text{hyp}}{2} = \frac{10}{2} = 5$</div>
+    <div class="step"><span class="step-label">Step 2: </span>Long leg (opposite 60&deg;) $= \text{short leg} \times \sqrt{3} = 5\sqrt{3} \approx 8.66$</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">A 45-45-90 triangle has legs of length 6. What is the hypotenuse?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ansSRT1')">Show Answer</button>
+    <div class="a" id="ansSRT1">$\text{hyp} = \text{leg} \times \sqrt{2} = 6\sqrt{2} \approx 8.49$</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">A 30-60-90 triangle has a long leg of $9\sqrt{3}$. Find the short leg and hypotenuse.</div>
+    <button class="show-ans-btn" onclick="toggleAns('ansSRT2')">Show Answer</button>
+    <div class="a" id="ansSRT2">
+      Long leg $= \text{short leg} \times \sqrt{3}$, so short leg $= \frac{9\sqrt{3}}{\sqrt{3}} = 9$<br>
+      Hypotenuse $= 2 \times \text{short leg} = 2 \times 9 = 18$
+    </div>
+  </div>
+</div>
+
+<!-- ===== CARD 0C: SOHCAHTOA ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x1F4D0;</span> Trig in Right Triangles — SOHCAHTOA</div>
+
+  <p class="body-text">Now here's where trig begins. In a right triangle, if you pick one of the non-right angles $\theta$, the three sides get names <em>relative to that angle</em>:</p>
+
+  <div class="term-grid">
+    <span class="term-sym">Opp</span><span class="term-def"><strong>Opposite</strong> — the side directly across from angle $\theta$</span>
+    <span class="term-sym">Adj</span><span class="term-def"><strong>Adjacent</strong> — the side next to angle $\theta$ (not the hypotenuse)</span>
+    <span class="term-sym">Hyp</span><span class="term-def"><strong>Hypotenuse</strong> — the longest side, across from the 90&deg; angle</span>
+  </div>
+
+  <p class="body-text">The three main trig functions are just <strong>ratios</strong> of these sides:</p>
+
+  <div class="formula-box">
+    $$\sin\theta = \frac{\text{Opposite}}{\text{Hypotenuse}} \qquad \cos\theta = \frac{\text{Adjacent}}{\text{Hypotenuse}} \qquad \tan\theta = \frac{\text{Opposite}}{\text{Adjacent}}$$
+  </div>
+
+  <div class="highlight-box">
+    <strong>SOH-CAH-TOA</strong> — the memory trick:<br>
+    <strong>S</strong>in = <strong>O</strong>pp / <strong>H</strong>yp &emsp;|&emsp; <strong>C</strong>os = <strong>A</strong>dj / <strong>H</strong>yp &emsp;|&emsp; <strong>T</strong>an = <strong>O</strong>pp / <strong>A</strong>dj
+  </div>
+
+  <div class="sub-title">Using Trig to Find a Missing Side</div>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Example: </span>A right triangle has a hypotenuse of 10 and an angle of 35&deg;. Find the side opposite the 35&deg; angle.</div>
+    <div class="step"><span class="step-label">Step 1: </span>We know the angle and the hypotenuse, and we want the opposite side. That's <strong>SOH</strong>: $\sin(35°) = \frac{\text{opp}}{10}$</div>
+    <div class="step"><span class="step-label">Step 2: </span>$\text{opp} = 10 \times \sin(35°) = 10 \times 0.5736 \approx 5.74$</div>
+  </div>
+
+  <div class="sub-title">Using Trig to Find a Missing Angle</div>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Example: </span>A right triangle has an opposite side of 7 and an adjacent side of 12. Find the angle $\theta$.</div>
+    <div class="step"><span class="step-label">Step 1: </span>We know opposite and adjacent. That's <strong>TOA</strong>: $\tan\theta = \frac{7}{12}$</div>
+    <div class="step"><span class="step-label">Step 2: </span>$\theta = \tan^{-1}\!\left(\frac{7}{12}\right) = \tan^{-1}(0.5833) \approx 30.26°$</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">A ladder leans against a wall making a 62&deg; angle with the ground. The base of the ladder is 4 m from the wall. How long is the ladder?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ansSOH1')">Show Answer</button>
+    <div class="a" id="ansSOH1">
+      The 4 m is the adjacent side, and we want the hypotenuse. Use <strong>CAH</strong>:<br>
+      $\cos(62°) = \frac{4}{\text{hyp}} \implies \text{hyp} = \frac{4}{\cos(62°)} = \frac{4}{0.4695} \approx 8.52$ m
+    </div>
+  </div>
+</div>
+
+<!-- ===== CARD 0D: LAW OF SINES & COSINES ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x1F4D0;</span> Law of Sines &amp; Law of Cosines</div>
+
+  <p class="body-text">SOHCAHTOA only works for <strong>right</strong> triangles. For <em>any</em> triangle (including ones without a 90&deg; angle), we use the Law of Sines and Law of Cosines.</p>
+
+  <div class="sub-title">Law of Sines</div>
+  <p class="body-text">In any triangle with sides $a$, $b$, $c$ and opposite angles $A$, $B$, $C$:</p>
+
+  <div class="formula-box">
+    $$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$$
+  </div>
+
+  <div class="highlight-box">
+    <strong>Use it when:</strong> You know an angle and its opposite side, plus one other piece (another angle or another side). It sets up a proportion you can solve.
+  </div>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Example: </span>In a triangle, $A = 40°$, $B = 70°$, and $a = 8$. Find side $b$.</div>
+    <div class="step"><span class="step-label">Step 1: </span>$\frac{a}{\sin A} = \frac{b}{\sin B} \implies \frac{8}{\sin 40°} = \frac{b}{\sin 70°}$</div>
+    <div class="step"><span class="step-label">Step 2: </span>$b = \frac{8 \times \sin 70°}{\sin 40°} = \frac{8 \times 0.9397}{0.6428} \approx 11.69$</div>
+  </div>
+
+  <div class="sub-title">Law of Cosines</div>
+  <p class="body-text">Think of it as the Pythagorean theorem with a correction term for non-right triangles:</p>
+
+  <div class="formula-box">
+    $$c^2 = a^2 + b^2 - 2ab\cos C$$
+  </div>
+
+  <div class="highlight-box">
+    <strong>Use it when:</strong> You know two sides and the included angle (SAS), or all three sides (SSS) and want to find an angle. Notice: if $C = 90°$, then $\cos 90° = 0$, and this reduces to $c^2 = a^2 + b^2$ — the Pythagorean theorem!
+  </div>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Example: </span>A triangle has sides $a = 5$, $b = 7$, and included angle $C = 50°$. Find side $c$.</div>
+    <div class="step"><span class="step-label">Step 1: </span>$c^2 = 5^2 + 7^2 - 2(5)(7)\cos 50° = 25 + 49 - 70(0.6428) = 74 - 45 = 29$</div>
+    <div class="step"><span class="step-label">Step 2: </span>$c = \sqrt{29} \approx 5.39$</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">A triangle has sides 8, 11, and 15. Find the angle opposite the side of length 15.</div>
+    <button class="show-ans-btn" onclick="toggleAns('ansLOC1')">Show Answer</button>
+    <div class="a" id="ansLOC1">
+      Using Law of Cosines: $15^2 = 8^2 + 11^2 - 2(8)(11)\cos C$<br>
+      $225 = 64 + 121 - 176\cos C \implies 225 = 185 - 176\cos C$<br>
+      $176\cos C = -40 \implies \cos C = -0.2273$<br>
+      $C = \cos^{-1}(-0.2273) \approx 103.1°$
+    </div>
+  </div>
+</div>
+
+<!-- ===== CARD 1: THE UNIT CIRCLE ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9898;</span> The Unit Circle</div>
+
+  <p class="body-text">Now let's connect everything back to a circle. Draw a circle with radius 1, centered at the origin. Pick any angle $\theta$ and draw a line from the center to the edge of the circle. That line is the <strong>hypotenuse</strong> of a right triangle, and it equals 1 (because the radius is 1).</p>
+
+  <p class="body-text">Drop a vertical line from that point down to the x-axis. You've just made a right triangle inside the circle! The horizontal leg is the <strong>x-coordinate</strong> of the point, and the vertical leg is the <strong>y-coordinate</strong>.</p>
+
+  <div class="highlight-box">
+    <strong>The connection:</strong> Since hypotenuse = 1, SOHCAHTOA gives us:<br><br>
+    $\cos\theta = \frac{\text{adj}}{\text{hyp}} = \frac{x}{1} = x$ &emsp; and &emsp; $\sin\theta = \frac{\text{opp}}{\text{hyp}} = \frac{y}{1} = y$<br><br>
+    So the x-coordinate IS the cosine, and the y-coordinate IS the sine! You're just finding the (x, y) coordinates of a point on a circle with radius 1. The special right triangles (30-60-90 and 45-45-90) give you the exact coordinates at every standard angle.
+  </div>
+
+  <p class="body-text">We measure angles starting from the positive x-axis and going <strong>counterclockwise</strong>. A full trip is $2\pi$ radians (360&deg;). Half is $\pi$ (180&deg;).</p>
+
+  <!-- Triangle inside unit circle — SOHCAHTOA visual -->
+  <div class="interactive-area">
+    <div class="ia-label">Right Triangle Inside the Unit Circle</div>
+    <canvas id="triInCircleCanvas" width="520" height="420"></canvas>
+  </div>
+
+  <!-- Complete static unit circle with all values -->
+  <div class="interactive-area">
+    <div class="ia-label">Complete Unit Circle &mdash; Each point is (cos &theta;, sin &theta;)</div>
+    <canvas id="fullUCCanvas" width="740" height="740"></canvas>
+  </div>
+
+  <!-- Unit circle values table -->
+  <div class="sub-title">Unit Circle Values Table</div>
+  <div style="overflow-x:auto;">
+    <table class="trig-summary">
+      <thead>
+        <tr><th>Angle (deg)</th><th>Angle (rad)</th><th>$\cos\theta$ (x)</th><th>$\sin\theta$ (y)</th><th>$\tan\theta$</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0&deg;</td><td>$0$</td><td>$1$</td><td>$0$</td><td>$0$</td></tr>
+        <tr><td>30&deg;</td><td>$\frac{\pi}{6}$</td><td>$\frac{\sqrt{3}}{2}$</td><td>$\frac{1}{2}$</td><td>$\frac{\sqrt{3}}{3}$</td></tr>
+        <tr><td>45&deg;</td><td>$\frac{\pi}{4}$</td><td>$\frac{\sqrt{2}}{2}$</td><td>$\frac{\sqrt{2}}{2}$</td><td>$1$</td></tr>
+        <tr><td>60&deg;</td><td>$\frac{\pi}{3}$</td><td>$\frac{1}{2}$</td><td>$\frac{\sqrt{3}}{2}$</td><td>$\sqrt{3}$</td></tr>
+        <tr><td>90&deg;</td><td>$\frac{\pi}{2}$</td><td>$0$</td><td>$1$</td><td>undef</td></tr>
+        <tr><td>120&deg;</td><td>$\frac{2\pi}{3}$</td><td>$-\frac{1}{2}$</td><td>$\frac{\sqrt{3}}{2}$</td><td>$-\sqrt{3}$</td></tr>
+        <tr><td>135&deg;</td><td>$\frac{3\pi}{4}$</td><td>$-\frac{\sqrt{2}}{2}$</td><td>$\frac{\sqrt{2}}{2}$</td><td>$-1$</td></tr>
+        <tr><td>150&deg;</td><td>$\frac{5\pi}{6}$</td><td>$-\frac{\sqrt{3}}{2}$</td><td>$\frac{1}{2}$</td><td>$-\frac{\sqrt{3}}{3}$</td></tr>
+        <tr><td>180&deg;</td><td>$\pi$</td><td>$-1$</td><td>$0$</td><td>$0$</td></tr>
+        <tr><td>210&deg;</td><td>$\frac{7\pi}{6}$</td><td>$-\frac{\sqrt{3}}{2}$</td><td>$-\frac{1}{2}$</td><td>$\frac{\sqrt{3}}{3}$</td></tr>
+        <tr><td>225&deg;</td><td>$\frac{5\pi}{4}$</td><td>$-\frac{\sqrt{2}}{2}$</td><td>$-\frac{\sqrt{2}}{2}$</td><td>$1$</td></tr>
+        <tr><td>240&deg;</td><td>$\frac{4\pi}{3}$</td><td>$-\frac{1}{2}$</td><td>$-\frac{\sqrt{3}}{2}$</td><td>$\sqrt{3}$</td></tr>
+        <tr><td>270&deg;</td><td>$\frac{3\pi}{2}$</td><td>$0$</td><td>$-1$</td><td>undef</td></tr>
+        <tr><td>300&deg;</td><td>$\frac{5\pi}{3}$</td><td>$\frac{1}{2}$</td><td>$-\frac{\sqrt{3}}{2}$</td><td>$-\sqrt{3}$</td></tr>
+        <tr><td>315&deg;</td><td>$\frac{7\pi}{4}$</td><td>$\frac{\sqrt{2}}{2}$</td><td>$-\frac{\sqrt{2}}{2}$</td><td>$-1$</td></tr>
+        <tr><td>330&deg;</td><td>$\frac{11\pi}{6}$</td><td>$\frac{\sqrt{3}}{2}$</td><td>$-\frac{1}{2}$</td><td>$-\frac{\sqrt{3}}{3}$</td></tr>
+        <tr><td>360&deg;</td><td>$2\pi$</td><td>$1$</td><td>$0$</td><td>$0$</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight-box">
+    <p class="sub-title" style="margin-top:0;">Quadrant Signs &mdash; "All Students Take Calculus"</p>
+    <p class="body-text">A handy mnemonic to remember which trig values are positive in each quadrant:</p>
+    <div class="term-grid" style="grid-template-columns:120px 1fr;">
+      <div class="term-sym">Q I (A)</div>
+      <div class="term-def"><strong>All</strong> functions are positive (both x and y are positive)</div>
+      <div class="term-sym">Q II (S)</div>
+      <div class="term-def"><strong>Sine</strong> is positive (y is positive, x is negative)</div>
+      <div class="term-sym">Q III (T)</div>
+      <div class="term-def"><strong>Tangent</strong> is positive (both x and y are negative, so y/x is positive)</div>
+      <div class="term-sym">Q IV (C)</div>
+      <div class="term-def"><strong>Cosine</strong> is positive (x is positive, y is negative)</div>
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Practice:</strong> What are the exact coordinates of the point on the unit circle at $\theta = \dfrac{5\pi}{6}$?</div>
+    <button class="show-ans-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show Answer</button>
+    <div class="a">At $\theta = \frac{5\pi}{6}$ (150&deg;), we are in Quadrant II. The reference angle is $\pi - \frac{5\pi}{6} = \frac{\pi}{6}$ (30&deg;). We know $\cos\frac{\pi}{6} = \frac{\sqrt{3}}{2}$ and $\sin\frac{\pi}{6} = \frac{1}{2}$. In Q II, cosine is negative, so the coordinates are $\left(-\frac{\sqrt{3}}{2},\;\frac{1}{2}\right)$.</div>
+  </div>
+</div>
+
+<!-- ===== CARD 2: SINE FUNCTION ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#12336;</span> The Sine Function</div>
+
+  <p class="body-text">Sine is the <strong>y-coordinate</strong> of the point on the unit circle. As the point travels around the circle, watch what happens to the y-value: it starts at 0, rises to 1, comes back to 0, drops to &minus;1, and returns to 0. That up-and-down pattern is the <strong>sine wave</strong> &mdash; one of the most important shapes in all of math and science.</p>
+
+  <p class="body-text">Think of it like tracking the height of a seat on a Ferris wheel as it spins. The wheel turns at a steady speed, but the seat goes up and down in a smooth wave pattern. That's sine!</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">The sine wave &mdash; tracing the y-coordinate around the circle</div>
+    <canvas id="sinGraphCanvas" width="700" height="240"></canvas>
+  </div>
+
+  <p class="sub-title">Key Features of $y = \sin(x)$</p>
+  <div class="term-grid">
+    <div class="term-sym">Period</div>
+    <div class="term-def">$2\pi$ &mdash; one full cycle of the wave</div>
+    <div class="term-sym">Amplitude</div>
+    <div class="term-def">$1$ &mdash; the wave reaches 1 unit above and below the midline</div>
+    <div class="term-sym">Domain</div>
+    <div class="term-def">$(-\infty, \infty)$ &mdash; you can plug in any real number</div>
+    <div class="term-sym">Range</div>
+    <div class="term-def">$[-1, 1]$ &mdash; the output never goes beyond &minus;1 or 1</div>
+    <div class="term-sym">Asymptotes</div>
+    <div class="term-def">None &mdash; the function is defined everywhere and always finite</div>
+    <div class="term-sym">x-intercepts</div>
+    <div class="term-def">At $x = n\pi$ for any integer $n$ (i.e., $0, \pm\pi, \pm 2\pi, \ldots$)</div>
+    <div class="term-sym">Maximum</div>
+    <div class="term-def">$y = 1$ at $x = \frac{\pi}{2} + 2n\pi$</div>
+    <div class="term-sym">Minimum</div>
+    <div class="term-def">$y = -1$ at $x = \frac{3\pi}{2} + 2n\pi$</div>
+  </div>
+
+  <div class="worked-example">
+    <p class="step"><span class="step-label">Problem:</span> For $y = \sin(x)$, what is the value at $x = \frac{\pi}{6}$? At $x = \frac{5\pi}{4}$?</p>
+    <p class="step"><span class="step-label">Step 1:</span> At $x = \frac{\pi}{6}$ (30&deg;), we recall that $\sin\frac{\pi}{6} = \frac{1}{2}$. This is one of the standard unit-circle values you should memorize.</p>
+    <p class="step"><span class="step-label">Step 2:</span> At $x = \frac{5\pi}{4}$ (225&deg;), the point is in Quadrant III. The reference angle is $\frac{5\pi}{4} - \pi = \frac{\pi}{4}$ (45&deg;). We know $\sin\frac{\pi}{4} = \frac{\sqrt{2}}{2}$, and in Q III sine is negative.</p>
+    <p class="step"><span class="step-label">Answer:</span> $\sin\frac{\pi}{6} = \frac{1}{2}$ and $\sin\frac{5\pi}{4} = -\frac{\sqrt{2}}{2}$.</p>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Practice:</strong> Evaluate $\sin\!\left(\frac{2\pi}{3}\right)$. In which quadrant does this angle lie?</div>
+    <button class="show-ans-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show Answer</button>
+    <div class="a">$\frac{2\pi}{3}$ is 120&deg;, which is in <strong>Quadrant II</strong>. The reference angle is $\pi - \frac{2\pi}{3} = \frac{\pi}{3}$ (60&deg;). Since $\sin\frac{\pi}{3} = \frac{\sqrt{3}}{2}$ and sine is positive in Q II, we get $\sin\frac{2\pi}{3} = \frac{\sqrt{3}}{2}$.</div>
+  </div>
+</div>
+
+<!-- ===== CARD 3: COSINE FUNCTION ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#12336;</span> The Cosine Function</div>
+
+  <p class="body-text">Cosine is the <strong>x-coordinate</strong> of the point on the unit circle. While sine tracks the height, cosine tracks how far left or right the point is. As the point goes around the circle, the x-value also makes a smooth wave &mdash; it just starts at 1 instead of 0.</p>
+
+  <p class="body-text">Back to our Ferris wheel analogy: if sine tracks the height of your seat, cosine tracks the <em>horizontal shadow</em> your seat casts on the ground.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">The cosine wave &mdash; tracing the x-coordinate around the circle</div>
+    <canvas id="cosGraphCanvas" width="700" height="240"></canvas>
+  </div>
+
+  <p class="sub-title">Key Features of $y = \cos(x)$</p>
+  <div class="term-grid">
+    <div class="term-sym">Period</div>
+    <div class="term-def">$2\pi$</div>
+    <div class="term-sym">Amplitude</div>
+    <div class="term-def">$1$</div>
+    <div class="term-sym">Domain</div>
+    <div class="term-def">$(-\infty, \infty)$</div>
+    <div class="term-sym">Range</div>
+    <div class="term-def">$[-1, 1]$</div>
+    <div class="term-sym">Asymptotes</div>
+    <div class="term-def">None</div>
+    <div class="term-sym">x-intercepts</div>
+    <div class="term-def">At $x = \frac{\pi}{2} + n\pi$ for any integer $n$</div>
+    <div class="term-sym">Maximum</div>
+    <div class="term-def">$y = 1$ at $x = 2n\pi$ (including $x=0$)</div>
+    <div class="term-sym">Minimum</div>
+    <div class="term-def">$y = -1$ at $x = \pi + 2n\pi$</div>
+  </div>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0;"><strong>Sine and cosine are the same wave, just shifted!</strong> Specifically, $\cos(\theta) = \sin\!\left(\theta + \frac{\pi}{2}\right)$. This means the cosine graph is the sine graph shifted <strong>left</strong> by $\frac{\pi}{2}$ (90&deg;). If you slide the sine wave to the left by a quarter of a cycle, you get cosine.</p>
+  </div>
+
+  <div class="worked-example">
+    <p class="step"><span class="step-label">Problem:</span> Evaluate $\cos\!\left(\frac{3\pi}{4}\right)$.</p>
+    <p class="step"><span class="step-label">Step 1:</span> $\frac{3\pi}{4}$ is 135&deg;, which is in Quadrant II. The reference angle is $\pi - \frac{3\pi}{4} = \frac{\pi}{4}$ (45&deg;).</p>
+    <p class="step"><span class="step-label">Step 2:</span> We know $\cos\frac{\pi}{4} = \frac{\sqrt{2}}{2}$. In Q II, the x-coordinate (cosine) is negative.</p>
+    <p class="step"><span class="step-label">Answer:</span> $\cos\frac{3\pi}{4} = -\frac{\sqrt{2}}{2}$.</p>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Practice:</strong> Evaluate $\cos\!\left(\frac{7\pi}{6}\right)$. Which quadrant is this angle in?</div>
+    <button class="show-ans-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show Answer</button>
+    <div class="a">$\frac{7\pi}{6}$ is 210&deg;, which is in <strong>Quadrant III</strong>. The reference angle is $\frac{7\pi}{6} - \pi = \frac{\pi}{6}$ (30&deg;). Since $\cos\frac{\pi}{6} = \frac{\sqrt{3}}{2}$ and cosine is negative in Q III, we get $\cos\frac{7\pi}{6} = -\frac{\sqrt{3}}{2}$.</div>
+  </div>
+</div>
+
+<!-- ===== CARD 4: SIN/COS TRANSFORMATIONS & EXPLORER ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#127912;</span> Sin/Cos Transformations &amp; Explorer</div>
+
+  <p class="body-text">The parent functions $y = \sin(x)$ and $y = \cos(x)$ can be stretched, flipped, shifted, and moved up or down. The general form is:</p>
+
+  <div class="formula-box">
+    $$y = a \cdot \sin\!\bigl(b(\theta + c)\bigr) + d \qquad \text{or} \qquad y = a \cdot \cos\!\bigl(b(\theta + c)\bigr) + d$$
+  </div>
+
+  <p class="body-text">Each parameter &mdash; $a$, $b$, $c$, and $d$ &mdash; controls a different aspect of the wave. Let's walk through each one:</p>
+
+  <div class="highlight-box">
+    <p class="sub-title" style="margin-top:0;">Parameter $a$ &mdash; Amplitude</p>
+    <p class="body-text">$|a|$ is the <strong>new amplitude</strong> (how tall the wave is). If $a$ is negative, the wave is <strong>flipped vertically</strong> (reflected over the midline). Think of it like turning a Ferris wheel upside-down.</p>
+    <p class="body-text" style="margin:0;">New amplitude $= |a|$. If $a &lt; 0$, the graph is reflected.</p>
+  </div>
+
+  <div class="highlight-box">
+    <p class="sub-title" style="margin-top:0;">Parameter $b$ &mdash; Period</p>
+    <p class="body-text">$b$ controls how <strong>fast</strong> the wave cycles. A larger $|b|$ squishes the wave horizontally (more cycles in the same space), and a smaller $|b|$ stretches it out.</p>
+    <p class="body-text" style="margin:0;">New period $= \dfrac{2\pi}{|b|}$.</p>
+  </div>
+
+  <div class="highlight-box">
+    <p class="sub-title" style="margin-top:0;">Parameter $c$ &mdash; Phase Shift</p>
+    <p class="body-text">$c$ slides the wave left or right. The <strong>phase shift</strong> is $-c$. If $c$ is positive, the wave shifts <strong>left</strong>; if $c$ is negative, it shifts <strong>right</strong>. Think of it as starting your Ferris wheel ride at a different position.</p>
+    <p class="body-text" style="margin:0;">Phase shift $= -c$.</p>
+  </div>
+
+  <div class="highlight-box">
+    <p class="sub-title" style="margin-top:0;">Parameter $d$ &mdash; Vertical Shift (Midline)</p>
+    <p class="body-text">$d$ moves the entire wave <strong>up or down</strong>. The midline becomes $y = d$, and the range becomes $[d - |a|,\; d + |a|]$. It's like raising or lowering the center of the Ferris wheel.</p>
+    <p class="body-text" style="margin:0;">Midline $= y = d$. Range $= [d - |a|,\; d + |a|]$.</p>
+  </div>
+
+  <p class="sub-title">Interactive Explorer</p>
+  <p class="body-text">Drag the sliders below to see how each parameter transforms the sine and cosine curves in real time. The unit circle on the left shows the rotating point, and the graphs on the right trace the waves.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Sin/Cos Transformation Explorer</div>
+    <canvas id="sinCosExplCanvas" width="860" height="400"></canvas>
+
+    <!-- Legend -->
+    <div class="btn-row" style="margin-top:10px;gap:16px;font-family:var(--fp);font-size:.9rem;">
+      <span><span style="display:inline-block;width:14px;height:14px;background:var(--sage);border-radius:50%;vertical-align:middle;margin-right:4px;"></span> sin</span>
+      <span><span style="display:inline-block;width:14px;height:14px;background:var(--slate);border-radius:50%;vertical-align:middle;margin-right:4px;"></span> cos</span>
+      <span><span style="display:inline-block;width:14px;height:14px;background:var(--forest);border-radius:50%;vertical-align:middle;margin-right:4px;"></span> circle point</span>
+      <span><span style="display:inline-block;width:14px;height:3px;background:var(--sage-l);vertical-align:middle;margin-right:4px;border:1px dashed var(--slate);"></span> midline</span>
+    </div>
+
+    <!-- Info chips -->
+    <div class="btn-row" style="margin-top:8px;">
+      <span class="exp-chip" id="scInfoMid" data-hl="mid" onmouseenter="expHL2('mid',true)" onmouseleave="expHL2('mid',false)">
+        <span class="chip-dot" style="background:var(--sage-l);border:1px dashed var(--slate);"></span> Midline
+      </span>
+      <span class="exp-chip" id="scInfoAmp" data-hl="amp" onmouseenter="expHL2('amp',true)" onmouseleave="expHL2('amp',false)">
+        <span class="chip-dot" style="background:var(--sage);"></span> Amplitude
+      </span>
+      <span class="exp-chip" id="scInfoPer" data-hl="per" onmouseenter="expHL2('per',true)" onmouseleave="expHL2('per',false)">
+        <span class="chip-dot" style="background:var(--slate);"></span> Period
+      </span>
+      <span class="exp-chip" id="scInfoPhs" data-hl="phs" onmouseenter="expHL2('phs',true)" onmouseleave="expHL2('phs',false)">
+        <span class="chip-dot" style="background:#6b7f4e;"></span> Phase
+      </span>
+    </div>
+
+    <!-- Speed controls -->
+    <div class="btn-row" style="margin-top:10px;">
+      <button class="site-btn secondary sc-speed" data-speed="0">Pause</button>
+      <button class="site-btn secondary sc-speed" data-speed="0.5">Slow</button>
+      <button class="site-btn active sc-speed" data-speed="1">Normal</button>
+      <button class="site-btn secondary sc-speed" data-speed="2">Fast</button>
+    </div>
+
+    <!-- Slider: a -->
+    <div class="exp-slider-card">
+      <div class="exp-sl-top">
+        <span class="exp-sl-name">a (amplitude)</span>
+        <span class="exp-sl-val" id="scValA">1.00</span>
+      </div>
+      <input type="range" id="scA" min="-3" max="3" step="0.1" value="1" style="width:100%;accent-color:#9BA06A;">
+      <div class="exp-sl-desc">Controls how tall the wave is. Negative values flip it.</div>
+    </div>
+
+    <!-- Slider: b -->
+    <div class="exp-slider-card">
+      <div class="exp-sl-top">
+        <span class="exp-sl-name">b (frequency)</span>
+        <span class="exp-sl-val" id="scValB">1.00</span>
+      </div>
+      <input type="range" id="scB" min="0.1" max="5" step="0.1" value="1" style="width:100%;accent-color:#525B76;">
+      <div class="exp-sl-desc">Controls how many cycles fit in a given width. Period = $2\pi / |b|$.</div>
+    </div>
+
+    <!-- Slider: c -->
+    <div class="exp-slider-card">
+      <div class="exp-sl-top">
+        <span class="exp-sl-name">c (phase shift)</span>
+        <span class="exp-sl-val" id="scValC">0.00</span>
+      </div>
+      <input type="range" id="scC" min="-3.14" max="3.14" step="0.05" value="0" style="width:100%;accent-color:#6b7f4e;">
+      <div class="exp-sl-desc">Shifts the wave left (positive c) or right (negative c). Phase shift = $-c$.</div>
+    </div>
+
+    <!-- Slider: d -->
+    <div class="exp-slider-card">
+      <div class="exp-sl-top">
+        <span class="exp-sl-name">d (vertical shift)</span>
+        <span class="exp-sl-val" id="scValD">0.00</span>
+      </div>
+      <input type="range" id="scD" min="-3" max="3" step="0.1" value="0" style="width:100%;accent-color:#143109;">
+      <div class="exp-sl-desc">Moves the entire wave up or down. The midline becomes $y = d$.</div>
+    </div>
+  </div>
+
+  <div class="worked-example">
+    <p class="step"><span class="step-label">Problem 1:</span> Identify the amplitude, period, phase shift, and midline of $y = 3\sin\!\left(2\!\left(x - \frac{\pi}{4}\right)\right) + 1$.</p>
+    <p class="step"><span class="step-label">Step 1:</span> Rewrite in standard form: $a = 3$, $b = 2$, $c = -\frac{\pi}{4}$ (since $b(x + c) = 2(x + (-\frac{\pi}{4}))$), $d = 1$.</p>
+    <p class="step"><span class="step-label">Step 2:</span> Amplitude $= |a| = 3$. Period $= \frac{2\pi}{|b|} = \frac{2\pi}{2} = \pi$. Phase shift $= -c = \frac{\pi}{4}$ (right). Midline $= y = 1$.</p>
+    <p class="step"><span class="step-label">Answer:</span> Amplitude 3, period $\pi$, shifted right $\frac{\pi}{4}$, midline at $y=1$, range $[-2, 4]$.</p>
+  </div>
+
+  <div class="worked-example">
+    <p class="step"><span class="step-label">Problem 2:</span> Write the equation of a cosine function with amplitude 2, period $4\pi$, shifted left by $\frac{\pi}{3}$, and midline $y = -1$.</p>
+    <p class="step"><span class="step-label">Step 1:</span> Amplitude $= |a| = 2$, so $a = 2$. Period $= \frac{2\pi}{|b|} = 4\pi$, so $|b| = \frac{1}{2}$, meaning $b = \frac{1}{2}$.</p>
+    <p class="step"><span class="step-label">Step 2:</span> Shifted left $\frac{\pi}{3}$ means phase shift $= -c = -\frac{\pi}{3}$, so $c = \frac{\pi}{3}$. Midline $y = -1$ means $d = -1$.</p>
+    <p class="step"><span class="step-label">Answer:</span> $y = 2\cos\!\left(\frac{1}{2}\!\left(x + \frac{\pi}{3}\right)\right) - 1$.</p>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Practice 1:</strong> For $y = -2\sin(3x) + 4$, find the amplitude, period, range, and midline.</div>
+    <button class="show-ans-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show Answer</button>
+    <div class="a">$a = -2$, $b = 3$, $c = 0$, $d = 4$. Amplitude $= |{-2}| = 2$. Period $= \frac{2\pi}{3}$. Midline $= y = 4$. Range $= [4 - 2, 4 + 2] = [2, 6]$. The negative $a$ flips the wave, but the amplitude and range stay the same.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Practice 2:</strong> Write a sine equation that has amplitude 5, period $\pi$, is shifted right $\frac{\pi}{6}$, and has midline $y = 3$.</div>
+    <button class="show-ans-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show Answer</button>
+    <div class="a">Amplitude $5 \Rightarrow a = 5$. Period $\pi = \frac{2\pi}{|b|} \Rightarrow b = 2$. Right shift $\frac{\pi}{6} \Rightarrow c = -\frac{\pi}{6}$. Midline $y = 3 \Rightarrow d = 3$. So $y = 5\sin\!\left(2\!\left(x - \frac{\pi}{6}\right)\right) + 3$.</div>
+  </div>
+</div>
+
+<!-- ===== CARD 5: TANGENT FUNCTION ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#8725;</span> The Tangent Function</div>
+
+  <p class="body-text">Tangent is the <strong>ratio</strong> of sine to cosine: $\tan\theta = \frac{\sin\theta}{\cos\theta} = \frac{y}{x}$. On the unit circle, it tells you the <strong>slope of the line</strong> from the origin to the point $(\cos\theta, \sin\theta)$. Slope = rise over run = y over x &mdash; that's tangent!</p>
+
+  <p class="body-text">But here's the catch: whenever $\cos\theta = 0$ (which happens at $\theta = \frac{\pi}{2}, \frac{3\pi}{2}, \ldots$, or more generally $\frac{\pi}{2} + n\pi$), you'd be dividing by zero. The function "blows up" to positive or negative infinity, creating <strong>vertical asymptotes</strong> &mdash; invisible walls the graph approaches but never crosses.</p>
+
+  <p class="body-text">Think of it this way: when the point on the circle is at the very top or bottom (directly above or below the origin), the line from the origin to that point is perfectly vertical. A vertical line has <em>undefined</em> slope &mdash; that's the asymptote.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">The tangent curve &mdash; notice the vertical asymptotes</div>
+    <canvas id="tanGraphCanvas" width="700" height="280"></canvas>
+  </div>
+
+  <p class="sub-title">Key Features of $y = \tan(x)$</p>
+  <div class="term-grid">
+    <div class="term-sym">Period</div>
+    <div class="term-def">$\pi$ &mdash; tangent repeats every half-turn, not every full turn</div>
+    <div class="term-sym">Amplitude</div>
+    <div class="term-def"><strong>None</strong> &mdash; tangent has no maximum or minimum height</div>
+    <div class="term-sym">Domain</div>
+    <div class="term-def">All real numbers except $x = \frac{\pi}{2} + n\pi$ (where $\cos = 0$)</div>
+    <div class="term-sym">Range</div>
+    <div class="term-def">$(-\infty, \infty)$ &mdash; the output can be any real number</div>
+    <div class="term-sym">Asymptotes</div>
+    <div class="term-def">Vertical asymptotes at $x = \frac{\pi}{2} + n\pi$</div>
+    <div class="term-sym">x-intercepts</div>
+    <div class="term-def">At $x = n\pi$ (wherever $\sin = 0$ but $\cos \neq 0$)</div>
+  </div>
+
+  <div class="highlight-box">
+    <p class="sub-title" style="margin-top:0;">Tangent Transformations</p>
+    <p class="body-text">For $y = a\tan\!\bigl(b(x+c)\bigr)+d$, the key differences from sin/cos are:</p>
+    <p class="body-text">&bull; Period $= \frac{\pi}{|b|}$ (not $\frac{2\pi}{|b|}$, since the parent period is $\pi$).</p>
+    <p class="body-text">&bull; Vertical asymptotes shift with $c$: they move to $x = -c + \frac{\pi}{2b} + \frac{n\pi}{b}$.</p>
+    <p class="body-text" style="margin:0;">&bull; $a$ controls the vertical stretch (steepness), and $d$ shifts the graph up or down.</p>
+  </div>
+
+  <p class="sub-title">Tangent Explorer</p>
+  <div class="interactive-area">
+    <div class="ia-label">Drag sliders to transform the tangent function</div>
+    <canvas id="tanExplCanvas" width="700" height="300"></canvas>
+
+    <div class="btn-row" style="margin-top:8px;">
+      <span class="exp-chip" id="tanInfoPer" data-hl="tanPer" onmouseenter="expHL2('tanPer',true)" onmouseleave="expHL2('tanPer',false)">
+        <span class="chip-dot" style="background:var(--slate);"></span> Period
+      </span>
+      <span class="exp-chip" id="tanInfoAsym" data-hl="tanAsym" onmouseenter="expHL2('tanAsym',true)" onmouseleave="expHL2('tanAsym',false)">
+        <span class="chip-dot" style="background:#c06060;"></span> Asymptotes
+      </span>
+    </div>
+
+    <div class="exp-slider-card">
+      <div class="exp-sl-top"><span class="exp-sl-name">a</span><span class="exp-sl-val" id="tanValA">1.00</span></div>
+      <input type="range" id="tanA" min="-3" max="3" step="0.1" value="1" style="width:100%;accent-color:#9BA06A;">
+    </div>
+    <div class="exp-slider-card">
+      <div class="exp-sl-top"><span class="exp-sl-name">b</span><span class="exp-sl-val" id="tanValB">1.00</span></div>
+      <input type="range" id="tanB" min="0.2" max="4" step="0.1" value="1" style="width:100%;accent-color:#525B76;">
+    </div>
+    <div class="exp-slider-card">
+      <div class="exp-sl-top"><span class="exp-sl-name">c</span><span class="exp-sl-val" id="tanValC">0.00</span></div>
+      <input type="range" id="tanC" min="-3.14" max="3.14" step="0.05" value="0" style="width:100%;accent-color:#6b7f4e;">
+    </div>
+    <div class="exp-slider-card">
+      <div class="exp-sl-top"><span class="exp-sl-name">d</span><span class="exp-sl-val" id="tanValD">0.00</span></div>
+      <input type="range" id="tanD" min="-3" max="3" step="0.1" value="0" style="width:100%;accent-color:#143109;">
+    </div>
+  </div>
+
+  <div class="worked-example">
+    <p class="step"><span class="step-label">Problem:</span> Find the period and asymptotes of $y = 2\tan\!\left(3x - \frac{\pi}{2}\right)$.</p>
+    <p class="step"><span class="step-label">Step 1:</span> Rewrite: $y = 2\tan\!\left(3\!\left(x - \frac{\pi}{6}\right)\right)$. So $a = 2$, $b = 3$, $c = -\frac{\pi}{6}$, $d = 0$.</p>
+    <p class="step"><span class="step-label">Step 2:</span> Period $= \frac{\pi}{|b|} = \frac{\pi}{3}$.</p>
+    <p class="step"><span class="step-label">Step 3:</span> Asymptotes of the parent $\tan(x)$ are at $\frac{\pi}{2} + n\pi$. After transformation: $3(x - \frac{\pi}{6}) = \frac{\pi}{2} + n\pi$, so $x = \frac{\pi}{6} + \frac{\pi}{6} + \frac{n\pi}{3} = \frac{\pi}{3} + \frac{n\pi}{3} = \frac{(n+1)\pi}{3}$.</p>
+    <p class="step"><span class="step-label">Answer:</span> Period is $\frac{\pi}{3}$. Asymptotes at $x = \frac{(n+1)\pi}{3}$ for integer $n$.</p>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Practice:</strong> For $y = -\tan\!\left(\frac{1}{2}x\right) + 3$, find the period, asymptotes, and describe how the graph differs from the parent function.</div>
+    <button class="show-ans-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show Answer</button>
+    <div class="a">$b = \frac{1}{2}$, so period $= \frac{\pi}{1/2} = 2\pi$. Asymptotes at $\frac{1}{2}x = \frac{\pi}{2} + n\pi$, so $x = \pi + 2n\pi$. The negative sign reflects the graph over the x-axis (it now <em>decreases</em> between asymptotes instead of increasing), and $d = 3$ shifts everything up 3 units.</div>
+  </div>
+</div>
+
+<!-- ===== CARD 6: COTANGENT FUNCTION ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#8725;</span> The Cotangent Function</div>
+
+  <p class="body-text">Cotangent is the <strong>reciprocal of tangent</strong>: $\cot\theta = \frac{\cos\theta}{\sin\theta} = \frac{x}{y} = \frac{1}{\tan\theta}$. While tangent is y/x, cotangent is x/y. It's also the ratio of the adjacent side to the opposite side in a right triangle.</p>
+
+  <p class="body-text">Since we're dividing by $\sin\theta$, the asymptotes happen where $\sin\theta = 0$ &mdash; that's at $\theta = 0, \pi, 2\pi, \ldots$ (every integer multiple of $\pi$). Between each pair of asymptotes, cotangent <strong>decreases</strong> from $+\infty$ to $-\infty$ &mdash; the opposite direction of tangent.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">The cotangent curve &mdash; decreasing between asymptotes</div>
+    <canvas id="cotGraphCanvas" width="700" height="280"></canvas>
+  </div>
+
+  <p class="sub-title">Key Features of $y = \cot(x)$</p>
+  <div class="term-grid">
+    <div class="term-sym">Period</div>
+    <div class="term-def">$\pi$</div>
+    <div class="term-sym">Amplitude</div>
+    <div class="term-def"><strong>None</strong> &mdash; no maximum or minimum</div>
+    <div class="term-sym">Domain</div>
+    <div class="term-def">All real numbers except $x = n\pi$ (where $\sin = 0$)</div>
+    <div class="term-sym">Range</div>
+    <div class="term-def">$(-\infty, \infty)$</div>
+    <div class="term-sym">Asymptotes</div>
+    <div class="term-def">Vertical asymptotes at $x = n\pi$</div>
+    <div class="term-sym">x-intercepts</div>
+    <div class="term-def">At $x = \frac{\pi}{2} + n\pi$ (wherever $\cos = 0$)</div>
+  </div>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0;"><strong>Key difference from tangent:</strong> Cotangent <strong>decreases</strong> between its asymptotes (goes from $+\infty$ down to $-\infty$), while tangent <strong>increases</strong> (goes from $-\infty$ up to $+\infty$). They are mirror images in a sense: $\cot(x) = -\tan\!\left(x - \frac{\pi}{2}\right)$.</p>
+  </div>
+
+  <p class="sub-title">Cotangent Explorer</p>
+  <div class="interactive-area">
+    <div class="ia-label">Drag sliders to transform the cotangent function</div>
+    <canvas id="cotExplCanvas" width="700" height="300"></canvas>
+
+    <div class="btn-row" style="margin-top:8px;">
+      <span class="exp-chip" id="cotInfoPer" data-hl="cotPer" onmouseenter="expHL2('cotPer',true)" onmouseleave="expHL2('cotPer',false)">
+        <span class="chip-dot" style="background:var(--slate);"></span> Period
+      </span>
+      <span class="exp-chip" id="cotInfoAsym" data-hl="cotAsym" onmouseenter="expHL2('cotAsym',true)" onmouseleave="expHL2('cotAsym',false)">
+        <span class="chip-dot" style="background:#c06060;"></span> Asymptotes
+      </span>
+    </div>
+
+    <div class="exp-slider-card">
+      <div class="exp-sl-top"><span class="exp-sl-name">a</span><span class="exp-sl-val" id="cotValA">1.00</span></div>
+      <input type="range" id="cotA" min="-3" max="3" step="0.1" value="1" style="width:100%;accent-color:#9BA06A;">
+    </div>
+    <div class="exp-slider-card">
+      <div class="exp-sl-top"><span class="exp-sl-name">b</span><span class="exp-sl-val" id="cotValB">1.00</span></div>
+      <input type="range" id="cotB" min="0.2" max="4" step="0.1" value="1" style="width:100%;accent-color:#525B76;">
+    </div>
+    <div class="exp-slider-card">
+      <div class="exp-sl-top"><span class="exp-sl-name">c</span><span class="exp-sl-val" id="cotValC">0.00</span></div>
+      <input type="range" id="cotC" min="-3.14" max="3.14" step="0.05" value="0" style="width:100%;accent-color:#6b7f4e;">
+    </div>
+    <div class="exp-slider-card">
+      <div class="exp-sl-top"><span class="exp-sl-name">d</span><span class="exp-sl-val" id="cotValD">0.00</span></div>
+      <input type="range" id="cotD" min="-3" max="3" step="0.1" value="0" style="width:100%;accent-color:#143109;">
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Practice:</strong> For $y = 3\cot\!\left(2x\right) - 1$, find the period, asymptotes, and vertical shift.</div>
+    <button class="show-ans-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show Answer</button>
+    <div class="a">$b = 2$, so period $= \frac{\pi}{2}$. Asymptotes of $\cot(x)$ at $n\pi$ become $2x = n\pi$, so $x = \frac{n\pi}{2}$. The graph is stretched vertically by 3 and shifted down 1 unit ($d = -1$).</div>
+  </div>
+</div>
+
+<!-- ===== CARD 7: SECANT & COSECANT ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#8960;</span> Secant &amp; Cosecant</div>
+
+  <p class="body-text">These are the <strong>reciprocal functions</strong>: $\sec\theta = \frac{1}{\cos\theta}$ and $\csc\theta = \frac{1}{\sin\theta}$. Whenever cosine or sine equals zero, the reciprocal "blows up" to infinity &mdash; creating vertical asymptotes.</p>
+
+  <p class="body-text">Think of it this way: if $\cos\theta$ is a tiny positive number (close to zero), then $\frac{1}{\cos\theta}$ is a huge positive number. As cosine approaches zero from the positive side, secant shoots off toward $+\infty$. From the negative side, it shoots to $-\infty$.</p>
+
+  <p class="body-text">The graphs of secant and cosecant look like a series of <strong>U-shapes</strong> opening upward and downward, hugging the peaks and valleys of the cosine and sine waves (respectively). Between the U-shapes are the asymptotes.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Secant and cosecant &mdash; reciprocals of cosine and sine</div>
+    <div class="btn-row" style="margin-bottom:10px;">
+      <button class="site-btn active" id="btnSec">sec(x)</button>
+      <button class="site-btn secondary" id="btnCsc">csc(x)</button>
+    </div>
+    <canvas id="secCscCanvas" width="700" height="300"></canvas>
+  </div>
+
+  <p class="sub-title">Key Features of $y = \sec(x)$</p>
+  <div class="term-grid">
+    <div class="term-sym">Period</div>
+    <div class="term-def">$2\pi$</div>
+    <div class="term-sym">Amplitude</div>
+    <div class="term-def"><strong>None</strong> &mdash; outputs can be arbitrarily large</div>
+    <div class="term-sym">Domain</div>
+    <div class="term-def">All real numbers except $x = \frac{\pi}{2} + n\pi$ (where $\cos = 0$)</div>
+    <div class="term-sym">Range</div>
+    <div class="term-def">$(-\infty, -1] \cup [1, \infty)$ &mdash; never between &minus;1 and 1</div>
+    <div class="term-sym">Asymptotes</div>
+    <div class="term-def">Vertical asymptotes at $x = \frac{\pi}{2} + n\pi$</div>
+  </div>
+
+  <p class="sub-title">Key Features of $y = \csc(x)$</p>
+  <div class="term-grid">
+    <div class="term-sym">Period</div>
+    <div class="term-def">$2\pi$</div>
+    <div class="term-sym">Amplitude</div>
+    <div class="term-def"><strong>None</strong></div>
+    <div class="term-sym">Domain</div>
+    <div class="term-def">All real numbers except $x = n\pi$ (where $\sin = 0$)</div>
+    <div class="term-sym">Range</div>
+    <div class="term-def">$(-\infty, -1] \cup [1, \infty)$</div>
+    <div class="term-sym">Asymptotes</div>
+    <div class="term-def">Vertical asymptotes at $x = n\pi$</div>
+  </div>
+
+  <p class="sub-title">Sec/Csc Explorer</p>
+  <div class="interactive-area">
+    <div class="ia-label">Drag sliders to transform sec or csc</div>
+    <div class="btn-row" style="margin-bottom:10px;">
+      <button class="site-btn active" id="btnSecExpl">sec</button>
+      <button class="site-btn secondary" id="btnCscExpl">csc</button>
+    </div>
+    <canvas id="secCscExplCanvas" width="700" height="300"></canvas>
+
+    <div class="btn-row" style="margin-top:8px;">
+      <span class="exp-chip" id="scFnInfoPer" data-hl="scFnPer" onmouseenter="expHL2('scFnPer',true)" onmouseleave="expHL2('scFnPer',false)">
+        <span class="chip-dot" style="background:var(--slate);"></span> Period
+      </span>
+      <span class="exp-chip" id="scFnInfoAsym" data-hl="scFnAsym" onmouseenter="expHL2('scFnAsym',true)" onmouseleave="expHL2('scFnAsym',false)">
+        <span class="chip-dot" style="background:#c06060;"></span> Asymptotes
+      </span>
+      <span class="exp-chip" id="scFnInfoRange" data-hl="scFnRange" onmouseenter="expHL2('scFnRange',true)" onmouseleave="expHL2('scFnRange',false)">
+        <span class="chip-dot" style="background:var(--sage);"></span> Range
+      </span>
+    </div>
+
+    <div class="exp-slider-card">
+      <div class="exp-sl-top"><span class="exp-sl-name">a</span><span class="exp-sl-val" id="scFnValA">1.00</span></div>
+      <input type="range" id="scFnA" min="-3" max="3" step="0.1" value="1" style="width:100%;accent-color:#9BA06A;">
+    </div>
+    <div class="exp-slider-card">
+      <div class="exp-sl-top"><span class="exp-sl-name">b</span><span class="exp-sl-val" id="scFnValB">1.00</span></div>
+      <input type="range" id="scFnB" min="0.2" max="4" step="0.1" value="1" style="width:100%;accent-color:#525B76;">
+    </div>
+    <div class="exp-slider-card">
+      <div class="exp-sl-top"><span class="exp-sl-name">c</span><span class="exp-sl-val" id="scFnValC">0.00</span></div>
+      <input type="range" id="scFnC" min="-3.14" max="3.14" step="0.05" value="0" style="width:100%;accent-color:#6b7f4e;">
+    </div>
+    <div class="exp-slider-card">
+      <div class="exp-sl-top"><span class="exp-sl-name">d</span><span class="exp-sl-val" id="scFnValD">0.00</span></div>
+      <input type="range" id="scFnD" min="-3" max="3" step="0.1" value="0" style="width:100%;accent-color:#143109;">
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Practice 1:</strong> What is the domain of $y = \sec(x)$? Why are those values excluded?</div>
+    <button class="show-ans-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show Answer</button>
+    <div class="a">Domain: all real numbers except $x = \frac{\pi}{2} + n\pi$ for any integer $n$. These are excluded because $\sec(x) = \frac{1}{\cos(x)}$, and $\cos(x) = 0$ at those exact points. Dividing by zero is undefined, so the function has vertical asymptotes there.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Practice 2:</strong> If $y = 2\csc\!\left(x - \frac{\pi}{4}\right) + 1$, find the vertical asymptotes and the range.</div>
+    <button class="show-ans-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show Answer</button>
+    <div class="a">Asymptotes of $\csc(x)$ are at $n\pi$. After the shift, $x - \frac{\pi}{4} = n\pi$, so $x = \frac{\pi}{4} + n\pi$. The vertical stretch is $a = 2$ and vertical shift is $d = 1$. The parent range $(-\infty, -1] \cup [1, \infty)$ becomes $(-\infty, -2] \cup [2, \infty)$ after the stretch, then shifts up by 1: $(-\infty, -1] \cup [3, \infty)$.</div>
+  </div>
+</div>
+
+<!-- ===== CARD 8: SUMMARY TABLE ===== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#128203;</span> Summary of All Six Trig Functions</div>
+
+  <p class="body-text">Here is a quick-reference table for the <strong>parent functions</strong> (before any transformations). Every entry below assumes the basic form with no stretching, shifting, or flipping.</p>
+
+  <div style="overflow-x:auto;">
+    <table class="trig-summary">
+      <thead>
+        <tr>
+          <th>Function</th>
+          <th>Period</th>
+          <th>Amplitude</th>
+          <th>Domain</th>
+          <th>Range</th>
+          <th>Asymptotes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>$\sin(x)$</strong></td>
+          <td>$2\pi$</td>
+          <td>$1$</td>
+          <td>$(-\infty, \infty)$</td>
+          <td>$[-1, 1]$</td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td><strong>$\cos(x)$</strong></td>
+          <td>$2\pi$</td>
+          <td>$1$</td>
+          <td>$(-\infty, \infty)$</td>
+          <td>$[-1, 1]$</td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td><strong>$\tan(x)$</strong></td>
+          <td>$\pi$</td>
+          <td>None</td>
+          <td>$x \neq \frac{\pi}{2}+n\pi$</td>
+          <td>$(-\infty, \infty)$</td>
+          <td>$x = \frac{\pi}{2}+n\pi$</td>
+        </tr>
+        <tr>
+          <td><strong>$\cot(x)$</strong></td>
+          <td>$\pi$</td>
+          <td>None</td>
+          <td>$x \neq n\pi$</td>
+          <td>$(-\infty, \infty)$</td>
+          <td>$x = n\pi$</td>
+        </tr>
+        <tr>
+          <td><strong>$\sec(x)$</strong></td>
+          <td>$2\pi$</td>
+          <td>None</td>
+          <td>$x \neq \frac{\pi}{2}+n\pi$</td>
+          <td>$(-\infty,-1]\cup[1,\infty)$</td>
+          <td>$x = \frac{\pi}{2}+n\pi$</td>
+        </tr>
+        <tr>
+          <td><strong>$\csc(x)$</strong></td>
+          <td>$2\pi$</td>
+          <td>None</td>
+          <td>$x \neq n\pi$</td>
+          <td>$(-\infty,-1]\cup[1,\infty)$</td>
+          <td>$x = n\pi$</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight-box">
+    <p class="sub-title" style="margin-top:0;">General Transformation Rules</p>
+    <p class="body-text">For any trig function in the form $y = a \cdot f\!\bigl(b(x + c)\bigr) + d$:</p>
+    <div class="term-grid" style="grid-template-columns:140px 1fr;">
+      <div class="term-sym">Amplitude</div>
+      <div class="term-def">$|a|$ (only applies to sin and cos; the others have no amplitude)</div>
+      <div class="term-sym">Period</div>
+      <div class="term-def">$\frac{\text{parent period}}{|b|}$ &mdash; that's $\frac{2\pi}{|b|}$ for sin, cos, sec, csc and $\frac{\pi}{|b|}$ for tan, cot</div>
+      <div class="term-sym">Phase Shift</div>
+      <div class="term-def">$-c$ (positive $c$ shifts left, negative $c$ shifts right)</div>
+      <div class="term-sym">Vertical Shift</div>
+      <div class="term-def">$d$ (moves the midline/center up or down)</div>
+      <div class="term-sym">Reflection</div>
+      <div class="term-def">If $a &lt; 0$, the graph is flipped over the midline</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div style="text-align:center;font-family:var(--fb);font-size:.82rem;color:var(--slate);padding:18px 0 0">
+  &copy; 2026 tutoringwithsruthi. All rights reserved.
+</div>
+
+</div><!-- end .page -->
+
+<script>
+/* ---------- toggleAns helper ---------- */
+function toggleAns(el){
+  var sib=el.nextElementSibling;
+  if(sib) sib.classList.toggle('show');
+}
+
+/* placeholder for explorer highlight — defined here so HTML onmouseenter doesn't error */
+function expHL2(){}
+
+/* ====== 1. UNIT CIRCLE INTERACTIVE ====== */
+(function(){
+  var cv=document.getElementById('unitCircleCanvas');
+  if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+  var cx=W/2, cy=H/2-10;
+  var R=180;
+
+  var S2='\u221a2/2', S3='\u221a3/2';
+  var n2=Math.SQRT2/2, n3=Math.sqrt(3)/2;
+
+  var pts=[
+    {deg:0,   rad:'0',        theta:0,             cos:'1',     sin:'0',     cosN:1,   sinN:0},
+    {deg:30,  rad:'\u03c0/6', theta:Math.PI/6,     cos:S3,      sin:'1/2',   cosN:n3,  sinN:0.5},
+    {deg:45,  rad:'\u03c0/4', theta:Math.PI/4,     cos:S2,      sin:S2,      cosN:n2,  sinN:n2},
+    {deg:60,  rad:'\u03c0/3', theta:Math.PI/3,     cos:'1/2',   sin:S3,      cosN:0.5, sinN:n3},
+    {deg:90,  rad:'\u03c0/2', theta:Math.PI/2,     cos:'0',     sin:'1',     cosN:0,   sinN:1},
+    {deg:120, rad:'2\u03c0/3',theta:2*Math.PI/3,   cos:'-1/2',  sin:S3,      cosN:-0.5,sinN:n3},
+    {deg:135, rad:'3\u03c0/4',theta:3*Math.PI/4,   cos:'-'+S2,  sin:S2,      cosN:-n2, sinN:n2},
+    {deg:150, rad:'5\u03c0/6',theta:5*Math.PI/6,   cos:'-'+S3,  sin:'1/2',   cosN:-n3, sinN:0.5},
+    {deg:180, rad:'\u03c0',   theta:Math.PI,       cos:'-1',    sin:'0',     cosN:-1,  sinN:0},
+    {deg:210, rad:'7\u03c0/6',theta:7*Math.PI/6,   cos:'-'+S3,  sin:'-1/2',  cosN:-n3, sinN:-0.5},
+    {deg:225, rad:'5\u03c0/4',theta:5*Math.PI/4,   cos:'-'+S2,  sin:'-'+S2,  cosN:-n2, sinN:-n2},
+    {deg:240, rad:'4\u03c0/3',theta:4*Math.PI/3,   cos:'-1/2',  sin:'-'+S3,  cosN:-0.5,sinN:-n3},
+    {deg:270, rad:'3\u03c0/2',theta:3*Math.PI/2,   cos:'0',     sin:'-1',    cosN:0,   sinN:-1},
+    {deg:300, rad:'5\u03c0/3',theta:5*Math.PI/3,   cos:'1/2',   sin:'-'+S3,  cosN:0.5, sinN:-n3},
+    {deg:315, rad:'7\u03c0/4',theta:7*Math.PI/4,   cos:S2,      sin:'-'+S2,  cosN:n2,  sinN:-n2},
+    {deg:330, rad:'11\u03c0/6',theta:11*Math.PI/6, cos:S3,      sin:'-1/2',  cosN:n3,  sinN:-0.5}
+  ];
+
+  var hlIdx=-1;
+  var readout=document.getElementById('ucReadout');
+
+  function draw(){
+    ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+    /* axes */
+    ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(cx-R-30,cy);ctx.lineTo(cx+R+30,cy);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx,cy-R-30);ctx.lineTo(cx,cy+R+30);ctx.stroke();
+
+    /* circle */
+    ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;
+    ctx.beginPath();ctx.arc(cx,cy,R,0,2*Math.PI);ctx.stroke();
+
+    /* quadrant labels */
+    ctx.fillStyle='#D0D6B3';ctx.font='bold 18px Dosis, sans-serif';ctx.textAlign='center';
+    ctx.fillText('I',cx+R/2-10,cy-R/2+10);
+    ctx.fillText('II',cx-R/2+10,cy-R/2+10);
+    ctx.fillText('III',cx-R/2+10,cy+R/2-10);
+    ctx.fillText('IV',cx+R/2-10,cy+R/2-10);
+
+    /* axis labels */
+    ctx.fillStyle='#525B76';ctx.font='13px Dosis, sans-serif';
+    ctx.textAlign='center';ctx.textBaseline='top';
+    ctx.fillText('0',cx+R+12,cy+4);
+    ctx.fillText('\u03c0',cx-R-14,cy+4);
+    ctx.textBaseline='bottom';
+    ctx.fillText('\u03c0/2',cx+4,cy-R-8);
+    ctx.textBaseline='top';
+    ctx.fillText('3\u03c0/2',cx+4,cy+R+6);
+
+    /* all 16 dots and labels */
+    for(var i=0;i<pts.length;i++){
+      var p=pts[i];
+      var px=cx+p.cosN*R, py=cy-p.sinN*R;
+      var isHL=(i===hlIdx);
+
+      /* dot */
+      ctx.fillStyle=isHL?'#143109':'#525B76';
+      ctx.beginPath();ctx.arc(px,py,isHL?6:3.5,0,2*Math.PI);ctx.fill();
+
+      /* radian label */
+      var loff=isHL?22:16;
+      var lx=cx+p.cosN*(R+loff);
+      var ly=cy-p.sinN*(R+loff);
+      ctx.fillStyle=isHL?'#143109':'#525B76';
+      ctx.font=(isHL?'bold ':'')+' 11px Dosis, sans-serif';
+      ctx.textAlign=(p.cosN>=0)?'left':'right';
+      if(Math.abs(p.cosN)<0.01) ctx.textAlign='center';
+      ctx.textBaseline=(p.sinN>=0)?'bottom':'top';
+      if(Math.abs(p.sinN)<0.01) ctx.textBaseline='middle';
+      ctx.fillText(p.rad,lx,ly);
+    }
+
+    /* highlighted point extras */
+    if(hlIdx>=0){
+      var hp=pts[hlIdx];
+      var hx=cx+hp.cosN*R, hy=cy-hp.sinN*R;
+
+      /* radius line */
+      ctx.strokeStyle='#143109';ctx.lineWidth=2;
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(hx,hy);ctx.stroke();
+
+      /* cos projection (horizontal) */
+      ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
+      ctx.beginPath();ctx.moveTo(hx,hy);ctx.lineTo(hx,cy);ctx.stroke();
+      ctx.setLineDash([]);
+
+      /* sin projection (vertical) */
+      ctx.strokeStyle='#525B76';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
+      ctx.beginPath();ctx.moveTo(hx,cy);ctx.lineTo(cx,cy);ctx.stroke();
+      ctx.setLineDash([]);
+
+      /* coordinate label near point */
+      ctx.fillStyle='#143109';ctx.font='bold 12px Dosis, sans-serif';
+      ctx.textAlign='center';ctx.textBaseline='bottom';
+      ctx.fillText('('+hp.cos+', '+hp.sin+')',hx,hy-12);
+
+      /* update readout — use exact values */
+      function exactTrig(sN,cN,deg){
+        var tanV,cotV,secV,cscV;
+        var abs=Math.abs;
+        /* tan */
+        if(abs(cN)<1e-9) tanV='undef';
+        else if(abs(sN)<1e-9) tanV='0';
+        else if(abs(abs(sN/cN)-1)<1e-9) tanV=(sN/cN>0?'1':'-1');
+        else if(abs(abs(sN/cN)-Math.sqrt(3))<0.01) tanV=(sN/cN>0?'\u221a3':'-\u221a3');
+        else if(abs(abs(sN/cN)-1/Math.sqrt(3))<0.01) tanV=(sN/cN>0?'\u221a3/3':'-\u221a3/3');
+        else tanV=(sN/cN).toFixed(4);
+        /* cot */
+        if(abs(sN)<1e-9) cotV='undef';
+        else if(abs(cN)<1e-9) cotV='0';
+        else if(abs(abs(cN/sN)-1)<1e-9) cotV=(cN/sN>0?'1':'-1');
+        else if(abs(abs(cN/sN)-Math.sqrt(3))<0.01) cotV=(cN/sN>0?'\u221a3':'-\u221a3');
+        else if(abs(abs(cN/sN)-1/Math.sqrt(3))<0.01) cotV=(cN/sN>0?'\u221a3/3':'-\u221a3/3');
+        else cotV=(cN/sN).toFixed(4);
+        /* sec */
+        if(abs(cN)<1e-9) secV='undef';
+        else if(abs(abs(cN)-1)<1e-9) secV=(cN>0?'1':'-1');
+        else if(abs(abs(cN)-0.5)<1e-9) secV=(cN>0?'2':'-2');
+        else if(abs(abs(1/cN)-Math.sqrt(2))<0.01) secV=(cN>0?'\u221a2':'-\u221a2');
+        else if(abs(abs(1/cN)-2*Math.sqrt(3)/3)<0.01) secV=(cN>0?'2\u221a3/3':'-2\u221a3/3');
+        else secV=(1/cN).toFixed(4);
+        /* csc */
+        if(abs(sN)<1e-9) cscV='undef';
+        else if(abs(abs(sN)-1)<1e-9) cscV=(sN>0?'1':'-1');
+        else if(abs(abs(sN)-0.5)<1e-9) cscV=(sN>0?'2':'-2');
+        else if(abs(abs(1/sN)-Math.sqrt(2))<0.01) cscV=(sN>0?'\u221a2':'-\u221a2');
+        else if(abs(abs(1/sN)-2*Math.sqrt(3)/3)<0.01) cscV=(sN>0?'2\u221a3/3':'-2\u221a3/3');
+        else cscV=(1/sN).toFixed(4);
+        return{tan:tanV,cot:cotV,sec:secV,csc:cscV};
+      }
+      var ev=exactTrig(hp.sinN,hp.cosN,hp.deg);
+      var tanV=ev.tan,cotV=ev.cot,secV=ev.sec,cscV=ev.csc;
+      if(readout){
+        readout.innerHTML='\u03b8 = '+hp.rad+' ('+hp.deg+'\u00b0) &nbsp;|&nbsp; cos\u03b8 = '+hp.cos+' &nbsp;|&nbsp; sin\u03b8 = '+hp.sin
+          +' &nbsp;|&nbsp; tan\u03b8 = '+tanV+' &nbsp;|&nbsp; cot\u03b8 = '+cotV
+          +' &nbsp;|&nbsp; sec\u03b8 = '+secV+' &nbsp;|&nbsp; csc\u03b8 = '+cscV;
+      }
+    } else {
+      if(readout) readout.innerHTML='\u03b8 = 0 &nbsp;|&nbsp; cos\u03b8 = 1 &nbsp;|&nbsp; sin\u03b8 = 0';
+    }
+  }
+
+  cv.addEventListener('mousemove',function(e){
+    var rect=cv.getBoundingClientRect();
+    var mx=(e.clientX-rect.left)*(W/rect.width);
+    var my=(e.clientY-rect.top)*(H/rect.height);
+    var best=-1, bestD=Infinity;
+    for(var i=0;i<pts.length;i++){
+      var px=cx+pts[i].cosN*R, py=cy-pts[i].sinN*R;
+      var d=Math.sqrt((mx-px)*(mx-px)+(my-py)*(my-py));
+      if(d<bestD){bestD=d;best=i;}
+    }
+    hlIdx=(bestD<45)?best:-1;
+    draw();
+  });
+
+  cv.addEventListener('mouseleave',function(){hlIdx=-1;draw();});
+  draw();
+})();
+
+/* ====== 1B. SPECIAL RIGHT TRIANGLE DIAGRAMS ====== */
+(function(){
+  /* 45-45-90 — small card */
+  var cv=document.getElementById('tri4545Canvas');
+  if(!cv)return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+  /* triangle: right angle at bottom-left */
+  var bx=70, by=H-50;   /* bottom-left corner (right angle) */
+  var side=110;
+  var tx=bx+side, ty=by; /* bottom-right */
+  var lx=bx, ly=by-side;  /* top-left */
+
+  /* fill */
+  ctx.fillStyle='#e4e8cc66';
+  ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(tx,ty);ctx.lineTo(lx,ly);ctx.closePath();ctx.fill();
+  /* stroke */
+  ctx.strokeStyle='#143109';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(tx,ty);ctx.lineTo(lx,ly);ctx.closePath();ctx.stroke();
+  /* right angle square */
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.5;ctx.strokeRect(bx,by-12,12,12);
+
+  /* side labels — positioned OUTSIDE the triangle */
+  ctx.fillStyle='#143109';ctx.font='bold 14px Bitter';
+  ctx.textAlign='center';ctx.textBaseline='top';
+  ctx.fillText('1',bx+side/2, by+8);                /* bottom side */
+  ctx.textAlign='right';ctx.textBaseline='middle';
+  ctx.fillText('1',bx-12, by-side/2);               /* left side */
+  ctx.fillStyle='#9BA06A';ctx.font='bold 14px Bitter';
+  ctx.textAlign='left';ctx.textBaseline='bottom';
+  ctx.fillText('\u221a2',(bx+tx)/2+8, (by+ly)/2-6); /* hypotenuse */
+
+  /* angle labels — positioned clearly */
+  ctx.fillStyle='#525B76';ctx.font='12px Dosis';
+  ctx.textAlign='left';ctx.textBaseline='bottom';
+  ctx.fillText('45\u00b0',tx-28, ty-6);              /* bottom-right angle */
+  ctx.textAlign='left';ctx.textBaseline='top';
+  ctx.fillText('45\u00b0',lx+16, ly+2);              /* top-left angle */
+})();
+
+(function(){
+  /* 30-60-90 — small card */
+  var cv=document.getElementById('tri3060Canvas');
+  if(!cv)return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+  /* triangle: right angle at bottom-left, 60° at bottom-right, 30° at top */
+  var bx=55, by=H-50;
+  var shortS=65;          /* short leg (opposite 30°) = vertical */
+  var longS=shortS*Math.sqrt(3);  /* long leg (opposite 60°) = horizontal */
+  var topY=by-shortS*2;   /* height of triangle */
+
+  var tx=bx+longS, ty=by; /* bottom-right */
+  var lx=bx, ly=topY;     /* top-left */
+
+  /* fill */
+  ctx.fillStyle='#e4e8cc66';
+  ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(tx,ty);ctx.lineTo(lx,ly);ctx.closePath();ctx.fill();
+  /* stroke */
+  ctx.strokeStyle='#143109';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(tx,ty);ctx.lineTo(lx,ly);ctx.closePath();ctx.stroke();
+  /* right angle square */
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.5;ctx.strokeRect(bx,by-12,12,12);
+
+  /* side labels — positioned OUTSIDE */
+  ctx.fillStyle='#143109';ctx.font='bold 13px Bitter';
+  ctx.textAlign='center';ctx.textBaseline='top';
+  ctx.fillText('\u221a3',bx+longS/2, by+8);           /* bottom (long leg) */
+  ctx.textAlign='right';ctx.textBaseline='middle';
+  ctx.fillText('1',bx-12, by-shortS);                  /* left (short leg) */
+  ctx.fillStyle='#9BA06A';ctx.font='bold 13px Bitter';
+  ctx.textAlign='left';ctx.textBaseline='bottom';
+  ctx.fillText('2',(bx+tx)/2+10, (by+ly)/2-4);        /* hypotenuse */
+
+  /* angle labels */
+  ctx.fillStyle='#525B76';ctx.font='12px Dosis';
+  ctx.textAlign='left';ctx.textBaseline='bottom';
+  ctx.fillText('60\u00b0',tx-32, ty-6);                /* bottom-right */
+  ctx.textAlign='left';ctx.textBaseline='top';
+  ctx.fillText('30\u00b0',lx+16, ly+2);                /* top-left */
+})();
+
+/* ====== 1C. TRIANGLE IN CIRCLE (SOHCAHTOA) ====== */
+(function(){
+  var cv=document.getElementById('triInCircleCanvas');
+  if(!cv)return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+  var cx=W/2,cy=H/2+30,R=150;
+
+  /* axes */
+  ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(cx-R-40,cy);ctx.lineTo(cx+R+40,cy);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(cx,cy-R-40);ctx.lineTo(cx,cy+R+40);ctx.stroke();
+  ctx.fillStyle='#525B76';ctx.font='13px Dosis';ctx.textAlign='center';
+  ctx.fillText('x',cx+R+36,cy-10);ctx.fillText('y',cx+10,cy-R-30);
+
+  /* circle */
+  ctx.strokeStyle='#D0D6B3';ctx.lineWidth=2;
+  ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.stroke();
+
+  /* pick 40° angle for a clear triangle */
+  var angle=40*Math.PI/180;
+  var px=cx+R*Math.cos(angle),py=cy-R*Math.sin(angle);
+
+  /* filled triangle */
+  ctx.fillStyle='#e4e8cc88';
+  ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(px,cy);ctx.lineTo(px,py);ctx.closePath();ctx.fill();
+  ctx.strokeStyle='#143109';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(px,cy);ctx.lineTo(px,py);ctx.closePath();ctx.stroke();
+
+  /* hypotenuse (radius) in sage */
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(px,py);ctx.stroke();
+
+  /* right angle marker */
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.5;ctx.strokeRect(px-12,cy-12,12,12);
+
+  /* angle arc */
+  ctx.strokeStyle='#525B76';ctx.lineWidth=2;
+  ctx.beginPath();ctx.arc(cx,cy,30,0,-angle,true);ctx.stroke();
+  ctx.fillStyle='#525B76';ctx.font='bold 15px Bitter';
+  ctx.textAlign='left';ctx.fillText('\u03b8',cx+34,cy-10);
+
+  /* point dot */
+  ctx.fillStyle='#143109';ctx.beginPath();ctx.arc(px,py,5,0,Math.PI*2);ctx.fill();
+
+  /* side labels — clearly outside */
+  ctx.font='bold 15px Bitter';
+  /* adjacent (bottom) — label below */
+  ctx.fillStyle='#525B76';ctx.textAlign='center';
+  ctx.fillText('x = cos \u03b8',(cx+px)/2,cy+22);
+  ctx.fillText('(adjacent)',    (cx+px)/2,cy+38);
+  /* opposite (right) — label to the right */
+  ctx.fillStyle='#9BA06A';ctx.textAlign='left';
+  ctx.fillText('y = sin \u03b8',px+14,(cy+py)/2);
+  ctx.fillText('(opposite)',    px+14,(cy+py)/2+16);
+  /* hypotenuse — label above the line */
+  ctx.fillStyle='#143109';ctx.textAlign='center';
+  var mx=(cx+px)/2-16,my=(cy+py)/2-12;
+  ctx.fillText('r = 1',mx,my);
+  ctx.fillText('(hypotenuse)',mx,my-16);
+
+  /* explanation at top */
+  ctx.fillStyle='#143109';ctx.font='bold 14px Bitter';ctx.textAlign='center';
+  ctx.fillText('Since hyp = 1:   sin \u03b8 = opp/hyp = y/1 = y',W/2,24);
+  ctx.fillText('cos \u03b8 = adj/hyp = x/1 = x',W/2,44);
+  ctx.fillStyle='#9BA06A';ctx.font='bold 13px Dosis';
+  ctx.fillText('So the coordinates of each point on the circle are (cos \u03b8, sin \u03b8)',W/2,66);
+})();
+
+/* ====== 1D. FULL STATIC UNIT CIRCLE ====== */
+(function(){
+  var cv=document.getElementById('fullUCCanvas');
+  if(!cv)return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+  var cx=W/2,cy=H/2,R=200;
+
+  /* title note */
+  ctx.fillStyle='#143109';ctx.font='bold 14px Bitter';ctx.textAlign='center';
+  ctx.fillText('Each point = (cos \u03b8, sin \u03b8)  \u2192  (x, y)',cx,24);
+
+  /* axes */
+  ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(30,cy);ctx.lineTo(W-30,cy);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(cx,40);ctx.lineTo(cx,H-30);ctx.stroke();
+  /* axis labels */
+  ctx.fillStyle='#525B76';ctx.font='12px Dosis';ctx.textAlign='center';
+  ctx.fillText('x = cos \u03b8',W-50,cy-10);
+  ctx.textAlign='center';ctx.fillText('y = sin \u03b8',cx+50,50);
+
+  /* circle */
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.stroke();
+
+  /* all 16 standard angles */
+  var S2='\u221a2/2', S3='\u221a3/2';
+  var angles=[
+    {deg:0,  rad:'0',         c:'1',       s:'0'},
+    {deg:30, rad:'\u03c0/6',  c:S3,        s:'1/2'},
+    {deg:45, rad:'\u03c0/4',  c:S2,        s:S2},
+    {deg:60, rad:'\u03c0/3',  c:'1/2',     s:S3},
+    {deg:90, rad:'\u03c0/2',  c:'0',       s:'1'},
+    {deg:120,rad:'2\u03c0/3', c:'-1/2',    s:S3},
+    {deg:135,rad:'3\u03c0/4', c:'-'+S2,    s:S2},
+    {deg:150,rad:'5\u03c0/6', c:'-'+S3,    s:'1/2'},
+    {deg:180,rad:'\u03c0',    c:'-1',      s:'0'},
+    {deg:210,rad:'7\u03c0/6', c:'-'+S3,    s:'-1/2'},
+    {deg:225,rad:'5\u03c0/4', c:'-'+S2,    s:'-'+S2},
+    {deg:240,rad:'4\u03c0/3', c:'-1/2',    s:'-'+S3},
+    {deg:270,rad:'3\u03c0/2', c:'0',       s:'-1'},
+    {deg:300,rad:'5\u03c0/3', c:'1/2',     s:'-'+S3},
+    {deg:315,rad:'7\u03c0/4', c:S2,        s:'-'+S2},
+    {deg:330,rad:'11\u03c0/6',c:S3,        s:'-1/2'}
+  ];
+
+  /* label offsets — push labels far enough from circle so text is clear */
+  var offsets={
+    0:  {dx:14,dy:0,   a:'left'},
+    30: {dx:14,dy:-18, a:'left'},
+    45: {dx:14,dy:-18, a:'left'},
+    60: {dx:12,dy:-20, a:'left'},
+    90: {dx:12,dy:-20, a:'left'},
+    120:{dx:-12,dy:-20,a:'right'},
+    135:{dx:-14,dy:-18,a:'right'},
+    150:{dx:-14,dy:-18,a:'right'},
+    180:{dx:-14,dy:0,  a:'right'},
+    210:{dx:-14,dy:22, a:'right'},
+    225:{dx:-14,dy:22, a:'right'},
+    240:{dx:-12,dy:24, a:'right'},
+    270:{dx:12,dy:26,  a:'left'},
+    300:{dx:12,dy:24,  a:'left'},
+    315:{dx:14,dy:22,  a:'left'},
+    330:{dx:14,dy:22,  a:'left'}
+  };
+
+  for(var i=0;i<angles.length;i++){
+    var a=angles[i];
+    var theta=a.deg*Math.PI/180;
+    var px=cx+R*Math.cos(theta),py=cy-R*Math.sin(theta);
+    var o=offsets[a.deg];
+
+    /* dot */
+    ctx.fillStyle='#143109';ctx.beginPath();ctx.arc(px,py,4,0,Math.PI*2);ctx.fill();
+
+    /* dashed lines to axes */
+    if(a.deg%90!==0){
+      ctx.strokeStyle='#D0D6B350';ctx.lineWidth=0.7;ctx.setLineDash([3,3]);
+      ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px,cy);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(cx,py);ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    /* coordinate label — BIGGER font */
+    ctx.fillStyle='#143109';ctx.font='bold 12px Bitter';ctx.textAlign=o.a;
+    ctx.fillText('('+a.c+', '+a.s+')',px+o.dx,py+o.dy);
+    /* angle label on second line */
+    ctx.fillStyle='#525B76';ctx.font='11px Dosis';
+    ctx.fillText(a.deg+'\u00b0  '+a.rad,px+o.dx,py+o.dy+14);
+  }
+
+  /* quadrant labels */
+  ctx.fillStyle='#9BA06A33';ctx.font='bold 15px Dosis';ctx.textAlign='center';
+  ctx.fillText('Q I  \u2014 All +',cx+R*0.5,cy-R*0.45);
+  ctx.fillText('Q II  \u2014 Sin +',cx-R*0.5,cy-R*0.45);
+  ctx.fillText('Q III  \u2014 Tan +',cx-R*0.5,cy+R*0.5);
+  ctx.fillText('Q IV  \u2014 Cos +',cx+R*0.5,cy+R*0.5);
+})();
+
+/* ====== 2. STATIC SIN GRAPH ====== */
+(function(){
+  var cv=document.getElementById('sinGraphCanvas');
+  if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+  var midY=H/2, scaleX=80, scaleY=80;
+  var ox=90; /* x-pixel of x=0 */
+
+  function xp(x){return ox+x*scaleX;}
+  function yp(y){return midY-y*scaleY;}
+
+  /* axes */
+  ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(0,midY);ctx.lineTo(W,midY);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,H);ctx.stroke();
+
+  /* curve */
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=3;ctx.beginPath();
+  var x0=-Math.PI/4, x1=9*Math.PI/4;
+  for(var t=x0;t<=x1;t+=0.02){
+    var px=xp(t), py=yp(Math.sin(t));
+    if(t===x0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+  }
+  ctx.stroke();
+
+  /* key points */
+  var keyPts=[
+    {x:0,            y:0,  label:'0'},
+    {x:Math.PI/2,    y:1,  label:'\u03c0/2'},
+    {x:Math.PI,      y:0,  label:'\u03c0'},
+    {x:3*Math.PI/2,  y:-1, label:'3\u03c0/2'},
+    {x:2*Math.PI,    y:0,  label:'2\u03c0'}
+  ];
+  ctx.font='12px Dosis, sans-serif';ctx.textAlign='center';
+  for(var i=0;i<keyPts.length;i++){
+    var kp=keyPts[i];
+    var kx=xp(kp.x), ky=yp(kp.y);
+    ctx.fillStyle='#143109';
+    ctx.beginPath();ctx.arc(kx,ky,4,0,2*Math.PI);ctx.fill();
+    /* skip radian label under crest (pi/2) and trough (3pi/2) */
+    var isCrest=(Math.abs(kp.y-1)<0.01);
+    var isTrough=(Math.abs(kp.y+1)<0.01);
+    if(!isCrest && !isTrough){
+      ctx.fillStyle='#525B76';ctx.textBaseline='top';
+      ctx.fillText(kp.label,kx,midY+6);
+    }
+  }
+
+  /* Crest / Trough labels */
+  ctx.fillStyle='#143109';ctx.font='bold 12px Dosis, sans-serif';
+  ctx.textBaseline='bottom';ctx.fillText('Crest (1)',xp(Math.PI/2),yp(1)-8);
+  ctx.textBaseline='top';ctx.fillText('Trough (-1)',xp(3*Math.PI/2),yp(-1)+8);
+
+  /* amplitude arrow */
+  ctx.strokeStyle='#525B76';ctx.lineWidth=1.5;
+  var ax=xp(-Math.PI/8);
+  ctx.beginPath();ctx.moveTo(ax,midY);ctx.lineTo(ax,yp(1));ctx.stroke();
+  ctx.beginPath();ctx.moveTo(ax-4,yp(1)+6);ctx.lineTo(ax,yp(1));ctx.lineTo(ax+4,yp(1)+6);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(ax-4,midY-6);ctx.lineTo(ax,midY);ctx.lineTo(ax+4,midY-6);ctx.stroke();
+  ctx.fillStyle='#525B76';ctx.font='11px Dosis, sans-serif';ctx.textAlign='right';ctx.textBaseline='middle';
+  ctx.fillText('A=1',ax-6,midY-scaleY/2);
+
+  /* period bracket */
+  var bY=yp(-1)+24;
+  ctx.strokeStyle='#525B76';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(xp(0),bY);ctx.lineTo(xp(2*Math.PI),bY);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(xp(0),bY-4);ctx.lineTo(xp(0),bY+4);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(xp(2*Math.PI),bY-4);ctx.lineTo(xp(2*Math.PI),bY+4);ctx.stroke();
+  ctx.fillStyle='#525B76';ctx.font='12px Dosis, sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+  ctx.fillText('Period = 2\u03c0',xp(Math.PI),bY+4);
+})();
+
+/* ====== 3. STATIC COS GRAPH ====== */
+(function(){
+  var cv=document.getElementById('cosGraphCanvas');
+  if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+  var midY=H/2, scaleX=80, scaleY=80;
+  var ox=90;
+
+  function xp(x){return ox+x*scaleX;}
+  function yp(y){return midY-y*scaleY;}
+
+  /* axes */
+  ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(0,midY);ctx.lineTo(W,midY);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,H);ctx.stroke();
+
+  /* curve */
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=3;ctx.beginPath();
+  var x0=-Math.PI/4, x1=9*Math.PI/4;
+  for(var t=x0;t<=x1;t+=0.02){
+    var px=xp(t), py=yp(Math.cos(t));
+    if(t===x0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+  }
+  ctx.stroke();
+
+  /* key points */
+  var keyPts=[
+    {x:0,            y:1,  label:'0'},
+    {x:Math.PI/2,    y:0,  label:'\u03c0/2'},
+    {x:Math.PI,      y:-1, label:'\u03c0'},
+    {x:3*Math.PI/2,  y:0,  label:'3\u03c0/2'},
+    {x:2*Math.PI,    y:1,  label:'2\u03c0'}
+  ];
+  ctx.font='12px Dosis, sans-serif';ctx.textAlign='center';
+  for(var i=0;i<keyPts.length;i++){
+    var kp=keyPts[i];
+    var kx=xp(kp.x), ky=yp(kp.y);
+    ctx.fillStyle='#143109';
+    ctx.beginPath();ctx.arc(kx,ky,4,0,2*Math.PI);ctx.fill();
+    /* skip radian label under crest and trough positions */
+    var isCrest=(Math.abs(kp.y-1)<0.01);
+    var isTrough=(Math.abs(kp.y+1)<0.01);
+    if(!isCrest && !isTrough){
+      ctx.fillStyle='#525B76';ctx.textBaseline='top';
+      ctx.fillText(kp.label,kx,midY+6);
+    }
+  }
+
+  /* Crest / Trough labels */
+  ctx.fillStyle='#143109';ctx.font='bold 12px Dosis, sans-serif';
+  ctx.textBaseline='bottom';ctx.fillText('Crest (1)',xp(0),yp(1)-8);
+  ctx.textBaseline='top';ctx.fillText('Trough (-1)',xp(Math.PI),yp(-1)+8);
+
+  /* period bracket */
+  var bY=yp(-1)+24;
+  ctx.strokeStyle='#525B76';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(xp(0),bY);ctx.lineTo(xp(2*Math.PI),bY);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(xp(0),bY-4);ctx.lineTo(xp(0),bY+4);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(xp(2*Math.PI),bY-4);ctx.lineTo(xp(2*Math.PI),bY+4);ctx.stroke();
+  ctx.fillStyle='#525B76';ctx.font='12px Dosis, sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+  ctx.fillText('Period = 2\u03c0',xp(Math.PI),bY+4);
+})();
+
+/* ====== 4. STATIC TAN GRAPH ====== */
+(function(){
+  var cv=document.getElementById('tanGraphCanvas');
+  if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+  var midY=H/2, scaleX=70, scaleY=28;
+  var ox=W/2;
+
+  function xp(x){return ox+x*scaleX;}
+  function yp(y){return midY-y*scaleY;}
+
+  /* axes */
+  ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(0,midY);ctx.lineTo(W,midY);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,H);ctx.stroke();
+
+  /* asymptotes */
+  var asyms=[-3*Math.PI/2,-Math.PI/2,Math.PI/2,3*Math.PI/2];
+  ctx.strokeStyle='#c06060';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+  for(var i=0;i<asyms.length;i++){
+    var ax=xp(asyms[i]);
+    if(ax>0&&ax<W){ctx.beginPath();ctx.moveTo(ax,0);ctx.lineTo(ax,H);ctx.stroke();}
+  }
+  ctx.setLineDash([]);
+
+  /* curve - break when |tan|>10 */
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=3;
+  var xMin=-5, xMax=5, step=0.01;
+  var drawing=false;
+  for(var t=xMin;t<=xMax;t+=step){
+    var v=Math.tan(t);
+    if(Math.abs(v)>10){drawing=false;continue;}
+    var px=xp(t),py=yp(v);
+    if(px<-5||px>W+5){drawing=false;continue;}
+    if(!drawing){ctx.beginPath();ctx.moveTo(px,py);drawing=true;}
+    else ctx.lineTo(px,py);
+  }
+  if(drawing) ctx.stroke();
+  /* re-draw segments properly */
+  drawing=false;
+  ctx.beginPath();
+  for(var t=xMin;t<=xMax;t+=step){
+    var v=Math.tan(t);
+    if(Math.abs(v)>10||xp(t)<-5||xp(t)>W+5){
+      if(drawing){ctx.stroke();drawing=false;}
+      continue;
+    }
+    if(!drawing){ctx.beginPath();ctx.moveTo(xp(t),yp(v));drawing=true;}
+    else ctx.lineTo(xp(t),yp(v));
+  }
+  if(drawing) ctx.stroke();
+
+  /* key points */
+  var keyPts=[
+    {x:0,         y:0,  label:'(0, 0)'},
+    {x:Math.PI/4, y:1,  label:'(\u03c0/4, 1)'},
+    {x:-Math.PI/4,y:-1, label:'(-\u03c0/4, -1)'}
+  ];
+  ctx.font='11px Dosis, sans-serif';ctx.textAlign='center';
+  for(var i=0;i<keyPts.length;i++){
+    var kp=keyPts[i];
+    var kx=xp(kp.x),ky=yp(kp.y);
+    ctx.fillStyle='#143109';ctx.beginPath();ctx.arc(kx,ky,4,0,2*Math.PI);ctx.fill();
+    ctx.fillStyle='#525B76';ctx.textBaseline=(kp.y>=0)?'bottom':'top';
+    ctx.fillText(kp.label,kx,ky+(kp.y>=0?-8:8));
+  }
+
+  /* asymptote labels */
+  ctx.fillStyle='#c06060';ctx.font='11px Dosis, sans-serif';ctx.textBaseline='top';ctx.textAlign='center';
+  ctx.fillText('-\u03c0/2',xp(-Math.PI/2),8);
+  ctx.fillText('\u03c0/2',xp(Math.PI/2),8);
+
+  /* period bracket */
+  var bY=H-18;
+  ctx.strokeStyle='#525B76';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(xp(-Math.PI/2),bY);ctx.lineTo(xp(Math.PI/2),bY);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(xp(-Math.PI/2),bY-4);ctx.lineTo(xp(-Math.PI/2),bY+4);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(xp(Math.PI/2),bY-4);ctx.lineTo(xp(Math.PI/2),bY+4);ctx.stroke();
+  ctx.fillStyle='#525B76';ctx.font='12px Dosis, sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+  ctx.fillText('Period = \u03c0',xp(0),bY+2);
+})();
+
+/* ====== 5. STATIC COT GRAPH ====== */
+(function(){
+  var cv=document.getElementById('cotGraphCanvas');
+  if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+  var midY=H/2, scaleX=70, scaleY=28;
+  var ox=W/2-scaleX*Math.PI/2; /* shift so pi/2 is centered-ish */
+
+  function xp(x){return ox+x*scaleX;}
+  function yp(y){return midY-y*scaleY;}
+
+  /* axes */
+  ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(0,midY);ctx.lineTo(W,midY);ctx.stroke();
+  /* y-axis at x=0 might be off screen, draw a light one */
+  if(xp(0)>0&&xp(0)<W){
+    ctx.beginPath();ctx.moveTo(xp(0),0);ctx.lineTo(xp(0),H);ctx.stroke();
+  }
+
+  /* asymptotes at x=n*pi */
+  var asyms=[-Math.PI, 0, Math.PI, 2*Math.PI, 3*Math.PI];
+  ctx.strokeStyle='#c06060';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+  for(var i=0;i<asyms.length;i++){
+    var ax=xp(asyms[i]);
+    if(ax>0&&ax<W){ctx.beginPath();ctx.moveTo(ax,0);ctx.lineTo(ax,H);ctx.stroke();}
+  }
+  ctx.setLineDash([]);
+
+  /* curve segments: cot(x) between asymptotes, breaks when |cot|>10 */
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=3;
+  var xMin=-Math.PI+0.05, xMax=3*Math.PI-0.05, step=0.01;
+  var drawing=false;
+  for(var t=xMin;t<=xMax;t+=step){
+    var sinT=Math.sin(t);
+    if(Math.abs(sinT)<0.01){drawing=false;if(drawing){ctx.stroke();}drawing=false;continue;}
+    var v=Math.cos(t)/sinT;
+    if(Math.abs(v)>10){if(drawing){ctx.stroke();}drawing=false;continue;}
+    var px=xp(t),py=yp(v);
+    if(px<-5||px>W+5){if(drawing){ctx.stroke();}drawing=false;continue;}
+    if(!drawing){ctx.beginPath();ctx.moveTo(px,py);drawing=true;}
+    else ctx.lineTo(px,py);
+  }
+  if(drawing) ctx.stroke();
+
+  /* key points */
+  var keyPts=[
+    {x:Math.PI/4,   y:1,  label:'(\u03c0/4, 1)'},
+    {x:Math.PI/2,   y:0,  label:'(\u03c0/2, 0)'},
+    {x:3*Math.PI/4, y:-1, label:'(3\u03c0/4, -1)'}
+  ];
+  ctx.font='11px Dosis, sans-serif';ctx.textAlign='center';
+  for(var i=0;i<keyPts.length;i++){
+    var kp=keyPts[i];
+    var kx=xp(kp.x),ky=yp(kp.y);
+    ctx.fillStyle='#143109';ctx.beginPath();ctx.arc(kx,ky,4,0,2*Math.PI);ctx.fill();
+    ctx.fillStyle='#525B76';ctx.textBaseline=(kp.y>=0)?'bottom':'top';
+    ctx.fillText(kp.label,kx,ky+(kp.y>=0?-8:8));
+  }
+
+  /* asymptote labels */
+  ctx.fillStyle='#c06060';ctx.font='11px Dosis, sans-serif';ctx.textBaseline='top';ctx.textAlign='center';
+  if(xp(0)>10&&xp(0)<W-10) ctx.fillText('0',xp(0),8);
+  ctx.fillText('\u03c0',xp(Math.PI),8);
+  ctx.fillText('2\u03c0',xp(2*Math.PI),8);
+
+  /* period bracket */
+  var bY=H-18;
+  ctx.strokeStyle='#525B76';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(xp(0),bY);ctx.lineTo(xp(Math.PI),bY);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(xp(0),bY-4);ctx.lineTo(xp(0),bY+4);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(xp(Math.PI),bY-4);ctx.lineTo(xp(Math.PI),bY+4);ctx.stroke();
+  ctx.fillStyle='#525B76';ctx.font='12px Dosis, sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+  ctx.fillText('Period = \u03c0',xp(Math.PI/2),bY+2);
+})();
+
+/* ====== 6. STATIC SEC/CSC GRAPH ====== */
+(function(){
+  var cv=document.getElementById('secCscCanvas');
+  if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+
+  var btnSec=document.getElementById('btnSec');
+  var btnCsc=document.getElementById('btnCsc');
+  var mode='sec'; /* 'sec' or 'csc' */
+
+  var midY=H/2, scaleX=55, scaleY=50;
+  var ox=W/2;
+
+  function xp(x){return ox+x*scaleX;}
+  function yp(y){return midY-y*scaleY;}
+
+  function draw(){
+    ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+    /* axes */
+    ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(0,midY);ctx.lineTo(W,midY);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,H);ctx.stroke();
+
+    var xMin=-2*Math.PI, xMax=2*Math.PI, step=0.01;
+
+    if(mode==='sec'){
+      /* asymptotes for sec: x = pi/2 + n*pi */
+      ctx.strokeStyle='#c06060';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+      for(var n=-3;n<=3;n++){
+        var ax=xp(Math.PI/2+n*Math.PI);
+        if(ax>0&&ax<W){ctx.beginPath();ctx.moveTo(ax,0);ctx.lineTo(ax,H);ctx.stroke();}
+      }
+      ctx.setLineDash([]);
+
+      /* faded cos reference */
+      ctx.strokeStyle='#e4e8cc';ctx.lineWidth=2;ctx.beginPath();
+      for(var t=xMin;t<=xMax;t+=0.02){
+        var px=xp(t),py=yp(Math.cos(t));
+        if(t===xMin) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+      }
+      ctx.stroke();
+
+      /* sec curve */
+      ctx.strokeStyle='#9BA06A';ctx.lineWidth=3;
+      var drawing=false;
+      for(var t=xMin;t<=xMax;t+=step){
+        var c=Math.cos(t);
+        if(Math.abs(c)<0.05){if(drawing){ctx.stroke();}drawing=false;continue;}
+        var v=1/c;
+        if(Math.abs(v)>10){if(drawing){ctx.stroke();}drawing=false;continue;}
+        var px=xp(t),py=yp(v);
+        if(px<-5||px>W+5){if(drawing){ctx.stroke();}drawing=false;continue;}
+        if(!drawing){ctx.beginPath();ctx.moveTo(px,py);drawing=true;}
+        else ctx.lineTo(px,py);
+      }
+      if(drawing) ctx.stroke();
+
+      /* label */
+      ctx.fillStyle='#9BA06A';ctx.font='bold 14px Dosis, sans-serif';
+      ctx.textAlign='left';ctx.textBaseline='top';
+      ctx.fillText('y = sec(x)',10,10);
+      ctx.fillStyle='#e4e8cc';ctx.fillText('y = cos(x) [reference]',10,28);
+
+    } else {
+      /* asymptotes for csc: x = n*pi */
+      ctx.strokeStyle='#c06060';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+      for(var n=-3;n<=3;n++){
+        var ax=xp(n*Math.PI);
+        if(ax>0&&ax<W){ctx.beginPath();ctx.moveTo(ax,0);ctx.lineTo(ax,H);ctx.stroke();}
+      }
+      ctx.setLineDash([]);
+
+      /* faded sin reference */
+      ctx.strokeStyle='#e4e8cc';ctx.lineWidth=2;ctx.beginPath();
+      for(var t=xMin;t<=xMax;t+=0.02){
+        var px=xp(t),py=yp(Math.sin(t));
+        if(t===xMin) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+      }
+      ctx.stroke();
+
+      /* csc curve */
+      ctx.strokeStyle='#525B76';ctx.lineWidth=3;
+      var drawing=false;
+      for(var t=xMin;t<=xMax;t+=step){
+        var s=Math.sin(t);
+        if(Math.abs(s)<0.05){if(drawing){ctx.stroke();}drawing=false;continue;}
+        var v=1/s;
+        if(Math.abs(v)>10){if(drawing){ctx.stroke();}drawing=false;continue;}
+        var px=xp(t),py=yp(v);
+        if(px<-5||px>W+5){if(drawing){ctx.stroke();}drawing=false;continue;}
+        if(!drawing){ctx.beginPath();ctx.moveTo(px,py);drawing=true;}
+        else ctx.lineTo(px,py);
+      }
+      if(drawing) ctx.stroke();
+
+      /* label */
+      ctx.fillStyle='#525B76';ctx.font='bold 14px Dosis, sans-serif';
+      ctx.textAlign='left';ctx.textBaseline='top';
+      ctx.fillText('y = csc(x)',10,10);
+      ctx.fillStyle='#e4e8cc';ctx.fillText('y = sin(x) [reference]',10,28);
+    }
+
+    /* y=1, y=-1 reference lines */
+    ctx.strokeStyle='#D0D6B3';ctx.lineWidth=0.5;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(0,yp(1));ctx.lineTo(W,yp(1));ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,yp(-1));ctx.lineTo(W,yp(-1));ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='#D0D6B3';ctx.font='11px Dosis, sans-serif';ctx.textAlign='right';ctx.textBaseline='bottom';
+    ctx.fillText('1',ox-4,yp(1));
+    ctx.textBaseline='top';ctx.fillText('-1',ox-4,yp(-1));
+  }
+
+  if(btnSec) btnSec.addEventListener('click',function(){
+    mode='sec';
+    btnSec.className='site-btn active';
+    if(btnCsc) btnCsc.className='site-btn secondary';
+    draw();
+  });
+  if(btnCsc) btnCsc.addEventListener('click',function(){
+    mode='csc';
+    if(btnSec) btnSec.className='site-btn secondary';
+    btnCsc.className='site-btn active';
+    draw();
+  });
+
+  draw();
+})();
+
+/* ====== EXPLORER 1: SIN/COS EXPLORER ====== */
+(function(){
+  var cv=document.getElementById('sinCosExplCanvas');
+  if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+
+  var slA=document.getElementById('scA');
+  var slB=document.getElementById('scB');
+  var slC=document.getElementById('scC');
+  var slD=document.getElementById('scD');
+  var valA=document.getElementById('scValA');
+  var valB=document.getElementById('scValB');
+  var valC=document.getElementById('scValC');
+  var valD=document.getElementById('scValD');
+  var chipMid=document.getElementById('scInfoMid');
+  var chipAmp=document.getElementById('scInfoAmp');
+  var chipPer=document.getElementById('scInfoPer');
+  var chipPhs=document.getElementById('scInfoPhs');
+
+  var theta=0;
+  var speed=1;
+  var _hl=null;
+
+  window.expHL2=function(key,on){_hl=on?key:null;};
+
+  window.setScSpeed=function(s){speed=s;};
+
+  /* attach speed buttons */
+  var speedBtns=document.querySelectorAll('.sc-speed');
+  for(var i=0;i<speedBtns.length;i++){
+    (function(btn){
+      btn.addEventListener('click',function(){
+        speed=parseFloat(btn.getAttribute('data-speed'));
+        for(var j=0;j<speedBtns.length;j++){
+          speedBtns[j].className='site-btn secondary sc-speed';
+        }
+        btn.className='site-btn active sc-speed';
+      });
+    })(speedBtns[i]);
+  }
+
+  function getP(){
+    return {
+      a:parseFloat(slA.value),
+      b:parseFloat(slB.value),
+      c:parseFloat(slC.value),
+      d:parseFloat(slD.value)
+    };
+  }
+
+  function fmt(v){return v.toFixed(2);}
+  function fmtPi(v){
+    if(Math.abs(v)<0.01) return '0';
+    var r=v/Math.PI;
+    if(Math.abs(r-1)<0.01) return '\u03c0';
+    if(Math.abs(r+1)<0.01) return '-\u03c0';
+    if(Math.abs(r-0.5)<0.01) return '\u03c0/2';
+    if(Math.abs(r+0.5)<0.01) return '-\u03c0/2';
+    if(Math.abs(r-2)<0.01) return '2\u03c0';
+    if(Math.abs(r+2)<0.01) return '-2\u03c0';
+    return fmt(v);
+  }
+
+  function updateInfo(p){
+    valA.textContent=fmt(p.a);
+    valB.textContent=fmt(p.b);
+    valC.textContent=fmt(p.c);
+    valD.textContent=fmt(p.d);
+    var per=2*Math.PI/Math.abs(p.b);
+    var amp=Math.abs(p.a);
+    if(chipMid) chipMid.innerHTML='<span class="chip-dot" style="background:#D0D6B3;border:1px dashed #525B76;"></span> Midline y = '+fmt(p.d);
+    if(chipAmp) chipAmp.innerHTML='<span class="chip-dot" style="background:#9BA06A;"></span> Amplitude = '+fmt(amp);
+    if(chipPer) chipPer.innerHTML='<span class="chip-dot" style="background:#525B76;"></span> Period = '+fmtPi(per);
+    if(chipPhs) chipPhs.innerHTML='<span class="chip-dot" style="background:#6b7f4e;"></span> Phase = '+fmtPi(-p.c);
+  }
+
+  function draw(){
+    var p=getP();
+    updateInfo(p);
+    ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+    /* === LEFT SIDE: UNIT CIRCLE === */
+    var ccx=155, ccy=190, baseR=100;
+    var aR=Math.abs(p.a)*baseR;
+    if(aR<2) aR=2;
+
+    /* grid */
+    ctx.strokeStyle='#e4e8cc';ctx.lineWidth=0.5;
+    var gs=25;
+    for(var gx=ccx%gs;gx<322;gx+=gs){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,H);ctx.stroke();}
+    for(var gy=0;gy<H;gy+=gs){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(322,gy);ctx.stroke();}
+
+    /* axes */
+    ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(10,ccy);ctx.lineTo(310,ccy);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(ccx,10);ctx.lineTo(ccx,H-10);ctx.stroke();
+
+    /* faint reference circle */
+    ctx.strokeStyle='#e4e8cc';ctx.lineWidth=1;
+    ctx.beginPath();ctx.arc(ccx,ccy,baseR,0,2*Math.PI);ctx.stroke();
+
+    /* shifted center for d */
+    var circCy=ccy-p.d*baseR;
+
+    /* transformed circle */
+    ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.arc(ccx,circCy,aR,0,2*Math.PI);ctx.stroke();
+
+    /* d midline dashed */
+    if(Math.abs(p.d)>0.01){
+      ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+      ctx.beginPath();ctx.moveTo(10,circCy);ctx.lineTo(310,circCy);ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    /* animated point */
+    var ang=p.b*(theta+p.c);
+    var ptx=ccx+Math.cos(ang)*aR;
+    var pty=circCy-Math.sin(ang)*aR;
+
+    /* radius line */
+    ctx.strokeStyle='#143109';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(ccx,circCy);ctx.lineTo(ptx,pty);ctx.stroke();
+
+    /* vertical projection (sin) */
+    ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
+    ctx.beginPath();ctx.moveTo(ptx,pty);ctx.lineTo(ptx,circCy);ctx.stroke();
+    ctx.setLineDash([]);
+
+    /* horizontal projection (cos) */
+    ctx.strokeStyle='#525B76';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
+    ctx.beginPath();ctx.moveTo(ptx,pty);ctx.lineTo(ccx,pty);ctx.stroke();
+    ctx.setLineDash([]);
+
+    /* dot */
+    ctx.fillStyle='#143109';ctx.strokeStyle='#D0D6B3';ctx.lineWidth=2;
+    ctx.beginPath();ctx.arc(ptx,pty,6,0,2*Math.PI);ctx.fill();ctx.stroke();
+
+    /* angle arc */
+    ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.5;
+    var arcR=22;
+    ctx.beginPath();ctx.arc(ccx,circCy,arcR,0,-ang%(2*Math.PI),ang>0);ctx.stroke();
+
+    /* label */
+    ctx.fillStyle='#525B76';ctx.font='bold 13px Dosis, sans-serif';
+    ctx.textAlign='center';ctx.textBaseline='bottom';
+    ctx.fillText('UNIT CIRCLE',ccx,H-6);
+
+    /* === DIVIDER === */
+    ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(322,10);ctx.lineTo(322,H-10);ctx.stroke();
+
+    /* === RIGHT SIDE: GRAPH === */
+    var gL=338, gR=W-20, gT=30, gB=H-50;
+    var gW=gR-gL, gH=gB-gT;
+    var gMidY=gT+gH/2;
+    var gOx=gL+40;
+    var scX=gW/((2*Math.PI+0.5));
+    if(scX<30) scX=30;
+    var scY=gH/(2*(Math.abs(p.a)+Math.abs(p.d)+1.5));
+    if(scY<15) scY=15;
+    if(scY>60) scY=60;
+
+    function gxp(x){return gOx+x*scX;}
+    function gyp(y){return gMidY-y*scY;}
+
+    /* grid */
+    ctx.strokeStyle='#e4e8cc';ctx.lineWidth=0.5;
+    for(var gi=1;gi<=8;gi++){
+      var gxv=gxp(gi*Math.PI/2);
+      if(gxv>gL&&gxv<gR){ctx.beginPath();ctx.moveTo(gxv,gT);ctx.lineTo(gxv,gB);ctx.stroke();}
+    }
+    for(var gyi=-5;gyi<=5;gyi++){
+      var gyv=gyp(gyi);
+      if(gyv>gT&&gyv<gB){ctx.beginPath();ctx.moveTo(gL,gyv);ctx.lineTo(gR,gyv);ctx.stroke();}
+    }
+
+    /* axes */
+    ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(gL,gMidY);ctx.lineTo(gR,gMidY);ctx.stroke();
+    if(gOx>gL&&gOx<gR){
+      ctx.beginPath();ctx.moveTo(gOx,gT);ctx.lineTo(gOx,gB);ctx.stroke();
+    }
+
+    /* midline if d!=0 */
+    if(Math.abs(p.d)>0.01){
+      var mlY=gyp(p.d);
+      ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1.5;ctx.setLineDash([6,4]);
+      ctx.beginPath();ctx.moveTo(gL,mlY);ctx.lineTo(gR,mlY);ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle='#525B76';ctx.font='11px Dosis, sans-serif';ctx.textAlign='right';ctx.textBaseline='bottom';
+      ctx.fillText('y='+fmt(p.d),gOx-4,mlY-2);
+    }
+
+    /* faded parent sin/cos */
+    ctx.lineWidth=1;
+    var xS=-0.3, xE=2.2*Math.PI;
+    /* parent sin */
+    ctx.strokeStyle='rgba(155,160,106,0.25)';ctx.beginPath();
+    for(var t=xS;t<=xE;t+=0.04){
+      var px=gxp(t),py=gyp(Math.sin(t));
+      if(px<gL||px>gR) continue;
+      if(t===xS) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+    /* parent cos */
+    ctx.strokeStyle='rgba(82,91,118,0.25)';ctx.beginPath();
+    for(var t=xS;t<=xE;t+=0.04){
+      var px=gxp(t),py=gyp(Math.cos(t));
+      if(px<gL||px>gR) continue;
+      if(t===xS) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+
+    /* transformed sin */
+    ctx.strokeStyle='#9BA06A';ctx.lineWidth=2.8;ctx.beginPath();
+    var started=false;
+    for(var t=xS;t<=xE;t+=0.02){
+      var px=gxp(t),py=gyp(p.a*Math.sin(p.b*(t+p.c))+p.d);
+      if(px<gL||px>gR){started=false;continue;}
+      if(!started){ctx.moveTo(px,py);started=true;}else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+
+    /* transformed cos */
+    ctx.strokeStyle='#525B76';ctx.lineWidth=2.8;ctx.beginPath();
+    started=false;
+    for(var t=xS;t<=xE;t+=0.02){
+      var px=gxp(t),py=gyp(p.a*Math.cos(p.b*(t+p.c))+p.d);
+      if(px<gL||px>gR){started=false;continue;}
+      if(!started){ctx.moveTo(px,py);started=true;}else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+
+    /* x-axis labels */
+    ctx.fillStyle='#525B76';ctx.font='11px Dosis, sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+    var xLabels=[
+      {v:Math.PI/2,l:'\u03c0/2'},{v:Math.PI,l:'\u03c0'},{v:3*Math.PI/2,l:'3\u03c0/2'},{v:2*Math.PI,l:'2\u03c0'}
+    ];
+    for(var li=0;li<xLabels.length;li++){
+      var lx=gxp(xLabels[li].v);
+      if(lx>gL+10&&lx<gR-10){
+        ctx.fillText(xLabels[li].l,lx,gMidY+4);
+        ctx.strokeStyle='#D0D6B3';ctx.lineWidth=0.5;
+        ctx.beginPath();ctx.moveTo(lx,gMidY-3);ctx.lineTo(lx,gMidY+3);ctx.stroke();
+      }
+    }
+
+    /* y-axis labels */
+    ctx.textAlign='right';ctx.textBaseline='middle';
+    for(var yl=-4;yl<=4;yl++){
+      if(yl===0) continue;
+      var yy=gyp(yl);
+      if(yy>gT+5&&yy<gB-5){
+        ctx.fillStyle='#525B76';ctx.fillText(yl.toString(),gOx-5,yy);
+      }
+    }
+
+    /* mapping bezier lines from circle to graph */
+    var sinVal=p.a*Math.sin(ang)+p.d;
+    var cosVal=p.a*Math.cos(ang)+p.d;
+    var gSinX=gxp(theta%(2*Math.PI));
+    var gCosX=gxp(theta%(2*Math.PI));
+    var gSinY=gyp(sinVal);
+    var gCosY=gyp(cosVal);
+
+    /* bezier: circle point to sin graph point */
+    if(gSinX>gL&&gSinX<gR){
+      ctx.strokeStyle='rgba(155,160,106,0.4)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(ptx,pty);
+      ctx.bezierCurveTo(ptx+40,pty,gSinX-40,gSinY,gSinX,gSinY);
+      ctx.stroke();
+    }
+    /* bezier: circle point to cos graph point */
+    if(gCosX>gL&&gCosX<gR){
+      ctx.strokeStyle='rgba(82,91,118,0.4)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(ptx,pty);
+      ctx.bezierCurveTo(ptx+40,pty,gCosX-40,gCosY,gCosX,gCosY);
+      ctx.stroke();
+    }
+
+    /* sin dot on graph */
+    if(gSinX>gL&&gSinX<gR){
+      ctx.fillStyle='#9BA06A';ctx.beginPath();ctx.arc(gSinX,gSinY,5,0,2*Math.PI);ctx.fill();
+    }
+    /* cos dot on graph */
+    if(gCosX>gL&&gCosX<gR){
+      ctx.fillStyle='#525B76';ctx.beginPath();ctx.arc(gCosX,gCosY,5,0,2*Math.PI);ctx.fill();
+    }
+
+    /* readout panel bottom-left */
+    ctx.fillStyle='rgba(255,255,255,0.85)';
+    ctx.fillRect(gL,gB+4,gW,38);
+    ctx.fillStyle='#143109';ctx.font='12px Dosis, sans-serif';ctx.textAlign='left';ctx.textBaseline='top';
+    ctx.fillText('\u03b8 = '+fmt(theta%(2*Math.PI))+' rad   sin = '+fmt(sinVal)+'   cos = '+fmt(cosVal),gL+6,gB+10);
+
+    /* graph label */
+    ctx.fillStyle='#525B76';ctx.font='bold 13px Dosis, sans-serif';ctx.textAlign='center';ctx.textBaseline='bottom';
+    ctx.fillText('GRAPH',gL+gW/2,H-6);
+
+    /* === HOVER HIGHLIGHTS === */
+    if(_hl==='mid'&&Math.abs(p.d)>0.01){
+      var hlMlY=gyp(p.d);
+      ctx.strokeStyle='#525B76';ctx.lineWidth=2.5;ctx.setLineDash([8,4]);
+      ctx.beginPath();ctx.moveTo(gL,hlMlY);ctx.lineTo(gR,hlMlY);ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle='#143109';ctx.font='bold 12px Dosis, sans-serif';ctx.textAlign='left';ctx.textBaseline='bottom';
+      ctx.fillText('midline y = '+fmt(p.d),gL+6,hlMlY-4);
+    }
+    if(_hl==='amp'){
+      var ampTop=gyp(p.d+Math.abs(p.a));
+      var ampBot=gyp(p.d-Math.abs(p.a));
+      var ampMid=gyp(p.d);
+      ctx.fillStyle='rgba(155,160,106,0.12)';
+      ctx.fillRect(gL,ampTop,gW,ampBot-ampTop);
+      /* arrows */
+      ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;
+      var arX=gL+20;
+      ctx.beginPath();ctx.moveTo(arX,ampMid);ctx.lineTo(arX,ampTop);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(arX-4,ampTop+6);ctx.lineTo(arX,ampTop);ctx.lineTo(arX+4,ampTop+6);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(arX,ampMid);ctx.lineTo(arX,ampBot);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(arX-4,ampBot-6);ctx.lineTo(arX,ampBot);ctx.lineTo(arX+4,ampBot-6);ctx.stroke();
+      ctx.fillStyle='#143109';ctx.font='bold 12px Dosis, sans-serif';ctx.textAlign='left';ctx.textBaseline='middle';
+      ctx.fillText('A = '+fmt(Math.abs(p.a)),arX+8,(ampMid+ampTop)/2);
+    }
+    if(_hl==='per'){
+      var per=2*Math.PI/Math.abs(p.b);
+      var brY=gB+2;
+      var brL=gxp(-p.c);
+      var brR=gxp(-p.c+per);
+      if(brL<gL) brL=gL;
+      if(brR>gR) brR=gR;
+      ctx.strokeStyle='#525B76';ctx.lineWidth=2;
+      ctx.beginPath();ctx.moveTo(brL,brY);ctx.lineTo(brR,brY);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(brL,brY-4);ctx.lineTo(brL,brY+4);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(brR,brY-4);ctx.lineTo(brR,brY+4);ctx.stroke();
+      ctx.fillStyle='#143109';ctx.font='bold 12px Dosis, sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+      ctx.fillText('Period = '+fmtPi(per),(brL+brR)/2,brY+5);
+    }
+    if(_hl==='phs'&&Math.abs(p.c)>0.01){
+      var arY=gT+8;
+      var arFrom=gxp(0);
+      var arTo=gxp(-p.c);
+      if(arFrom>gL&&arFrom<gR&&arTo>gL&&arTo<gR){
+        ctx.strokeStyle='#6b7f4e';ctx.lineWidth=2;
+        ctx.beginPath();ctx.moveTo(arFrom,arY);ctx.lineTo(arTo,arY);ctx.stroke();
+        var dir=(arTo>arFrom)?1:-1;
+        ctx.beginPath();ctx.moveTo(arTo-dir*6,arY-4);ctx.lineTo(arTo,arY);ctx.lineTo(arTo-dir*6,arY+4);ctx.stroke();
+        ctx.fillStyle='#143109';ctx.font='bold 12px Dosis, sans-serif';ctx.textAlign='center';ctx.textBaseline='bottom';
+        ctx.fillText('Phase = '+fmtPi(-p.c),(arFrom+arTo)/2,arY-3);
+      }
+    }
+  }
+
+  function step(){
+    theta+=0.02*speed;
+    draw();
+    requestAnimationFrame(step);
+  }
+
+  slA.addEventListener('input',draw);
+  slB.addEventListener('input',draw);
+  slC.addEventListener('input',draw);
+  slD.addEventListener('input',draw);
+
+  step();
+})();
+
+/* ====== EXPLORER 2: TANGENT EXPLORER ====== */
+(function(){
+  var cv=document.getElementById('tanExplCanvas');
+  if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+
+  var slA=document.getElementById('tanA');
+  var slB=document.getElementById('tanB');
+  var slC=document.getElementById('tanC');
+  var slD=document.getElementById('tanD');
+  var valA=document.getElementById('tanValA');
+  var valB=document.getElementById('tanValB');
+  var valC=document.getElementById('tanValC');
+  var valD=document.getElementById('tanValD');
+  var chipPer=document.getElementById('tanInfoPer');
+  var chipAsym=document.getElementById('tanInfoAsym');
+
+  function fmt(v){return v.toFixed(2);}
+  function fmtPi(v){
+    if(Math.abs(v)<0.01) return '0';
+    var r=v/Math.PI;
+    if(Math.abs(r-1)<0.01) return '\u03c0';
+    if(Math.abs(r-0.5)<0.01) return '\u03c0/2';
+    if(Math.abs(r-2)<0.01) return '2\u03c0';
+    return fmt(v);
+  }
+
+  function draw(){
+    var a=parseFloat(slA.value);
+    var b=parseFloat(slB.value);
+    var c=parseFloat(slC.value);
+    var d=parseFloat(slD.value);
+
+    valA.textContent=fmt(a);
+    valB.textContent=fmt(b);
+    valC.textContent=fmt(c);
+    valD.textContent=fmt(d);
+
+    var per=Math.PI/Math.abs(b);
+    if(chipPer) chipPer.innerHTML='<span class="chip-dot" style="background:#525B76;"></span> Period = '+fmtPi(per);
+    if(chipAsym) chipAsym.innerHTML='<span class="chip-dot" style="background:#c06060;"></span> Asymptotes: x = '+fmt(-c)+' + n\u00b7'+fmtPi(per);
+
+    ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+    var midY=H/2, scaleX=70, scaleY=28;
+    var ox=W/2;
+
+    function xp(x){return ox+x*scaleX;}
+    function yp(y){return midY-y*scaleY;}
+
+    /* grid */
+    ctx.strokeStyle='#e4e8cc';ctx.lineWidth=0.5;
+    for(var gx=0;gx<W;gx+=35){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,H);ctx.stroke();}
+    for(var gy=0;gy<H;gy+=35){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke();}
+
+    /* axes */
+    ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(0,midY);ctx.lineTo(W,midY);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,H);ctx.stroke();
+
+    /* d midline */
+    if(Math.abs(d)>0.01){
+      ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+      ctx.beginPath();ctx.moveTo(0,yp(d));ctx.lineTo(W,yp(d));ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    /* asymptotes: x = -c + pi/(2*|b|) + n*pi/|b| */
+    var halfPer=Math.PI/(2*Math.abs(b));
+    ctx.strokeStyle='#c06060';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+    for(var n=-10;n<=10;n++){
+      var ax=-c+halfPer+n*per;
+      var apx=xp(ax);
+      if(apx>0&&apx<W){
+        ctx.beginPath();ctx.moveTo(apx,0);ctx.lineTo(apx,H);ctx.stroke();
+      }
+    }
+    ctx.setLineDash([]);
+
+    /* tan curve with breaks */
+    var xMin=-5, xMax=5, step=0.005;
+    var thresh=H/(scaleY*2);
+    ctx.strokeStyle='#9BA06A';ctx.lineWidth=2.8;
+    var drawing=false;
+    var prevV=null;
+    for(var t=xMin;t<=xMax;t+=step){
+      var inner=b*(t+c);
+      var cosI=Math.cos(inner);
+      if(Math.abs(cosI)<0.001){
+        if(drawing){ctx.stroke();drawing=false;}
+        prevV=null;continue;
+      }
+      var v=a*(Math.sin(inner)/cosI)+d;
+      if(Math.abs(v)>thresh){
+        if(drawing){ctx.stroke();drawing=false;}
+        prevV=v;continue;
+      }
+      if(prevV!==null&&((prevV>0&&v<0)||(prevV<0&&v>0))&&Math.abs(prevV-v)>2){
+        if(drawing){ctx.stroke();drawing=false;}
+        prevV=v;continue;
+      }
+      var px=xp(t),py=yp(v);
+      if(px<-5||px>W+5){if(drawing){ctx.stroke();drawing=false;}prevV=v;continue;}
+      if(!drawing){ctx.beginPath();ctx.moveTo(px,py);drawing=true;}
+      else ctx.lineTo(px,py);
+      prevV=v;
+    }
+    if(drawing) ctx.stroke();
+
+    /* x-axis labels */
+    ctx.fillStyle='#525B76';ctx.font='11px Dosis, sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+    var xLabels=[
+      {v:-Math.PI,l:'-\u03c0'},{v:-Math.PI/2,l:'-\u03c0/2'},{v:Math.PI/2,l:'\u03c0/2'},{v:Math.PI,l:'\u03c0'},
+      {v:3*Math.PI/2,l:'3\u03c0/2'},{v:-3*Math.PI/2,l:'-3\u03c0/2'}
+    ];
+    for(var li=0;li<xLabels.length;li++){
+      var lx=xp(xLabels[li].v);
+      if(lx>10&&lx<W-10) ctx.fillText(xLabels[li].l,lx,midY+4);
+    }
+
+    /* y-axis labels */
+    ctx.textAlign='right';ctx.textBaseline='middle';
+    for(var yl=-4;yl<=4;yl++){
+      if(yl===0) continue;
+      var yy=yp(yl);
+      if(yy>5&&yy<H-5) ctx.fillText(yl.toString(),ox-5,yy);
+    }
+  }
+
+  slA.addEventListener('input',draw);
+  slB.addEventListener('input',draw);
+  slC.addEventListener('input',draw);
+  slD.addEventListener('input',draw);
+  draw();
+})();
+
+/* ====== EXPLORER 3: COTANGENT EXPLORER ====== */
+(function(){
+  var cv=document.getElementById('cotExplCanvas');
+  if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+
+  var slA=document.getElementById('cotA');
+  var slB=document.getElementById('cotB');
+  var slC=document.getElementById('cotC');
+  var slD=document.getElementById('cotD');
+  var valA=document.getElementById('cotValA');
+  var valB=document.getElementById('cotValB');
+  var valC=document.getElementById('cotValC');
+  var valD=document.getElementById('cotValD');
+  var chipPer=document.getElementById('cotInfoPer');
+  var chipAsym=document.getElementById('cotInfoAsym');
+
+  function fmt(v){return v.toFixed(2);}
+  function fmtPi(v){
+    if(Math.abs(v)<0.01) return '0';
+    var r=v/Math.PI;
+    if(Math.abs(r-1)<0.01) return '\u03c0';
+    if(Math.abs(r-0.5)<0.01) return '\u03c0/2';
+    if(Math.abs(r-2)<0.01) return '2\u03c0';
+    return fmt(v);
+  }
+
+  function draw(){
+    var a=parseFloat(slA.value);
+    var b=parseFloat(slB.value);
+    var c=parseFloat(slC.value);
+    var d=parseFloat(slD.value);
+
+    valA.textContent=fmt(a);
+    valB.textContent=fmt(b);
+    valC.textContent=fmt(c);
+    valD.textContent=fmt(d);
+
+    var per=Math.PI/Math.abs(b);
+    if(chipPer) chipPer.innerHTML='<span class="chip-dot" style="background:#525B76;"></span> Period = '+fmtPi(per);
+    if(chipAsym) chipAsym.innerHTML='<span class="chip-dot" style="background:#c06060;"></span> Asymptotes: x = '+fmt(-c)+' + n\u00b7'+fmtPi(per);
+
+    ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+    var midY=H/2, scaleX=70, scaleY=28;
+    var ox=W/2;
+
+    function xp(x){return ox+x*scaleX;}
+    function yp(y){return midY-y*scaleY;}
+
+    /* grid */
+    ctx.strokeStyle='#e4e8cc';ctx.lineWidth=0.5;
+    for(var gx=0;gx<W;gx+=35){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,H);ctx.stroke();}
+    for(var gy=0;gy<H;gy+=35){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke();}
+
+    /* axes */
+    ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(0,midY);ctx.lineTo(W,midY);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,H);ctx.stroke();
+
+    /* d midline */
+    if(Math.abs(d)>0.01){
+      ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+      ctx.beginPath();ctx.moveTo(0,yp(d));ctx.lineTo(W,yp(d));ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    /* asymptotes for cot: x = -c + n*pi/|b| */
+    ctx.strokeStyle='#c06060';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+    for(var n=-10;n<=10;n++){
+      var ax=-c+n*per;
+      var apx=xp(ax);
+      if(apx>0&&apx<W){
+        ctx.beginPath();ctx.moveTo(apx,0);ctx.lineTo(apx,H);ctx.stroke();
+      }
+    }
+    ctx.setLineDash([]);
+
+    /* cot curve with breaks */
+    var xMin=-5, xMax=5, step=0.005;
+    var thresh=H/(scaleY*2);
+    ctx.strokeStyle='#9BA06A';ctx.lineWidth=2.8;
+    var drawing=false;
+    var prevV=null;
+    for(var t=xMin;t<=xMax;t+=step){
+      var inner=b*(t+c);
+      var sinI=Math.sin(inner);
+      if(Math.abs(sinI)<0.001){
+        if(drawing){ctx.stroke();drawing=false;}
+        prevV=null;continue;
+      }
+      var v=a*(Math.cos(inner)/sinI)+d;
+      if(Math.abs(v)>thresh){
+        if(drawing){ctx.stroke();drawing=false;}
+        prevV=v;continue;
+      }
+      if(prevV!==null&&((prevV>0&&v<0)||(prevV<0&&v>0))&&Math.abs(prevV-v)>2){
+        if(drawing){ctx.stroke();drawing=false;}
+        prevV=v;continue;
+      }
+      var px=xp(t),py=yp(v);
+      if(px<-5||px>W+5){if(drawing){ctx.stroke();drawing=false;}prevV=v;continue;}
+      if(!drawing){ctx.beginPath();ctx.moveTo(px,py);drawing=true;}
+      else ctx.lineTo(px,py);
+      prevV=v;
+    }
+    if(drawing) ctx.stroke();
+
+    /* x-axis labels */
+    ctx.fillStyle='#525B76';ctx.font='11px Dosis, sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+    var xLabels=[
+      {v:-Math.PI,l:'-\u03c0'},{v:-Math.PI/2,l:'-\u03c0/2'},{v:Math.PI/2,l:'\u03c0/2'},{v:Math.PI,l:'\u03c0'},
+      {v:3*Math.PI/2,l:'3\u03c0/2'},{v:-3*Math.PI/2,l:'-3\u03c0/2'}
+    ];
+    for(var li=0;li<xLabels.length;li++){
+      var lx=xp(xLabels[li].v);
+      if(lx>10&&lx<W-10) ctx.fillText(xLabels[li].l,lx,midY+4);
+    }
+
+    /* y-axis labels */
+    ctx.textAlign='right';ctx.textBaseline='middle';
+    for(var yl=-4;yl<=4;yl++){
+      if(yl===0) continue;
+      var yy=yp(yl);
+      if(yy>5&&yy<H-5) ctx.fillText(yl.toString(),ox-5,yy);
+    }
+  }
+
+  slA.addEventListener('input',draw);
+  slB.addEventListener('input',draw);
+  slC.addEventListener('input',draw);
+  slD.addEventListener('input',draw);
+  draw();
+})();
+
+/* ====== EXPLORER 4: SEC/CSC EXPLORER ====== */
+(function(){
+  var cv=document.getElementById('secCscExplCanvas');
+  if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+
+  var mode='sec';
+  var btnSec=document.getElementById('btnSecExpl');
+  var btnCsc=document.getElementById('btnCscExpl');
+
+  var slA=document.getElementById('scFnA');
+  var slB=document.getElementById('scFnB');
+  var slC=document.getElementById('scFnC');
+  var slD=document.getElementById('scFnD');
+  var valA=document.getElementById('scFnValA');
+  var valB=document.getElementById('scFnValB');
+  var valC=document.getElementById('scFnValC');
+  var valD=document.getElementById('scFnValD');
+  var chipPer=document.getElementById('scFnInfoPer');
+  var chipAsym=document.getElementById('scFnInfoAsym');
+  var chipRange=document.getElementById('scFnInfoRange');
+
+  window.setSecCscExpl=function(fn){mode=fn;draw();};
+
+  if(btnSec) btnSec.addEventListener('click',function(){
+    mode='sec';
+    btnSec.className='site-btn active';
+    if(btnCsc) btnCsc.className='site-btn secondary';
+    draw();
+  });
+  if(btnCsc) btnCsc.addEventListener('click',function(){
+    mode='csc';
+    if(btnSec) btnSec.className='site-btn secondary';
+    btnCsc.className='site-btn active';
+    draw();
+  });
+
+  function fmt(v){return v.toFixed(2);}
+  function fmtPi(v){
+    if(Math.abs(v)<0.01) return '0';
+    var r=v/Math.PI;
+    if(Math.abs(r-1)<0.01) return '\u03c0';
+    if(Math.abs(r-0.5)<0.01) return '\u03c0/2';
+    if(Math.abs(r-2)<0.01) return '2\u03c0';
+    return fmt(v);
+  }
+
+  function draw(){
+    var a=parseFloat(slA.value);
+    var b=parseFloat(slB.value);
+    var c=parseFloat(slC.value);
+    var d=parseFloat(slD.value);
+
+    valA.textContent=fmt(a);
+    valB.textContent=fmt(b);
+    valC.textContent=fmt(c);
+    valD.textContent=fmt(d);
+
+    var per=2*Math.PI/Math.abs(b);
+    var absA=Math.abs(a);
+    var rangeTop=d+absA;
+    var rangeBot=d-absA;
+
+    if(chipPer) chipPer.innerHTML='<span class="chip-dot" style="background:#525B76;"></span> Period = '+fmtPi(per);
+    if(mode==='sec'){
+      if(chipAsym) chipAsym.innerHTML='<span class="chip-dot" style="background:#c06060;"></span> Asymptotes: cos(b(x+c))=0';
+    } else {
+      if(chipAsym) chipAsym.innerHTML='<span class="chip-dot" style="background:#c06060;"></span> Asymptotes: sin(b(x+c))=0';
+    }
+    if(chipRange) chipRange.innerHTML='<span class="chip-dot" style="background:#9BA06A;"></span> Range: (-\u221e, '+fmt(rangeBot)+'] \u222a ['+fmt(rangeTop)+', \u221e)';
+
+    ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+    var midY=H/2, scaleX=55, scaleY=50;
+    var ox=W/2;
+
+    function xp(x){return ox+x*scaleX;}
+    function yp(y){return midY-y*scaleY;}
+
+    /* grid */
+    ctx.strokeStyle='#e4e8cc';ctx.lineWidth=0.5;
+    for(var gx=0;gx<W;gx+=35){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,H);ctx.stroke();}
+    for(var gy=0;gy<H;gy+=35){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke();}
+
+    /* axes */
+    ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(0,midY);ctx.lineTo(W,midY);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(ox,0);ctx.lineTo(ox,H);ctx.stroke();
+
+    /* y=1, y=-1 reference */
+    ctx.strokeStyle='#D0D6B3';ctx.lineWidth=0.5;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(0,yp(1));ctx.lineTo(W,yp(1));ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,yp(-1));ctx.lineTo(W,yp(-1));ctx.stroke();
+    ctx.setLineDash([]);
+
+    /* d midline */
+    if(Math.abs(d)>0.01){
+      ctx.strokeStyle='#D0D6B3';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+      ctx.beginPath();ctx.moveTo(0,yp(d));ctx.lineTo(W,yp(d));ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    var xMin=-2*Math.PI, xMax=2*Math.PI, step=0.005;
+    var thresh=H/(scaleY*2);
+
+    if(mode==='sec'){
+      /* asymptotes for sec: b*(x+c) = pi/2 + n*pi => x = -c + (pi/2+n*pi)/b */
+      ctx.strokeStyle='#c06060';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+      for(var n=-10;n<=10;n++){
+        var ax=-c+(Math.PI/2+n*Math.PI)/b;
+        var apx=xp(ax);
+        if(apx>0&&apx<W){ctx.beginPath();ctx.moveTo(apx,0);ctx.lineTo(apx,H);ctx.stroke();}
+      }
+      ctx.setLineDash([]);
+
+      /* faded cos parent */
+      ctx.strokeStyle='#e4e8cc';ctx.lineWidth=2;ctx.beginPath();
+      for(var t=xMin;t<=xMax;t+=0.02){
+        var px=xp(t),py=yp(a*Math.cos(b*(t+c))+d);
+        if(t===xMin) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+      }
+      ctx.stroke();
+
+      /* sec curve */
+      ctx.strokeStyle='#9BA06A';ctx.lineWidth=2.8;
+      var drawing=false;
+      var prevV=null;
+      for(var t=xMin;t<=xMax;t+=step){
+        var cosV=Math.cos(b*(t+c));
+        if(Math.abs(cosV)<0.02){if(drawing){ctx.stroke();drawing=false;}prevV=null;continue;}
+        var v=a*(1/cosV)+d;
+        if(Math.abs(v)>thresh){if(drawing){ctx.stroke();drawing=false;}prevV=v;continue;}
+        if(prevV!==null&&((prevV>d&&v<d)||(prevV<d&&v>d))&&Math.abs(prevV-v)>2){
+          if(drawing){ctx.stroke();drawing=false;}prevV=v;continue;
+        }
+        var px=xp(t),py=yp(v);
+        if(px<-5||px>W+5){if(drawing){ctx.stroke();drawing=false;}prevV=v;continue;}
+        if(!drawing){ctx.beginPath();ctx.moveTo(px,py);drawing=true;}
+        else ctx.lineTo(px,py);
+        prevV=v;
+      }
+      if(drawing) ctx.stroke();
+
+      /* label */
+      ctx.fillStyle='#9BA06A';ctx.font='bold 13px Dosis, sans-serif';ctx.textAlign='left';ctx.textBaseline='top';
+      ctx.fillText('y = '+fmt(a)+'\u00b7sec('+fmt(b)+'(x+'+fmt(c)+'))+'+fmt(d),10,10);
+
+    } else {
+      /* asymptotes for csc: b*(x+c) = n*pi => x = -c + n*pi/b */
+      ctx.strokeStyle='#c06060';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+      for(var n=-10;n<=10;n++){
+        var ax=-c+(n*Math.PI)/b;
+        var apx=xp(ax);
+        if(apx>0&&apx<W){ctx.beginPath();ctx.moveTo(apx,0);ctx.lineTo(apx,H);ctx.stroke();}
+      }
+      ctx.setLineDash([]);
+
+      /* faded sin parent */
+      ctx.strokeStyle='#e4e8cc';ctx.lineWidth=2;ctx.beginPath();
+      for(var t=xMin;t<=xMax;t+=0.02){
+        var px=xp(t),py=yp(a*Math.sin(b*(t+c))+d);
+        if(t===xMin) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+      }
+      ctx.stroke();
+
+      /* csc curve */
+      ctx.strokeStyle='#525B76';ctx.lineWidth=2.8;
+      var drawing=false;
+      var prevV=null;
+      for(var t=xMin;t<=xMax;t+=step){
+        var sinV=Math.sin(b*(t+c));
+        if(Math.abs(sinV)<0.02){if(drawing){ctx.stroke();drawing=false;}prevV=null;continue;}
+        var v=a*(1/sinV)+d;
+        if(Math.abs(v)>thresh){if(drawing){ctx.stroke();drawing=false;}prevV=v;continue;}
+        if(prevV!==null&&((prevV>d&&v<d)||(prevV<d&&v>d))&&Math.abs(prevV-v)>2){
+          if(drawing){ctx.stroke();drawing=false;}prevV=v;continue;
+        }
+        var px=xp(t),py=yp(v);
+        if(px<-5||px>W+5){if(drawing){ctx.stroke();drawing=false;}prevV=v;continue;}
+        if(!drawing){ctx.beginPath();ctx.moveTo(px,py);drawing=true;}
+        else ctx.lineTo(px,py);
+        prevV=v;
+      }
+      if(drawing) ctx.stroke();
+
+      /* label */
+      ctx.fillStyle='#525B76';ctx.font='bold 13px Dosis, sans-serif';ctx.textAlign='left';ctx.textBaseline='top';
+      ctx.fillText('y = '+fmt(a)+'\u00b7csc('+fmt(b)+'(x+'+fmt(c)+'))+'+fmt(d),10,10);
+    }
+
+    /* x-axis labels */
+    ctx.fillStyle='#525B76';ctx.font='11px Dosis, sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+    var xLabels=[
+      {v:-Math.PI,l:'-\u03c0'},{v:-Math.PI/2,l:'-\u03c0/2'},{v:Math.PI/2,l:'\u03c0/2'},{v:Math.PI,l:'\u03c0'},
+      {v:3*Math.PI/2,l:'3\u03c0/2'},{v:-3*Math.PI/2,l:'-3\u03c0/2'}
+    ];
+    for(var li=0;li<xLabels.length;li++){
+      var lx=xp(xLabels[li].v);
+      if(lx>10&&lx<W-10) ctx.fillText(xLabels[li].l,lx,midY+4);
+    }
+
+    /* y-axis labels */
+    ctx.textAlign='right';ctx.textBaseline='middle';
+    for(var yl=-4;yl<=4;yl++){
+      if(yl===0) continue;
+      var yy=yp(yl);
+      if(yy>5&&yy<H-5) ctx.fillText(yl.toString(),ox-5,yy);
+    }
+  }
+
+  slA.addEventListener('input',draw);
+  slB.addEventListener('input',draw);
+  slC.addEventListener('input',draw);
+  slD.addEventListener('input',draw);
+  draw();
+})();
+</script>
+</body></html>
