@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circle Geometry &mdash; Interactive Notes</title>
+<meta name="description" content="Interactive notes on circle geometry — central angles, arcs, chords, inscribed angles, tangents, secants, power of a point, and equations of circles — by tutoringwithsruthi">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Dosis:wght@400;500;600;700&family=Bitter:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+:root{--white:#FFFFFF;--sage-l:#D0D6B3;--sage:#9BA06A;--slate:#525B76;--forest:#143109;--bg:#f5f6ee;--sage-m:#e4e8cc;--fh:'Young Serif',Georgia,serif;--fp:'Dosis','Trebuchet MS',Arial,sans-serif;--fb:'Bitter',Georgia,serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px 16px 52px;overflow-x:hidden}
+.page{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+.pg-head{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:20px;padding:44px 36px;text-align:center}
+.pg-head h1{font-family:var(--fh);font-size:2.3rem;color:var(--forest);margin-bottom:0}
+.card{background:var(--white);border:2px solid var(--sage-l);border-radius:20px;padding:32px 30px;box-shadow:0 2px 12px rgba(20,49,9,0.06)}
+.card-title{font-family:var(--fh);font-size:1.45rem;color:var(--forest);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.card-title .icon{font-size:1.5rem}
+.body-text{font-family:var(--fp);font-size:1.05rem;color:var(--forest);line-height:1.7;margin-bottom:12px}
+.body-text:last-child{margin-bottom:0}
+.highlight-box{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:14px;padding:20px 22px;margin:16px 0}
+.formula-box{background:var(--white);border:2px solid var(--sage);border-radius:14px;padding:22px;margin:16px 0;text-align:center;font-size:1.3rem;overflow-x:auto}
+.term-grid{display:grid;grid-template-columns:80px 1fr;gap:8px 16px;margin:12px 0}
+.term-sym{font-family:var(--fb);font-weight:700;font-size:1.1rem;color:var(--sage);text-align:right}
+.term-def{font-family:var(--fp);font-size:1rem;color:var(--forest);line-height:1.6}
+.interactive-area{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:18px;padding:24px;margin:18px 0;text-align:center}
+.interactive-area canvas{border-radius:12px;display:block;margin:0 auto;max-width:100%}
+.ia-label{font-family:var(--fb);font-size:1.05rem;color:var(--slate);margin-bottom:12px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0}
+.site-btn{font-family:var(--fp);font-weight:600;font-size:.98rem;border:none;border-radius:30px;padding:10px 22px;cursor:pointer;transition:background .18s,transform .18s;background:var(--sage);color:var(--white)}
+.site-btn:hover{background:var(--forest);transform:translateY(-1px)}
+.site-btn.active{background:var(--forest)}
+.site-btn.secondary{background:var(--white);color:var(--forest);border:2px solid var(--sage-l)}
+.site-btn.secondary:hover{background:var(--sage-m)}
+.worked-example{background:#f9faf4;border-left:4px solid var(--sage);border-radius:0 14px 14px 0;padding:20px 22px;margin:16px 0}
+.worked-example .step{font-family:var(--fp);font-size:1rem;color:var(--forest);margin-bottom:8px;line-height:1.7}
+.worked-example .step-label{font-family:var(--fb);font-weight:700;color:var(--sage)}
+.practice-box{background:var(--white);border:2px dashed var(--sage-l);border-radius:14px;padding:18px 20px;margin:10px 0}
+.practice-box .q{font-family:var(--fp);font-size:1rem;color:var(--forest);margin-bottom:8px;line-height:1.6}
+.practice-box .a{font-family:var(--fp);font-size:.95rem;color:var(--sage);display:none;margin-top:6px;padding:10px 14px;background:var(--sage-m);border-radius:10px;line-height:1.6}
+.practice-box .a.show{display:block;animation:fadeIn .25s ease}
+.show-ans-btn{font-family:var(--fp);font-weight:600;font-size:.88rem;border:2px solid var(--sage-l);border-radius:20px;padding:6px 16px;cursor:pointer;background:var(--white);color:var(--sage);transition:background .18s}
+.show-ans-btn:hover{background:var(--sage-m)}
+.sub-title{font-family:var(--fh);font-size:1.15rem;color:var(--forest);margin:18px 0 8px}
+.slider-row{display:flex;align-items:center;gap:12px;justify-content:center;margin:8px 0;flex-wrap:wrap}
+.slider-row label{font-family:var(--fp);font-weight:600;font-size:.95rem}
+.slider-row input[type=range]{width:180px;accent-color:var(--sage)}
+.slider-row .val{font-family:var(--fb);font-weight:700;color:var(--sage);min-width:48px}
+.status-text{font-family:var(--fb);font-size:.95rem;color:var(--slate);margin-top:8px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){
+  .pg-head{padding:30px 18px}.pg-head h1{font-size:1.6rem}.card{padding:22px 16px}.card-title{font-size:1.2rem}
+  .term-grid{grid-template-columns:60px 1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════════════════ HEADER ═══════════════════ -->
+<div class="pg-head"><h1>Circle Geometry</h1></div>
+
+<!-- ═══════════════════ CARD 1: Circle Basics & Vocabulary ═══════════════════ -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9678;</span> Circle Basics &amp; Vocabulary</div>
+
+  <p class="body-text">Before we do anything with circles, let's nail down every vocabulary word you'll need. Think of a circle as a perfectly round fence — every point on that fence is the exact same distance from one special point in the middle.</p>
+
+  <div class="term-grid">
+    <span class="term-sym">Circle</span>
+    <span class="term-def">The set of ALL points in a plane that are the same distance from a fixed point (the center). It's like tying a string to a stake and walking around it — the path you trace is the circle.</span>
+
+    <span class="term-sym">Center</span>
+    <span class="term-def">The fixed point right in the middle. Every point on the circle is the same distance from here. We usually label it $O$.</span>
+
+    <span class="term-sym">Radius</span>
+    <span class="term-def">The distance from the center to any point on the circle. Think of it as the length of the string in our stake analogy. Plural: radii.</span>
+
+    <span class="term-sym">Diameter</span>
+    <span class="term-def">A straight line that passes through the center and touches the circle on both sides. It's the longest chord you can draw. The diameter is always exactly twice the radius: $d = 2r$.</span>
+
+    <span class="term-sym">Chord</span>
+    <span class="term-def">Any straight line segment whose both endpoints sit on the circle. A diameter is just a special chord that happens to pass through the center.</span>
+
+    <span class="term-sym">Secant</span>
+    <span class="term-def">A line that cuts through the circle and crosses it at two points. Think of a chord that keeps going forever in both directions — that's a secant.</span>
+
+    <span class="term-sym">Tangent</span>
+    <span class="term-def">A line that just barely touches the circle at exactly one point and then keeps going. It "kisses" the circle without crossing it.</span>
+
+    <span class="term-sym">Arc</span>
+    <span class="term-def">A curved piece of the circle between two points. Like cutting a piece of string off a hoop. There are two types: minor arc (the short way around) and major arc (the long way around).</span>
+
+    <span class="term-sym">Minor Arc</span>
+    <span class="term-def">The shorter arc between two points — it measures less than 180&deg;.</span>
+
+    <span class="term-sym">Major Arc</span>
+    <span class="term-def">The longer arc between two points — it measures more than 180&deg;.</span>
+
+    <span class="term-sym">Semicircle</span>
+    <span class="term-def">Exactly half of the circle — an arc that measures exactly 180&deg;. It's created when a diameter splits the circle in two.</span>
+
+    <span class="term-sym">Central Angle</span>
+    <span class="term-def">An angle whose vertex (corner point) is at the center of the circle. Its two sides are radii. The size of this angle equals the size of the arc it "opens up to."</span>
+
+    <span class="term-sym">Inscribed Angle</span>
+    <span class="term-def">An angle whose vertex sits ON the circle itself, and whose two sides are chords. This one is always half the arc it intercepts — we'll explore why soon.</span>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Circle Vocabulary Diagram</div>
+    <canvas id="circleVocabCanvas" width="700" height="520"></canvas>
+  </div>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0"><strong>Key fact:</strong> A full circle = 360&deg;. A semicircle = 180&deg;. No matter how big or small the circle is, this is always true.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════ CARD 2: Central Angles & Arcs ═══════════════════ -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9681;</span> Central Angles &amp; Arcs</div>
+
+  <p class="body-text">Now that we know the vocabulary, let's start with the simplest angle-arc relationship. A <strong>central angle</strong> is formed when two radii meet at the center of the circle. The beautiful thing about central angles is how simple they are: the angle and its intercepted arc are always the same measure. If the central angle is 80&deg;, the arc it opens up to is also 80&deg;. No tricks, no formulas — just equal.</p>
+
+  <p class="body-text">Think of cutting a pizza. The angle of your pizza slice at the very tip (the center) is the central angle, and the curved crust edge is the arc. A bigger angle means a bigger crust edge.</p>
+
+  <div class="formula-box">
+    Central Angle = Intercepted Arc
+  </div>
+
+  <p class="body-text"><strong>Types of arcs by size:</strong></p>
+  <div class="term-grid">
+    <span class="term-sym">Minor Arc</span>
+    <span class="term-def">Less than 180&deg;. Named with two letters, like $\overset{\frown}{AB}$.</span>
+
+    <span class="term-sym">Major Arc</span>
+    <span class="term-def">Greater than 180&deg;. Named with three letters (so we know which way around), like $\overset{\frown}{ACB}$.</span>
+
+    <span class="term-sym">Semicircle</span>
+    <span class="term-def">Exactly 180&deg;. Created by a diameter.</span>
+  </div>
+
+  <h3 class="sub-title">Arc Addition Postulate</h3>
+  <p class="body-text">If two arcs are next to each other (adjacent), you can add their measures to get the total. It's just like adding two puzzle pieces together. If $\overset{\frown}{AB} = 70°$ and $\overset{\frown}{BC} = 110°$, then $\overset{\frown}{ABC} = 70° + 110° = 180°$.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Drag the slider to change the central angle</div>
+    <canvas id="centralAngleCanvas" width="500" height="400"></canvas>
+    <div class="slider-row">
+      <label for="centralSlider">Central Angle:</label>
+      <input type="range" id="centralSlider" min="10" max="350" value="72">
+      <span class="val" id="centralVal">72&deg;</span>
+    </div>
+    <div class="status-text" id="centralStatus">Minor arc = 72&deg; &nbsp;|&nbsp; Major arc = 288&deg;</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example 1</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> A central angle measures 72&deg;. Find the minor arc and the major arc.</div>
+    <div class="step"><span class="step-label">Step 1:</span> The minor arc equals the central angle, so <strong>minor arc = 72&deg;</strong>.</div>
+    <div class="step"><span class="step-label">Step 2:</span> The entire circle is 360&deg;. The major arc is the rest: $360° - 72° = 288°$.</div>
+    <div class="step"><span class="step-label">Answer:</span> Minor arc = 72&deg;, Major arc = 288&deg;.</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example 2</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> Two adjacent arcs make up the full circle. One arc is 145&deg;. Find the other.</div>
+    <div class="step"><span class="step-label">Step 1:</span> Together they must equal 360&deg;.</div>
+    <div class="step"><span class="step-label">Step 2:</span> $360° - 145° = 215°$.</div>
+    <div class="step"><span class="step-label">Answer:</span> The other arc is 215&deg;.</div>
+  </div>
+
+  <h3 class="sub-title">Practice</h3>
+  <div class="practice-box">
+    <div class="q"><strong>Q1:</strong> A central angle is 130&deg;. What are the minor and major arcs?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ca1')">Show Answer</button>
+    <div class="a" id="ca1">Minor arc = 130&deg;. Major arc = 360&deg; &minus; 130&deg; = 230&deg;.</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>Q2:</strong> Three adjacent arcs in a circle measure 95&deg;, 120&deg;, and $x$&deg;. Find $x$.</div>
+    <button class="show-ans-btn" onclick="toggleAns('ca2')">Show Answer</button>
+    <div class="a" id="ca2">$95 + 120 + x = 360$, so $x = 360 - 215 = 145°$.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CARD 3: Arc Length ═══════════════════ -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#8978;</span> Arc Length</div>
+
+  <p class="body-text">We know that arc <em>measure</em> is in degrees — but what about the actual physical <em>length</em> of an arc? Arc length is the actual distance along the curved part of the circle — if you straightened it out, how long would that piece of string be?</p>
+
+  <p class="body-text">Think of it like slicing a pizza. If your slice has a 90&deg; angle, that's $\frac{90}{360} = \frac{1}{4}$ of the whole pie. So the crust (arc length) is $\frac{1}{4}$ of the total circumference.</p>
+
+  <div class="formula-box">
+    $$\text{Arc Length} = \frac{\theta}{360} \times 2\pi r = \frac{\theta}{360} \times \pi d$$
+  </div>
+
+  <p class="body-text">In plain English: figure out what fraction of the circle your arc covers (that's $\frac{\theta}{360}$), then take that fraction of the full circumference ($2\pi r$). Done!</p>
+
+  <h3 class="sub-title">Worked Example 1</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> A circle has radius $r = 8$. Find the arc length for a central angle of 45&deg;.</div>
+    <div class="step"><span class="step-label">Step 1:</span> Find the fraction of the circle: $\frac{45}{360} = \frac{1}{8}$.</div>
+    <div class="step"><span class="step-label">Step 2:</span> Find the full circumference: $2\pi(8) = 16\pi$.</div>
+    <div class="step"><span class="step-label">Step 3:</span> Multiply: $\frac{1}{8} \times 16\pi = 2\pi \approx 6.28$.</div>
+    <div class="step"><span class="step-label">Answer:</span> Arc length = $2\pi$ units.</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example 2</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> An arc has length $5\pi$ and the circle has radius 10. Find the central angle.</div>
+    <div class="step"><span class="step-label">Step 1:</span> Full circumference = $2\pi(10) = 20\pi$.</div>
+    <div class="step"><span class="step-label">Step 2:</span> Set up the equation: $5\pi = \frac{\theta}{360} \times 20\pi$.</div>
+    <div class="step"><span class="step-label">Step 3:</span> Divide both sides by $20\pi$: $\frac{5\pi}{20\pi} = \frac{\theta}{360}$, so $\frac{1}{4} = \frac{\theta}{360}$.</div>
+    <div class="step"><span class="step-label">Step 4:</span> Multiply: $\theta = \frac{360}{4} = 90°$.</div>
+    <div class="step"><span class="step-label">Answer:</span> The central angle is 90&deg;.</div>
+  </div>
+
+  <h3 class="sub-title">Practice</h3>
+  <div class="practice-box">
+    <div class="q"><strong>Q1:</strong> A circle has radius 6. Find the arc length for a central angle of 120&deg;.</div>
+    <button class="show-ans-btn" onclick="toggleAns('al1')">Show Answer</button>
+    <div class="a" id="al1">$\frac{120}{360} \times 2\pi(6) = \frac{1}{3} \times 12\pi = 4\pi \approx 12.57$ units.</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>Q2:</strong> An arc length is $3\pi$ on a circle with radius 9. What is the central angle?</div>
+    <button class="show-ans-btn" onclick="toggleAns('al2')">Show Answer</button>
+    <div class="a" id="al2">$3\pi = \frac{\theta}{360} \times 18\pi$. So $\frac{3\pi}{18\pi} = \frac{\theta}{360}$, meaning $\frac{1}{6} = \frac{\theta}{360}$, and $\theta = 60°$.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CARD 4: Arcs & Chords ═══════════════════ -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9473;</span> Arcs &amp; Chords</div>
+
+  <p class="body-text">So far we've looked at angles at the center and the arcs they create. Now let's look at <strong>chords</strong> — straight lines across the circle — and how they relate to arcs. Chords and arcs are best friends — when you know something about one, you usually know something about the other.</p>
+
+  <p class="body-text"><strong>Big Rule 1:</strong> In the same circle (or in congruent circles), congruent chords have congruent arcs, and congruent arcs have congruent chords. Think of it like this: if two guitar strings stretched across a circle are the same length, they must cover the same amount of curve.</p>
+
+  <p class="body-text"><strong>Big Rule 2:</strong> If you draw a line from the center of the circle perpendicular to a chord, that line bisects (cuts in half) both the chord AND its arc. It's like dropping a plumb line from the center — it splits everything evenly.</p>
+
+  <p class="body-text"><strong>Big Rule 3:</strong> When you know the chord length and the radius, the perpendicular distance from the center to the chord can be found using the <strong>Pythagorean theorem</strong>. The radius is the hypotenuse, half the chord is one leg, and the distance from center to chord is the other leg.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Chord, Perpendicular from Center &amp; Bisection</div>
+    <canvas id="chordCanvas" width="500" height="400"></canvas>
+  </div>
+
+  <h3 class="sub-title">Worked Example 1</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> A chord is 24 units long in a circle with radius 13. Find the distance from the center to the chord.</div>
+    <div class="step"><span class="step-label">Step 1:</span> The perpendicular from center bisects the chord, so each half = $\frac{24}{2} = 12$.</div>
+    <div class="step"><span class="step-label">Step 2:</span> Now we have a right triangle: hypotenuse = radius = 13, one leg = 12, find the other leg $d$.</div>
+    <div class="step"><span class="step-label">Step 3:</span> $d^2 + 12^2 = 13^2 \Rightarrow d^2 + 144 = 169 \Rightarrow d^2 = 25 \Rightarrow d = 5$.</div>
+    <div class="step"><span class="step-label">Answer:</span> The distance from the center to the chord is <strong>5 units</strong>.</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example 2</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> The distance from the center to a chord is 5, and the radius is 13. Find the chord length.</div>
+    <div class="step"><span class="step-label">Step 1:</span> Right triangle: hypotenuse = 13, one leg = 5, find the other leg (half-chord).</div>
+    <div class="step"><span class="step-label">Step 2:</span> $5^2 + h^2 = 13^2 \Rightarrow 25 + h^2 = 169 \Rightarrow h^2 = 144 \Rightarrow h = 12$.</div>
+    <div class="step"><span class="step-label">Step 3:</span> That's half the chord, so the full chord = $12 \times 2 = 24$.</div>
+    <div class="step"><span class="step-label">Answer:</span> The chord is <strong>24 units</strong> long.</div>
+  </div>
+
+  <h3 class="sub-title">Practice</h3>
+  <div class="practice-box">
+    <div class="q"><strong>Q1:</strong> A chord is 16 units long in a circle with radius 10. Find the distance from the center to the chord.</div>
+    <button class="show-ans-btn" onclick="toggleAns('ch1')">Show Answer</button>
+    <div class="a" id="ch1">Half-chord = 8. Using Pythagorean theorem: $d^2 + 8^2 = 10^2 \Rightarrow d^2 = 100 - 64 = 36 \Rightarrow d = 6$ units.</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>Q2:</strong> A radius is 17 and the perpendicular distance from center to chord is 8. Find the chord length.</div>
+    <button class="show-ans-btn" onclick="toggleAns('ch2')">Show Answer</button>
+    <div class="a" id="ch2">$8^2 + h^2 = 17^2 \Rightarrow h^2 = 289 - 64 = 225 \Rightarrow h = 15$. Full chord = $15 \times 2 = 30$ units.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CARD 5: Inscribed Angles ═══════════════════ -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9651;</span> Inscribed Angles</div>
+
+  <p class="body-text">Central angles have their vertex at the center, and their measure equals the arc. But what happens when we move the vertex to the edge of the circle? That gives us an <strong>inscribed angle</strong> — an angle whose vertex (corner) sits right ON the circle, and whose two sides are chords of the circle. Imagine sitting on the edge of a circular stadium and looking across at two points on the opposite side — the angle your eyes make is an inscribed angle.</p>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0;font-size:1.15rem"><strong>THE BIG RULE:</strong> An inscribed angle is always exactly <strong>half</strong> the intercepted arc.</p>
+    <div class="formula-box" style="margin:12px 0 0">$$\text{Inscribed Angle} = \frac{1}{2} \times \text{Intercepted Arc}$$</div>
+  </div>
+
+  <p class="body-text">Think of it like this: the central angle gets the "full view" of the arc because it's at the center. The inscribed angle is sitting on the edge, farther away from the action, so it only sees half as much.</p>
+
+  <h3 class="sub-title">Important Corollaries</h3>
+
+  <p class="body-text"><strong>Corollary 1:</strong> If two inscribed angles intercept (open up to) the same arc, they are equal. No matter where you sit on the circle, if you're looking at the same arc, you get the same angle.</p>
+
+  <p class="body-text"><strong>Corollary 2 (Thales' Theorem):</strong> An inscribed angle that intercepts a semicircle (an arc of 180&deg;) is always exactly 90&deg;. If the two endpoints of the angle sit on a diameter, the angle at the third point is a right angle. Always. This is one of the most useful facts in all of geometry.</p>
+
+  <p class="body-text"><strong>Corollary 3:</strong> If a quadrilateral is inscribed in a circle (all four vertices on the circle), then opposite angles add up to 180&deg;. They are supplementary.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Drag the slider to move the vertex around the circle</div>
+    <canvas id="inscribedCanvas" width="500" height="400"></canvas>
+    <div class="slider-row">
+      <label for="inscribedSlider">Vertex Position:</label>
+      <input type="range" id="inscribedSlider" min="0" max="360" value="180">
+    </div>
+    <div class="status-text" id="inscribedStatus">Inscribed angle = 45&deg; &nbsp;|&nbsp; Intercepted arc = 90&deg;</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example 1</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> An inscribed angle measures 35&deg;. Find the intercepted arc.</div>
+    <div class="step"><span class="step-label">Step 1:</span> Use the rule: inscribed angle = &frac12; &times; arc.</div>
+    <div class="step"><span class="step-label">Step 2:</span> So arc = 2 &times; inscribed angle = $2 \times 35° = 70°$.</div>
+    <div class="step"><span class="step-label">Answer:</span> The intercepted arc is <strong>70&deg;</strong>.</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example 2</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> An arc measures 124&deg;. Find the inscribed angle that intercepts it.</div>
+    <div class="step"><span class="step-label">Step 1:</span> Inscribed angle = &frac12; &times; arc = $\frac{1}{2} \times 124° = 62°$.</div>
+    <div class="step"><span class="step-label">Answer:</span> The inscribed angle is <strong>62&deg;</strong>.</div>
+  </div>
+
+  <h3 class="sub-title">Practice</h3>
+  <div class="practice-box">
+    <div class="q"><strong>Q1:</strong> An inscribed angle intercepts an arc of 200&deg;. What is the inscribed angle?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ia1')">Show Answer</button>
+    <div class="a" id="ia1">Inscribed angle = $\frac{1}{2} \times 200° = 100°$.</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>Q2:</strong> Two inscribed angles intercept the same arc. One is $(3x + 5)°$ and the other is $(2x + 20)°$. Find $x$.</div>
+    <button class="show-ans-btn" onclick="toggleAns('ia2')">Show Answer</button>
+    <div class="a" id="ia2">Since they intercept the same arc, they're equal: $3x + 5 = 2x + 20 \Rightarrow x = 15$. Each angle = $3(15) + 5 = 50°$.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CARD 6: Tangent Lines ═══════════════════ -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#10178;</span> Tangent Lines</div>
+
+  <p class="body-text">We've covered lines that cross through the circle (chords and secants). Now let's look at lines that only <em>touch</em> it. A <strong>tangent line</strong> just barely touches the circle at exactly one point — called the <strong>point of tangency</strong>. Imagine a ball sitting on the floor: the floor is tangent to the ball, and the point where they touch is the point of tangency.</p>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0;font-size:1.15rem"><strong>THE BIG RULE:</strong> A tangent line is always perpendicular (makes a 90&deg; angle) to the radius drawn to the point of tangency.</p>
+  </div>
+
+  <p class="body-text">This is incredibly useful because it gives you a right angle, which means you can use the Pythagorean theorem!</p>
+
+  <p class="body-text"><strong>Two-Tangent Theorem:</strong> If you stand at a point outside a circle and draw two tangent lines to the circle, those two tangent segments are always the <strong>same length</strong>. Think of it like reaching out with both hands to touch a basketball — both arms stretch the same distance.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Tangent Line, Radius &amp; the 90&deg; Angle</div>
+    <canvas id="tangentCanvas" width="500" height="400"></canvas>
+  </div>
+
+  <h3 class="sub-title">Worked Example 1</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> A tangent segment from an external point to the circle is 12 units. The radius is 5 units. Find the distance from the external point to the center.</div>
+    <div class="step"><span class="step-label">Step 1:</span> The tangent and radius form a right angle at the point of tangency. So we have a right triangle.</div>
+    <div class="step"><span class="step-label">Step 2:</span> Legs = tangent (12) and radius (5). Hypotenuse = distance from external point to center.</div>
+    <div class="step"><span class="step-label">Step 3:</span> $d^2 = 12^2 + 5^2 = 144 + 25 = 169 \Rightarrow d = 13$.</div>
+    <div class="step"><span class="step-label">Answer:</span> The distance from the external point to the center is <strong>13 units</strong>.</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example 2</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> From an external point, two tangent segments are drawn to a circle. One tangent segment is $(3x + 2)$ and the other is $(5x - 8)$. Find $x$ and the tangent length.</div>
+    <div class="step"><span class="step-label">Step 1:</span> Two tangent segments from the same external point are equal.</div>
+    <div class="step"><span class="step-label">Step 2:</span> $3x + 2 = 5x - 8 \Rightarrow 10 = 2x \Rightarrow x = 5$.</div>
+    <div class="step"><span class="step-label">Step 3:</span> Tangent length = $3(5) + 2 = 17$.</div>
+    <div class="step"><span class="step-label">Answer:</span> $x = 5$ and each tangent segment is <strong>17 units</strong>.</div>
+  </div>
+
+  <h3 class="sub-title">Practice</h3>
+  <div class="practice-box">
+    <div class="q"><strong>Q1:</strong> A tangent is 24 units and the distance from the external point to the center is 25 units. Find the radius.</div>
+    <button class="show-ans-btn" onclick="toggleAns('tg1')">Show Answer</button>
+    <div class="a" id="tg1">$r^2 + 24^2 = 25^2 \Rightarrow r^2 = 625 - 576 = 49 \Rightarrow r = 7$ units.</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>Q2:</strong> Two tangent segments from the same point are $(4x - 1)$ and $(2x + 11)$. Find the tangent length.</div>
+    <button class="show-ans-btn" onclick="toggleAns('tg2')">Show Answer</button>
+    <div class="a" id="tg2">$4x - 1 = 2x + 11 \Rightarrow 2x = 12 \Rightarrow x = 6$. Length = $4(6) - 1 = 23$ units.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CARD 7: Angles from Secants, Tangents & Chords ═══════════════════ -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#8736;</span> Angles Formed by Secants, Tangents &amp; Chords</div>
+
+  <p class="body-text">We've seen central angles (vertex at center = arc) and inscribed angles (vertex on circle = ½ arc). But what about angles formed <em>inside</em> or <em>outside</em> the circle by secants, tangents, and chords? This card covers all three cases. The rule depends entirely on <strong>where the vertex is</strong> relative to the circle.</p>
+
+  <h3 class="sub-title">Case 1: Vertex INSIDE the Circle</h3>
+  <p class="body-text">When two chords cross each other inside the circle, the angle formed equals half the <strong>sum</strong> of the two intercepted arcs. Think of it like being inside a room and looking at two arcs on the wall — you average them out.</p>
+  <div class="formula-box">$$\text{Angle} = \frac{1}{2}(\text{arc}_1 + \text{arc}_2)$$</div>
+
+  <h3 class="sub-title">Case 2: Vertex ON the Circle</h3>
+  <p class="body-text">This is our inscribed angle rule again! Also works for a tangent-chord angle (where one side is a tangent and the other is a chord). The angle equals half the intercepted arc.</p>
+  <div class="formula-box">$$\text{Angle} = \frac{1}{2}(\text{intercepted arc})$$</div>
+
+  <h3 class="sub-title">Case 3: Vertex OUTSIDE the Circle</h3>
+  <p class="body-text">When the vertex is outside — whether it's two secants, a secant and a tangent, or two tangents — the angle equals half the <strong>difference</strong> of the two intercepted arcs. You take the far (bigger) arc, subtract the near (smaller) arc, and halve the result.</p>
+  <div class="formula-box">$$\text{Angle} = \frac{1}{2}(\text{far arc} - \text{near arc})$$</div>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0"><strong>Summary of the three angle rules:</strong></p>
+    <p class="body-text"><strong>Inside:</strong> angle = &frac12;(sum of arcs)</p>
+    <p class="body-text"><strong>On:</strong> angle = &frac12;(intercepted arc)</p>
+    <p class="body-text"><strong>Outside:</strong> angle = &frac12;(far arc &minus; near arc)</p>
+    <p class="body-text" style="margin:0"><em>Memory trick:</em> As the vertex moves from inside → on → outside the circle, the formula goes from <strong>add</strong> → <strong>just the arc</strong> → <strong>subtract</strong>.</p>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Toggle between the three cases</div>
+    <div class="btn-row">
+      <button class="site-btn active" id="btnInside" onclick="showAngleCase('inside')">Vertex Inside</button>
+      <button class="site-btn" id="btnOn" onclick="showAngleCase('on')">Vertex On</button>
+      <button class="site-btn" id="btnOutside" onclick="showAngleCase('outside')">Vertex Outside</button>
+    </div>
+    <canvas id="angleRulesCanvas" width="600" height="400"></canvas>
+    <div class="status-text" id="angleRulesStatus">Two chords intersect inside the circle</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example &mdash; Vertex Inside</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> Two chords intersect inside a circle. The intercepted arcs are 80&deg; and 40&deg;. Find the angle.</div>
+    <div class="step"><span class="step-label">Step 1:</span> Vertex is inside, so use: angle = &frac12;(arc&#8321; + arc&#8322;).</div>
+    <div class="step"><span class="step-label">Step 2:</span> Angle = $\frac{1}{2}(80 + 40) = \frac{1}{2}(120) = 60°$.</div>
+    <div class="step"><span class="step-label">Answer:</span> The angle is <strong>60&deg;</strong>.</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example &mdash; Vertex On</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> A tangent and a chord meet at a point on the circle. The intercepted arc is 148&deg;. Find the angle.</div>
+    <div class="step"><span class="step-label">Step 1:</span> Vertex is on the circle, so use: angle = &frac12;(intercepted arc).</div>
+    <div class="step"><span class="step-label">Step 2:</span> Angle = $\frac{1}{2}(148) = 74°$.</div>
+    <div class="step"><span class="step-label">Answer:</span> The angle is <strong>74&deg;</strong>.</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example &mdash; Vertex Outside</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> Two secants from an external point intercept arcs of 140&deg; (far) and 50&deg; (near). Find the angle.</div>
+    <div class="step"><span class="step-label">Step 1:</span> Vertex is outside, so use: angle = &frac12;(far arc &minus; near arc).</div>
+    <div class="step"><span class="step-label">Step 2:</span> Angle = $\frac{1}{2}(140 - 50) = \frac{1}{2}(90) = 45°$.</div>
+    <div class="step"><span class="step-label">Answer:</span> The angle is <strong>45&deg;</strong>.</div>
+  </div>
+
+  <h3 class="sub-title">Practice</h3>
+  <div class="practice-box">
+    <div class="q"><strong>Q1:</strong> Two chords intersect inside a circle. The two intercepted arcs are 110&deg; and 70&deg;. Find the angle.</div>
+    <button class="show-ans-btn" onclick="toggleAns('ar1')">Show Answer</button>
+    <div class="a" id="ar1">Angle = $\frac{1}{2}(110 + 70) = \frac{1}{2}(180) = 90°$.</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>Q2:</strong> A tangent-chord angle intercepts an arc of 96&deg;. Find the angle.</div>
+    <button class="show-ans-btn" onclick="toggleAns('ar2')">Show Answer</button>
+    <div class="a" id="ar2">Vertex is on the circle: angle = $\frac{1}{2}(96) = 48°$.</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>Q3:</strong> Two tangents from an external point create a far arc of 240&deg; and a near arc of 120&deg;. Find the angle.</div>
+    <button class="show-ans-btn" onclick="toggleAns('ar3')">Show Answer</button>
+    <div class="a" id="ar3">Vertex is outside: angle = $\frac{1}{2}(240 - 120) = \frac{1}{2}(120) = 60°$.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CARD 8: Segment Lengths (Power of a Point) ═══════════════════ -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#10005;</span> Segment Lengths in Circles (Power of a Point)</div>
+
+  <p class="body-text">The previous card was about <em>angles</em>. Now let's look at <em>lengths</em>. When lines pass through or touch a circle, the segments they create have a special relationship. No matter which line you draw through the same point, the "product" of the segments stays the same. This is called the <strong>Power of a Point</strong>.</p>
+
+  <h3 class="sub-title">Case 1: Intersecting Chords</h3>
+  <p class="body-text">Two chords cross inside the circle, creating four segments. The products of the pieces of each chord are equal. Think of it like a balance — the pieces always multiply to the same number.</p>
+  <div class="formula-box">$$a \times b = c \times d$$</div>
+
+  <h3 class="sub-title">Case 2: Two Secants from an External Point</h3>
+  <p class="body-text">Two secant lines from the same external point P. Label the first secant's full length $a$ and its external segment $b$. Label the second secant's full length $c$ and its external segment $d$. The products are equal:</p>
+  <div class="formula-box">$$a \times b = c \times d$$</div>
+  <p class="body-text">($a$ = whole length of secant 1, $b$ = external part of secant 1, $c$ = whole length of secant 2, $d$ = external part of secant 2)</p>
+
+  <h3 class="sub-title">Case 3: Tangent-Secant from an External Point</h3>
+  <p class="body-text">One tangent and one secant from the same external point P. Let $a$ be the tangent length, $b$ be the whole secant length, and $c$ be the external part of the secant. The tangent squared equals the product of the secant parts:</p>
+  <div class="formula-box">$$a^2 = b \times c$$</div>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0"><strong>Power of a Point</strong> &mdash; the product is always the same no matter which line you draw through the point. Whether it's chords crossing inside, secants from outside, or a tangent and secant — the products always balance out.</p>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Toggle between the three segment cases</div>
+    <div class="btn-row">
+      <button class="site-btn active" id="btnChords" onclick="showSegCase('chords')">Intersecting Chords</button>
+      <button class="site-btn" id="btnSecants" onclick="showSegCase('secants')">Two Secants</button>
+      <button class="site-btn" id="btnTanSec" onclick="showSegCase('tansec')">Tangent-Secant</button>
+    </div>
+    <canvas id="segmentCanvas" width="600" height="400"></canvas>
+    <div class="status-text" id="segmentStatus">Intersecting chords: a &times; b = c &times; d</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example &mdash; Intersecting Chords</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> Two chords intersect inside a circle. One chord is split into segments of 6 and 8. The other chord has one segment of 4. Find the other segment.</div>
+    <div class="step"><span class="step-label">Step 1:</span> Use $a \times b = c \times d$: $6 \times 8 = 4 \times d$.</div>
+    <div class="step"><span class="step-label">Step 2:</span> $48 = 4d \Rightarrow d = 12$.</div>
+    <div class="step"><span class="step-label">Answer:</span> The missing segment is <strong>12 units</strong>.</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example &mdash; Two Secants</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> Two secants from point P. Secant 1: $a = 15$ (whole), $b = 5$ (external). Secant 2: $c = x$ (whole), $d = 3$ (external). Find $x$.</div>
+    <div class="step"><span class="step-label">Step 1:</span> $a \times b = c \times d$.</div>
+    <div class="step"><span class="step-label">Step 2:</span> $15 \times 5 = x \times 3 \Rightarrow 75 = 3x \Rightarrow x = 25$.</div>
+    <div class="step"><span class="step-label">Answer:</span> The whole length of secant 2 is <strong>25 units</strong>.</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example &mdash; Tangent-Secant</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> From point P, a tangent $a = 8$ and a secant with whole length $b$ and external part $c = 4$. Find $b$.</div>
+    <div class="step"><span class="step-label">Step 1:</span> $a^2 = b \times c$.</div>
+    <div class="step"><span class="step-label">Step 2:</span> $8^2 = b \times 4 \Rightarrow 64 = 4b \Rightarrow b = 16$.</div>
+    <div class="step"><span class="step-label">Answer:</span> The whole secant is <strong>16 units</strong>.</div>
+  </div>
+
+  <h3 class="sub-title">Practice</h3>
+  <div class="practice-box">
+    <div class="q"><strong>Q1:</strong> Two chords intersect. One is split into 3 and 10. The other has one segment of 5. Find the other segment.</div>
+    <button class="show-ans-btn" onclick="toggleAns('sg1')">Show Answer</button>
+    <div class="a" id="sg1">$3 \times 10 = 5 \times d \Rightarrow 30 = 5d \Rightarrow d = 6$ units.</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>Q2:</strong> Two secants from point P: $a = 20$, $b = 4$, $d = 5$. Find $c$ (whole length of secant 2).</div>
+    <button class="show-ans-btn" onclick="toggleAns('sg2')">Show Answer</button>
+    <div class="a" id="sg2">$a \times b = c \times d \Rightarrow 20 \times 4 = c \times 5 \Rightarrow 80 = 5c \Rightarrow c = 16$ units.</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>Q3:</strong> Tangent $a = 6$, secant whole $b = 9$. Find the external segment $c$.</div>
+    <button class="show-ans-btn" onclick="toggleAns('sg3')">Show Answer</button>
+    <div class="a" id="sg3">$a^2 = b \times c \Rightarrow 6^2 = 9 \times c \Rightarrow 36 = 9c \Rightarrow c = 4$ units.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CARD 9: Equations of Circles ═══════════════════ -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#9679;</span> Equations of Circles</div>
+
+  <p class="body-text">Everything so far has been pure geometry — angles, arcs, and lengths. Now let's bring circles into the coordinate plane. The equation of a circle is really just the <strong>distance formula in disguise</strong>. Every point $(x, y)$ on the circle is exactly $r$ units from the center $(h, k)$. The distance formula says $\sqrt{(x - h)^2 + (y - k)^2} = r$. Square both sides and you get the standard equation of a circle.</p>
+
+  <h3 class="sub-title">Standard Form</h3>
+  <div class="formula-box">$$(x - h)^2 + (y - k)^2 = r^2$$</div>
+  <p class="body-text">Here, $(h, k)$ is the center and $r$ is the radius. Think of it like a GPS — it tells you "every point that's exactly $r$ steps from the center at $(h, k)$."</p>
+  <p class="body-text"><strong>Watch the signs!</strong> In the equation it says $(x - h)$. If the center is at $(3, -2)$, you get $(x - 3)^2 + (y - (-2))^2 = (x - 3)^2 + (y + 2)^2$. The sign flips!</p>
+
+  <h3 class="sub-title">General Form</h3>
+  <div class="formula-box">$$x^2 + y^2 + Dx + Ey + F = 0$$</div>
+  <p class="body-text">This is just the standard form expanded out. It looks messier, but it's the same circle. To go from general form back to standard form, you <strong>complete the square</strong> for both $x$ and $y$.</p>
+
+  <h3 class="sub-title">Converting: General to Standard (Completing the Square)</h3>
+  <p class="body-text">Think of completing the square like building a perfect box. You take the messy expanded terms and reorganize them into neat squared binomials. Here's the process:</p>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Step 1:</span> Group the $x$-terms together and the $y$-terms together. Move the constant to the other side.</div>
+    <div class="step"><span class="step-label">Step 2:</span> For each group, take half the coefficient of the linear term, square it, and add it to BOTH sides.</div>
+    <div class="step"><span class="step-label">Step 3:</span> Factor each group into a perfect square binomial.</div>
+    <div class="step"><span class="step-label">Step 4:</span> Read off the center and radius.</div>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Adjust center and radius to see the equation update</div>
+    <canvas id="eqCircleCanvas" width="500" height="400"></canvas>
+    <div class="slider-row">
+      <label for="hSlider">h:</label>
+      <input type="range" id="hSlider" min="-5" max="5" value="0" step="1">
+      <span class="val" id="hVal">0</span>
+    </div>
+    <div class="slider-row">
+      <label for="kSlider">k:</label>
+      <input type="range" id="kSlider" min="-5" max="5" value="0" step="1">
+      <span class="val" id="kVal">0</span>
+    </div>
+    <div class="slider-row">
+      <label for="rSlider">r:</label>
+      <input type="range" id="rSlider" min="1" max="5" value="3" step="0.5">
+      <span class="val" id="rVal">3</span>
+    </div>
+    <div class="status-text" id="eqStatus">$(x - 0)^2 + (y - 0)^2 = 9$</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example 1</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> Write the equation of a circle with center $(3, -2)$ and radius 5.</div>
+    <div class="step"><span class="step-label">Step 1:</span> Plug into the standard form: $(x - h)^2 + (y - k)^2 = r^2$.</div>
+    <div class="step"><span class="step-label">Step 2:</span> $(x - 3)^2 + (y - (-2))^2 = 5^2$.</div>
+    <div class="step"><span class="step-label">Answer:</span> $(x - 3)^2 + (y + 2)^2 = 25$.</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example 2</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> Convert $x^2 + y^2 - 6x + 4y - 12 = 0$ to standard form. Find the center and radius.</div>
+    <div class="step"><span class="step-label">Step 1:</span> Group and move constant: $(x^2 - 6x) + (y^2 + 4y) = 12$.</div>
+    <div class="step"><span class="step-label">Step 2:</span> Complete the square for $x$: half of $-6$ is $-3$, square it: $9$. Add 9 to both sides.</div>
+    <div class="step"><span class="step-label">Step 3:</span> Complete the square for $y$: half of $4$ is $2$, square it: $4$. Add 4 to both sides.</div>
+    <div class="step"><span class="step-label">Step 4:</span> $(x^2 - 6x + 9) + (y^2 + 4y + 4) = 12 + 9 + 4$.</div>
+    <div class="step"><span class="step-label">Step 5:</span> $(x - 3)^2 + (y + 2)^2 = 25$.</div>
+    <div class="step"><span class="step-label">Answer:</span> Center = $(3, -2)$, Radius = $\sqrt{25} = 5$.</div>
+  </div>
+
+  <h3 class="sub-title">Worked Example 3</h3>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Problem:</span> A circle has center $(1, 4)$ and passes through the point $(4, 8)$. Find the equation.</div>
+    <div class="step"><span class="step-label">Step 1:</span> First find the radius using the distance formula between center and the given point.</div>
+    <div class="step"><span class="step-label">Step 2:</span> $r = \sqrt{(4 - 1)^2 + (8 - 4)^2} = \sqrt{9 + 16} = \sqrt{25} = 5$.</div>
+    <div class="step"><span class="step-label">Step 3:</span> Plug into standard form: $(x - 1)^2 + (y - 4)^2 = 25$.</div>
+    <div class="step"><span class="step-label">Answer:</span> $(x - 1)^2 + (y - 4)^2 = 25$.</div>
+  </div>
+
+  <h3 class="sub-title">Practice</h3>
+  <div class="practice-box">
+    <div class="q"><strong>Q1:</strong> Write the equation of a circle with center $(-4, 7)$ and radius 3.</div>
+    <button class="show-ans-btn" onclick="toggleAns('eq1')">Show Answer</button>
+    <div class="a" id="eq1">$(x + 4)^2 + (y - 7)^2 = 9$.</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>Q2:</strong> Convert $x^2 + y^2 + 8x - 2y - 8 = 0$ to standard form and find the center and radius.</div>
+    <button class="show-ans-btn" onclick="toggleAns('eq2')">Show Answer</button>
+    <div class="a" id="eq2">$(x^2 + 8x + 16) + (y^2 - 2y + 1) = 8 + 16 + 1 = 25$. So $(x + 4)^2 + (y - 1)^2 = 25$. Center = $(-4, 1)$, radius = 5.</div>
+  </div>
+  <div class="practice-box">
+    <div class="q"><strong>Q3:</strong> A circle has center $(0, -3)$ and passes through $(5, 0)$. Write its equation.</div>
+    <button class="show-ans-btn" onclick="toggleAns('eq3')">Show Answer</button>
+    <div class="a" id="eq3">$r = \sqrt{(5-0)^2 + (0-(-3))^2} = \sqrt{25 + 9} = \sqrt{34}$. Equation: $x^2 + (y + 3)^2 = 34$.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<div style="text-align:center;font-family:var(--fb);font-size:.82rem;color:var(--slate);padding:18px 0 0">
+  &copy; 2026 tutoringwithsruthi. All rights reserved.
+</div>
+
+</div><!-- .page -->
+
+<script>
+function toggleAns(id){document.getElementById(id).classList.toggle('show')}
+/* ═══════════════ 1. circleVocabCanvas — Static labeled diagram ═══════════════ */
+(function(){
+var c=document.getElementById('circleVocabCanvas');if(!c)return;
+var ctx=c.getContext('2d'),W=c.width,H=c.height;
+var cx=280,cy=260,R=175;
+ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+function pt(a){return{x:cx+R*Math.cos(a),y:cy+R*Math.sin(a)};}
+function dot(x,y,r,col){ctx.beginPath();ctx.arc(x,y,r||4,0,Math.PI*2);ctx.fillStyle=col||'#143109';ctx.fill();}
+
+/* helper: draw a thin arrow from (x1,y1) to (x2,y2) */
+function arrow(x1,y1,x2,y2,col){
+  ctx.strokeStyle=col||'#525B76';ctx.lineWidth=1;ctx.setLineDash([]);
+  ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+  var ang=Math.atan2(y2-y1,x2-x1);
+  ctx.beginPath();
+  ctx.moveTo(x2,y2);
+  ctx.lineTo(x2-6*Math.cos(ang-0.4),y2-6*Math.sin(ang-0.4));
+  ctx.lineTo(x2-6*Math.cos(ang+0.4),y2-6*Math.sin(ang+0.4));
+  ctx.closePath();ctx.fillStyle=col||'#525B76';ctx.fill();
+}
+
+/* ---- circle outline ---- */
+ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.strokeStyle='#D0D6B3';ctx.lineWidth=2.5;ctx.stroke();
+
+/* ---- center ---- */
+dot(cx,cy,5,'#143109');
+ctx.font='bold 12px Dosis';ctx.fillStyle='#143109';ctx.textAlign='center';
+ctx.fillText('O',cx,cy-10);
+
+/* ---- radius (upper right, with label rotated along the line) ---- */
+var rAng=-0.4;
+var rPt=pt(rAng);
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(rPt.x,rPt.y);
+ctx.strokeStyle='#9BA06A';ctx.lineWidth=2.5;ctx.stroke();
+dot(rPt.x,rPt.y,4,'#9BA06A');
+/* rotated label along the radius line */
+ctx.save();
+var rmx=(cx+rPt.x)/2, rmy=(cy+rPt.y)/2;
+ctx.translate(rmx,rmy);ctx.rotate(rAng);
+ctx.fillStyle='#9BA06A';ctx.font='bold 13px Dosis';ctx.textAlign='center';ctx.textBaseline='bottom';
+ctx.fillText('Radius (r)',0,-6);
+ctx.restore();
+
+/* ---- diameter (nearly horizontal) ---- */
+var dA=pt(0.15),dB=pt(Math.PI+0.15);
+ctx.beginPath();ctx.moveTo(dA.x,dA.y);ctx.lineTo(dB.x,dB.y);
+ctx.strokeStyle='#525B76';ctx.lineWidth=2;ctx.stroke();
+dot(dA.x,dA.y,4,'#525B76');dot(dB.x,dB.y,4,'#525B76');
+/* rotated label along the diameter */
+ctx.save();
+ctx.translate(cx,cy);ctx.rotate(0.15);
+ctx.fillStyle='#525B76';ctx.font='bold 12px Dosis';ctx.textAlign='center';ctx.textBaseline='top';
+ctx.fillText('Diameter (d = 2r)',0,6);
+ctx.restore();
+
+/* ---- chord (left side) ---- */
+var chAng1=Math.PI*0.6, chAng2=Math.PI*0.95;
+var chA=pt(chAng1),chB=pt(chAng2);
+ctx.beginPath();ctx.moveTo(chA.x,chA.y);ctx.lineTo(chB.x,chB.y);
+ctx.strokeStyle='#143109';ctx.lineWidth=2.5;ctx.stroke();
+dot(chA.x,chA.y,4);dot(chB.x,chB.y,4);
+/* arrow from label to chord midpoint */
+var chMx=(chA.x+chB.x)/2, chMy=(chA.y+chB.y)/2;
+ctx.fillStyle='#143109';ctx.font='bold 13px Dosis';ctx.textAlign='right';ctx.textBaseline='middle';
+ctx.fillText('Chord',26,chMy);
+arrow(30,chMy,chMx-6,chMy,'#143109');
+
+/* ---- secant (goes through upper-left, extends both sides) ---- */
+var sAng1=Math.PI*0.3, sAng2=Math.PI*1.15;
+var sA=pt(sAng1),sB=pt(sAng2);
+var sdx=sB.x-sA.x,sdy=sB.y-sA.y,sLen=Math.sqrt(sdx*sdx+sdy*sdy);
+var sux=sdx/sLen,suy=sdy/sLen;
+ctx.beginPath();ctx.moveTo(sA.x-sux*50,sA.y-suy*50);ctx.lineTo(sB.x+sux*50,sB.y+suy*50);
+ctx.strokeStyle='#525B76';ctx.lineWidth=1.8;ctx.setLineDash([6,4]);ctx.stroke();ctx.setLineDash([]);
+dot(sA.x,sA.y,4,'#525B76');dot(sB.x,sB.y,4,'#525B76');
+/* arrow from label to secant */
+var secLabelX=sB.x+sux*50+4, secLabelY=sB.y+suy*50+4;
+ctx.fillStyle='#525B76';ctx.font='bold 13px Dosis';ctx.textAlign='left';ctx.textBaseline='top';
+ctx.fillText('Secant',secLabelX+4,secLabelY);
+
+/* ---- tangent (bottom, horizontal) ---- */
+var tPt=pt(Math.PI*1.5);/* bottom */
+ctx.beginPath();ctx.moveTo(tPt.x-130,tPt.y);ctx.lineTo(tPt.x+130,tPt.y);
+ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;ctx.stroke();
+dot(tPt.x,tPt.y,5,'#9BA06A');
+/* 90° mark */
+ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.5;
+ctx.strokeRect(tPt.x-10,tPt.y-10,10,10);
+/* dashed radius to tangent point */
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(tPt.x,tPt.y);
+ctx.strokeStyle='#9BA06A55';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);ctx.stroke();ctx.setLineDash([]);
+/* label along the tangent line */
+ctx.fillStyle='#9BA06A';ctx.font='bold 13px Dosis';ctx.textAlign='left';ctx.textBaseline='bottom';
+ctx.fillText('Tangent',tPt.x+50,tPt.y-6);
+ctx.fillStyle='#525B76';ctx.font='11px Dosis';
+ctx.fillText('90\u00b0',tPt.x-24,tPt.y-12);
+
+/* ---- minor arc (highlighted, upper right) ---- */
+var arcS=-0.4, arcE=0.15;
+ctx.beginPath();ctx.arc(cx,cy,R+8,arcS,arcE);ctx.strokeStyle='#9BA06A';ctx.lineWidth=6;ctx.stroke();
+/* arrow from label */
+var arcMid=(arcS+arcE)/2;
+var arcLx=cx+R*Math.cos(arcMid)+40, arcLy=cy+R*Math.sin(arcMid)-40;
+ctx.fillStyle='#9BA06A';ctx.font='bold 12px Dosis';ctx.textAlign='left';ctx.textBaseline='bottom';
+ctx.fillText('Minor',arcLx,arcLy);
+ctx.fillText('Arc',arcLx,arcLy+14);
+arrow(arcLx-2,arcLy+4,cx+(R+8)*Math.cos(arcMid)+4,cy+(R+8)*Math.sin(arcMid)-4,'#9BA06A');
+
+/* ---- major arc (faded, everything else) ---- */
+ctx.beginPath();ctx.arc(cx,cy,R+8,arcE,arcS+Math.PI*2);ctx.strokeStyle='#525B7630';ctx.lineWidth=4;ctx.stroke();
+/* arrow from label */
+ctx.fillStyle='#525B76';ctx.font='bold 12px Dosis';ctx.textAlign='right';ctx.textBaseline='bottom';
+ctx.fillText('Major Arc',52,cy-60);
+arrow(54,cy-64,cx+(R+8)*Math.cos(Math.PI*0.85),cy+(R+8)*Math.sin(Math.PI*0.85),'#525B76');
+
+/* ---- point of tangency label ---- */
+ctx.fillStyle='#525B76';ctx.font='11px Dosis';ctx.textAlign='right';ctx.textBaseline='top';
+ctx.fillText('Point of',tPt.x-50,tPt.y+6);
+ctx.fillText('tangency',tPt.x-50,tPt.y+18);
+arrow(tPt.x-46,tPt.y+14,tPt.x-6,tPt.y+2,'#525B76');
+
+ctx.textAlign='left';ctx.textBaseline='alphabetic';
+})();
+
+/* ═══════════════ 2. centralAngleCanvas — Interactive with slider ═══════════════ */
+(function(){
+var c=document.getElementById('centralAngleCanvas');if(!c)return;
+var ctx=c.getContext('2d'),W=c.width,H=c.height;
+var slider=document.getElementById('centralSlider');
+var valSpan=document.getElementById('centralVal');
+var statusEl=document.getElementById('centralStatus');
+var cx=W/2,cy=H/2,R=140;
+
+function draw(){
+  var angle=parseInt(slider.value);
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+  var startA=-Math.PI/2;
+  var endA=startA+angle*Math.PI/180;
+  var majorDeg=360-angle;
+
+  /* minor arc fill */
+  ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,R,startA,endA);ctx.closePath();
+  ctx.fillStyle='rgba(155,160,106,0.35)';ctx.fill();
+
+  /* major arc fill */
+  ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,R,endA,startA+Math.PI*2);ctx.closePath();
+  ctx.fillStyle='rgba(208,214,179,0.35)';ctx.fill();
+
+  /* circle */
+  ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.strokeStyle='#525B76';ctx.lineWidth=2.5;ctx.stroke();
+
+  /* two radii */
+  var pA={x:cx+R*Math.cos(startA),y:cy+R*Math.sin(startA)};
+  var pB={x:cx+R*Math.cos(endA),y:cy+R*Math.sin(endA)};
+  ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(pA.x,pA.y);ctx.strokeStyle='#143109';ctx.lineWidth=2;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(pB.x,pB.y);ctx.strokeStyle='#143109';ctx.lineWidth=2;ctx.stroke();
+
+  /* dots */
+  ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fillStyle='#143109';ctx.fill();
+  ctx.beginPath();ctx.arc(pA.x,pA.y,4,0,Math.PI*2);ctx.fillStyle='#9BA06A';ctx.fill();
+  ctx.beginPath();ctx.arc(pB.x,pB.y,4,0,Math.PI*2);ctx.fillStyle='#9BA06A';ctx.fill();
+
+  /* angle arc at center */
+  ctx.beginPath();ctx.arc(cx,cy,30,startA,endA);ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;ctx.stroke();
+
+  /* central angle label */
+  var midA=startA+angle*Math.PI/360;
+  ctx.font='bold 15px Dosis, sans-serif';ctx.fillStyle='#143109';ctx.textAlign='center';
+  ctx.fillText(angle+'\u00B0',cx+45*Math.cos(midA),cy+45*Math.sin(midA));
+
+  /* minor arc label */
+  var minMid=startA+angle*Math.PI/360;
+  ctx.font='bold 13px Dosis, sans-serif';ctx.fillStyle='#9BA06A';
+  ctx.fillText('Minor: '+angle+'\u00B0',cx+(R+24)*Math.cos(minMid),cy+(R+24)*Math.sin(minMid));
+
+  /* major arc label */
+  var majMid=endA+(360-angle)*Math.PI/360;
+  ctx.fillStyle='#525B76';
+  ctx.fillText('Major: '+majorDeg+'\u00B0',cx+(R+24)*Math.cos(majMid),cy+(R+24)*Math.sin(majMid));
+
+  ctx.textAlign='left';
+
+  /* labels A and B */
+  ctx.font='bold 13px Dosis, sans-serif';ctx.fillStyle='#143109';
+  ctx.fillText('A',pA.x-4,pA.y-10);
+  ctx.fillText('B',pB.x+6,pB.y+4);
+
+  valSpan.innerHTML=angle+'&deg;';
+  statusEl.innerHTML='Minor arc = '+angle+'&deg; &nbsp;|&nbsp; Major arc = '+majorDeg+'&deg;';
+}
+
+slider.addEventListener('input',draw);
+draw();
+})();
+
+/* ═══════════════ 3. chordCanvas — Static diagram ═══════════════ */
+(function(){
+var c=document.getElementById('chordCanvas');if(!c)return;
+var ctx=c.getContext('2d'),W=c.width,H=c.height;
+var cx=W/2,cy=H/2-10,R=150;
+ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+/* circle */
+ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.strokeStyle='#525B76';ctx.lineWidth=2.5;ctx.stroke();
+
+/* chord — horizontal, below center */
+var chordY=cy+60;
+var halfChord=Math.sqrt(R*R-(chordY-cy)*(chordY-cy));
+var chL={x:cx-halfChord,y:chordY},chR={x:cx+halfChord,y:chordY};
+
+ctx.beginPath();ctx.moveTo(chL.x,chL.y);ctx.lineTo(chR.x,chR.y);
+ctx.strokeStyle='#143109';ctx.lineWidth=2.5;ctx.stroke();
+
+/* perpendicular from center (dashed) */
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx,chordY);
+ctx.strokeStyle='#525B76';ctx.lineWidth=2;ctx.setLineDash([6,4]);ctx.stroke();ctx.setLineDash([]);
+
+/* right angle marker */
+var sq=12;
+ctx.beginPath();ctx.moveTo(cx+sq,chordY);ctx.lineTo(cx+sq,chordY-sq);ctx.lineTo(cx,chordY-sq);
+ctx.strokeStyle='#143109';ctx.lineWidth=1.5;ctx.stroke();
+
+/* center dot */
+ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fillStyle='#143109';ctx.fill();
+ctx.font='bold 14px Dosis, sans-serif';ctx.fillStyle='#143109';
+ctx.fillText('O',cx+8,cy-6);
+
+/* midpoint dot on chord */
+ctx.beginPath();ctx.arc(cx,chordY,4,0,Math.PI*2);ctx.fillStyle='#525B76';ctx.fill();
+ctx.fillText('M',cx+8,chordY+16);
+
+/* chord endpoint dots */
+ctx.beginPath();ctx.arc(chL.x,chL.y,4,0,Math.PI*2);ctx.fillStyle='#9BA06A';ctx.fill();
+ctx.beginPath();ctx.arc(chR.x,chR.y,4,0,Math.PI*2);ctx.fillStyle='#9BA06A';ctx.fill();
+ctx.fillText('A',chL.x-18,chL.y+5);
+ctx.fillText('B',chR.x+8,chR.y+5);
+
+/* radius lines to chord endpoints */
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(chL.x,chL.y);ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.8;ctx.stroke();
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(chR.x,chR.y);ctx.strokeStyle='#9BA06A';ctx.lineWidth=1.8;ctx.stroke();
+
+/* labels */
+/* d label */
+ctx.font='bold 14px Bitter, serif';ctx.fillStyle='#525B76';
+ctx.fillText('d',cx-20,(cy+chordY)/2);
+
+/* r labels */
+ctx.fillStyle='#9BA06A';
+var rmx1=(cx+chL.x)/2, rmy1=(cy+chL.y)/2;
+ctx.fillText('r',rmx1-18,rmy1-4);
+var rmx2=(cx+chR.x)/2, rmy2=(cy+chR.y)/2;
+ctx.fillText('r',rmx2+10,rmy2-4);
+
+/* chord half labels */
+ctx.fillStyle='#143109';ctx.font='bold 13px Bitter, serif';
+ctx.fillText('\u00BD chord',(chL.x+cx)/2-20,chordY-10);
+ctx.fillText('\u00BD chord',(cx+chR.x)/2-10,chordY-10);
+
+/* right triangle highlight */
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx,chordY);ctx.lineTo(chR.x,chR.y);ctx.closePath();
+ctx.strokeStyle='rgba(155,160,106,0.5)';ctx.lineWidth=1;ctx.fillStyle='rgba(155,160,106,0.1)';ctx.fill();ctx.stroke();
+
+/* formula */
+ctx.font='bold 13px Dosis, sans-serif';ctx.fillStyle='#525B76';ctx.textAlign='center';
+ctx.fillText('r\u00B2 = d\u00B2 + (\u00BD chord)\u00B2',cx,H-20);
+ctx.textAlign='left';
+})();
+
+/* ═══════════════ 4. inscribedCanvas — Interactive with slider ═══════════════ */
+(function(){
+var c=document.getElementById('inscribedCanvas');if(!c)return;
+var ctx=c.getContext('2d'),W=c.width,H=c.height;
+var slider=document.getElementById('inscribedSlider');
+var statusEl=document.getElementById('inscribedStatus');
+var cx=W/2,cy=H/2,R=150;
+
+/* fixed arc endpoints at 45 deg and -45 deg (right side) */
+var arcA_angle=(-Math.PI/4);   /* point A at -45 deg */
+var arcB_angle=(Math.PI/4);    /* point B at +45 deg */
+var interceptedArcDeg=90;      /* arc from A to B going clockwise through right side */
+
+function draw(){
+  var sliderVal=parseInt(slider.value);
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+  /* Vertex position: slider moves vertex along the major arc (the arc NOT between A and B) */
+  /* Major arc goes from B (45deg) counter-clockwise to A (-45deg = 315deg), i.e. from 45 to 315 */
+  /* Map slider 0..360 to angle range on major arc */
+  var vertAngle=(arcB_angle)+ (sliderVal/360)*(2*Math.PI - (arcB_angle - arcA_angle + 2*Math.PI)%(2*Math.PI));
+  /* Simpler: place vertex along arc from 45deg to 315deg (going through 180deg) */
+  var range=2*Math.PI-Math.PI/2; /* 270 deg in radians */
+  vertAngle=arcB_angle + (sliderVal/360)*range;
+
+  var pA={x:cx+R*Math.cos(arcA_angle),y:cy+R*Math.sin(arcA_angle)};
+  var pB={x:cx+R*Math.cos(arcB_angle),y:cy+R*Math.sin(arcB_angle)};
+  var pV={x:cx+R*Math.cos(vertAngle),y:cy+R*Math.sin(vertAngle)};
+
+  /* intercepted arc highlight (from A to B, short way on right) */
+  ctx.beginPath();ctx.arc(cx,cy,R+5,arcA_angle,arcB_angle);
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=6;ctx.stroke();
+
+  /* circle */
+  ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.strokeStyle='#525B76';ctx.lineWidth=2.5;ctx.stroke();
+
+  /* chords from vertex to A and B */
+  ctx.beginPath();ctx.moveTo(pA.x,pA.y);ctx.lineTo(pV.x,pV.y);ctx.lineTo(pB.x,pB.y);
+  ctx.strokeStyle='#143109';ctx.lineWidth=2;ctx.stroke();
+
+  /* angle arc at vertex */
+  var angToA=Math.atan2(pA.y-pV.y,pA.x-pV.x);
+  var angToB=Math.atan2(pB.y-pV.y,pB.x-pV.x);
+  /* ensure we draw the small angle */
+  var diff=(angToB-angToA+2*Math.PI)%(2*Math.PI);
+  if(diff>Math.PI){var tmp=angToA;angToA=angToB;angToB=tmp;diff=2*Math.PI-diff;}
+  ctx.beginPath();ctx.arc(pV.x,pV.y,25,angToA,angToA+diff);
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;ctx.stroke();
+
+  var inscAngle=Math.round(diff*180/Math.PI);
+  var arcMeasure=inscAngle*2;
+
+  /* dots */
+  ctx.beginPath();ctx.arc(pA.x,pA.y,5,0,Math.PI*2);ctx.fillStyle='#9BA06A';ctx.fill();
+  ctx.beginPath();ctx.arc(pB.x,pB.y,5,0,Math.PI*2);ctx.fillStyle='#9BA06A';ctx.fill();
+  ctx.beginPath();ctx.arc(pV.x,pV.y,6,0,Math.PI*2);ctx.fillStyle='#143109';ctx.fill();
+
+  /* labels */
+  ctx.font='bold 14px Dosis, sans-serif';ctx.fillStyle='#143109';
+  ctx.fillText('A',pA.x+10,pA.y+5);
+  ctx.fillText('B',pB.x+10,pB.y-5);
+  ctx.fillText('V',pV.x-20,pV.y+5);
+
+  /* angle value at vertex */
+  var angMid=angToA+diff/2;
+  ctx.font='bold 13px Dosis, sans-serif';ctx.fillStyle='#143109';ctx.textAlign='center';
+  ctx.fillText(inscAngle+'\u00B0',pV.x+40*Math.cos(angMid),pV.y+40*Math.sin(angMid));
+
+  /* arc label */
+  var arcMid=(arcA_angle+arcB_angle)/2;
+  ctx.fillStyle='#9BA06A';
+  ctx.fillText('Arc: '+arcMeasure+'\u00B0',cx+(R+28)*Math.cos(arcMid),cy+(R+28)*Math.sin(arcMid));
+  ctx.textAlign='left';
+
+  statusEl.innerHTML='Inscribed angle = '+inscAngle+'&deg; &nbsp;|&nbsp; Intercepted arc = '+arcMeasure+'&deg;';
+}
+
+slider.addEventListener('input',draw);
+draw();
+})();
+
+/* ═══════════════ 5. tangentCanvas — Static diagram ═══════════════ */
+(function(){
+var c=document.getElementById('tangentCanvas');if(!c)return;
+var ctx=c.getContext('2d'),W=c.width,H=c.height;
+var cxC=200,cyC=H/2,R=110;
+ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+/* circle */
+ctx.beginPath();ctx.arc(cxC,cyC,R,0,Math.PI*2);ctx.strokeStyle='#525B76';ctx.lineWidth=2.5;ctx.stroke();
+
+/* center */
+ctx.beginPath();ctx.arc(cxC,cyC,5,0,Math.PI*2);ctx.fillStyle='#143109';ctx.fill();
+ctx.font='bold 13px Dosis, sans-serif';ctx.fillStyle='#143109';
+ctx.fillText('O',cxC-16,cyC-6);
+
+/* tangent point on right side */
+var tAng=0;
+var tP={x:cxC+R,y:cyC};
+
+/* radius to tangent point */
+ctx.beginPath();ctx.moveTo(cxC,cyC);ctx.lineTo(tP.x,tP.y);
+ctx.strokeStyle='#9BA06A';ctx.lineWidth=2.5;ctx.stroke();
+
+/* tangent line (vertical through tP) */
+ctx.beginPath();ctx.moveTo(tP.x,cyC-140);ctx.lineTo(tP.x,cyC+140);
+ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;ctx.stroke();
+
+/* dot at tangent point */
+ctx.beginPath();ctx.arc(tP.x,tP.y,5,0,Math.PI*2);ctx.fillStyle='#9BA06A';ctx.fill();
+ctx.fillText('T',tP.x+8,tP.y-8);
+
+/* 90 degree mark */
+var sq=13;
+ctx.beginPath();ctx.moveTo(tP.x-sq,tP.y-sq);ctx.lineTo(tP.x,tP.y-sq);ctx.lineTo(tP.x,tP.y);
+ctx.strokeStyle='#143109';ctx.lineWidth=1.5;ctx.stroke();
+
+/* labels */
+ctx.font='bold 13px Bitter, serif';ctx.fillStyle='#9BA06A';
+ctx.fillText('Radius',cxC+20,cyC-10);
+ctx.fillStyle='#525B76';
+ctx.fillText('Tangent',tP.x+10,cyC-100);
+
+/* ---- Two tangents from external point ---- */
+var extX=420,extY=cyC;
+var dist=extX-cxC; /* distance from center to external point */
+var tangLen=Math.sqrt(dist*dist-R*R);
+var halfAngle=Math.asin(R/dist);
+
+var tAng1=halfAngle, tAng2=-halfAngle;
+var tP1={x:cxC+R*Math.cos(tAng1),y:cyC-R*Math.sin(tAng1)};
+var tP2={x:cxC+R*Math.cos(tAng2),y:cyC+R*Math.sin(tAng2)};
+
+/* tangent lines from ext point */
+ctx.beginPath();ctx.moveTo(extX,extY);ctx.lineTo(tP1.x,tP1.y);ctx.strokeStyle='#525B76';ctx.lineWidth=2;ctx.stroke();
+ctx.beginPath();ctx.moveTo(extX,extY);ctx.lineTo(tP2.x,tP2.y);ctx.strokeStyle='#525B76';ctx.lineWidth=2;ctx.stroke();
+
+/* dots */
+ctx.beginPath();ctx.arc(extX,extY,5,0,Math.PI*2);ctx.fillStyle='#143109';ctx.fill();
+ctx.beginPath();ctx.arc(tP1.x,tP1.y,4,0,Math.PI*2);ctx.fillStyle='#9BA06A';ctx.fill();
+ctx.beginPath();ctx.arc(tP2.x,tP2.y,4,0,Math.PI*2);ctx.fillStyle='#9BA06A';ctx.fill();
+
+ctx.font='bold 13px Dosis, sans-serif';ctx.fillStyle='#143109';
+ctx.fillText('P',extX+8,extY-8);
+
+/* equal length labels */
+var ml1x=(extX+tP1.x)/2, ml1y=(extY+tP1.y)/2;
+var ml2x=(extX+tP2.x)/2, ml2y=(extY+tP2.y)/2;
+ctx.font='bold 12px Bitter, serif';ctx.fillStyle='#525B76';
+ctx.fillText('t',ml1x+8,ml1y-6);
+ctx.fillText('t',ml2x+8,ml2y+16);
+
+/* equal marks (tick marks) */
+function tick(ax,ay,bx,by){
+  var mx=(ax+bx)/2,my=(ay+by)/2;
+  var dx=bx-ax,dy=by-ay,len=Math.sqrt(dx*dx+dy*dy);
+  var px=-dy/len*7,py=dx/len*7;
+  ctx.beginPath();ctx.moveTo(mx-px,my-py);ctx.lineTo(mx+px,my+py);ctx.strokeStyle='#143109';ctx.lineWidth=1.5;ctx.stroke();
+}
+tick(extX,extY,tP1.x,tP1.y);
+tick(extX,extY,tP2.x,tP2.y);
+
+/* note at bottom */
+ctx.font='bold 13px Dosis, sans-serif';ctx.fillStyle='#525B76';ctx.textAlign='center';
+ctx.fillText('Two tangent segments from the same external point are equal.',W/2,H-14);
+ctx.textAlign='left';
+})();
+
+/* ═══════════════ 6. angleRulesCanvas — Toggle between 3 cases ═══════════════ */
+var angleRulesMode='inside';
+function showAngleCase(mode){
+  angleRulesMode=mode;
+  document.getElementById('btnInside').classList.toggle('active',mode==='inside');
+  document.getElementById('btnOn').classList.toggle('active',mode==='on');
+  document.getElementById('btnOutside').classList.toggle('active',mode==='outside');
+  drawAngleRules();
+}
+function drawAngleRules(){
+  var c=document.getElementById('angleRulesCanvas');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height;
+  var cx=W/2,cy=H/2,R=140;
+  var statusEl=document.getElementById('angleRulesStatus');
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+  function pt(a){return{x:cx+R*Math.cos(a),y:cy+R*Math.sin(a)};}
+  function dot(x,y,col){ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fillStyle=col||'#143109';ctx.fill();}
+
+  /* circle */
+  ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.strokeStyle='#525B76';ctx.lineWidth=2.5;ctx.stroke();
+
+  if(angleRulesMode==='inside'){
+    /* two chords crossing inside */
+    var a1=0.3,a2=Math.PI+0.6,a3=Math.PI*0.7,a4=Math.PI*1.8;
+    var p1=pt(a1),p2=pt(a2),p3=pt(a3),p4=pt(a4);
+    /* find intersection */
+    var denom=(p1.x-p2.x)*(p3.y-p4.y)-(p1.y-p2.y)*(p3.x-p4.x);
+    var t=((p1.x-p3.x)*(p3.y-p4.y)-(p1.y-p3.y)*(p3.x-p4.x))/denom;
+    var ix=p1.x+t*(p2.x-p1.x),iy=p1.y+t*(p2.y-p1.y);
+
+    ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.strokeStyle='#143109';ctx.lineWidth=2;ctx.stroke();
+    ctx.beginPath();ctx.moveTo(p3.x,p3.y);ctx.lineTo(p4.x,p4.y);ctx.strokeStyle='#143109';ctx.lineWidth=2;ctx.stroke();
+
+    /* highlight arc1 (from a1 to a3) and arc2 (from a2 to a4) */
+    var arc1Deg=Math.round(((a3-a1)*180/Math.PI+360)%360);
+    var arc2Deg=Math.round(((a4-a2)*180/Math.PI+360)%360);
+    ctx.beginPath();ctx.arc(cx,cy,R+5,a1,a3);ctx.strokeStyle='#9BA06A';ctx.lineWidth=5;ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,R+5,a2,a4);ctx.strokeStyle='#D0D6B3';ctx.lineWidth=5;ctx.stroke();
+
+    /* angle arc at intersection */
+    var angSize=15;
+    ctx.beginPath();
+    var ia1=Math.atan2(p1.y-iy,p1.x-ix);
+    var ia3=Math.atan2(p3.y-iy,p3.x-ix);
+    var diff=(ia3-ia1+2*Math.PI)%(2*Math.PI);
+    if(diff>Math.PI)diff=2*Math.PI-diff;
+    ctx.arc(ix,iy,angSize,Math.min(ia1,ia3),Math.min(ia1,ia3)+diff);
+    ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;ctx.stroke();
+
+    dot(p1.x,p1.y,'#9BA06A');dot(p2.x,p2.y,'#9BA06A');dot(p3.x,p3.y,'#9BA06A');dot(p4.x,p4.y,'#9BA06A');
+    dot(ix,iy,'#143109');
+
+    /* arc labels */
+    ctx.font='bold 13px Dosis, sans-serif';ctx.textAlign='center';
+    var mid1=(a1+a3)/2;ctx.fillStyle='#9BA06A';
+    ctx.fillText('Arc\u2081 = '+arc1Deg+'\u00B0',cx+(R+24)*Math.cos(mid1),cy+(R+24)*Math.sin(mid1));
+    var mid2=(a2+a4)/2;ctx.fillStyle='#525B76';
+    ctx.fillText('Arc\u2082 = '+arc2Deg+'\u00B0',cx+(R+24)*Math.cos(mid2),cy+(R+24)*Math.sin(mid2));
+
+    var angleDeg=Math.round((arc1Deg+arc2Deg)/2);
+    ctx.fillStyle='#143109';ctx.font='bold 14px Dosis, sans-serif';
+    ctx.fillText('Angle = \u00BD('+arc1Deg+'\u00B0 + '+arc2Deg+'\u00B0) = '+angleDeg+'\u00B0',W/2,H-16);
+    ctx.textAlign='left';
+    statusEl.innerHTML='Two chords intersect inside the circle';
+
+  } else if(angleRulesMode==='on'){
+    /* inscribed angle / tangent-chord on circle */
+    var arcStart=-Math.PI/5, arcEnd=Math.PI*0.65;
+    var vertA=Math.PI+0.3;
+    var pA=pt(arcStart),pB=pt(arcEnd),pV=pt(vertA);
+
+    /* intercepted arc highlight */
+    ctx.beginPath();ctx.arc(cx,cy,R+5,arcStart,arcEnd);ctx.strokeStyle='#9BA06A';ctx.lineWidth=5;ctx.stroke();
+
+    /* chords */
+    ctx.beginPath();ctx.moveTo(pA.x,pA.y);ctx.lineTo(pV.x,pV.y);ctx.lineTo(pB.x,pB.y);
+    ctx.strokeStyle='#143109';ctx.lineWidth=2;ctx.stroke();
+
+    var arcDeg=Math.round(((arcEnd-arcStart)*180/Math.PI+360)%360);
+    var angleDeg=Math.round(arcDeg/2);
+
+    dot(pA.x,pA.y,'#9BA06A');dot(pB.x,pB.y,'#9BA06A');dot(pV.x,pV.y,'#143109');
+
+    /* angle arc at vertex */
+    var va1=Math.atan2(pA.y-pV.y,pA.x-pV.x);
+    var va2=Math.atan2(pB.y-pV.y,pB.x-pV.x);
+    var vdiff=(va2-va1+2*Math.PI)%(2*Math.PI);
+    if(vdiff>Math.PI){vdiff=2*Math.PI-vdiff;var tmp=va1;va1=va2;va2=tmp;vdiff=(va2-va1+2*Math.PI)%(2*Math.PI);}
+    ctx.beginPath();ctx.arc(pV.x,pV.y,22,va1,va1+vdiff);ctx.strokeStyle='#9BA06A';ctx.lineWidth=2;ctx.stroke();
+
+    ctx.font='bold 13px Dosis, sans-serif';ctx.textAlign='center';ctx.fillStyle='#9BA06A';
+    var arcMid=(arcStart+arcEnd)/2;
+    ctx.fillText('Arc = '+arcDeg+'\u00B0',cx+(R+24)*Math.cos(arcMid),cy+(R+24)*Math.sin(arcMid));
+
+    ctx.fillStyle='#143109';ctx.font='bold 14px Dosis, sans-serif';
+    ctx.fillText(angleDeg+'\u00B0',pV.x+35*Math.cos(va1+vdiff/2),pV.y+35*Math.sin(va1+vdiff/2));
+    ctx.fillText('Angle = \u00BD('+arcDeg+'\u00B0) = '+angleDeg+'\u00B0',W/2,H-16);
+    ctx.textAlign='left';
+    ctx.font='bold 13px Dosis, sans-serif';
+    ctx.fillText('V',pV.x-18,pV.y+5);ctx.fillText('A',pA.x+8,pA.y-4);ctx.fillText('B',pB.x+8,pB.y+14);
+    statusEl.innerHTML='Vertex is on the circle (inscribed angle)';
+
+  } else {
+    /* vertex outside — two secants */
+    var extX=cx+R+110,extY=cy;
+    var halfAng=0.42;
+    var a1=Math.PI-halfAng, a2=Math.PI+halfAng;
+    var a3=Math.PI-halfAng*2.4, a4=Math.PI+halfAng*2.4;
+    /* near arc between the close intersection points, far arc between the far ones */
+    /* secant 1 hits circle at a1 (near) and a3 (far on same side? lets simplify) */
+    /* Use clear geometry: two secants from right side */
+    var angTop=0.45, angBot=-0.45;
+    var farTop=Math.PI-0.6, farBot=Math.PI+0.6;
+    var pNT=pt(angTop),pNB=pt(angBot),pFT=pt(farTop),pFB=pt(farBot);
+
+    /* secant lines from external point through circle */
+    ctx.beginPath();ctx.moveTo(extX,extY);ctx.lineTo(pFT.x,pFT.y);ctx.strokeStyle='#143109';ctx.lineWidth=2;ctx.stroke();
+    ctx.beginPath();ctx.moveTo(extX,extY);ctx.lineTo(pFB.x,pFB.y);ctx.strokeStyle='#143109';ctx.lineWidth=2;ctx.stroke();
+
+    /* far arc (between far points, going through left side) */
+    var farArcDeg=Math.round(((farBot-farTop)*180/Math.PI+360)%360);
+    ctx.beginPath();ctx.arc(cx,cy,R+5,farTop,farBot);ctx.strokeStyle='#9BA06A';ctx.lineWidth=5;ctx.stroke();
+
+    /* near arc (between near points) */
+    var nearArcDeg=Math.round(((angTop-angBot)*180/Math.PI+360)%360);
+    ctx.beginPath();ctx.arc(cx,cy,R+5,angBot,angTop);ctx.strokeStyle='#D0D6B3';ctx.lineWidth=5;ctx.stroke();
+
+    var angleDeg=Math.round((farArcDeg-nearArcDeg)/2);
+
+    dot(pNT.x,pNT.y,'#9BA06A');dot(pNB.x,pNB.y,'#9BA06A');
+    dot(pFT.x,pFT.y,'#9BA06A');dot(pFB.x,pFB.y,'#9BA06A');
+    ctx.beginPath();ctx.arc(extX,extY,5,0,Math.PI*2);ctx.fillStyle='#143109';ctx.fill();
+
+    ctx.font='bold 13px Dosis, sans-serif';ctx.textAlign='center';
+    ctx.fillStyle='#9BA06A';
+    ctx.fillText('Far arc = '+farArcDeg+'\u00B0',cx+(R+26)*Math.cos((farTop+farBot)/2),cy+(R+26)*Math.sin((farTop+farBot)/2));
+    ctx.fillStyle='#525B76';
+    ctx.fillText('Near arc = '+nearArcDeg+'\u00B0',cx+(R+26)*Math.cos((angBot+angTop)/2),cy+(R+26)*Math.sin((angBot+angTop)/2));
+
+    ctx.fillStyle='#143109';ctx.font='bold 14px Dosis, sans-serif';
+    ctx.fillText('Angle = \u00BD('+farArcDeg+'\u00B0 \u2212 '+nearArcDeg+'\u00B0) = '+angleDeg+'\u00B0',W/2,H-16);
+    ctx.fillText('P',extX+8,extY-10);
+    ctx.textAlign='left';
+    statusEl.innerHTML='Vertex is outside the circle (two secants)';
+  }
+}
+drawAngleRules();
+
+/* ═══════════════ 7. segmentCanvas — Toggle between 3 cases ═══════════════ */
+var segMode='chords';
+function showSegCase(mode){
+  segMode=mode;
+  document.getElementById('btnChords').classList.toggle('active',mode==='chords');
+  document.getElementById('btnSecants').classList.toggle('active',mode==='secants');
+  document.getElementById('btnTanSec').classList.toggle('active',mode==='tansec');
+  drawSegment();
+}
+function drawSegment(){
+  var c=document.getElementById('segmentCanvas');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height;
+  var cx=W/2,cy=H/2,R=140;
+  var statusEl=document.getElementById('segmentStatus');
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+  function pt(a){return{x:cx+R*Math.cos(a),y:cy+R*Math.sin(a)};}
+  function dot(x,y,col){ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fillStyle=col||'#143109';ctx.fill();}
+  function labelPt(txt,x,y){ctx.font='bold 14px Bitter, serif';ctx.fillStyle='#143109';ctx.fillText(txt,x,y);}
+
+  /* circle */
+  ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.strokeStyle='#525B76';ctx.lineWidth=2.5;ctx.stroke();
+
+  if(segMode==='chords'){
+    var p1=pt(0.4),p2=pt(Math.PI+0.7),p3=pt(Math.PI*0.7),p4=pt(Math.PI*1.7);
+    /* find intersection */
+    var denom=(p1.x-p2.x)*(p3.y-p4.y)-(p1.y-p2.y)*(p3.x-p4.x);
+    var t=((p1.x-p3.x)*(p3.y-p4.y)-(p1.y-p3.y)*(p3.x-p4.x))/denom;
+    var ix=p1.x+t*(p2.x-p1.x),iy=p1.y+t*(p2.y-p1.y);
+
+    ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.strokeStyle='#9BA06A';ctx.lineWidth=2.5;ctx.stroke();
+    ctx.beginPath();ctx.moveTo(p3.x,p3.y);ctx.lineTo(p4.x,p4.y);ctx.strokeStyle='#525B76';ctx.lineWidth=2.5;ctx.stroke();
+
+    dot(p1.x,p1.y,'#9BA06A');dot(p2.x,p2.y,'#9BA06A');dot(p3.x,p3.y,'#525B76');dot(p4.x,p4.y,'#525B76');
+    dot(ix,iy,'#143109');
+
+    /* segment labels */
+    var a=Math.round(Math.sqrt((p1.x-ix)*(p1.x-ix)+(p1.y-iy)*(p1.y-iy)));
+    var b=Math.round(Math.sqrt((p2.x-ix)*(p2.x-ix)+(p2.y-iy)*(p2.y-iy)));
+    var cc=Math.round(Math.sqrt((p3.x-ix)*(p3.x-ix)+(p3.y-iy)*(p3.y-iy)));
+    var d=Math.round(Math.sqrt((p4.x-ix)*(p4.x-ix)+(p4.y-iy)*(p4.y-iy)));
+
+    ctx.font='bold 15px Bitter, serif';
+    ctx.fillStyle='#9BA06A';
+    ctx.fillText('a',(p1.x+ix)/2+6,(p1.y+iy)/2-8);
+    ctx.fillText('b',(p2.x+ix)/2-14,(p2.y+iy)/2+6);
+    ctx.fillStyle='#525B76';
+    ctx.fillText('c',(p3.x+ix)/2+6,(p3.y+iy)/2-4);
+    ctx.fillText('d',(p4.x+ix)/2-14,(p4.y+iy)/2+10);
+
+    ctx.font='bold 15px Dosis, sans-serif';ctx.fillStyle='#143109';ctx.textAlign='center';
+    ctx.fillText('a \u00B7 b = c \u00B7 d',W/2,H-16);
+    ctx.textAlign='left';
+    statusEl.innerHTML='Intersecting chords: a &times; b = c &times; d';
+
+  } else if(segMode==='secants'){
+    var extX=cx+R+120,extY=cy;
+    var angT=0.38,angB=-0.38;
+    var farT=Math.PI-0.55,farB=Math.PI+0.55;
+    var pNT=pt(angT),pNB=pt(angB),pFT=pt(farT),pFB=pt(farB);
+
+    ctx.beginPath();ctx.moveTo(extX,extY);ctx.lineTo(pFT.x,pFT.y);ctx.strokeStyle='#9BA06A';ctx.lineWidth=2.5;ctx.stroke();
+    ctx.beginPath();ctx.moveTo(extX,extY);ctx.lineTo(pFB.x,pFB.y);ctx.strokeStyle='#525B76';ctx.lineWidth=2.5;ctx.stroke();
+
+    dot(pNT.x,pNT.y,'#9BA06A');dot(pFT.x,pFT.y,'#9BA06A');
+    dot(pNB.x,pNB.y,'#525B76');dot(pFB.x,pFB.y,'#525B76');
+    ctx.beginPath();ctx.arc(extX,extY,5,0,Math.PI*2);ctx.fillStyle='#143109';ctx.fill();
+
+    ctx.font='bold 14px Bitter, serif';ctx.fillStyle='#143109';
+    ctx.fillText('P',extX+8,extY-10);
+
+    /* label whole and external */
+    ctx.fillStyle='#9BA06A';ctx.font='bold 15px Bitter, serif';
+    ctx.fillText('b',(extX+pNT.x)/2+8,(extY+pNT.y)/2-10);
+    ctx.fillText('a',(extX+pFT.x)/2-6,(extY+pFT.y)/2-14);
+    ctx.fillStyle='#525B76';
+    ctx.fillText('d',(extX+pNB.x)/2+8,(extY+pNB.y)/2+18);
+    ctx.fillText('c',(extX+pFB.x)/2-6,(extY+pFB.y)/2+20);
+
+    ctx.font='bold 15px Dosis, sans-serif';ctx.fillStyle='#143109';ctx.textAlign='center';
+    ctx.fillText('a \u00B7 b = c \u00B7 d',W/2,H-16);
+    ctx.fillText('a = whole\u2081,  b = ext\u2081,  c = whole\u2082,  d = ext\u2082',W/2,H-38);
+    ctx.textAlign='left';
+    statusEl.innerHTML='Two secants: a &times; b = c &times; d';
+
+  } else {
+    /* tangent-secant */
+    var extX=cx+R+120,extY=cy;
+    var dist=extX-cx;
+    var tangLen=Math.sqrt(dist*dist-R*R);
+    var tangAng=Math.acos(R/dist);
+
+    /* tangent point */
+    var tP=pt(tangAng);
+    /* secant: through center-ish area */
+    var secAngNear=-0.35, secAngFar=Math.PI+0.35;
+    var pSN=pt(secAngNear),pSF=pt(secAngFar);
+
+    /* tangent line */
+    ctx.beginPath();ctx.moveTo(extX,extY);ctx.lineTo(tP.x,tP.y);ctx.strokeStyle='#9BA06A';ctx.lineWidth=2.5;ctx.stroke();
+
+    /* secant line */
+    ctx.beginPath();ctx.moveTo(extX,extY);ctx.lineTo(pSF.x,pSF.y);ctx.strokeStyle='#525B76';ctx.lineWidth=2.5;ctx.stroke();
+
+    dot(tP.x,tP.y,'#9BA06A');
+    dot(pSN.x,pSN.y,'#525B76');dot(pSF.x,pSF.y,'#525B76');
+    ctx.beginPath();ctx.arc(extX,extY,5,0,Math.PI*2);ctx.fillStyle='#143109';ctx.fill();
+
+    ctx.font='bold 14px Bitter, serif';ctx.fillStyle='#143109';
+    ctx.fillText('P',extX+8,extY-10);
+
+    ctx.fillStyle='#9BA06A';ctx.font='bold 15px Bitter, serif';
+    ctx.fillText('a',(extX+tP.x)/2+8,(extY+tP.y)/2-12);
+
+    ctx.fillStyle='#525B76';ctx.font='bold 15px Bitter, serif';
+    ctx.fillText('c',(extX+pSN.x)/2+8,(extY+pSN.y)/2+18);
+    ctx.fillText('b',(extX+pSF.x)/2-12,(extY+pSF.y)/2+18);
+
+    ctx.font='bold 15px Dosis, sans-serif';ctx.fillStyle='#143109';ctx.textAlign='center';
+    ctx.fillText('a\u00B2 = b \u00B7 c',W/2,H-16);
+    ctx.fillText('a = tangent,  b = whole secant,  c = external',W/2,H-38);
+    ctx.textAlign='left';
+    statusEl.innerHTML='Tangent-secant: a\u00B2 = b \u00B7 c';
+  }
+}
+drawSegment();
+
+/* ═══════════════ 8. eqCircleCanvas — Interactive with sliders ═══════════════ */
+(function(){
+var c=document.getElementById('eqCircleCanvas');if(!c)return;
+var ctx=c.getContext('2d'),W=c.width,H=c.height;
+var hSlider=document.getElementById('hSlider');
+var kSlider=document.getElementById('kSlider');
+var rSlider=document.getElementById('rSlider');
+var hVal=document.getElementById('hVal');
+var kVal=document.getElementById('kVal');
+var rVal=document.getElementById('rVal');
+var eqStatus=document.getElementById('eqStatus');
+
+var gridMin=-7,gridMax=7;
+var pad=40;
+function toX(v){return pad+(v-gridMin)/(gridMax-gridMin)*(W-2*pad);}
+function toY(v){return (H-pad)-(v-gridMin)/(gridMax-gridMin)*(H-2*pad);}
+function fromScale(v){return(v)/(gridMax-gridMin)*(W-2*pad);}
+
+function draw(){
+  var h=parseInt(hSlider.value);
+  var k=parseInt(kSlider.value);
+  var r=parseFloat(rSlider.value);
+  ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);
+
+  /* grid lines */
+  ctx.strokeStyle='#e4e8cc';ctx.lineWidth=1;
+  for(var i=gridMin;i<=gridMax;i++){
+    ctx.beginPath();ctx.moveTo(toX(i),toY(gridMin));ctx.lineTo(toX(i),toY(gridMax));ctx.stroke();
+    ctx.beginPath();ctx.moveTo(toX(gridMin),toY(i));ctx.lineTo(toX(gridMax),toY(i));ctx.stroke();
+  }
+
+  /* axes */
+  ctx.strokeStyle='#525B76';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(toX(gridMin),toY(0));ctx.lineTo(toX(gridMax),toY(0));ctx.stroke();
+  ctx.beginPath();ctx.moveTo(toX(0),toY(gridMin));ctx.lineTo(toX(0),toY(gridMax));ctx.stroke();
+
+  /* axis labels */
+  ctx.font='bold 11px Dosis, sans-serif';ctx.fillStyle='#525B76';ctx.textAlign='center';
+  for(var i=gridMin;i<=gridMax;i++){
+    if(i===0)continue;
+    ctx.fillText(i,toX(i),toY(0)+14);
+    ctx.textAlign='right';
+    ctx.fillText(i,toX(0)-6,toY(i)+4);
+    ctx.textAlign='center';
+  }
+  ctx.fillText('x',toX(gridMax)-4,toY(0)+14);
+  ctx.textAlign='right';ctx.fillText('y',toX(0)-6,toY(gridMax)+4);
+  ctx.textAlign='left';
+
+  /* circle */
+  var pixR=Math.abs(fromScale(r));
+  ctx.beginPath();ctx.arc(toX(h),toY(k),pixR,0,Math.PI*2);
+  ctx.strokeStyle='#9BA06A';ctx.lineWidth=3;ctx.stroke();
+  ctx.fillStyle='rgba(155,160,106,0.12)';ctx.fill();
+
+  /* center dot */
+  ctx.beginPath();ctx.arc(toX(h),toY(k),5,0,Math.PI*2);ctx.fillStyle='#143109';ctx.fill();
+
+  /* center label */
+  ctx.font='bold 13px Dosis, sans-serif';ctx.fillStyle='#143109';
+  ctx.fillText('('+h+', '+k+')',toX(h)+8,toY(k)-10);
+
+  /* radius line */
+  ctx.beginPath();ctx.moveTo(toX(h),toY(k));ctx.lineTo(toX(h)+pixR,toY(k));
+  ctx.strokeStyle='#143109';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillText('r = '+r,toX(h)+pixR/2-10,toY(k)-8);
+
+  /* equation display */
+  var hStr=(h===0)?'x\u00B2':'(x '+(h>0?'\u2212 '+h:'+ '+(-h))+')\u00B2';
+  var kStr=(k===0)?'y\u00B2':'(y '+(k>0?'\u2212 '+k:'+ '+(-k))+')\u00B2';
+  var r2=Math.round(r*r*100)/100;
+  var eqTxt=hStr+' + '+kStr+' = '+r2;
+
+  ctx.font='bold 15px Dosis, sans-serif';ctx.fillStyle='#143109';ctx.textAlign='center';
+  ctx.fillText(eqTxt,W/2,H-10);
+  ctx.textAlign='left';
+
+  hVal.textContent=h;
+  kVal.textContent=k;
+  rVal.textContent=r;
+  eqStatus.innerHTML=eqTxt;
+}
+
+hSlider.addEventListener('input',draw);
+kSlider.addEventListener('input',draw);
+rSlider.addEventListener('input',draw);
+draw();
+})()
+</script>
+</body>
+</html>
