@@ -65,6 +65,30 @@ body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px
 .exp-sl-desc{font-family:var(--fp);font-size:.72rem;color:var(--slate);margin-bottom:8px;font-weight:500}
 .exp-slider-card input[type=range]{width:100%;height:5px;border-radius:4px;outline:none;cursor:pointer}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+/* Superposition Practice Widget */
+.ws-tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.ws-tab{font-family:var(--fp);font-weight:600;font-size:.88rem;padding:6px 18px;border:2px solid var(--sage-l);border-radius:30px;cursor:pointer;background:var(--white);color:var(--sage);transition:background .18s}
+.ws-tab:hover{background:var(--sage-m)}
+.ws-tab.active{background:var(--sage);color:var(--white);border-color:var(--sage)}
+.ws-controls{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:14px;align-items:center}
+.ws-ctrl{display:flex;flex-direction:column;gap:4px;min-width:140px}
+.ws-ctrl label{font-family:var(--fp);font-size:.82rem;color:var(--slate);font-weight:500}
+.ws-ctrl .val{font-family:var(--fb);font-size:.85rem;font-weight:700;color:var(--sage)}
+.ws-ctrl input[type=range]{accent-color:var(--sage);width:100%}
+.ws-legend{display:flex;gap:20px;margin:10px 0;font-size:.82rem;color:var(--slate);flex-wrap:wrap;font-family:var(--fp)}
+.ws-legend span{display:flex;align-items:center;gap:6px}
+.ws-legend .dot{width:24px;height:3px;border-radius:2px}
+.ws-quiz{margin-top:14px;border:2px dashed var(--sage-l);border-radius:14px;padding:18px 20px;background:var(--white)}
+.ws-quiz h3{font-family:var(--fh);font-size:1.05rem;color:var(--forest);margin:0 0 8px}
+.ws-points{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ws-point{background:var(--sage-m);border-radius:12px;padding:12px;text-align:center}
+.ws-point .loc{font-family:var(--fp);font-size:.82rem;color:var(--slate);margin-bottom:4px;font-weight:600}
+.ws-point input{width:60px;padding:5px 6px;border:2px solid var(--sage-l);border-radius:10px;background:var(--white);color:var(--forest);font-family:var(--fb);font-size:.95rem;text-align:center}
+.ws-point input:focus{outline:none;border-color:var(--sage)}
+.ws-point .unit{font-family:var(--fp);font-size:.75rem;color:var(--slate);margin-top:4px}
+.ws-feedback{margin-top:10px;font-family:var(--fp);font-size:.92rem;padding:10px 14px;border-radius:10px;display:none;line-height:1.6}
+.ws-feedback.correct{background:var(--sage-m);color:var(--forest);display:block;border:2px solid var(--sage)}
+.ws-feedback.wrong{background:#fef2f2;color:#991b1b;display:block;border:2px solid #fca5a5}
 @media(max-width:600px){
   .pg-head{padding:30px 18px}.pg-head h1{font-size:1.6rem}.card{padding:22px 16px}.card-title{font-size:1.2rem}
   .term-grid{grid-template-columns:60px 1fr}
@@ -583,10 +607,66 @@ body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px
     $$y_{\text{net}}(x,t) = y_1(x,t) + y_2(x,t)$$
   </div>
 
+  <div class="sub-title">Constructive Interference — "peaks meet peaks"</div>
+  <p class="body-text">When two waves arrive <strong>in phase</strong> (crest lines up with crest, trough with trough), their displacements add together. The result is a wave with a <em>larger</em> amplitude than either individual wave.</p>
   <div class="highlight-box">
-    <strong>Constructive interference:</strong> Waves in phase add up &rarr; larger amplitude.<br><br>
-    <strong>Destructive interference:</strong> Waves out of phase cancel &rarr; smaller (or zero) amplitude.
+    <strong>When does it happen?</strong> The phase difference between the waves is $\Delta\phi = 0,\;2\pi,\;4\pi,\;\ldots$ &nbsp;(any even multiple of $\pi$).<br><br>
+    <strong>What you see:</strong> The peaks and troughs of both waves line up perfectly. The resultant wave is taller — its amplitude is the <em>sum</em> of the two individual amplitudes.<br><br>
+    <strong>Maximum constructive interference</strong> (two identical waves):<br>
+    $$A_{\text{net}} = A_1 + A_2$$
+    If $A_1 = A_2 = A$, the combined wave has amplitude $2A$ — double the height.
   </div>
+
+  <div class="sub-title">Destructive Interference — "peaks meet troughs"</div>
+  <p class="body-text">When two waves arrive <strong>out of phase</strong> (one wave's crest lines up with the other's trough), their displacements subtract. The result is a wave with a <em>smaller</em> amplitude — or even zero.</p>
+  <div class="highlight-box">
+    <strong>When does it happen?</strong> The phase difference is $\Delta\phi = \pi,\;3\pi,\;5\pi,\;\ldots$ &nbsp;(any odd multiple of $\pi$).<br><br>
+    <strong>What you see:</strong> Every peak in one wave is "filled in" by a trough from the other. The resultant wave is shorter — its amplitude is the <em>difference</em> of the two.<br><br>
+    <strong>Complete destructive interference</strong> (two identical waves, 180° apart):<br>
+    $$A_{\text{net}} = |A_1 - A_2|$$
+    If $A_1 = A_2$, the waves cancel entirely: $A_{\text{net}} = 0$. The medium doesn't move at all.
+  </div>
+
+  <div class="sub-title">Side-by-Side Comparison</div>
+  <div class="highlight-box" style="padding:0;overflow:hidden;">
+    <table style="width:100%;border-collapse:collapse;font-family:var(--fp);font-size:.95rem;color:var(--forest);">
+      <thead>
+        <tr style="background:var(--sage-l);">
+          <th style="padding:12px 14px;text-align:left;font-family:var(--fh);font-weight:600;border-bottom:2px solid var(--sage);width:50%;">Constructive</th>
+          <th style="padding:12px 14px;text-align:left;font-family:var(--fh);font-weight:600;border-bottom:2px solid var(--sage);width:50%;">Destructive</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 14px;border-bottom:1px solid var(--sage-l);">Waves arrive <strong>in phase</strong></td>
+          <td style="padding:10px 14px;border-bottom:1px solid var(--sage-l);">Waves arrive <strong>out of phase</strong></td>
+        </tr>
+        <tr>
+          <td style="padding:10px 14px;border-bottom:1px solid var(--sage-l);">Phase difference: $0,\;2\pi,\;4\pi\;\ldots$</td>
+          <td style="padding:10px 14px;border-bottom:1px solid var(--sage-l);">Phase difference: $\pi,\;3\pi,\;5\pi\;\ldots$</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 14px;border-bottom:1px solid var(--sage-l);">Crest + crest, trough + trough</td>
+          <td style="padding:10px 14px;border-bottom:1px solid var(--sage-l);">Crest + trough cancel out</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 14px;border-bottom:1px solid var(--sage-l);">$A_{\text{net}} = A_1 + A_2$</td>
+          <td style="padding:10px 14px;border-bottom:1px solid var(--sage-l);">$A_{\text{net}} = |A_1 - A_2|$</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 14px;">Resultant is <strong>louder / brighter / taller</strong></td>
+          <td style="padding:10px 14px;">Resultant is <strong>quieter / dimmer / flatter</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-title">What about everything in between?</div>
+  <p class="body-text">Most real situations aren't perfectly in phase or perfectly out of phase — they're somewhere in between. The resultant amplitude depends on the exact phase difference:</p>
+  <div class="formula-box">
+    $$A_{\text{net}} = \sqrt{A_1^2 + A_2^2 + 2A_1 A_2 \cos(\Delta\phi)}$$
+  </div>
+  <p class="body-text">At $\Delta\phi = 0$ (in phase), $\cos(0)=1$ and you get $A_1+A_2$. At $\Delta\phi = \pi$ (out of phase), $\cos(\pi)=-1$ and you get $|A_1-A_2|$. Everything else falls in between — try the explorer below to see this for yourself.</p>
 
   <!-- Superposition Simulation -->
   <div class="interactive-area">
@@ -616,6 +696,82 @@ body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px
       In phase (constructive): $A_{\text{net}} = 4 + 4 = 8$ cm<br>
       Out of phase (destructive): $A_{\text{net}} = 4 - 4 = 0$ cm (complete cancellation)
     </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">Wave A has amplitude 5 cm and wave B has amplitude 3 cm. They meet with a phase difference of $\pi$ (180°). Is this constructive or destructive? What is the resultant amplitude?</div>
+    <button class="show-ans-btn" onclick="toggleAns('ans4b')">Show Answer</button>
+    <div class="a" id="ans4b">
+      Phase difference is $\pi$ &rarr; <strong>destructive interference</strong>.<br>
+      $A_{\text{net}} = |A_1 - A_2| = |5 - 3| = 2$ cm.<br>
+      The waves don't fully cancel because they have different amplitudes — you get partial cancellation.
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q">Two waves with amplitudes $A_1 = 3$ cm and $A_2 = 4$ cm overlap with a phase difference of $\frac{\pi}{2}$ (90°). Use the general formula to find the resultant amplitude.</div>
+    <button class="show-ans-btn" onclick="toggleAns('ans4c')">Show Answer</button>
+    <div class="a" id="ans4c">
+      $A_{\text{net}} = \sqrt{A_1^2 + A_2^2 + 2A_1 A_2 \cos(\Delta\phi)}$<br>
+      $= \sqrt{9 + 16 + 2(3)(4)\cos(90°)}$<br>
+      $= \sqrt{9 + 16 + 0} = \sqrt{25} = 5$ cm.<br>
+      At 90° the $\cos$ term vanishes — the result is between the constructive max ($3+4=7$) and destructive min ($|3-4|=1$).
+    </div>
+  </div>
+</div>
+
+<!-- ======== 5B — SUPERPOSITION PRACTICE ======== -->
+<div class="card">
+  <div class="card-title"><span class="icon">&#x1F4CF;</span> Superposition Practice</div>
+
+  <div class="ws-tabs">
+    <button class="ws-tab active" onclick="wsSetMode('practice')">Practice</button>
+    <button class="ws-tab" onclick="wsSetMode('explore')">Explore</button>
+  </div>
+
+  <div id="ws-explore-controls" style="display:none;">
+    <div class="ws-controls">
+      <div class="ws-ctrl">
+        <label>Wave 1 amplitude</label>
+        <input type="range" min="-3" max="3" step="0.5" value="2" id="wsA1" oninput="wsUpdateW()">
+        <span class="val" id="wsA1v">2.0 squares</span>
+      </div>
+      <div class="ws-ctrl">
+        <label>Wave 2 amplitude</label>
+        <input type="range" min="-3" max="3" step="0.5" value="1" id="wsA2" oninput="wsUpdateW()">
+        <span class="val" id="wsA2v">1.0 squares</span>
+      </div>
+      <div class="ws-ctrl">
+        <label>Wave 2 phase offset</label>
+        <input type="range" min="0" max="360" step="30" value="0" id="wsPh" oninput="wsUpdateW()">
+        <span class="val" id="wsPhv">0&deg;</span>
+      </div>
+      <div class="ws-ctrl">
+        <label>Show resultant</label>
+        <button class="site-btn secondary" id="wsShowBtn" onclick="wsToggleResult()" style="font-size:.85rem;padding:7px 16px;">Visible</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="interactive-area">
+    <canvas id="wsCanvas" width="700" height="320"></canvas>
+  </div>
+
+  <div class="ws-legend">
+    <span><span class="dot" style="background:#9BA06A;"></span>Wave 1</span>
+    <span><span class="dot" style="background:#525B76;"></span>Wave 2</span>
+    <span><span class="dot" style="background:#143109;"></span>Resultant</span>
+  </div>
+
+  <div class="ws-quiz" id="wsQuizBox">
+    <h3 id="wsQuizTitle">Question 1 of 4 — read the resultant displacement</h3>
+    <p style="font-family:var(--fp);font-size:.88rem;color:var(--slate);margin-bottom:10px;">All three waves share one axis. At each marked point, add the green + slate displacements to predict the dark resultant. Watch for where peaks align (constructive) or cancel (destructive).</p>
+    <div class="ws-points" id="wsQuizPoints"></div>
+    <div class="btn-row" style="justify-content:flex-start;margin-top:12px;">
+      <button class="site-btn secondary" onclick="wsCheckAnswers()">Check answers</button>
+      <button class="site-btn secondary" onclick="wsNextQuestion()">New question</button>
+    </div>
+    <div class="ws-feedback" id="wsFeedback"></div>
   </div>
 </div>
 
@@ -1660,6 +1816,235 @@ actx.textAlign='left';
 actx.fillStyle='#143109';actx.font='bold 14px Bitter';actx.textAlign='center';
 actx.fillText('y = A \u00B7 sin( b(\u03B8 + c) ) + d',AW/2,pad.t-14);
 actx.textAlign='left';
+})();
+
+/* ====================
+   SUPERPOSITION PRACTICE WIDGET
+   ==================== */
+(function(){
+var wsCanvas=document.getElementById('wsCanvas');
+var wsCtx=wsCanvas.getContext('2d');
+var WS_W=700,WS_H=320;
+var wsShowResult=true;
+var wsMode='practice';
+
+// Questions designed to show constructive & destructive interference
+var wsQuestions=[
+  {a1:2,a2:2,phase:0,pts:[0.25,0.5,0.75],
+   hint:'Fully in phase — peaks & troughs align perfectly (constructive)'},
+  {a1:2,a2:2,phase:180,pts:[0.25,0.5,0.75],
+   hint:'Fully out of phase — every peak meets a trough (destructive, total cancellation)'},
+  {a1:2,a2:1.5,phase:0,pts:[0.25,0.5,0.75],
+   hint:'In phase but different amplitudes — constructive, but not doubled'},
+  {a1:2,a2:2,phase:90,pts:[0.125,0.375,0.75],
+   hint:'Quarter-cycle offset — some points constructive, some destructive'},
+  {a1:1.5,a2:1,phase:180,pts:[0.25,0.5,0.75],
+   hint:'Out of phase, unequal amplitudes — partial cancellation'},
+  {a1:2,a2:1,phase:90,pts:[0.2,0.5,0.8],
+   hint:'Phase offset shifts where constructive & destructive zones fall'}
+];
+var wsQIdx=0;
+var wsCurQ=wsQuestions[0];
+
+function wsWave1(x,q){return q.a1*Math.sin(2*Math.PI*x)}
+function wsWave2(x,q){return q.a2*Math.sin(2*Math.PI*x+(q.phase*Math.PI)/180)}
+function wsResultant(x,q){return wsWave1(x,q)+wsWave2(x,q)}
+
+function wsDraw(q,showRes){
+  wsCtx.clearRect(0,0,WS_W,WS_H);
+  var mx=44,my=34;
+  var pw=WS_W-mx*2,ph=WS_H-my*2;
+  var cy=my+ph/2;
+  // scale to fit max possible amplitude (sum of both)
+  var maxAmp=Math.max(Math.abs(q.a1)+Math.abs(q.a2),3.5);
+  var scale=(ph/2)/(maxAmp+0.5);
+
+  // grid lines
+  wsCtx.strokeStyle='rgba(155,160,106,0.13)';wsCtx.lineWidth=0.5;
+  var gridMax=Math.ceil(maxAmp);
+  for(var g=1;g<=gridMax;g++){
+    [cy-g*scale,cy+g*scale].forEach(function(gy){
+      if(gy>my&&gy<my+ph){wsCtx.beginPath();wsCtx.moveTo(mx,gy);wsCtx.lineTo(mx+pw,gy);wsCtx.stroke();}
+    });
+  }
+  for(var c=0;c<=8;c++){
+    var gx=mx+(c/8)*pw;
+    wsCtx.beginPath();wsCtx.moveTo(gx,my);wsCtx.lineTo(gx,my+ph);wsCtx.stroke();
+  }
+
+  // shaded regions showing constructive vs destructive
+  if(showRes){
+    for(var px=0;px<pw;px++){
+      var x=px/pw;
+      var y1=wsWave1(x,q),y2=wsWave2(x,q),yr=wsResultant(x,q);
+      var isConstructive=Math.abs(yr)>(Math.max(Math.abs(y1),Math.abs(y2))+0.05);
+      var isDestructive=Math.abs(yr)<(Math.min(Math.abs(y1),Math.abs(y2))-0.05);
+      if(isConstructive){
+        wsCtx.fillStyle='rgba(155,160,106,0.08)';
+        wsCtx.fillRect(mx+px,my,1,ph);
+      }else if(isDestructive){
+        wsCtx.fillStyle='rgba(210,80,60,0.05)';
+        wsCtx.fillRect(mx+px,my,1,ph);
+      }
+    }
+  }
+
+  // axes
+  wsCtx.strokeStyle='#D0D6B3';wsCtx.lineWidth=1.5;
+  wsCtx.beginPath();wsCtx.moveTo(mx,cy);wsCtx.lineTo(mx+pw,cy);wsCtx.stroke();
+  wsCtx.beginPath();wsCtx.moveTo(mx,my);wsCtx.lineTo(mx,my+ph);wsCtx.stroke();
+
+  // y-axis labels
+  wsCtx.fillStyle='#525B76';wsCtx.font='bold 11px Bitter';wsCtx.textAlign='right';
+  for(var v=-gridMax;v<=gridMax;v++){
+    var ly=cy-v*scale;
+    if(ly>my-2&&ly<my+ph+2)wsCtx.fillText(v,mx-6,ly+4);
+  }
+
+  // draw individual waves with lighter weight, then resultant bold
+  function drawWave(fn,color,lw,dashed){
+    wsCtx.strokeStyle=color;wsCtx.lineWidth=lw;
+    if(dashed)wsCtx.setLineDash([8,5]);
+    wsCtx.beginPath();
+    for(var px=0;px<=pw;px++){
+      var x=px/pw;
+      var y=cy-fn(x,q)*scale;
+      px===0?wsCtx.moveTo(mx+px,y):wsCtx.lineTo(mx+px,y);
+    }
+    wsCtx.stroke();
+    if(dashed)wsCtx.setLineDash([]);
+  }
+
+  drawWave(wsWave1,'#9BA06A',2.5,false);
+  drawWave(wsWave2,'#525B76',2.5,true);
+  if(showRes)drawWave(wsResultant,'#143109',4,false);
+
+  // marked points — show dots on all three waves at each sample point
+  wsCtx.textAlign='center';wsCtx.font='600 13px Dosis';
+  (q.pts||[]).forEach(function(xf,i){
+    var px=mx+xf*pw;
+    var y1Val=wsWave1(xf,q),y2Val=wsWave2(xf,q),yrVal=wsResultant(xf,q);
+
+    // vertical guide line
+    wsCtx.setLineDash([3,3]);
+    wsCtx.strokeStyle='rgba(155,160,106,0.35)';wsCtx.lineWidth=1;
+    wsCtx.beginPath();wsCtx.moveTo(px,my);wsCtx.lineTo(px,my+ph);wsCtx.stroke();
+    wsCtx.setLineDash([]);
+
+    // wave 1 dot
+    wsCtx.beginPath();
+    wsCtx.arc(px,cy-y1Val*scale,4,0,Math.PI*2);
+    wsCtx.fillStyle='#9BA06A';wsCtx.fill();
+
+    // wave 2 dot
+    wsCtx.beginPath();
+    wsCtx.arc(px,cy-y2Val*scale,4,0,Math.PI*2);
+    wsCtx.fillStyle='#525B76';wsCtx.fill();
+
+    // resultant dot (larger, bold)
+    if(showRes){
+      wsCtx.beginPath();
+      wsCtx.arc(px,cy-yrVal*scale,6,0,Math.PI*2);
+      wsCtx.fillStyle='#143109';wsCtx.fill();
+      wsCtx.strokeStyle='#FFFFFF';wsCtx.lineWidth=1.5;
+      wsCtx.stroke();
+    }
+
+    // connecting bracket from wave1 dot to wave2 dot
+    wsCtx.strokeStyle='rgba(82,91,118,0.2)';wsCtx.lineWidth=1;
+    wsCtx.setLineDash([2,2]);
+    wsCtx.beginPath();wsCtx.moveTo(px,cy-y1Val*scale);wsCtx.lineTo(px,cy-y2Val*scale);wsCtx.stroke();
+    wsCtx.setLineDash([]);
+
+    // label
+    wsCtx.fillStyle='#143109';
+    wsCtx.fillText(String.fromCharCode(65+i),px,my-10);
+  });
+
+  // hint text at bottom if showing resultant
+  if(showRes&&q.hint){
+    wsCtx.fillStyle='#525B76';wsCtx.font='italic 11px Bitter';wsCtx.textAlign='center';
+    wsCtx.fillText(q.hint,WS_W/2,WS_H-6);
+  }
+}
+
+// Expose functions globally
+window.wsUpdateW=function(){
+  var a1=parseFloat(document.getElementById('wsA1').value);
+  var a2=parseFloat(document.getElementById('wsA2').value);
+  var ph=parseFloat(document.getElementById('wsPh').value);
+  document.getElementById('wsA1v').textContent=a1.toFixed(1)+' squares';
+  document.getElementById('wsA2v').textContent=a2.toFixed(1)+' squares';
+  document.getElementById('wsPhv').textContent=ph+'\u00B0';
+  wsCurQ={a1:a1,a2:a2,phase:ph,pts:wsCurQ.pts,hint:''};
+  wsDraw(wsCurQ,wsShowResult);
+};
+
+window.wsToggleResult=function(){
+  wsShowResult=!wsShowResult;
+  var btn=document.getElementById('wsShowBtn');
+  btn.textContent=wsShowResult?'Visible':'Hidden';
+  btn.className=wsShowResult?'site-btn active':'site-btn secondary';
+  btn.style.fontSize='.85rem';btn.style.padding='7px 16px';
+  wsDraw(wsCurQ,wsShowResult);
+};
+
+window.wsSetMode=function(m){
+  wsMode=m;
+  document.querySelectorAll('.ws-tab').forEach(function(t,i){
+    t.className='ws-tab'+((i===0&&m==='practice')||(i===1&&m==='explore')?' active':'');
+  });
+  document.getElementById('ws-explore-controls').style.display=m==='explore'?'block':'none';
+  document.getElementById('wsQuizBox').style.display=m==='practice'?'block':'none';
+  if(m==='explore'){
+    wsCurQ={a1:2,a2:2,phase:0,pts:[0.25,0.5,0.75],hint:''};
+    wsDraw(wsCurQ,wsShowResult);
+  }else{
+    wsLoadQuestion();
+  }
+};
+
+function wsLoadQuestion(){
+  wsCurQ=wsQuestions[wsQIdx];
+  document.getElementById('wsQuizTitle').textContent=
+    'Question '+(wsQIdx+1)+' of '+wsQuestions.length+' \u2014 read the resultant displacement';
+  var container=document.getElementById('wsQuizPoints');
+  container.innerHTML='';
+  wsCurQ.pts.forEach(function(_,i){
+    var label=String.fromCharCode(65+i);
+    container.innerHTML+='<div class="ws-point">'+
+      '<div class="loc">Point '+label+'</div>'+
+      '<input type="number" id="wsAns'+i+'" step="0.1" placeholder="?" />'+
+      '<div class="unit">squares</div></div>';
+  });
+  document.getElementById('wsFeedback').className='ws-feedback';
+  document.getElementById('wsFeedback').textContent='';
+  wsDraw(wsCurQ,false);
+}
+
+window.wsCheckAnswers=function(){
+  var allCorrect=true,msg='';
+  wsCurQ.pts.forEach(function(xf,i){
+    var correct=Math.round(wsResultant(xf,wsCurQ)*10)/10;
+    var input=document.getElementById('wsAns'+i);
+    var userVal=parseFloat(input.value);
+    var label=String.fromCharCode(65+i);
+    var ok=Math.abs(userVal-correct)<=0.15;
+    input.style.borderColor=ok?'#9BA06A':'#ef4444';
+    if(!ok){allCorrect=false;msg+='Point '+label+': you said '+(isNaN(userVal)?'?':userVal)+', answer is '+correct.toFixed(1)+'. ';}
+  });
+  var fb=document.getElementById('wsFeedback');
+  fb.className='ws-feedback '+(allCorrect?'correct':'wrong');
+  fb.textContent=allCorrect?'All correct! Great work applying superposition.':msg;
+  wsDraw(wsCurQ,true);
+};
+
+window.wsNextQuestion=function(){
+  wsQIdx=(wsQIdx+1)%wsQuestions.length;
+  wsLoadQuestion();
+};
+
+wsLoadQuestion();
 })();
 </script>
 </body>
