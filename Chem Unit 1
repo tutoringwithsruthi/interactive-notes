@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Topic 1 – Atomic Structure | NYC Regents Review</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --card: #FFFFFF;
+    --accent: #1A3A5C;
+    --accent2: #C0392B;
+    --highlight: #F0E6D3;
+    --highlight2: #D6EAF8;
+    --highlight3: #D5F5E3;
+    --highlight4: #FDEBD0;
+    --text: #1C1C1C;
+    --muted: #6B6B6B;
+    --border: #E0DDD6;
+    --tag-know: #1A3A5C;
+    --tag-do: #C0392B;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 4rem;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    background: var(--accent);
+    color: #fff;
+    margin-bottom: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: 'R.1';
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'DM Serif Display', serif;
+    font-size: 4rem;
+    opacity: 0.12;
+    letter-spacing: -2px;
+  }
+  .header-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 12px;
+  }
+  .header-meta span {
+    background: rgba(255,255,255,0.12);
+    padding: 3px 12px;
+    border-radius: 99px;
+  }
+
+  /* ── LESSON TIMELINE ── */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 2.5rem;
+  }
+  .tl-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    text-align: center;
+  }
+  .tl-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .tl-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 2.5rem;
+  }
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 10px;
+  }
+  .section-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--accent);
+    flex: 1;
+  }
+  .section-time {
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    background: var(--highlight);
+    padding: 3px 10px;
+    border-radius: 99px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 0.85rem;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    color: var(--accent);
+  }
+  .card p { margin-bottom: 6px; }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* ── FORMULA BOX ── */
+  .formula-box {
+    background: var(--highlight2);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 0.9rem 1.2rem;
+    margin: 10px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1.8;
+  }
+
+  /* ── FACT TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    background: var(--card);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+  th {
+    background: var(--accent);
+    color: #fff;
+    padding: 9px 14px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 13px;
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #FAFAF8; }
+
+  /* ── TAGS ── */
+  .tag-know {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+  .tag-do {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--accent2);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+
+  /* ── HIGHLIGHT BOXES ── */
+  .alert {
+    border-radius: 8px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.85rem;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .alert-gold {
+    background: var(--highlight4);
+    border-left: 4px solid #E67E22;
+    color: #784212;
+  }
+  .alert-green {
+    background: var(--highlight3);
+    border-left: 4px solid #27AE60;
+    color: #145A32;
+  }
+  .alert-blue {
+    background: var(--highlight2);
+    border-left: 4px solid #2980B9;
+    color: #1A5276;
+  }
+  .alert-red {
+    background: #FDECEA;
+    border-left: 4px solid var(--accent2);
+    color: #78281F;
+  }
+  .alert strong { font-weight: 600; }
+
+  /* ── CHECKLIST ── */
+  .checklist { list-style: none; }
+  .checklist li {
+    padding: 6px 0 6px 28px;
+    position: relative;
+    border-bottom: 1px dashed var(--border);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--muted);
+    border-radius: 3px;
+  }
+
+  /* ── EXAMPLE BOX ── */
+  .example {
+    background: #FAFAF8;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 10px 0;
+    font-size: 13.5px;
+  }
+  .example-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 6px;
+  }
+
+  /* ── TWO COL ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 0.85rem;
+  }
+  @media (max-width: 540px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  /* ── VOCAB GRID ── */
+  .vocab { display: flex; flex-direction: column; gap: 6px; }
+  .vocab-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 14px;
+  }
+  .vocab-term {
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    min-width: 145px;
+    padding-top: 1px;
+  }
+  .vocab-def { color: var(--text); line-height: 1.5; }
+
+  /* ── ATOM DIAGRAM ── */
+  .atom-svg { display: block; margin: 0 auto 1rem; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 1.5rem 0;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── PRACTICE TIPS ── */
+  .practice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .practice-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+  }
+  .practice-icon {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+  .practice-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--accent);
+  }
+  .practice-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── ELECTRON CONFIG DISPLAY ── */
+  .config-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 6px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+  .config-box {
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
+    padding: 4px 10px;
+    min-width: 36px;
+    text-align: center;
+  }
+  .config-box.filled { background: var(--highlight2); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  .config-box.excited { background: #FDECEA; border-color: var(--accent2); color: var(--accent2); font-weight: 600; }
+  .config-box.empty { background: #FAFAF8; color: var(--muted); }
+
+  .footer-bar {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    margin-top: 3rem;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-label">NYC Regents Chemistry · Major Topic I</div>
+    <div class="header-title">Atomic Structure</div>
+    <div class="header-meta">
+      <span>⏱ 1.5 Hours</span>
+      <span>📋 12 Things to Know</span>
+      <span>📐 6 Skills to Master</span>
+      <span>🔬 Reference Table S &amp; T</span>
+    </div>
+  </div>
+
+  <!-- LESSON TIMELINE -->
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">0:00 – 0:20</div>
+      <div class="tl-label">Atomic structure &amp; subatomic particles</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">0:20 – 0:35</div>
+      <div class="tl-label">Rutherford + atomic number / mass number</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">0:35 – 0:50</div>
+      <div class="tl-label">Isotopes + weighted average atomic mass</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">0:50 – 1:10</div>
+      <div class="tl-label">Energy levels, electron config &amp; excited state</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">1:10 – 1:30</div>
+      <div class="tl-label">Bright-line spectra, ions &amp; practice problems</div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 1 ═══ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">1</div>
+      <div class="section-title">Subatomic Particles</div>
+      <div class="section-time">0:00 – 0:20</div>
+    </div>
+
+    <div class="alert alert-blue">
+      <strong>Big idea:</strong> All atoms are made of three subatomic particles. You MUST know their mass, charge, and location. This comes up almost every Regents exam.
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Particle</th>
+          <th>Symbol</th>
+          <th>Charge</th>
+          <th>Mass (amu)</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Proton</strong></td>
+          <td>p⁺</td>
+          <td>+1</td>
+          <td>≈ 1</td>
+          <td>Nucleus</td>
+        </tr>
+        <tr>
+          <td><strong>Neutron</strong></td>
+          <td>n⁰</td>
+          <td>0 (neutral)</td>
+          <td>≈ 1</td>
+          <td>Nucleus</td>
+        </tr>
+        <tr>
+          <td><strong>Electron</strong></td>
+          <td>e⁻</td>
+          <td>–1</td>
+          <td>≈ 0 (negligible)</td>
+          <td>Electron cloud (outside nucleus)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-gold">
+      <strong>⚡ Regents tip:</strong> Electrons have negligible mass — they do NOT contribute to mass number. The nucleus (protons + neutrons) holds nearly all of the atom's mass.
+    </div>
+
+    <div class="card">
+      <div class="card-title">Wave-Mechanical Model</div>
+      <p>The modern model of the atom says electrons do <strong>not</strong> travel in fixed circular orbits. Instead, they exist in <strong>orbitals</strong> — regions of space where there is a high probability of finding an electron.</p>
+      <p>Think of an orbital like a "fuzzy cloud" rather than a planet orbit.</p>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 2 ═══ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">2</div>
+      <div class="section-title">Rutherford's Gold Foil Experiment</div>
+      <div class="section-time">0:20 – 0:35</div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">What he did</div>
+        <p>Rutherford fired positively charged alpha (α) particles at a thin sheet of gold foil and observed where they went using a detector screen.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">What he expected</div>
+        <p>Based on the "plum pudding" model, he expected all particles to pass straight through with minor deflection — the positive charge was thought to be spread out.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">3 Key Conclusions (memorize these!)</div>
+      <div class="vocab">
+        <div class="vocab-item">
+          <div class="vocab-term">Most passed through →</div>
+          <div class="vocab-def">Atoms are mostly empty space</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Some deflected →</div>
+          <div class="vocab-def">There is a small, dense, positively charged center</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">A few bounced back →</div>
+          <div class="vocab-def">The nucleus contains most of the atom's mass and has a positive charge that repels α particles</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <strong>❌ Common mistake:</strong> Rutherford did NOT discover electrons — that was J.J. Thomson. Rutherford discovered the nucleus.
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 3 ═══ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">3</div>
+      <div class="section-title">Atomic Number, Mass Number &amp; Identity</div>
+      <div class="section-time">0:20 – 0:35</div>
+    </div>
+
+    <div class="formula-box">
+      Atomic Number (Z)  =  # of protons<br>
+      Mass Number (A)    =  # of protons + # of neutrons<br>
+      # of Neutrons      =  Mass Number − Atomic Number<br>
+      Neutral atom: # of protons = # of electrons
+    </div>
+
+    <div class="alert alert-green">
+      <strong>🔑 Key rule:</strong> The <strong>identity</strong> of an element is determined entirely by its number of protons (atomic number). Change the protons → different element. Change the neutrons → still the same element (isotope). Change the electrons → ion.
+    </div>
+
+    <div class="card">
+      <div class="card-title">Isotope Notation — How to read it</div>
+      <div style="text-align:center; padding: 1rem 0;">
+        <svg width="180" height="80" viewBox="0 0 180 80">
+          <text x="90" y="50" font-family="JetBrains Mono, monospace" font-size="36" font-weight="700" fill="#1A3A5C" text-anchor="middle">C</text>
+          <text x="60" y="32" font-family="JetBrains Mono, monospace" font-size="16" font-weight="600" fill="#C0392B" text-anchor="middle">12</text>
+          <text x="60" y="55" font-family="JetBrains Mono, monospace" font-size="14" fill="#C0392B" text-anchor="middle">6</text>
+          <text x="8" y="28" font-family="DM Sans, sans-serif" font-size="9" fill="#6B6B6B">Mass number</text>
+          <text x="2" y="56" font-family="DM Sans, sans-serif" font-size="9" fill="#6B6B6B">Atomic number</text>
+          <line x1="30" y1="26" x2="52" y2="30" stroke="#C0392B" stroke-width="0.8"/>
+          <line x1="30" y1="54" x2="52" y2="52" stroke="#C0392B" stroke-width="0.8"/>
+        </svg>
+      </div>
+      <p style="text-align:center; font-size:13px; color:var(--muted);">Carbon-12: 6 protons, 6 neutrons, 6 electrons (if neutral)</p>
+    </div>
+
+    <div class="example">
+      <div class="example-label">Practice — Try it</div>
+      <p>For ¹⁴₆C (Carbon-14):</p>
+      <p>Protons = 6 &nbsp;|&nbsp; Neutrons = 14 − 6 = <strong>8</strong> &nbsp;|&nbsp; Electrons (neutral) = 6</p>
+      <p style="margin-top:6px;">For ¹⁶₈O²⁻ (Oxide ion):</p>
+      <p>Protons = 8 &nbsp;|&nbsp; Neutrons = 8 &nbsp;|&nbsp; Electrons = 8 + 2 = <strong>10</strong> &nbsp;|&nbsp; Charge = –2</p>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 4 ═══ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">4</div>
+      <div class="section-title">Isotopes &amp; Atomic Mass</div>
+      <div class="section-time">0:35 – 0:50</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">What is an isotope?</div>
+      <p>Isotopes are atoms of the <strong>same element</strong> (same # of protons) that have <strong>different masses</strong> because they have a <strong>different number of neutrons</strong>.</p>
+      <p style="margin-top:8px;">Examples: Carbon-12 (6p, 6n), Carbon-13 (6p, 7n), Carbon-14 (6p, 8n) — all carbon, all different masses.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Atomic Mass (Weighted Average)</div>
+      <p>The atomic mass on the periodic table is <strong>NOT</strong> a whole number because it is the <strong>weighted average</strong> of all naturally occurring isotopes of that element.</p>
+
+      <div class="formula-box">
+        Atomic Mass = Σ (isotope mass × fractional abundance)
+      </div>
+
+      <div class="example">
+        <div class="example-label">Worked Example — Chlorine</div>
+        <p>Cl-35 is 75.77% abundant &nbsp;|&nbsp; Cl-37 is 24.23% abundant</p>
+        <p style="margin-top:6px; font-family: JetBrains Mono, monospace; font-size:13px;">
+          = (35 × 0.7577) + (37 × 0.2423)<br>
+          = 26.52 + 8.97<br>
+          = <strong>35.45 amu</strong> ✓ (matches periodic table)
+        </p>
+      </div>
+    </div>
+
+    <div class="alert alert-gold">
+      <strong>⚡ Regents tip:</strong> The atomic mass is always closer to the mass of the more abundant isotope. Use this to check your answer!
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 5 ═══ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">5</div>
+      <div class="section-title">Energy Levels &amp; Electron Configuration</div>
+      <div class="section-time">0:50 – 1:10</div>
+    </div>
+
+    <div class="vocab" style="margin-bottom:1rem;">
+      <div class="vocab-item">
+        <div class="vocab-term">Principal energy levels</div>
+        <div class="vocab-def">The main energy levels (shells) of an atom, numbered 1, 2, 3, 4… outward from the nucleus. Also called electron shells.</div>
+      </div>
+      <div class="vocab-item">
+        <div class="vocab-term">Valence shell</div>
+        <div class="vocab-def">The outermost electron shell. Electrons here have the <strong>most energy</strong> and are most involved in chemical reactions.</div>
+      </div>
+      <div class="vocab-item">
+        <div class="vocab-term">Valence electrons</div>
+        <div class="vocab-def">Electrons in the valence shell. For main group elements, = group number on the periodic table.</div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Energy Level (n)</th>
+          <th>Max electrons</th>
+          <th>Sublevels</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>2</td><td>s</td></tr>
+        <tr><td>2</td><td>8</td><td>s, p</td></tr>
+        <tr><td>3</td><td>18</td><td>s, p, d</td></tr>
+        <tr><td>4</td><td>32</td><td>s, p, d, f</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card">
+      <div class="card-title">Ground State vs. Excited State</div>
+
+      <div class="divider">Ground State</div>
+      <p style="font-size:14px; margin-bottom:8px;">Electrons fill the <strong>lowest available energy levels first</strong> (Aufbau principle). This is the most stable, lowest energy arrangement.</p>
+      <div class="config-row">
+        <span style="font-size:13px; color:var(--muted);">Na (11e⁻):</span>
+        <div class="config-box filled">1s²</div>
+        <div class="config-box filled">2s²</div>
+        <div class="config-box filled">2p⁶</div>
+        <div class="config-box filled">3s¹</div>
+        <span style="font-size:12px; color:#27AE60;">✓ Ground state</span>
+      </div>
+
+      <div class="divider">Excited State</div>
+      <p style="font-size:14px; margin-bottom:8px;">An electron has <strong>absorbed energy</strong> and jumped to a higher energy level, skipping a lower level. This is unstable — the atom will release light to return to ground state.</p>
+      <div class="config-row">
+        <span style="font-size:13px; color:var(--muted);">Na (excited):</span>
+        <div class="config-box filled">1s²</div>
+        <div class="config-box filled">2s²</div>
+        <div class="config-box filled">2p⁶</div>
+        <div class="config-box empty">3s⁰</div>
+        <div class="config-box excited">4s¹</div>
+        <span style="font-size:12px; color:#C0392B;">⚠ Excited state (skipped 3s!)</span>
+      </div>
+    </div>
+
+    <div class="alert alert-green">
+      <strong>✅ How to identify excited state:</strong> Look for an electron in a higher level when a lower level is not fully filled. If 3s is empty but 4s has an electron — that's excited state.
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 6 ═══ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">6</div>
+      <div class="section-title">Bright-Line Spectra &amp; Light</div>
+      <div class="section-time">1:10 – 1:20</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">How light is produced by atoms</div>
+      <div class="vocab">
+        <div class="vocab-item">
+          <div class="vocab-term">Step 1 →</div>
+          <div class="vocab-def">Atom absorbs energy → electron jumps to a higher (excited) energy level</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Step 2 →</div>
+          <div class="vocab-def">Electron is unstable in excited state → falls back to a lower energy level (ground state)</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Step 3 →</div>
+          <div class="vocab-def">The energy difference is released as a <strong>photon of light</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Bright-Line Spectrum</div>
+      <p style="margin-bottom:8px;">Each element produces a <strong>unique set of colored lines</strong> (bright-line spectrum) — like a fingerprint for that element. This is because each element has unique energy level differences.</p>
+
+      <!-- Simplified spectrum graphic -->
+      <div style="background:#111; border-radius:6px; padding:12px 16px; margin:10px 0; overflow:hidden;">
+        <div style="font-size:10px; color:#aaa; margin-bottom:6px; font-family: JetBrains Mono, monospace;">Hydrogen bright-line spectrum</div>
+        <div style="position:relative; height:28px; background: linear-gradient(to right, #1a0030 0%, #1a0030 100%);">
+          <div style="position:absolute; left:18%; width:2px; height:100%; background:#7B2FBE; opacity:0.9;"></div>
+          <div style="position:absolute; left:31%; width:2px; height:100%; background:#4169E1; opacity:0.9;"></div>
+          <div style="position:absolute; left:60%; width:3px; height:100%; background:#00CED1; opacity:0.9;"></div>
+          <div style="position:absolute; left:78%; width:3px; height:100%; background:#FF4500; opacity:0.9;"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:9px; color:#666; margin-top:4px; font-family: JetBrains Mono, monospace;">
+          <span>400 nm (violet)</span><span>700 nm (red)</span>
+        </div>
+      </div>
+
+      <p style="font-size:13px; color:var(--muted);">Each line = a specific wavelength of light emitted when an electron falls a specific number of energy levels. More energy difference → shorter wavelength → toward violet end.</p>
+    </div>
+
+    <div class="alert alert-gold">
+      <strong>⚡ Regents tip:</strong> On the exam, you may be shown a spectrum and asked to identify the element — match the pattern of lines to the reference spectrum. Each element's pattern is unique.
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 7 ═══ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">7</div>
+      <div class="section-title">Ions — Calculating Charge</div>
+      <div class="section-time">1:20 – 1:30</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">What is an ion?</div>
+      <p>An ion is an atom (or group of atoms) that has gained or lost electrons, giving it a net charge.</p>
+
+      <div class="formula-box">
+        Charge = # of protons − # of electrons<br><br>
+        Positive ion (cation): lost electrons → more protons than electrons<br>
+        Negative ion (anion): gained electrons → more electrons than protons
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="example">
+        <div class="example-label">Cation Example</div>
+        <p><strong>Na⁺</strong></p>
+        <p>Protons: 11</p>
+        <p>Electrons: 10 (lost 1)</p>
+        <p>Charge = 11 − 10 = <strong>+1</strong></p>
+      </div>
+      <div class="example">
+        <div class="example-label">Anion Example</div>
+        <p><strong>Cl⁻</strong></p>
+        <p>Protons: 17</p>
+        <p>Electrons: 18 (gained 1)</p>
+        <p>Charge = 17 − 18 = <strong>–1</strong></p>
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <strong>❌ Common mistake:</strong> Ions do NOT have a different atomic number or mass number. Only the electron count changes. A Na⁺ ion still has 11 protons and is still sodium.
+    </div>
+  </div>
+
+  <!-- ═══ MASTER CHECKLIST ═══ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">✓</div>
+      <div class="section-title">Regents Checklist — Topic 1</div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title"><span class="tag-know">Know</span> Things to Know</div>
+        <ul class="checklist">
+          <li>Mass, charge, location of p⁺, n⁰, e⁻</li>
+          <li>Rutherford's 3 key conclusions</li>
+          <li>Identity of element = # of protons</li>
+          <li>Atomic number = # of protons</li>
+          <li>Mass number = protons + neutrons</li>
+          <li>Atomic mass = weighted average of isotopes</li>
+          <li>Isotopes = same element, different # of neutrons</li>
+          <li>Ground state vs. excited state</li>
+          <li>Light produced: excited → ground state</li>
+          <li>Principal energy levels = electron shells</li>
+          <li>Valence shell = outermost, most energetic</li>
+          <li>Wave-mechanical model = orbital = probable location of e⁻</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="tag-do">Can Do</span> Skills to Master</div>
+        <ul class="checklist">
+          <li>Interpret isotope notation (read ᴬ𝑍X symbols)</li>
+          <li>Calculate weighted average atomic mass</li>
+          <li>Identify excited vs ground state electron configs</li>
+          <li>Interpret bright-line spectra</li>
+          <li>Calculate ion charge (protons − electrons)</li>
+          <li>Calculate mass number (p + n)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ QUICK REFERENCE ═══ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">★</div>
+      <div class="section-title">Quick-Reference Formulas</div>
+    </div>
+    <div class="formula-box">
+      Atomic Number        = # protons<br>
+      Mass Number          = # protons + # neutrons<br>
+      # Neutrons           = Mass Number − Atomic Number<br>
+      Charge of ion        = # protons − # electrons<br>
+      Atomic Mass          = Σ (mass of isotope × fractional abundance)<br>
+      Fractional abundance = % / 100
+    </div>
+  </div>
+
+  <!-- ═══ STUDY TIPS ═══ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">💡</div>
+      <div class="section-title">Study &amp; Exam Strategy</div>
+    </div>
+    <div class="practice-grid">
+      <div class="practice-card">
+        <div class="practice-icon">📋</div>
+        <div class="practice-title">Use Reference Table S</div>
+        <div class="practice-desc">Table S lists properties of elements including atomic radius, electronegativity, and first ionization energy. Know how to read it.</div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon">🧮</div>
+        <div class="practice-title">Always show your work</div>
+        <div class="practice-desc">For weighted average mass calculations, write out each step — partial credit is available even if you get the final answer wrong.</div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon">🔍</div>
+        <div class="practice-title">Spot excited state fast</div>
+        <div class="practice-desc">Scan from left to right in an electron config. If a lower level has empty slots while a higher level has electrons — it's excited.</div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon">⚛️</div>
+        <div class="practice-title">Rutherford = nucleus</div>
+        <div class="practice-desc">Rutherford → nucleus. Thomson → electron. Bohr → planetary model. Schrödinger → wave-mechanical/orbital model.</div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon">📈</div>
+        <div class="practice-title">Abundant isotope check</div>
+        <div class="practice-desc">The atomic mass on the periodic table is always closest to the mass of the most abundant isotope. Use this as a sanity check.</div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon">🌈</div>
+        <div class="practice-title">Spectra = fingerprints</div>
+        <div class="practice-desc">Each element has a unique bright-line spectrum. More energy released = shorter wavelength = toward the violet/UV end of the spectrum.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    NYC Regents Chemistry · Topic I: Atomic Structure · 1.5-Hour Lesson Notes · © Regents Review
+  </div>
+
+</div>
+</body>
+</html>
