@@ -1,0 +1,8 @@
+.DS_Store
+
+# Teacher versions (kept local, not shared with students)
+*-teacher.html
+
+# Private lesson planning docs
+NOTES_FORMAT_PLAN.md
+LESSON_PLANS/
