@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atomic Structure Notes (Unit 1)</title>
+<meta name="description" content="Interactive Atomic Structure Notes (Unit 1 of 10). Subatomic particles, Rutherford's experiment, atomic number, mass number, isotopes, average atomic mass, ions, ground vs excited states, bright-line spectra, and the wave-mechanical model. By tutoringwithsruthi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Dosis:wght@400;500;600;700&family=Bitter:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+:root{
+  --white:#FFFFFF;--sage-l:#D0D6B3;--sage:#9BA06A;--slate:#525B76;--forest:#143109;
+  --bg:#f5f6ee;--sage-m:#e4e8cc;
+  --proton:#b5503e;--neutron:#525B76;--electron:#e8b0a0;
+  --good:#5b8a3f;--bad:#b5503e;
+  --fh:'Young Serif',Georgia,serif;--fp:'Dosis','Trebuchet MS',Arial,sans-serif;--fb:'Bitter',Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:18px 16px 52px;overflow-x:hidden}
+.page{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+
+/* Unit nav */
+.unit-nav{background:var(--white);border:2px solid var(--sage-l);border-radius:24px;padding:6px;display:flex;flex-wrap:wrap;gap:3px;box-shadow:0 2px 10px rgba(20,49,9,0.07);position:sticky;top:8px;z-index:20}
+.unit-tab{font-family:var(--fp);font-weight:600;font-size:.78rem;border:none;background:transparent;color:var(--slate);padding:7px 11px;border-radius:18px;cursor:pointer;text-decoration:none;white-space:nowrap;flex:1 1 auto;text-align:center;transition:background .15s,color .15s;display:flex;align-items:center;justify-content:center;gap:4px}
+.unit-tab:hover{background:var(--sage-m);color:var(--forest)}
+.unit-tab.current{background:var(--sage);color:var(--white)}
+.unit-tab.locked{color:#a3a89a;cursor:not-allowed}
+.unit-tab.locked:hover{background:transparent;color:#a3a89a}
+.unit-tab .un{font-family:var(--fb);font-weight:700;font-size:.72rem;opacity:.85}
+
+/* Header */
+.pg-head{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:20px;padding:36px 28px;text-align:center}
+.pg-head .topic-badge{display:inline-block;font-family:var(--fb);font-weight:700;color:var(--slate);background:var(--white);border:1.5px solid var(--sage-l);padding:4px 14px;border-radius:20px;font-size:.82rem;margin-bottom:12px;letter-spacing:.04em}
+.pg-head h1{font-family:var(--fh);font-size:2.2rem;color:var(--forest);margin-bottom:6px}
+.pg-head .sub{font-family:var(--fp);color:var(--slate);font-size:1rem}
+
+/* Cards */
+.card{background:var(--white);border:2px solid var(--sage-l);border-radius:20px;padding:28px 26px;box-shadow:0 2px 12px rgba(20,49,9,0.06)}
+.card-title{font-family:var(--fh);font-size:1.4rem;color:var(--forest);margin-bottom:14px}
+.card-title .num{font-family:var(--fb);font-weight:700;color:var(--sage);font-size:.9rem;background:var(--sage-m);border-radius:8px;padding:2px 10px;margin-right:8px;vertical-align:middle}
+.body-text{font-family:var(--fp);font-size:1.04rem;color:var(--forest);line-height:1.7;margin-bottom:12px}
+.body-text:last-child{margin-bottom:0}
+.highlight-box{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:14px;padding:18px 22px;margin:14px 0}
+.sub-title{font-family:var(--fh);font-size:1.1rem;color:var(--forest);margin:18px 0 8px}
+.term-grid{display:grid;grid-template-columns:160px 1fr;gap:8px 16px;margin:12px 0}
+.term-sym{font-family:var(--fb);font-weight:700;color:var(--sage);text-align:right;font-size:1rem}
+.term-def{font-family:var(--fp);font-size:.98rem;color:var(--forest);line-height:1.6}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.site-btn{font-family:var(--fp);font-weight:600;font-size:.92rem;border:none;border-radius:30px;padding:8px 18px;cursor:pointer;transition:background .18s,transform .18s;background:var(--sage);color:var(--white)}
+.site-btn:hover{background:var(--forest);transform:translateY(-1px)}
+.site-btn.active{background:var(--forest)}
+.site-btn.secondary{background:var(--white);color:var(--forest);border:2px solid var(--sage-l)}
+.site-btn.secondary:hover{background:var(--sage-m)}
+.interactive-area{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:16px;padding:20px 18px;margin:16px 0}
+.ia-label{font-family:var(--fb);font-size:1rem;color:var(--slate);margin-bottom:10px;text-align:center;font-weight:700}
+.practice-box{background:var(--white);border:2px dashed var(--sage-l);border-radius:14px;padding:16px 20px;margin:10px 0}
+.practice-box .q{font-family:var(--fp);font-size:1rem;color:var(--forest);margin-bottom:8px;line-height:1.6}
+.practice-box .a{font-family:var(--fp);font-size:.95rem;color:var(--forest);display:none;margin-top:8px;padding:12px 14px;background:var(--sage-m);border:1.5px solid var(--sage-l);border-radius:10px;line-height:1.65}
+.practice-box .a.show{display:block;animation:fadeIn .25s ease}
+.show-ans-btn{font-family:var(--fp);font-weight:600;font-size:.85rem;border:2px solid var(--sage-l);border-radius:20px;padding:5px 14px;cursor:pointer;background:var(--white);color:var(--sage);transition:background .18s}
+.show-ans-btn:hover{background:var(--sage-m)}
+.worked-example{background:#f9faf4;border-left:4px solid var(--sage);border-radius:0 14px 14px 0;padding:16px 22px;margin:14px 0}
+.worked-example .step{font-family:var(--fp);font-size:.98rem;color:var(--forest);margin-bottom:6px;line-height:1.65}
+.worked-example .step-label{font-family:var(--fb);font-weight:700;color:var(--sage)}
+
+/* Topics list */
+.topics-list{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 18px;margin-top:8px}
+.topics-list .row{font-family:var(--fp);color:var(--forest);display:flex;gap:10px;font-size:.98rem;padding:3px 0}
+.topics-list .row .rn{font-family:var(--fb);color:var(--sage);min-width:28px;font-weight:700}
+.topics-list .row.current{background:var(--sage-m);border-radius:8px;padding:3px 8px;font-weight:600}
+
+/* Particle table */
+.particle-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:10px 0}
+.pcard{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:14px;text-align:center}
+.pcard .pdot{display:inline-block;width:46px;height:46px;border-radius:50%;border:2px solid var(--forest);margin:6px}
+.pcard .pname{font-family:var(--fh);font-size:1.05rem;color:var(--forest);margin-top:6px}
+.pcard .pmeta{font-family:var(--fp);font-size:.88rem;color:var(--slate);line-height:1.5;margin-top:4px}
+.pcard .pmeta strong{color:var(--forest)}
+
+/* Atom builder */
+.ab-stage{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:14px;text-align:center}
+.ab-stage svg{max-width:100%;height:auto}
+.ab-controls{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.ab-input{background:var(--white);border:1.5px solid var(--sage-l);border-radius:10px;padding:8px 6px;text-align:center}
+.ab-input .lbl{font-family:var(--fb);font-size:.72rem;color:var(--slate);text-transform:uppercase;letter-spacing:.05em}
+.ab-input input[type=number]{width:80%;border:none;background:transparent;text-align:center;font-family:var(--fb);font-weight:700;font-size:1.2rem;color:var(--forest);outline:none;margin-top:2px}
+.ab-readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:10px}
+.ab-cell{background:var(--white);border:1.5px solid var(--sage-l);border-radius:10px;padding:8px 10px;text-align:center}
+.ab-cell .lbl{font-family:var(--fb);font-size:.72rem;color:var(--slate);text-transform:uppercase;letter-spacing:.05em}
+.ab-cell .val{font-family:var(--fb);font-weight:700;font-size:1.05rem;color:var(--forest);margin-top:2px}
+
+/* Rutherford simulator */
+.ruth-stage{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:8px;text-align:center;position:relative;overflow:hidden}
+.ruth-stage svg{display:block;width:100%;height:auto;max-width:520px;margin:0 auto}
+.ruth-actions{display:flex;justify-content:center;gap:8px;margin-top:8px;flex-wrap:wrap}
+.ruth-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;max-width:520px;margin-left:auto;margin-right:auto}
+.ruth-stats .st{background:var(--sage-m);border-radius:10px;padding:7px 10px;text-align:center}
+.ruth-stats .st .n{font-family:var(--fb);font-weight:700;font-size:1.2rem;color:var(--forest)}
+.ruth-stats .st .l{font-family:var(--fp);font-size:.78rem;color:var(--slate)}
+
+/* Isotope notation */
+.iso-stage{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:18px;text-align:center}
+.iso-symbol{font-family:var(--fh);font-size:3.5rem;color:var(--forest);position:relative;display:inline-block;padding:0 18px;line-height:1;letter-spacing:.02em}
+.iso-mass{position:absolute;top:-6px;left:0;font-family:var(--fb);font-size:1.2rem;color:var(--proton);font-weight:700}
+.iso-z{position:absolute;bottom:-2px;left:0;font-family:var(--fb);font-size:1.2rem;color:var(--neutron);font-weight:700}
+.iso-pick{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0}
+.iso-pick-btn{font-family:var(--fb);font-size:.85rem;background:var(--white);border:1.5px solid var(--sage-l);border-radius:18px;padding:5px 12px;cursor:pointer;color:var(--forest);transition:all .15s}
+.iso-pick-btn:hover{background:var(--sage-m)}
+.iso-pick-btn.active{background:var(--sage);color:var(--white);border-color:var(--sage)}
+.iso-readout{background:var(--sage-m);border-radius:10px;padding:8px 14px;margin:8px auto;max-width:400px;font-family:var(--fp);font-size:.95rem;color:var(--forest);line-height:1.6}
+
+/* Weighted avg calculator */
+.wavg-card{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:14px}
+.wavg-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:center;margin:6px 0}
+.wavg-row label{font-family:var(--fb);font-size:.85rem;color:var(--slate)}
+.wavg-row input{width:100%;border:1.5px solid var(--sage-l);border-radius:8px;padding:6px 8px;font-family:var(--fb);font-size:.95rem;background:var(--white);outline:none;text-align:center}
+.wavg-out{background:var(--sage-m);border-radius:10px;padding:10px 14px;margin-top:10px;font-family:var(--fb);font-size:1.05rem;color:var(--forest);text-align:center}
+.wavg-pick{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0 12px}
+
+/* Bohr model */
+.bohr-stage{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:10px;text-align:center;position:relative}
+.bohr-stage svg{max-width:100%;height:auto;width:100%}
+.bohr-actions{display:flex;justify-content:center;gap:8px;margin-top:8px;flex-wrap:wrap}
+.bohr-info{font-family:var(--fp);color:var(--forest);background:var(--sage-m);border-radius:10px;padding:8px 14px;margin-top:8px;font-size:.92rem;line-height:1.5;min-height:32px}
+
+/* Spectrum */
+.spec-stage{background:#0a0e0a;border:1.5px solid var(--sage-l);border-radius:14px;padding:16px;position:relative}
+.spec-row{display:grid;grid-template-columns:90px 1fr;gap:10px;align-items:center;margin:8px 0}
+.spec-label{font-family:var(--fb);font-size:.95rem;color:#fff;text-align:right;font-weight:700}
+.spec-bar{position:relative;height:36px;background:linear-gradient(to right,#7a0e88,#4d4dff,#0080ff,#00ddc0,#7fff00,#ffe800,#ff8c00,#ff2222,#a30404);border-radius:6px;overflow:hidden}
+.spec-line{position:absolute;top:0;width:3px;height:100%;background:#fff;box-shadow:0 0 6px rgba(255,255,255,0.7)}
+.spec-line.dim{opacity:.55}
+.spec-axis{display:grid;grid-template-columns:90px 1fr;gap:10px;font-family:var(--fb);font-size:.7rem;color:#aab8a3;margin-top:4px}
+.spec-axis .ax{display:flex;justify-content:space-between}
+
+/* Orbital shapes */
+.orb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:10px 0}
+.orb-card{background:var(--white);border:1.5px solid var(--sage-l);border-radius:12px;padding:10px;text-align:center}
+.orb-card svg{width:100%;height:120px}
+.orb-card .otitle{font-family:var(--fb);font-weight:700;color:var(--forest);font-size:.95rem;margin-top:4px}
+.orb-card .onote{font-family:var(--fp);color:var(--slate);font-size:.8rem;line-height:1.4;margin-top:2px}
+
+/* Models compare */
+.models-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:10px 0}
+.model-card{background:var(--white);border:1.5px solid var(--sage-l);border-radius:12px;padding:14px;text-align:center}
+.model-card svg{width:100%;height:140px}
+.model-card .mtitle{font-family:var(--fh);font-size:1.05rem;color:var(--forest);margin-top:4px}
+.model-card .mnote{font-family:var(--fp);color:var(--slate);font-size:.85rem;margin-top:6px;line-height:1.4}
+
+/* Ground vs excited */
+.ge-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:10px 0}
+.ge-card{background:var(--white);border:1.5px solid var(--sage-l);border-radius:12px;padding:14px;text-align:center}
+.ge-card .gname{font-family:var(--fh);font-size:1.05rem;color:var(--forest);margin-bottom:4px}
+.ge-card .gconf{font-family:var(--fb);font-size:1rem;color:var(--forest);background:var(--sage-m);padding:6px 10px;border-radius:6px;margin:6px 0}
+.ge-card .gnote{font-family:var(--fp);color:var(--slate);font-size:.88rem;line-height:1.5}
+.ge-card.ground{border-left:4px solid var(--good)}
+.ge-card.excited{border-left:4px solid var(--proton)}
+.ge-tag{display:inline-block;font-family:var(--fb);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:10px;margin-bottom:4px}
+.ge-tag.ground{background:var(--good);color:var(--white)}
+.ge-tag.excited{background:var(--proton);color:var(--white)}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:640px){
+  .pg-head{padding:26px 18px}.pg-head h1{font-size:1.55rem}
+  .card{padding:22px 16px}.card-title{font-size:1.15rem}
+  .term-grid{grid-template-columns:110px 1fr}
+  .topics-list{grid-template-columns:1fr}
+  .ab-controls{grid-template-columns:repeat(3,1fr)}
+  .wavg-row{grid-template-columns:1fr}
+  .unit-tab{font-size:.72rem;padding:6px 9px}
+  .iso-symbol{font-size:2.6rem}
+  .spec-row{grid-template-columns:70px 1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ======== UNIT NAV ======== -->
+<nav class="unit-nav" aria-label="Chemistry units">
+  <a class="unit-tab current" href="atomic-structure.html"><span class="un">I.</span> Atomic Structure</a>
+  <a class="unit-tab" href="periodic-table.html"><span class="un">II.</span> Periodic Table</a>
+  <a class="unit-tab" href="stoichiometry.html"><span class="un">III.</span> Stoichiometry</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">IV.</span> Bonding</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">V.</span> Matter</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">VI.</span> Equilibrium</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">VII.</span> Organic</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">VIII.</span> Redox</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">IX.</span> Acids/Bases</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">X.</span> Nuclear</a>
+</nav>
+
+<!-- ======== HEADER ======== -->
+<div class="pg-head">
+  <div class="topic-badge">Atomic Structure Notes &middot; Unit 1 of 10</div>
+  <h1>Atomic Structure</h1>
+  <p class="sub">A guided, interactive walkthrough of how atoms are built and how that structure shows up in light, mass, and identity.</p>
+</div>
+
+<!-- ======== OVERVIEW ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">0</span>The Ten Units</div>
+  <p class="body-text">Chemistry is organized into ten major units. Each one builds on the last. This page covers Unit 1, Atomic Structure, the foundation that every other chemistry topic stands on.</p>
+  <div class="highlight-box">
+    <div class="topics-list">
+      <div class="row current"><span class="rn">I.</span> Atomic Structure</div>
+      <div class="row"><span class="rn">II.</span> The Periodic Table</div>
+      <div class="row"><span class="rn">III.</span> Stoichiometry</div>
+      <div class="row"><span class="rn">IV.</span> Chemical Bonding</div>
+      <div class="row"><span class="rn">V.</span> Physical Behavior of Matter</div>
+      <div class="row"><span class="rn">VI.</span> Equilibrium</div>
+      <div class="row"><span class="rn">VII.</span> Organic Chemistry</div>
+      <div class="row"><span class="rn">VIII.</span> Oxidation-Reduction</div>
+      <div class="row"><span class="rn">IX.</span> Acids, Bases, and Salts</div>
+      <div class="row"><span class="rn">X.</span> Nuclear Chemistry</div>
+    </div>
+  </div>
+  <p class="body-text">By the end of this page you should be able to identify and place every subatomic particle, read isotope notation, calculate the average atomic mass of an element, recognize ground vs excited electron configurations, and explain how bright-line spectra prove that energy levels exist.</p>
+</div>
+
+<!-- ======== 1. SUBATOMIC PARTICLES ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">1</span>The Three Subatomic Particles</div>
+  <p class="body-text">An atom has three building blocks. Two of them sit in a tiny dense ball at the center, the <strong>nucleus</strong>. The third buzzes around the outside in a region called the <strong>electron cloud</strong>.</p>
+
+  <div class="particle-grid">
+    <div class="pcard">
+      <div class="pdot" style="background:var(--proton)"></div>
+      <div class="pname">Proton</div>
+      <div class="pmeta"><strong>charge:</strong> +1<br><strong>mass:</strong> ~1 amu<br><strong>location:</strong> nucleus</div>
+    </div>
+    <div class="pcard">
+      <div class="pdot" style="background:var(--neutron)"></div>
+      <div class="pname">Neutron</div>
+      <div class="pmeta"><strong>charge:</strong> 0<br><strong>mass:</strong> ~1 amu<br><strong>location:</strong> nucleus</div>
+    </div>
+    <div class="pcard">
+      <div class="pdot" style="background:var(--electron);width:18px;height:18px"></div>
+      <div class="pname">Electron</div>
+      <div class="pmeta"><strong>charge:</strong> -1<br><strong>mass:</strong> ~1/1836 amu (almost zero)<br><strong>location:</strong> orbitals around nucleus</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    Almost all of an atom's mass is in the nucleus, where protons and neutrons live. Electrons contribute almost nothing to mass. But electrons take up almost all of an atom's <em>volume</em>, because the orbitals are huge compared to the nucleus.
+    <br><br>
+    If the nucleus were a marble in the middle of a football field, the electrons would be moving around the outer edge of the field. The atom is mostly empty space.
+  </div>
+
+  <p class="body-text">An <strong>amu</strong> (atomic mass unit) is a tiny mass unit chosen so that protons and neutrons each weigh almost exactly 1. The whole point of amu is to make atomic mass numbers small and easy to compare.</p>
+</div>
+
+<!-- ======== 2. RUTHERFORD ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">2</span>Rutherford's Gold Foil Experiment</div>
+  <p class="body-text">Before 1911, scientists thought atoms were like a "plum pudding," a soft positive blob with electrons stuck inside. Ernest Rutherford disagreed and ran a famous experiment to test it.</p>
+
+  <div class="sub-title">The Setup</div>
+  <p class="body-text">Rutherford fired tiny positive particles called <strong>alpha particles</strong> at a very thin sheet of gold foil. He surrounded the foil with a detector to see where the particles went after passing through.</p>
+
+  <div class="sub-title">What He Expected vs What He Saw</div>
+  <p class="body-text">If the plum-pudding model were correct, all the alpha particles should pass through with only tiny deflections. They didn't.</p>
+
+  <div class="highlight-box">
+    <strong>What actually happened:</strong>
+    <br>
+    &middot; <strong>Most</strong> alpha particles passed straight through. The atom must be mostly <em>empty space</em>.
+    <br>
+    &middot; <strong>Some</strong> were deflected at small angles.
+    <br>
+    &middot; <strong>A few</strong> bounced almost straight back. Rutherford said this was "as if you fired a bullet at tissue paper and it bounced back at you."
+  </div>
+
+  <div class="sub-title">Conclusions</div>
+  <div class="highlight-box">
+    1. Atoms have a <strong>tiny, dense, positively charged nucleus</strong> at the center.
+    <br>
+    2. Most of the atom is <strong>empty space</strong>.
+    <br>
+    3. Electrons orbit the nucleus at a relatively large distance, in this empty space.
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Rutherford Simulation: Fire Alpha Particles at the Foil</div>
+    <div class="ruth-stage">
+      <svg id="ruthSvg" viewBox="0 0 520 220">
+        <rect width="520" height="220" fill="#fafbf3"/>
+        <rect x="220" y="20" width="80" height="180" fill="#d9c59a" stroke="#9BA06A" stroke-width="1.5"/>
+        <text x="260" y="14" text-anchor="middle" font-family="Bitter" font-size="11" fill="#143109">Gold foil</text>
+        <g id="ruthNuclei"></g>
+        <g id="ruthShots"></g>
+        <text x="20" y="115" font-family="Bitter" font-size="11" fill="#525B76">alpha source &rarr;</text>
+        <line x1="105" y1="110" x2="218" y2="110" stroke="#9BA06A" stroke-width="1" stroke-dasharray="3,3"/>
+      </svg>
+    </div>
+    <div class="ruth-actions">
+      <button class="site-btn" onclick="ruthShoot(20)">Fire 20 alphas</button>
+      <button class="site-btn secondary" onclick="ruthShoot(60)">Fire 60 alphas</button>
+      <button class="site-btn secondary" onclick="ruthReset()">Reset</button>
+    </div>
+    <div class="ruth-stats">
+      <div class="st"><div class="n" id="ruthThru">0</div><div class="l">Passed straight</div></div>
+      <div class="st"><div class="n" id="ruthDef">0</div><div class="l">Slight deflection</div></div>
+      <div class="st"><div class="n" id="ruthBack">0</div><div class="l">Bounced back</div></div>
+    </div>
+    <p class="body-text" style="font-size:.88rem;color:var(--slate);text-align:center;margin-top:8px">Each shot has a small chance of hitting near a nucleus. Most miss entirely.</p>
+  </div>
+</div>
+
+<!-- ======== 3. ATOMIC NUMBER, MASS NUMBER ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">3</span>Atomic Number, Mass Number, and Isotopes</div>
+
+  <div class="highlight-box">
+    <strong>Atomic number (Z) = number of protons.</strong>
+    <br>
+    The atomic number is the identity of an element. If you change the number of protons, you change the element. Carbon has 6 protons. Anything with 6 protons is carbon, by definition.
+    <br><br>
+    <strong>Mass number (A) = protons + neutrons.</strong>
+    <br>
+    The mass number counts the heavy stuff in the nucleus. Electrons weigh almost nothing, so they do not count.
+    <br><br>
+    In a neutral atom, <strong>number of electrons = number of protons</strong>. Charge is only nonzero when those don't match.
+  </div>
+
+  <div class="sub-title">Isotope Notation</div>
+  <p class="body-text">Isotopes are written with the mass number on the upper left and the atomic number on the lower left, like $^{14}_{6}\text{C}$. The chemical symbol on the right tells you the element, and the numbers tell you the specific version.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Isotope Notation Builder</div>
+    <div class="iso-pick" id="isoPick"></div>
+    <div class="iso-stage">
+      <div class="iso-symbol" id="isoSymBox">
+        <span class="iso-mass" id="isoMass">12</span>
+        <span class="iso-z" id="isoZ">6</span>
+        <span id="isoSym">C</span>
+      </div>
+      <div class="iso-readout" id="isoRead"></div>
+    </div>
+  </div>
+
+  <div class="sub-title">What is an Isotope?</div>
+  <p class="body-text"><strong>Isotopes</strong> are atoms of the same element with different masses, because they have different numbers of neutrons. Same protons, different neutrons.</p>
+
+  <div class="highlight-box">
+    Carbon has three notable isotopes:
+    <br>
+    &middot; Carbon-12 ($^{12}_{6}$C): 6 protons, 6 neutrons. Most common.
+    <br>
+    &middot; Carbon-13 ($^{13}_{6}$C): 6 protons, 7 neutrons. Stable, rare.
+    <br>
+    &middot; Carbon-14 ($^{14}_{6}$C): 6 protons, 8 neutrons. Radioactive. Used in carbon dating.
+    <br><br>
+    All three are still carbon. They differ only in the nucleus.
+  </div>
+</div>
+
+<!-- ======== 4. WEIGHTED AVG ATOMIC MASS ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">4</span>Average Atomic Mass</div>
+  <p class="body-text">When you look up an element on a periodic table, you see a decimal mass like Cl = 35.45 amu. That is not a typo, and chlorine is not made of half-atoms. The decimal is a <strong>weighted average</strong> of all the naturally occurring isotopes of that element.</p>
+
+  <div class="highlight-box">
+    <strong>Atomic mass</strong> is the weighted average mass of the naturally occurring isotopes of an element.
+    <br><br>
+    Why "weighted"? Because rarer isotopes count less. The formula:
+    <br>
+    Atomic mass = (mass$_1$ &times; abundance$_1$) + (mass$_2$ &times; abundance$_2$) + ...
+    <br>
+    where each abundance is a decimal between 0 and 1, and they all add up to 1.
+  </div>
+
+  <div class="sub-title">Worked Example: Chlorine</div>
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Isotopes. </span>Cl-35 (mass 35) is 75.77% of natural chlorine. Cl-37 (mass 37) is 24.23%.</div>
+    <div class="step"><span class="step-label">Weighted sum. </span>$(35 \times 0.7577) + (37 \times 0.2423) = 26.52 + 8.97$.</div>
+    <div class="step"><span class="step-label">Total. </span>$26.52 + 8.97 \approx 35.49$ amu. The periodic table lists 35.45, basically the same with sharper data.</div>
+    <div class="step"><span class="step-label">Sanity check. </span>The average is closer to 35 than to 37, because Cl-35 is more abundant. The weighted average always lands closer to the more common isotope.</div>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Weighted Average Calculator</div>
+    <div class="wavg-pick" id="wavgPick"></div>
+    <div class="wavg-card">
+      <div class="wavg-row" style="font-family:var(--fb);font-size:.78rem;color:var(--slate);text-transform:uppercase;letter-spacing:.05em">
+        <label>Isotope</label><label>Mass (amu)</label><label>Abundance (%)</label>
+      </div>
+      <div class="wavg-row">
+        <input id="wavgN1" placeholder="Isotope 1" value="Cl-35" disabled>
+        <input id="wavgM1" type="number" step="any" value="35">
+        <input id="wavgP1" type="number" step="any" value="75.77">
+      </div>
+      <div class="wavg-row">
+        <input id="wavgN2" placeholder="Isotope 2" value="Cl-37" disabled>
+        <input id="wavgM2" type="number" step="any" value="37">
+        <input id="wavgP2" type="number" step="any" value="24.23">
+      </div>
+      <div class="wavg-out" id="wavgOut"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 5. IONS ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">5</span>Ions: When the Numbers Don't Match</div>
+  <p class="body-text">A neutral atom has the same number of protons and electrons. When those counts differ, the atom has a net <strong>charge</strong> and is called an <strong>ion</strong>.</p>
+
+  <div class="highlight-box" style="text-align:center;font-family:var(--fb);font-size:1.05rem">
+    charge &nbsp;=&nbsp; (number of protons) &nbsp;&minus;&nbsp; (number of electrons)
+  </div>
+
+  <p class="body-text">More electrons than protons means a <em>negative</em> charge (the extra electrons each carry -1). Fewer electrons than protons means a <em>positive</em> charge.</p>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Example. </span>An atom has 11 protons and 10 electrons. What is its charge and identity?</div>
+    <div class="step"><span class="step-label">Identity. </span>11 protons means it is sodium (Na).</div>
+    <div class="step"><span class="step-label">Charge. </span>$11 - 10 = +1$. So it is Na$^+$, a sodium ion (cation).</div>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Atom Builder: Build Any Atom or Ion</div>
+    <div class="ab-stage">
+      <svg id="abSvg" viewBox="0 0 320 240">
+        <circle id="abNucleus" cx="160" cy="120" r="22" fill="#fafbf3" stroke="#143109" stroke-width="1.5"/>
+        <g id="abShells"></g>
+        <g id="abParticles"></g>
+        <text id="abLabel" x="160" y="125" text-anchor="middle" font-family="Bitter" font-size="14" font-weight="700" fill="#143109">?</text>
+      </svg>
+    </div>
+    <div class="ab-controls">
+      <div class="ab-input"><div class="lbl" style="color:var(--proton)">Protons</div><input id="abP" type="number" min="0" max="20" value="6"></div>
+      <div class="ab-input"><div class="lbl" style="color:var(--neutron)">Neutrons</div><input id="abN" type="number" min="0" max="30" value="6"></div>
+      <div class="ab-input"><div class="lbl" style="color:var(--electron)">Electrons</div><input id="abE" type="number" min="0" max="20" value="6"></div>
+    </div>
+    <div class="ab-readout">
+      <div class="ab-cell"><div class="lbl">Element</div><div class="val" id="abElem"></div></div>
+      <div class="ab-cell"><div class="lbl">Mass #</div><div class="val" id="abMass"></div></div>
+      <div class="ab-cell"><div class="lbl">Atomic #</div><div class="val" id="abZ"></div></div>
+      <div class="ab-cell"><div class="lbl">Charge</div><div class="val" id="abQ"></div></div>
+    </div>
+    <p class="body-text" id="abExplain" style="font-size:.92rem;color:var(--slate);text-align:center;margin-top:8px"></p>
+  </div>
+</div>
+
+<!-- ======== 6. ENERGY LEVELS ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">6</span>Energy Levels: Ground State and Excited State</div>
+  <p class="body-text">Electrons are arranged into <strong>principal energy levels</strong>, sometimes called shells. They are numbered 1, 2, 3, and so on, with 1 being closest to the nucleus and lowest in energy. Each shell holds a limited number of electrons.</p>
+
+  <div class="term-grid">
+    <span class="term-sym">Shell 1 (n=1)</span><span class="term-def">Holds up to 2 electrons. Closest to the nucleus, lowest in energy.</span>
+    <span class="term-sym">Shell 2 (n=2)</span><span class="term-def">Holds up to 8 electrons.</span>
+    <span class="term-sym">Shell 3 (n=3)</span><span class="term-def">Holds up to 18 electrons (8 in the introductory model).</span>
+    <span class="term-sym">Shell 4 (n=4)</span><span class="term-def">Holds up to 32 electrons.</span>
+    <span class="term-sym">Valence shell</span><span class="term-def">The outermost shell that contains electrons. These electrons have the most energy and do all the bonding.</span>
+  </div>
+
+  <div class="highlight-box">
+    <strong>Ground state:</strong> every electron is in the lowest available energy level. This is the resting, stable arrangement.
+    <br><br>
+    <strong>Excited state:</strong> at least one electron has absorbed energy and jumped to a higher level, leaving a gap below it. The atom is unstable and will fall back.
+    <br><br>
+    Carbon ground state: 2-4 (2 in shell 1, 4 in shell 2).
+    <br>
+    Carbon excited state example: 2-3-1 (one electron jumped from shell 2 to shell 3).
+  </div>
+
+  <p class="body-text">When you see a configuration written as a series of numbers separated by dashes, like 2-8-2 for magnesium, that is the <em>shell configuration</em>. Add the numbers up to get the total electron count, and check it against the atomic number to make sure it is the right element. To check ground vs excited, compare against what you would get by filling shells in order with the proper caps.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Ground vs Excited: Spot the Difference</div>
+    <div class="ge-grid">
+      <div class="ge-card ground">
+        <div class="ge-tag ground">Ground</div>
+        <div class="gname">Boron (Z = 5)</div>
+        <div class="gconf">2-3</div>
+        <div class="gnote">Shell 1 is full (2). Shell 2 has 3, the rest of B's 5 electrons. No higher shells used. Ground state.</div>
+      </div>
+      <div class="ge-card excited">
+        <div class="ge-tag excited">Excited</div>
+        <div class="gname">Boron (Z = 5)</div>
+        <div class="gconf">2-2-1</div>
+        <div class="gnote">Total is still 5, but an electron sits in shell 3 while shell 2 is not full. That promoted electron is the giveaway.</div>
+      </div>
+      <div class="ge-card ground">
+        <div class="ge-tag ground">Ground</div>
+        <div class="gname">Sodium (Z = 11)</div>
+        <div class="gconf">2-8-1</div>
+        <div class="gnote">Shells 1 and 2 are full. Shell 3 has the leftover 1 electron. All electrons are as low as they can be.</div>
+      </div>
+      <div class="ge-card excited">
+        <div class="ge-tag excited">Excited</div>
+        <div class="gname">Sodium (Z = 11)</div>
+        <div class="gconf">2-7-2</div>
+        <div class="gnote">Total is still 11, but shell 2 is missing one electron and shell 3 has an extra. An electron is excited.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 7. LIGHT AND BRIGHT-LINE SPECTRA ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">7</span>Light Emission and Bright-Line Spectra</div>
+  <p class="body-text">When an excited electron falls back down to a lower energy level, the atom releases the extra energy as a <strong>photon</strong>, a packet of light. The energy of the photon equals the difference between the two levels.</p>
+
+  <div class="highlight-box">
+    <strong>Light is produced when an atom transitions from the excited state back to the ground state.</strong>
+    <br><br>
+    The exact wavelength (color) of the light depends on the size of the energy drop. Bigger drop &rarr; more energetic photon &rarr; bluer/violet color. Smaller drop &rarr; less energetic photon &rarr; redder color.
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Bohr Model: Watch an Electron Jump Down</div>
+    <div class="bohr-stage">
+      <svg id="bohrSvg" viewBox="0 0 360 200" style="max-width:420px">
+        <g id="bohrShells">
+          <circle cx="180" cy="100" r="30" fill="none" stroke="#D0D6B3" stroke-width="1.5"/>
+          <circle cx="180" cy="100" r="55" fill="none" stroke="#D0D6B3" stroke-width="1.5"/>
+          <circle cx="180" cy="100" r="80" fill="none" stroke="#D0D6B3" stroke-width="1.5"/>
+        </g>
+        <circle cx="180" cy="100" r="14" fill="#b5503e"/>
+        <text x="180" y="104" text-anchor="middle" font-family="Bitter" font-size="11" fill="#fff" font-weight="700">+</text>
+        <circle id="bohrEl" cx="260" cy="100" r="6" fill="#525B76"/>
+        <g id="bohrPhoton" style="opacity:0">
+          <line x1="180" y1="100" x2="320" y2="40" stroke="#ffd24a" stroke-width="2" stroke-dasharray="5,3"/>
+          <text x="320" y="35" text-anchor="end" font-family="Bitter" font-size="11" fill="#525B76">photon</text>
+        </g>
+      </svg>
+    </div>
+    <div class="bohr-actions">
+      <button class="site-btn" onclick="bohrAnimate(3,1)">Drop 3 &rarr; 1 (UV)</button>
+      <button class="site-btn secondary" onclick="bohrAnimate(3,2)">Drop 3 &rarr; 2 (visible red)</button>
+      <button class="site-btn secondary" onclick="bohrAnimate(2,1)">Drop 2 &rarr; 1 (UV)</button>
+    </div>
+    <div class="bohr-info" id="bohrInfo">Click a button to see an electron drop and emit a photon. The bigger the drop, the more energetic the light.</div>
+  </div>
+
+  <div class="sub-title">Bright-Line Spectra</div>
+  <p class="body-text">If you heat up a gas of one element and pass the emitted light through a prism, you do not get a rainbow. You get a few sharp bright lines on a black background. That is called a <strong>bright-line spectrum</strong>, and every element has its own unique pattern.</p>
+
+  <p class="body-text">Why? Because the energy levels of an atom are <em>quantized</em>, meaning only certain drops are possible. Each allowed drop produces a photon of a specific wavelength. Different elements have different shells with different gaps, so they emit different colors. The pattern is a fingerprint.</p>
+
+  <div class="interactive-area" style="background:transparent;border:none;padding:8px 0">
+    <div class="ia-label" style="color:var(--slate)">Sample Bright-Line Spectra (visible range)</div>
+    <div class="spec-stage">
+      <div class="spec-row">
+        <div class="spec-label">Hydrogen</div>
+        <div class="spec-bar" id="specH"></div>
+      </div>
+      <div class="spec-row">
+        <div class="spec-label">Helium</div>
+        <div class="spec-bar" id="specHe"></div>
+      </div>
+      <div class="spec-row">
+        <div class="spec-label">Sodium</div>
+        <div class="spec-bar" id="specNa"></div>
+      </div>
+      <div class="spec-row">
+        <div class="spec-label">Mercury</div>
+        <div class="spec-bar" id="specHg"></div>
+      </div>
+      <div class="spec-axis">
+        <div></div>
+        <div class="ax"><span>400 nm (violet)</span><span>500 nm</span><span>600 nm</span><span>700 nm (red)</span></div>
+      </div>
+    </div>
+    <p class="body-text" style="font-size:.88rem;color:var(--slate);text-align:center;margin-top:8px">Each white tick marks an emission line for that element. Notice how each pattern is unique. That is how astronomers identify the elements in distant stars.</p>
+  </div>
+</div>
+
+<!-- ======== 8. WAVE-MECHANICAL MODEL ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">8</span>The Wave-Mechanical Model and Orbitals</div>
+  <p class="body-text">Bohr's model of fixed circular orbits was a great first step, but it was not the whole story. Modern chemistry uses the <strong>wave-mechanical model</strong> (also called the quantum-mechanical model). In this picture, electrons do not travel on neat circles. Instead, they exist as fuzzy regions of probability called <strong>orbitals</strong>.</p>
+
+  <div class="highlight-box">
+    An <strong>orbital</strong> is a region in space where an electron is most likely to be found. Not where it is for sure. Where it is <em>most probably</em>.
+    <br><br>
+    The wave-mechanical model still has principal energy levels (shells, n = 1, 2, 3, ...), and the electrons inside still have similar total energies as in Bohr's picture. The difference is the shape and the language of probability instead of certainty.
+  </div>
+
+  <p class="body-text">Each orbital has a shape. The s orbital is a sphere. The p orbital is a dumbbell. The d and f orbitals are more complex. The shape tells you the regions of high probability for finding the electron.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Orbital Shapes: Where the Electron Probably Is</div>
+    <div class="orb-grid">
+      <div class="orb-card">
+        <svg viewBox="0 0 140 120">
+          <defs><radialGradient id="sgrad"><stop offset="0%" stop-color="#9BA06A" stop-opacity="0.9"/><stop offset="70%" stop-color="#9BA06A" stop-opacity="0.4"/><stop offset="100%" stop-color="#9BA06A" stop-opacity="0"/></radialGradient></defs>
+          <circle cx="70" cy="60" r="48" fill="url(#sgrad)"/>
+          <circle cx="70" cy="60" r="3" fill="#143109"/>
+        </svg>
+        <div class="otitle">s orbital</div>
+        <div class="onote">Spherical, surrounding the nucleus.</div>
+      </div>
+      <div class="orb-card">
+        <svg viewBox="0 0 140 120">
+          <defs><radialGradient id="pgrad"><stop offset="0%" stop-color="#525B76" stop-opacity="0.8"/><stop offset="80%" stop-color="#525B76" stop-opacity="0.1"/></radialGradient></defs>
+          <ellipse cx="70" cy="32" rx="22" ry="32" fill="url(#pgrad)"/>
+          <ellipse cx="70" cy="88" rx="22" ry="32" fill="url(#pgrad)"/>
+          <circle cx="70" cy="60" r="3" fill="#143109"/>
+        </svg>
+        <div class="otitle">p orbital</div>
+        <div class="onote">Dumbbell, two lobes through the nucleus.</div>
+      </div>
+      <div class="orb-card">
+        <svg viewBox="0 0 140 120">
+          <defs><radialGradient id="dgrad"><stop offset="0%" stop-color="#c9b3d4" stop-opacity="0.9"/><stop offset="80%" stop-color="#c9b3d4" stop-opacity="0.1"/></radialGradient></defs>
+          <ellipse cx="36" cy="32" rx="18" ry="22" fill="url(#dgrad)"/>
+          <ellipse cx="104" cy="32" rx="18" ry="22" fill="url(#dgrad)"/>
+          <ellipse cx="36" cy="88" rx="18" ry="22" fill="url(#dgrad)"/>
+          <ellipse cx="104" cy="88" rx="18" ry="22" fill="url(#dgrad)"/>
+          <circle cx="70" cy="60" r="3" fill="#143109"/>
+        </svg>
+        <div class="otitle">d orbital</div>
+        <div class="onote">Four-lobed cloverleaf around the nucleus.</div>
+      </div>
+      <div class="orb-card">
+        <svg viewBox="0 0 140 120">
+          <defs><radialGradient id="fgrad"><stop offset="0%" stop-color="#e8b0a0" stop-opacity="0.9"/><stop offset="80%" stop-color="#e8b0a0" stop-opacity="0.1"/></radialGradient></defs>
+          <ellipse cx="20" cy="60" rx="14" ry="22" fill="url(#fgrad)"/>
+          <ellipse cx="50" cy="30" rx="14" ry="22" fill="url(#fgrad)"/>
+          <ellipse cx="90" cy="30" rx="14" ry="22" fill="url(#fgrad)"/>
+          <ellipse cx="120" cy="60" rx="14" ry="22" fill="url(#fgrad)"/>
+          <ellipse cx="50" cy="90" rx="14" ry="22" fill="url(#fgrad)"/>
+          <ellipse cx="90" cy="90" rx="14" ry="22" fill="url(#fgrad)"/>
+          <circle cx="70" cy="60" r="3" fill="#143109"/>
+        </svg>
+        <div class="otitle">f orbital</div>
+        <div class="onote">Complex, multi-lobed shape.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-title">Bohr vs Wave-Mechanical: Side by Side</div>
+  <div class="models-grid">
+    <div class="model-card">
+      <svg viewBox="0 0 200 140">
+        <circle cx="100" cy="70" r="14" fill="#b5503e"/>
+        <circle cx="100" cy="70" r="32" fill="none" stroke="#143109" stroke-width="1.5"/>
+        <circle cx="100" cy="70" r="52" fill="none" stroke="#143109" stroke-width="1.5"/>
+        <circle cx="132" cy="70" r="5" fill="#525B76"/>
+        <circle cx="68" cy="40" r="5" fill="#525B76"/>
+        <circle cx="62" cy="100" r="5" fill="#525B76"/>
+      </svg>
+      <div class="mtitle">Bohr Model</div>
+      <div class="mnote">Electrons travel on fixed circular orbits at definite distances. A useful first picture, but not the full reality.</div>
+    </div>
+    <div class="model-card">
+      <svg viewBox="0 0 200 140">
+        <defs><radialGradient id="qm1"><stop offset="0%" stop-color="#9BA06A" stop-opacity="0.7"/><stop offset="100%" stop-color="#9BA06A" stop-opacity="0"/></radialGradient></defs>
+        <circle cx="100" cy="70" r="58" fill="url(#qm1)"/>
+        <circle cx="100" cy="70" r="14" fill="#b5503e"/>
+        <g fill="#525B76">
+          <circle cx="86" cy="50" r="2"/><circle cx="120" cy="60" r="2"/><circle cx="78" cy="84" r="2"/>
+          <circle cx="124" cy="92" r="2"/><circle cx="60" cy="68" r="2"/><circle cx="138" cy="78" r="2"/>
+          <circle cx="92" cy="32" r="2"/><circle cx="110" cy="100" r="2"/><circle cx="142" cy="46" r="2"/>
+        </g>
+      </svg>
+      <div class="mtitle">Wave-Mechanical Model</div>
+      <div class="mnote">Electrons exist in orbitals, fuzzy clouds of probability. The dots show where the electron is more likely to be found over many measurements.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 9. PRACTICE ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">9</span>Practice Problems</div>
+  <p class="body-text">Try each one before opening the answer.</p>
+
+  <div class="practice-box">
+    <div class="q"><strong>1.</strong> An atom has 17 protons, 18 neutrons, and 17 electrons. What is its identity, mass number, and charge?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p1')">Show Answer</button>
+    <div class="a" id="p1">Identity: 17 protons = chlorine (Cl). Mass number = 17 + 18 = <strong>35</strong>. Charge: protons - electrons = 17 - 17 = <strong>0</strong>. So this is a neutral Cl-35 atom.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>2.</strong> Naturally occurring copper is 69.17% Cu-63 (mass 62.93 amu) and 30.83% Cu-65 (mass 64.93 amu). Calculate the average atomic mass.</div>
+    <button class="show-ans-btn" onclick="toggleAns('p2')">Show Answer</button>
+    <div class="a" id="p2">$(62.93 \times 0.6917) + (64.93 \times 0.3083) = 43.53 + 20.02 \approx $ <strong>63.55 amu</strong>. The periodic table value is 63.55, matching exactly.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>3.</strong> Which of these electron configurations represents an excited state of a sodium atom (Z = 11)?
+      <br>(A) 2-8-1 &nbsp; (B) 2-7-2 &nbsp; (C) 2-8-2 &nbsp; (D) 2-8</div>
+    <button class="show-ans-btn" onclick="toggleAns('p3')">Show Answer</button>
+    <div class="a" id="p3"><strong>(B) 2-7-2.</strong> Sodium has 11 electrons, so configurations summing to 11 are valid. (A) 2-8-1 is the ground state. (B) 2-7-2 sums to 11 but shell 2 is not full while shell 3 has electrons, so it is excited. (C) sums to 12, not sodium. (D) sums to 10, not sodium.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>4.</strong> An ion has 12 protons and 10 electrons. What is its symbol and charge?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p4')">Show Answer</button>
+    <div class="a" id="p4">12 protons = magnesium. Charge = 12 - 10 = +2. Symbol: <strong>Mg$^{2+}$</strong>.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>5.</strong> What did Rutherford's gold foil experiment demonstrate about the structure of the atom? Pick the best answer.
+      <br>(A) Electrons exist in shells.
+      <br>(B) The atom has a small, dense, positively charged nucleus.
+      <br>(C) Atoms cannot be divided.
+      <br>(D) Electrons emit photons when they fall energy levels.
+    </div>
+    <button class="show-ans-btn" onclick="toggleAns('p5')">Show Answer</button>
+    <div class="a" id="p5"><strong>(B).</strong> The deflection of alpha particles, especially the few that bounced back, told Rutherford the atom must have a tiny, dense, positively charged center.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>6.</strong> Why does each element produce a unique bright-line spectrum?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p6')">Show Answer</button>
+    <div class="a" id="p6">Each element has its own unique set of energy levels. When an excited electron drops between levels, the photon released has an energy equal to the gap. Different gaps mean different photon energies, which means different wavelengths (colors). The full pattern of allowed transitions is unique to each element, so it acts as a fingerprint.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>7.</strong> $^{40}_{20}\text{Ca}$ — how many protons, neutrons, and electrons are in this neutral atom?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p7')">Show Answer</button>
+    <div class="a" id="p7">Atomic number 20: <strong>20 protons</strong>. Mass number 40: protons + neutrons = 40, so <strong>20 neutrons</strong>. Neutral atom: electrons = protons = <strong>20 electrons</strong>.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>8.</strong> Which subatomic particle has the smallest mass?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p8')">Show Answer</button>
+    <div class="a" id="p8"><strong>The electron.</strong> Mass roughly 1/1836 amu, almost negligible compared to a proton or neutron at ~1 amu.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>9.</strong> What is the difference between Bohr's model and the wave-mechanical (quantum) model of the atom?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p9')">Show Answer</button>
+    <div class="a" id="p9">Bohr's model places electrons on fixed circular orbits at definite distances. The wave-mechanical model treats electrons as probability clouds called orbitals. The orbital represents where the electron is most probably found, not exactly where it is. Both keep the idea of energy levels.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>10.</strong> Bromine occurs as Br-79 (50.69%, mass 78.92) and Br-81 (49.31%, mass 80.92). Predict whether the average atomic mass is closer to 79 or 81, then calculate.</div>
+    <button class="show-ans-btn" onclick="toggleAns('p10')">Show Answer</button>
+    <div class="a" id="p10">Both isotopes are nearly equal in abundance, so the average should sit roughly in the middle, slightly closer to 79 (since Br-79 is a bit more abundant). $(78.92 \times 0.5069) + (80.92 \times 0.4931) = 40.01 + 39.91 \approx $ <strong>79.92 amu</strong>. Periodic table lists 79.90.</div>
+  </div>
+</div>
+
+<!-- ======== 10. CHEAT SHEET ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">10</span>Quick Review Cheat Sheet</div>
+  <div class="term-grid">
+    <span class="term-sym">Proton</span><span class="term-def">Charge +1, mass ~1 amu, in nucleus.</span>
+    <span class="term-sym">Neutron</span><span class="term-def">Charge 0, mass ~1 amu, in nucleus.</span>
+    <span class="term-sym">Electron</span><span class="term-def">Charge -1, mass ~1/1836 amu, in orbitals.</span>
+    <span class="term-sym">Atomic # (Z)</span><span class="term-def">= number of protons. Identifies the element.</span>
+    <span class="term-sym">Mass # (A)</span><span class="term-def">= protons + neutrons.</span>
+    <span class="term-sym">Charge</span><span class="term-def">= protons &minus; electrons.</span>
+    <span class="term-sym">Atomic mass</span><span class="term-def">Weighted average of all natural isotopes.</span>
+    <span class="term-sym">Isotope</span><span class="term-def">Same element, different number of neutrons.</span>
+    <span class="term-sym">Rutherford</span><span class="term-def">Gold foil &rarr; tiny dense positive nucleus, mostly empty atom.</span>
+    <span class="term-sym">Ground state</span><span class="term-def">All electrons in lowest available levels.</span>
+    <span class="term-sym">Excited state</span><span class="term-def">An electron has jumped to a higher level. Total still matches Z, but a lower shell is unfilled.</span>
+    <span class="term-sym">Light emission</span><span class="term-def">Excited electron falls back &rarr; releases a photon.</span>
+    <span class="term-sym">Bright-line spectrum</span><span class="term-def">Unique pattern of emission lines for each element.</span>
+    <span class="term-sym">Valence shell</span><span class="term-def">Outermost shell with electrons. Highest energy. Does the bonding.</span>
+    <span class="term-sym">Bohr model</span><span class="term-def">Electrons in fixed circular orbits.</span>
+    <span class="term-sym">Wave-mechanical model</span><span class="term-def">Electrons in orbitals = regions of probability.</span>
+    <span class="term-sym">Orbital</span><span class="term-def">Most probable region for finding an electron.</span>
+  </div>
+</div>
+
+</div>
+
+<script>
+/* ============== Element data ============== */
+const ELEM_TABLE = [
+  {z:1, s:'H',  name:'Hydrogen'},
+  {z:2, s:'He', name:'Helium'},
+  {z:3, s:'Li', name:'Lithium'},
+  {z:4, s:'Be', name:'Beryllium'},
+  {z:5, s:'B',  name:'Boron'},
+  {z:6, s:'C',  name:'Carbon'},
+  {z:7, s:'N',  name:'Nitrogen'},
+  {z:8, s:'O',  name:'Oxygen'},
+  {z:9, s:'F',  name:'Fluorine'},
+  {z:10,s:'Ne', name:'Neon'},
+  {z:11,s:'Na', name:'Sodium'},
+  {z:12,s:'Mg', name:'Magnesium'},
+  {z:13,s:'Al', name:'Aluminum'},
+  {z:14,s:'Si', name:'Silicon'},
+  {z:15,s:'P',  name:'Phosphorus'},
+  {z:16,s:'S',  name:'Sulfur'},
+  {z:17,s:'Cl', name:'Chlorine'},
+  {z:18,s:'Ar', name:'Argon'},
+  {z:19,s:'K',  name:'Potassium'},
+  {z:20,s:'Ca', name:'Calcium'}
+];
+function elemBy(z){ return ELEM_TABLE.find(e=>e.z===z); }
+
+/* ============== Practice toggle ============== */
+function toggleAns(id){ document.getElementById(id).classList.toggle('show'); }
+window.toggleAns = toggleAns;
+
+/* ============== Rutherford simulator ============== */
+const ruthSvg = document.getElementById('ruthSvg');
+const nucleiG = document.getElementById('ruthNuclei');
+const shotsG = document.getElementById('ruthShots');
+let ruthThru = 0, ruthDef = 0, ruthBack = 0;
+
+// Place a sparse grid of "nuclei" inside the foil
+(function placeNuclei(){
+  const positions = [];
+  for(let row=0; row<5; row++){
+    for(let col=0; col<3; col++){
+      const x = 232 + col*22 + (row%2 ? 8 : 0);
+      const y = 36 + row*36;
+      positions.push([x,y]);
+    }
+  }
+  let html = '';
+  positions.forEach(([x,y])=>{
+    html += '<circle cx="'+x+'" cy="'+y+'" r="2.4" fill="#b5503e"/>';
+  });
+  nucleiG.innerHTML = html;
+  // store positions for collision tests
+  ruthSvg._nuclei = positions;
+})();
+
+function ruthShoot(n){
+  const positions = ruthSvg._nuclei;
+  for(let i=0;i<n;i++){
+    setTimeout(()=>fireOne(positions, i*40), i*60);
+  }
+}
+function fireOne(positions, delay){
+  const startY = 60 + Math.random()*100;
+  // closest nucleus distance from this y
+  let minD = 1e9, hit = null;
+  positions.forEach(([nx,ny])=>{
+    const d = Math.abs(ny - startY);
+    if(d < minD){ minD = d; hit = [nx,ny]; }
+  });
+  // type of trajectory
+  let type;
+  if(minD > 14) type = 'thru';
+  else if(minD > 6) type = 'def';
+  else type = 'back';
+  let path;
+  if(type==='thru'){
+    path = 'M 100 '+startY+' L 480 '+startY;
+  } else if(type==='def'){
+    const angle = (startY < hit[1] ? -1 : 1) * (10 + Math.random()*10);
+    const endX = 480, endY = startY + Math.tan(angle*Math.PI/180)*(endX-hit[0]);
+    path = 'M 100 '+startY+' L '+hit[0]+' '+startY+' L '+endX+' '+endY;
+  } else {
+    const endX = 60, endY = startY + (startY < hit[1] ? -30 : 30);
+    path = 'M 100 '+startY+' L '+hit[0]+' '+startY+' L '+endX+' '+endY;
+  }
+  const id = 'rs'+Math.random().toString(36).slice(2,8);
+  const colorMap = {thru:'#9BA06A', def:'#525B76', back:'#b5503e'};
+  const el = document.createElementNS('http://www.w3.org/2000/svg','path');
+  el.setAttribute('d', path);
+  el.setAttribute('fill','none');
+  el.setAttribute('stroke', colorMap[type]);
+  el.setAttribute('stroke-width','1.4');
+  el.setAttribute('stroke-linecap','round');
+  el.setAttribute('opacity','0.85');
+  el.style.strokeDasharray = '500';
+  el.style.strokeDashoffset = '500';
+  el.style.transition = 'stroke-dashoffset 1s ease-out';
+  shotsG.appendChild(el);
+  requestAnimationFrame(()=>{ el.style.strokeDashoffset = '0'; });
+  setTimeout(()=>{ el.style.opacity = '0.35'; }, 1100);
+  if(type==='thru') ruthThru++;
+  else if(type==='def') ruthDef++;
+  else ruthBack++;
+  document.getElementById('ruthThru').textContent = ruthThru;
+  document.getElementById('ruthDef').textContent = ruthDef;
+  document.getElementById('ruthBack').textContent = ruthBack;
+}
+function ruthReset(){
+  shotsG.innerHTML = '';
+  ruthThru = ruthDef = ruthBack = 0;
+  document.getElementById('ruthThru').textContent = 0;
+  document.getElementById('ruthDef').textContent = 0;
+  document.getElementById('ruthBack').textContent = 0;
+}
+window.ruthShoot = ruthShoot;
+window.ruthReset = ruthReset;
+
+/* ============== Isotope notation ============== */
+const ISOTOPES = [
+  {sym:'H',  z:1,  a:1,  name:'Hydrogen-1 (protium)',   note:'1 proton, 0 neutrons. Most common form of hydrogen.'},
+  {sym:'H',  z:1,  a:2,  name:'Hydrogen-2 (deuterium)', note:'1 proton, 1 neutron. Stable, used in heavy water.'},
+  {sym:'H',  z:1,  a:3,  name:'Hydrogen-3 (tritium)',   note:'1 proton, 2 neutrons. Radioactive.'},
+  {sym:'C',  z:6,  a:12, name:'Carbon-12',              note:'6 protons, 6 neutrons. The mass standard.'},
+  {sym:'C',  z:6,  a:14, name:'Carbon-14',              note:'6 protons, 8 neutrons. Radioactive, used in carbon dating.'},
+  {sym:'O',  z:8,  a:16, name:'Oxygen-16',              note:'8 protons, 8 neutrons. The most common oxygen isotope.'},
+  {sym:'Cl', z:17, a:35, name:'Chlorine-35',            note:'17 protons, 18 neutrons. About 76% of natural chlorine.'},
+  {sym:'Cl', z:17, a:37, name:'Chlorine-37',            note:'17 protons, 20 neutrons. About 24% of natural chlorine.'},
+  {sym:'U',  z:92, a:235,name:'Uranium-235',            note:'92 protons, 143 neutrons. Used in nuclear fission.'},
+  {sym:'U',  z:92, a:238,name:'Uranium-238',            note:'92 protons, 146 neutrons. The most abundant uranium isotope.'}
+];
+const isoPick = document.getElementById('isoPick');
+ISOTOPES.forEach((iso,i)=>{
+  const b = document.createElement('button');
+  b.className = 'iso-pick-btn'+(i===3?' active':'');
+  b.textContent = iso.sym+'-'+iso.a;
+  b.addEventListener('click', ()=>showIso(i));
+  isoPick.appendChild(b);
+});
+function showIso(i){
+  const iso = ISOTOPES[i];
+  isoPick.querySelectorAll('.iso-pick-btn').forEach((b,j)=>b.classList.toggle('active', j===i));
+  document.getElementById('isoSym').textContent = iso.sym;
+  document.getElementById('isoMass').textContent = iso.a;
+  document.getElementById('isoZ').textContent = iso.z;
+  const neutrons = iso.a - iso.z;
+  document.getElementById('isoRead').innerHTML = '<strong>'+iso.name+'</strong><br>'+iso.note+'<br><span style="color:var(--slate)">protons: '+iso.z+' &middot; neutrons: '+neutrons+' &middot; mass number: '+iso.a+'</span>';
+}
+showIso(3);
+window.showIso = showIso;
+
+/* ============== Weighted average calculator ============== */
+const WAVG_PRESETS = [
+  {name:'Chlorine', n1:'Cl-35', m1:35, p1:75.77, n2:'Cl-37', m2:37, p2:24.23},
+  {name:'Copper',   n1:'Cu-63', m1:62.93, p1:69.17, n2:'Cu-65', m2:64.93, p2:30.83},
+  {name:'Bromine',  n1:'Br-79', m1:78.92, p1:50.69, n2:'Br-81', m2:80.92, p2:49.31},
+  {name:'Boron',    n1:'B-10',  m1:10.01, p1:19.9, n2:'B-11',   m2:11.01, p2:80.1}
+];
+const wavgPick = document.getElementById('wavgPick');
+WAVG_PRESETS.forEach((p,i)=>{
+  const b = document.createElement('button');
+  b.className = 'iso-pick-btn'+(i===0?' active':'');
+  b.textContent = p.name;
+  b.addEventListener('click', ()=>setWavg(i));
+  wavgPick.appendChild(b);
+});
+function setWavg(i){
+  const p = WAVG_PRESETS[i];
+  wavgPick.querySelectorAll('.iso-pick-btn').forEach((b,j)=>b.classList.toggle('active', j===i));
+  document.getElementById('wavgN1').value = p.n1;
+  document.getElementById('wavgM1').value = p.m1;
+  document.getElementById('wavgP1').value = p.p1;
+  document.getElementById('wavgN2').value = p.n2;
+  document.getElementById('wavgM2').value = p.m2;
+  document.getElementById('wavgP2').value = p.p2;
+  recalcWavg();
+}
+function recalcWavg(){
+  const m1 = +document.getElementById('wavgM1').value;
+  const p1 = +document.getElementById('wavgP1').value;
+  const m2 = +document.getElementById('wavgM2').value;
+  const p2 = +document.getElementById('wavgP2').value;
+  const total = p1 + p2;
+  const out = document.getElementById('wavgOut');
+  if(!isFinite(m1+p1+m2+p2)){ out.textContent = '...'; return; }
+  if(Math.abs(total - 100) > 0.5){
+    out.innerHTML = '<span style="color:var(--bad)">Abundances should add to 100% (currently '+total.toFixed(2)+'%)</span>';
+    return;
+  }
+  const avg = m1*(p1/100) + m2*(p2/100);
+  out.innerHTML = 'Weighted average atomic mass = ('+m1+' &times; '+(p1/100).toFixed(4)+') + ('+m2+' &times; '+(p2/100).toFixed(4)+') = <strong>'+avg.toFixed(3)+' amu</strong>';
+}
+['wavgM1','wavgP1','wavgM2','wavgP2'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', recalcWavg);
+});
+recalcWavg();
+window.setWavg = setWavg;
+
+/* ============== Atom builder ============== */
+const abP = document.getElementById('abP');
+const abN = document.getElementById('abN');
+const abE = document.getElementById('abE');
+
+function shellCaps(){ return [2,8,8,2]; }
+
+function fillShells(electrons){
+  const caps = shellCaps();
+  const shells = [];
+  let rem = electrons;
+  for(const c of caps){
+    if(rem<=0){ shells.push(0); continue; }
+    const t = Math.min(rem, c);
+    shells.push(t); rem -= t;
+  }
+  if(rem>0){ shells[shells.length-1] += rem; }
+  return shells;
+}
+
+function refreshAtom(){
+  let p = +abP.value, n = +abN.value, e = +abE.value;
+  if(!isFinite(p)) p = 0; if(!isFinite(n)) n = 0; if(!isFinite(e)) e = 0;
+  const elem = elemBy(p);
+  const mass = p + n;
+  const charge = p - e;
+  document.getElementById('abElem').textContent = elem ? elem.s : '?';
+  document.getElementById('abMass').textContent = mass;
+  document.getElementById('abZ').textContent = p;
+  let qStr;
+  if(charge===0) qStr = '0 (neutral)';
+  else if(charge>0) qStr = '+'+charge;
+  else qStr = String(charge);
+  document.getElementById('abQ').textContent = qStr;
+
+  // Explain
+  let exp;
+  if(!elem){ exp = 'No element matches that proton count in our table (try 1-20).'; }
+  else if(charge===0){ exp = elem.name+' atom &middot; '+p+' protons, '+n+' neutrons, '+e+' electrons. Neutral.'; }
+  else if(charge>0){ exp = elem.name+' cation '+elem.s+'$^{'+charge+'+}$ &middot; lost '+charge+' electron'+(charge===1?'':'s')+' compared to a neutral atom.'; }
+  else { exp = elem.name+' anion '+elem.s+'$^{'+(-charge)+'-}$ &middot; gained '+(-charge)+' electron'+(charge===-1?'':'s')+' compared to a neutral atom.'; }
+  const expEl = document.getElementById('abExplain');
+  expEl.innerHTML = exp;
+  if(window.renderMathInElement){ try{ window.renderMathInElement(expEl,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]}); }catch{} }
+
+  // Draw shells and electrons
+  const shellsG = document.getElementById('abShells');
+  const partG = document.getElementById('abParticles');
+  const cx=160, cy=120;
+  const radii = [40, 65, 90, 112];
+  const shells = fillShells(e);
+  let html = '';
+  shells.forEach((cnt,i)=>{
+    if(i>=radii.length) return;
+    if(cnt>0){
+      html += '<circle cx="'+cx+'" cy="'+cy+'" r="'+radii[i]+'" fill="none" stroke="#D0D6B3" stroke-width="1.2"/>';
+    }
+  });
+  shellsG.innerHTML = html;
+  let phtml = '';
+  shells.forEach((cnt,i)=>{
+    if(i>=radii.length || cnt<=0) return;
+    const r = radii[i];
+    for(let k=0;k<cnt;k++){
+      const a = (k/cnt)*Math.PI*2 - Math.PI/2 + i*0.3;
+      const ex = cx + r*Math.cos(a);
+      const ey = cy + r*Math.sin(a);
+      phtml += '<circle cx="'+ex+'" cy="'+ey+'" r="4" fill="#525B76" stroke="#143109" stroke-width="0.8"/>';
+    }
+  });
+  partG.innerHTML = phtml;
+  const labelStr = elem ? elem.s : '?';
+  document.getElementById('abLabel').textContent = labelStr;
+  // nucleus color/size based on p+n
+  const nucR = Math.min(28, 12 + Math.sqrt(p+n)*2.5);
+  document.getElementById('abNucleus').setAttribute('r', nucR);
+}
+[abP,abN,abE].forEach(el=>el.addEventListener('input', refreshAtom));
+refreshAtom();
+
+/* ============== Bohr animation ============== */
+const bohrEl = document.getElementById('bohrEl');
+const bohrPhoton = document.getElementById('bohrPhoton');
+const bohrInfo = document.getElementById('bohrInfo');
+const SHELL_R = {1:30, 2:55, 3:80};
+
+function bohrAnimate(from, to){
+  const cx=180, cy=100;
+  // Start at "from" shell, jump to "to" shell. Show photon.
+  bohrPhoton.style.opacity = 0;
+  bohrEl.setAttribute('cx', cx + SHELL_R[from]);
+  bohrEl.setAttribute('cy', cy);
+  let t = 0;
+  const start = SHELL_R[from], end = SHELL_R[to];
+  const dur = 800;
+  const startTime = performance.now();
+  function frame(now){
+    const f = Math.min(1, (now - startTime)/dur);
+    const r = start + (end - start)*f;
+    const angle = -Math.PI/2 + f*Math.PI;
+    const x = cx + r*Math.cos(angle);
+    const y = cy + r*Math.sin(angle);
+    bohrEl.setAttribute('cx', x);
+    bohrEl.setAttribute('cy', y);
+    if(f<1) requestAnimationFrame(frame);
+    else {
+      bohrPhoton.style.opacity = 1;
+      setTimeout(()=>{ bohrPhoton.style.opacity = 0; }, 1400);
+    }
+  }
+  requestAnimationFrame(frame);
+  const energy = (1/(to*to) - 1/(from*from)) * 13.6;
+  let color;
+  if(from===3 && to===2) color = 'visible red light (~656 nm)';
+  else if(from===4 && to===2) color = 'visible green/teal light (~486 nm)';
+  else if(from===3 && to===1) color = 'ultraviolet light';
+  else if(from===2 && to===1) color = 'ultraviolet light';
+  else color = 'a photon of light';
+  bohrInfo.innerHTML = 'Drop from shell '+from+' to shell '+to+'. Energy of photon &asymp; '+energy.toFixed(2)+' eV. That falls in '+color+'. Bigger drops &rarr; bluer/UV light. Smaller drops &rarr; redder.';
+}
+window.bohrAnimate = bohrAnimate;
+
+/* ============== Bright-line spectra ============== */
+// Approximate visible-range emission lines (nm). Range for our bar: 400-700 nm.
+const SPECTRA = {
+  specH:  [410, 434, 486, 656],
+  specHe: [447, 471, 501, 587, 668, 706],
+  specNa: [589, 590, 615, 819], // Na D doublet ~589
+  specHg: [405, 436, 546, 577, 579, 615, 691]
+};
+function placeLines(barId, wavelengths){
+  const bar = document.getElementById(barId);
+  const min = 400, max = 700;
+  bar.innerHTML = '';
+  wavelengths.forEach(w=>{
+    if(w < min || w > max) return;
+    const pct = ((w - min)/(max-min))*100;
+    const line = document.createElement('div');
+    line.className = 'spec-line';
+    line.style.left = pct.toFixed(2)+'%';
+    bar.appendChild(line);
+  });
+}
+Object.entries(SPECTRA).forEach(([k,v])=>placeLines(k, v));
+</script>
+</body>
+</html>

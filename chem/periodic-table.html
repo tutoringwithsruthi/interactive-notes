@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Periodic Table (Regents Topic 2)</title>
-<meta name="description" content="Interactive notes on the periodic table for Chemistry Regents Review Topic 2. Groups, periods, metals and nonmetals, trends, ions, Lewis dot diagrams, and practice problems. By tutoringwithsruthi.">
+<title>Periodic Table Notes (Unit 2)</title>
+<meta name="description" content="Interactive notes on the periodic table (Unit 2 of 10). Groups, periods, metals and nonmetals, trends, ions, Lewis dot diagrams, and practice problems. By tutoringwithsruthi.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Dosis:wght@400;500;600;700&family=Bitter:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -22,8 +22,17 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px 16px 52px;overflow-x:hidden}
-.page{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:18px 16px 52px;overflow-x:hidden}
+.page{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+
+/* Unit nav */
+.unit-nav{background:var(--white);border:2px solid var(--sage-l);border-radius:24px;padding:6px;display:flex;flex-wrap:wrap;gap:3px;box-shadow:0 2px 10px rgba(20,49,9,0.07);position:sticky;top:8px;z-index:20}
+.unit-tab{font-family:var(--fp);font-weight:600;font-size:.78rem;border:none;background:transparent;color:var(--slate);padding:7px 11px;border-radius:18px;cursor:pointer;text-decoration:none;white-space:nowrap;flex:1 1 auto;text-align:center;transition:background .15s,color .15s;display:flex;align-items:center;justify-content:center;gap:4px}
+.unit-tab:hover{background:var(--sage-m);color:var(--forest)}
+.unit-tab.current{background:var(--sage);color:var(--white)}
+.unit-tab.locked{color:#a3a89a;cursor:not-allowed}
+.unit-tab.locked:hover{background:transparent;color:#a3a89a}
+.unit-tab .un{font-family:var(--fb);font-weight:700;font-size:.72rem;opacity:.85}
 .pg-head{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:20px;padding:40px 32px;text-align:center}
 .pg-head .topic-badge{display:inline-block;font-family:var(--fb);font-weight:700;color:var(--slate);background:var(--white);border:1.5px solid var(--sage-l);padding:4px 14px;border-radius:20px;font-size:.85rem;margin-bottom:12px;letter-spacing:.04em}
 .pg-head h1{font-family:var(--fh);font-size:2.2rem;color:var(--forest);margin-bottom:6px}
@@ -144,23 +153,38 @@ body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px
   .topics-list{grid-template-columns:1fr}
   .trends-grid{grid-template-columns:repeat(8,1fr)}
   .trends-grid .el{font-size:.7rem;padding:4px 0}
+  .unit-tab{font-size:.72rem;padding:6px 9px}
 }
 </style>
 </head>
 <body>
 <div class="page">
 
+<!-- ======== UNIT NAV ======== -->
+<nav class="unit-nav" aria-label="Chemistry units">
+  <a class="unit-tab" href="atomic-structure.html"><span class="un">I.</span> Atomic Structure</a>
+  <a class="unit-tab current" href="periodic-table.html"><span class="un">II.</span> Periodic Table</a>
+  <a class="unit-tab" href="stoichiometry.html"><span class="un">III.</span> Stoichiometry</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">IV.</span> Bonding</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">V.</span> Matter</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">VI.</span> Equilibrium</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">VII.</span> Organic</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">VIII.</span> Redox</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">IX.</span> Acids/Bases</a>
+  <a class="unit-tab locked" title="Coming soon"><span class="un">X.</span> Nuclear</a>
+</nav>
+
 <!-- HEADER -->
 <div class="pg-head">
-  <div class="topic-badge">Regents Review &middot; Topic 2</div>
+  <div class="topic-badge">Periodic Table Notes &middot; Unit 2 of 10</div>
   <h1>The Periodic Table</h1>
-  <p class="sub">A guided, interactive review of everything Topic 2 asks of you.</p>
+  <p class="sub">A guided, interactive walkthrough of how the table is built and what it tells you about every element.</p>
 </div>
 
 <!-- ======== OVERVIEW ======== -->
 <div class="card">
-  <div class="card-title"><span class="num">0</span>The Ten Regents Topics</div>
-  <p class="body-text">Chemistry Regents is organized into ten major topics. Each one builds on the last. This page covers Topic 2, The Periodic Table, which leans on the atomic structure ideas from Topic 1 and sets up the bonding work you will do in Topic 4.</p>
+  <div class="card-title"><span class="num">0</span>The Ten Units</div>
+  <p class="body-text">Chemistry is organized into ten major units. Each one builds on the last. This page covers Unit 2, The Periodic Table, which leans on the atomic structure ideas from Unit 1 and sets up the bonding work you will do in Unit 4.</p>
   <div class="highlight-box">
     <div class="topics-list">
       <div class="row"><span class="rn">I.</span> Atomic Structure</div>
@@ -356,7 +380,7 @@ body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px
 <!-- ======== STP & STATES ======== -->
 <div class="card">
   <div class="card-title"><span class="num">6</span>STP and States of the Elements</div>
-  <p class="body-text"><strong>STP</strong> stands for <em>Standard Temperature and Pressure</em>. On the Regents reference tables, STP is defined as:</p>
+  <p class="body-text"><strong>STP</strong> stands for <em>Standard Temperature and Pressure</em>. The standard chemistry definition is:</p>
 
   <div class="highlight-box" style="text-align:center;font-family:var(--fb);font-size:1.05rem">
     Temperature = 0&deg;C (273 K) &nbsp;&nbsp;&middot;&nbsp;&nbsp; Pressure = 101.3 kPa (1 atm)
@@ -501,7 +525,7 @@ body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px
   </div>
 
   <div class="sub-title">Same Electrons as Which Noble Gas?</div>
-  <p class="body-text">A common Regents question asks which noble gas an ion matches. The trick is to count electrons in the ion, not in the atom.</p>
+  <p class="body-text">A common test question asks which noble gas an ion matches. The trick is to count electrons in the ion, not in the atom.</p>
   <div class="worked-example">
     <div class="step"><span class="step-label">Example. </span>O$^{2-}$ has how many electrons? Oxygen starts with 8. Gaining 2 makes 10.</div>
     <div class="step"><span class="step-label">Match. </span>The noble gas with 10 electrons is <strong>neon</strong>. So O$^{2-}$ has the same electron configuration as Ne.</div>
@@ -693,7 +717,7 @@ body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px
 <!-- ======== NAMING & FORMULAS ======== -->
 <div class="card">
   <div class="card-title"><span class="num">11</span>Simple Compounds: Names and Formulas</div>
-  <p class="body-text">On the Regents you should be able to go either direction: given a name, write the formula; given a formula, write the name. For Topic 2 we are sticking with simple compounds. The key rule for ionic compounds is that positive and negative charges must cancel.</p>
+  <p class="body-text">You should be able to go either direction: given a name, write the formula; given a formula, write the name. For this unit we are sticking with simple compounds. The key rule for ionic compounds is that positive and negative charges must cancel.</p>
 
   <div class="worked-example">
     <div class="step"><span class="step-label">Name to formula. </span>Magnesium chloride. Mg is Group 2 so it forms Mg$^{2+}$. Cl is Group 17 so it forms Cl$^-$. To balance +2 you need two -1 ions. Formula: <strong>MgCl$_2$</strong>.</div>
@@ -702,14 +726,14 @@ body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px
     <div class="step"><span class="step-label">Formula to name. </span>K$_2$O. K is potassium, a metal. O is oxygen. Ionic compounds name the metal first, then the nonmetal with an "-ide" ending. Name: <strong>potassium oxide</strong>.</div>
   </div>
   <div class="worked-example">
-    <div class="step"><span class="step-label">Formula to name. </span>HCl. This is hydrogen and chlorine only. Call it <strong>hydrogen chloride</strong>. (When dissolved in water it becomes hydrochloric acid, but that is acid naming, Topic 9.)</div>
+    <div class="step"><span class="step-label">Formula to name. </span>HCl. This is hydrogen and chlorine only. Call it <strong>hydrogen chloride</strong>. (When dissolved in water it becomes hydrochloric acid, but that is acid naming, covered in Unit 9.)</div>
   </div>
 </div>
 
 <!-- ======== PRACTICE ======== -->
 <div class="card">
   <div class="card-title"><span class="num">12</span>Practice Problems</div>
-  <p class="body-text">These are drawn straight from the kind of items you will see on the Regents. Try each one before opening the answer.</p>
+  <p class="body-text">Try each one before opening the answer.</p>
 
   <div class="practice-box">
     <div class="q"><strong>1.</strong> Which Lewis electron-dot diagram represents the bonding in potassium iodide?
@@ -754,7 +778,7 @@ body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:24px
     <div class="q"><strong>4.</strong> Which element has the greatest electronegativity? Justify using periodic trends.</div>
     <button class="show-ans-btn" onclick="toggleAns('ansP4')">Show Answer</button>
     <div class="a" id="ansP4">
-      <strong>Fluorine (F).</strong> Electronegativity increases going up a group and going right across a period. Fluorine is in the top right of the table (excluding noble gases, which typically are not assigned an electronegativity on the Regents reference table because they do not form bonds under normal conditions).
+      <strong>Fluorine (F).</strong> Electronegativity increases going up a group and going right across a period. Fluorine is in the top right of the table (excluding noble gases, which typically are not assigned an electronegativity because they do not form bonds under normal conditions).
     </div>
   </div>
 
@@ -1192,7 +1216,7 @@ function shortText(z){
   return '['+core.sym+'] '+tail.map(o=>o.name+'<sup>'+o.n+'</sup>').join(' ');
 }
 
-/* Element list for picker: Z 1-36 covers everything a Regents/intro student sees */
+/* Element list for picker: Z 1-36 covers everything an intro student sees */
 const CFG_ELEMENTS = ELEMENTS.filter(e=>e.n<=36 && e.s!=='La*' && e.s!=='Ac**').sort((a,b)=>a.n-b.n);
 
 function buildPicker(containerId, onPick){
