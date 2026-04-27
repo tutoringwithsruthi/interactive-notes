@@ -310,6 +310,61 @@ body{padding:0;background:var(--bg);overflow-x:auto;font-feature-settings:"ss01"
   .main{padding:16px 18px 48px}
   .search{order:3;flex-basis:100%;max-width:none}
 }
+
+/* Dark mode for v2 */
+[data-theme="dark"]{
+  --white:#14170F; --sage-l:#2B3320; --sage:#A9B07A; --sage-m:#1E2416;
+  --slate:#AEB5C8; --forest:#E8EBDA; --bg:#0E1108;
+}
+[data-theme="dark"] body{color:var(--forest)}
+[data-theme="dark"] .lws-backdrop{
+  background:radial-gradient(1200px 600px at 8% -10%,rgba(43,51,32,.7) 0%,transparent 60%),
+             radial-gradient(900px 500px at 110% 0%,rgba(30,36,22,.55) 0%,transparent 55%),
+             radial-gradient(800px 400px at 50% 120%,rgba(43,51,32,.7) 0%,transparent 55%),
+             var(--bg)
+}
+[data-theme="dark"] .side,[data-theme="dark"] .top{background:rgba(20,23,15,0.7);border-color:#2B3320}
+[data-theme="dark"] .ws-switch-btn,[data-theme="dark"] .search,[data-theme="dark"] .btn-icon{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .ws-switch-btn .lbl,[data-theme="dark"] .ws-switch-btn .ico{color:var(--forest)}
+[data-theme="dark"] .ws-switch-btn .ico{background:#2A3421}
+[data-theme="dark"] .nav-item,[data-theme="dark"] .nav-item .t{color:var(--forest)}
+[data-theme="dark"] .nav-item:hover{background:#2A3421}
+[data-theme="dark"] .nav-item.active{background:#2A3421;border-color:#3A4A2E;box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 12px 40px -12px rgba(0,0,0,0.55),0 2px 8px rgba(0,0,0,0.35)}
+[data-theme="dark"] .btn-icon:hover{background:#2A3421;color:var(--forest)}
+[data-theme="dark"] .search input{color:var(--forest)}
+[data-theme="dark"] .search input::placeholder{color:#7e8775}
+[data-theme="dark"] .pg-head{background:#1E2416;border-color:#3A4A2E}
+[data-theme="dark"] .pg-head h1,[data-theme="dark"] .pg-head .sub,[data-theme="dark"] .pg-head .topic-badge{color:var(--forest)}
+[data-theme="dark"] .pg-head .topic-badge{background:#2A3421;border-color:#3A4A2E}
+[data-theme="dark"] .card{background:#14170F;border-color:#2B3320;color:var(--forest)}
+[data-theme="dark"] .card-title,[data-theme="dark"] .sub-title,[data-theme="dark"] .body-text,[data-theme="dark"] .term-def,[data-theme="dark"] .term-sym{color:var(--forest)}
+[data-theme="dark"] .card-title .num{background:#2A3421;color:var(--sage)}
+[data-theme="dark"] .highlight-box{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .interactive-area{background:#1E2416;border-color:#3A4A2E}
+[data-theme="dark"] .ia-label{color:var(--forest)}
+[data-theme="dark"] .practice-box{background:#14170F;border-color:#3A4A2E}
+[data-theme="dark"] .practice-box .q,[data-theme="dark"] .practice-box .a{color:var(--forest)}
+[data-theme="dark"] .practice-box .a{background:#1E2416;border-color:#3A4A2E}
+[data-theme="dark"] .show-ans-btn{background:#1E2416;color:var(--sage);border-color:#3A4A2E}
+[data-theme="dark"] .worked-example{background:#1A1F11;border-left-color:var(--sage);color:var(--forest)}
+[data-theme="dark"] .site-btn.secondary{background:#1E2416;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .topics-list .row.current{background:#2A3421}
+[data-theme="dark"] .fc-card,[data-theme="dark"] .fc-face,[data-theme="dark"] .fc-front{background:#14170F;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .fc-front{background:#1E2416}
+[data-theme="dark"] .fc-back{background:#14170F}
+[data-theme="dark"] .fc-face .term,[data-theme="dark"] .fc-face .def{color:var(--forest)}
+[data-theme="dark"] .fc-nav-btn{background:#14170F;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .fc-nav-btn:hover{background:#2A3421}
+[data-theme="dark"] .mole-stage,[data-theme="dark"] .gfm-card,[data-theme="dark"] .conv-stage,[data-theme="dark"] .pie-card,[data-theme="dark"] .gas-card,[data-theme="dark"] .rx-card,[data-theme="dark"] .balance-stage,[data-theme="dark"] .bio-card,[data-theme="dark"] .rxtype-card,[data-theme="dark"] .energy-stage,[data-theme="dark"] .sol-card,[data-theme="dark"] .ionic-card,[data-theme="dark"] .stoich-card,[data-theme="dark"] .bal-card{background:#14170F;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .ionic-row,[data-theme="dark"] .ionic-row.title,[data-theme="dark"] .gfm-total,[data-theme="dark"] .stoich-eq,[data-theme="dark"] .energy-readout,[data-theme="dark"] .stoich-steps{background:#1E2416;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .conv-cell,[data-theme="dark"] .energy-bar,[data-theme="dark"] .bal-feedback{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .conv-pick-btn,[data-theme="dark"] .rx-opt{background:#14170F;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .conv-pick-btn:hover,[data-theme="dark"] .rx-opt:hover{background:#2A3421}
+[data-theme="dark"] .conv-cell input,[data-theme="dark"] .stoich-input input,[data-theme="dark"] .bal-eq input,[data-theme="dark"] input[type=number],[data-theme="dark"] input[type=range]{background:#14170F;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .dots-grid{background:#1E2416;border-color:#3A4A2E}
+[data-theme="dark"] .scale-readout{background:#14170F;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .gfm-row{border-bottom-color:#3A4A2E}
+[data-theme="dark"] .pie-legend,[data-theme="dark"] .ionic-key{color:var(--slate)}
 </style>
 </head>
 <body data-theme="light">
@@ -320,11 +375,6 @@ body{padding:0;background:var(--bg);overflow-x:auto;font-feature-settings:"ss01"
   <div class="brand">
     <div class="brand-mark">L</div>
     <div class="brand-name">learningwithsruthi <small>chemistry notes</small></div>
-  </div>
-  <div class="exam-picker">
-    <button class="exam-pill active">CHEM</button>
-    <button class="exam-pill">PHYS</button>
-    <button class="exam-pill">MATH</button>
   </div>
   <div class="ws-switch">
     <div class="ws-switch-btn">
@@ -364,9 +414,7 @@ body{padding:0;background:var(--bg);overflow-x:auto;font-feature-settings:"ss01"
     <input placeholder="Search topics, lessons, questions...">
   </div>
   <div class="top-actions">
-    <button class="btn-icon" title="Toggle theme" onclick="document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark'">&#9790;</button>
-    <button class="btn-icon" title="Notifications">&#9775;</button>
-    <div class="avatar">J</div>
+    <button class="btn-icon" id="themeBtn" title="Toggle theme" onclick="toggleLwsTheme()">&#9790;</button>
   </div>
 </header>
 
@@ -2034,6 +2082,59 @@ function fcShuffle(){
 }
 window.fcFlip = fcFlip; window.fcNext = fcNext; window.fcPrev = fcPrev; window.fcShuffle = fcShuffle;
 fcRender();
+
+/* ============== LWS shell: theme toggle + search ============== */
+function toggleLwsTheme(){
+  const cur = document.body.dataset.theme || 'light';
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.body.dataset.theme = next;
+  try{ localStorage.setItem('lws-theme', next); }catch(e){}
+  const btn = document.getElementById('themeBtn');
+  if(btn) btn.innerHTML = next === 'dark' ? '&#9728;' : '&#9790;';
+}
+window.toggleLwsTheme = toggleLwsTheme;
+try{
+  const saved = localStorage.getItem('lws-theme');
+  if(saved === 'dark'){
+    document.body.dataset.theme = 'dark';
+    const btn = document.getElementById('themeBtn');
+    if(btn) btn.innerHTML = '&#9728;';
+  }
+}catch(e){}
+
+(function setupSearch(){
+  const input = document.querySelector('.search input');
+  if(!input) return;
+  const cards = Array.from(document.querySelectorAll('.main .card'));
+  let pgHead = document.querySelector('.main .pg-head');
+  let emptyMsg = null;
+  input.addEventListener('input', e => {
+    const q = e.target.value.toLowerCase().trim();
+    let shown = 0;
+    cards.forEach(card => {
+      if(!q){ card.style.display = ''; shown++; return; }
+      const hit = card.textContent.toLowerCase().includes(q);
+      card.style.display = hit ? '' : 'none';
+      if(hit) shown++;
+    });
+    if(pgHead) pgHead.style.display = q ? 'none' : '';
+    if(q && shown === 0){
+      if(!emptyMsg){
+        emptyMsg = document.createElement('div');
+        emptyMsg.className = 'card';
+        emptyMsg.style.textAlign = 'center';
+        emptyMsg.innerHTML = '<div class="body-text" style="color:var(--slate)">No sections match that search.</div>';
+        document.querySelector('.main').appendChild(emptyMsg);
+      }
+      emptyMsg.style.display = '';
+    } else if(emptyMsg){
+      emptyMsg.style.display = 'none';
+    }
+  });
+  input.addEventListener('keydown', e => {
+    if(e.key === 'Escape'){ input.value = ''; input.dispatchEvent(new Event('input')); }
+  });
+})();
 </script>
 </body>
 </html>
