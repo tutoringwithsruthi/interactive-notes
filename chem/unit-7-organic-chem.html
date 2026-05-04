@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organic Chemistry Notes (Unit 7)</title>
+<meta name="description" content="Interactive Organic Chemistry Notes (Unit 7 of 10). Hydrocarbons, alkanes, alkenes, alkynes, naming rules, isomers, branched alkanes, cycloalkanes, and complex branch shortcuts. By tutoringwithsruthi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Dosis:wght@400;500;600;700&family=Bitter:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/mhchem.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="molecules.js"></script>
+<script src="mol3d.js"></script>
+<script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+<style>
+:root{
+  --white:#FFFFFF;--sage-l:#D0D6B3;--sage:#9BA06A;--slate:#525B76;--forest:#143109;
+  --bg:#f5f6ee;--sage-m:#e4e8cc;
+  --carbon:#3a3a3a;--hydrogen:#b5503e;--bond:#525B76;
+  --good:#5b8a3f;--bad:#b5503e;
+  --fh:'Young Serif',Georgia,serif;--fp:'Dosis','Trebuchet MS',Arial,sans-serif;--fb:'Bitter',Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:18px 16px 52px;overflow-x:hidden}
+.page{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+
+/* Unit nav */
+.unit-nav{background:var(--white);border:2px solid var(--sage-l);border-radius:24px;padding:6px;display:flex;flex-wrap:wrap;gap:3px;box-shadow:0 2px 10px rgba(20,49,9,0.07);position:sticky;top:8px;z-index:20}
+.unit-tab{font-family:var(--fp);font-weight:600;font-size:.78rem;border:none;background:transparent;color:var(--slate);padding:7px 11px;border-radius:18px;cursor:pointer;text-decoration:none;white-space:nowrap;flex:1 1 auto;text-align:center;transition:background .15s,color .15s;display:flex;align-items:center;justify-content:center;gap:4px}
+.unit-tab:hover{background:var(--sage-m);color:var(--forest)}
+.unit-tab.current{background:var(--sage);color:var(--white)}
+.unit-tab.locked{color:#a3a89a;cursor:not-allowed}
+.unit-tab.locked:hover{background:transparent;color:#a3a89a}
+.unit-tab .un{font-family:var(--fb);font-weight:700;font-size:.72rem;opacity:.85}
+
+/* Header */
+.pg-head{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:20px;padding:36px 28px;text-align:center}
+.pg-head .topic-badge{display:inline-block;font-family:var(--fb);font-weight:700;color:var(--slate);background:var(--white);border:1.5px solid var(--sage-l);padding:4px 14px;border-radius:20px;font-size:.82rem;margin-bottom:12px;letter-spacing:.04em}
+.pg-head h1{font-family:var(--fh);font-size:2.2rem;color:var(--forest);margin-bottom:6px}
+.pg-head .sub{font-family:var(--fp);color:var(--slate);font-size:1rem}
+
+/* Cards */
+.card{background:var(--white);border:2px solid var(--sage-l);border-radius:20px;padding:28px 26px;box-shadow:0 2px 12px rgba(20,49,9,0.06)}
+.card-title{font-family:var(--fh);font-size:1.4rem;color:var(--forest);margin-bottom:14px}
+.card-title .num{font-family:var(--fb);font-weight:700;color:var(--sage);font-size:.9rem;background:var(--sage-m);border-radius:8px;padding:2px 10px;margin-right:8px;vertical-align:middle}
+.body-text{font-family:var(--fp);font-size:1.04rem;color:var(--forest);line-height:1.7;margin-bottom:12px}
+.body-text:last-child{margin-bottom:0}
+.highlight-box{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:14px;padding:18px 22px;margin:14px 0}
+.sub-title{font-family:var(--fh);font-size:1.1rem;color:var(--forest);margin:18px 0 8px}
+.term-grid{display:grid;grid-template-columns:160px 1fr;gap:8px 16px;margin:12px 0}
+.term-sym{font-family:var(--fb);font-weight:700;color:var(--sage);text-align:right;font-size:1rem}
+.term-def{font-family:var(--fp);font-size:.98rem;color:var(--forest);line-height:1.6}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.site-btn{font-family:var(--fp);font-weight:600;font-size:.92rem;border:none;border-radius:30px;padding:8px 18px;cursor:pointer;transition:background .18s,transform .18s;background:var(--sage);color:var(--white)}
+.site-btn:hover{background:var(--forest);transform:translateY(-1px)}
+.site-btn.active{background:var(--forest)}
+.site-btn.secondary{background:var(--white);color:var(--forest);border:2px solid var(--sage-l)}
+.site-btn.secondary:hover{background:var(--sage-m)}
+.interactive-area{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:16px;padding:20px 18px;margin:16px 0}
+.ia-label{font-family:var(--fb);font-size:1rem;color:var(--slate);margin-bottom:10px;text-align:center;font-weight:700}
+.practice-box{background:var(--white);border:2px dashed var(--sage-l);border-radius:14px;padding:16px 20px;margin:10px 0}
+.practice-box .q{font-family:var(--fp);font-size:1rem;color:var(--forest);margin-bottom:8px;line-height:1.6}
+.practice-box .a{font-family:var(--fp);font-size:.95rem;color:var(--forest);display:none;margin-top:8px;padding:12px 14px;background:var(--sage-m);border:1.5px solid var(--sage-l);border-radius:10px;line-height:1.65}
+.practice-box .a.show{display:block;animation:fadeIn .25s ease}
+.show-ans-btn{font-family:var(--fp);font-weight:600;font-size:.85rem;border:2px solid var(--sage-l);border-radius:20px;padding:5px 14px;cursor:pointer;background:var(--white);color:var(--sage);transition:background .18s}
+.show-ans-btn:hover{background:var(--sage-m)}
+.worked-example{background:#f9faf4;border-left:4px solid var(--sage);border-radius:0 14px 14px 0;padding:16px 22px;margin:14px 0}
+.worked-example .step{font-family:var(--fp);font-size:.98rem;color:var(--forest);margin-bottom:6px;line-height:1.65}
+.worked-example .step-label{font-family:var(--fb);font-weight:700;color:var(--sage)}
+
+/* Topics list */
+.topics-list{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 18px;margin-top:8px}
+.topics-list .row{font-family:var(--fp);color:var(--forest);display:flex;gap:10px;font-size:.98rem;padding:3px 0}
+.topics-list .row .rn{font-family:var(--fb);color:var(--sage);min-width:28px;font-weight:700}
+.topics-list .row.current{background:var(--sage-m);border-radius:8px;padding:3px 8px;font-weight:600}
+
+/* Prefix table */
+.prefix-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:10px 0}
+.pcell{background:var(--white);border:1.5px solid var(--sage-l);border-radius:12px;padding:12px 10px;text-align:center;cursor:pointer;transition:all .15s}
+.pcell:hover{background:var(--sage-m);transform:translateY(-1px)}
+.pcell.active{background:var(--sage);border-color:var(--sage);color:var(--white)}
+.pcell.active .pn,.pcell.active .pc{color:var(--white)}
+.pcell .pn{font-family:var(--fb);font-weight:700;font-size:1rem;color:var(--forest);display:block}
+.pcell .pc{font-family:var(--fp);font-size:.82rem;color:var(--slate);display:block;margin-top:3px}
+
+/* Carbon picker readout */
+.cpick-stage{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:18px}
+.cpick-row{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;margin-bottom:12px}
+.cpick-row label{font-family:var(--fb);font-weight:700;color:var(--slate);font-size:.85rem;text-transform:uppercase;letter-spacing:.05em}
+.cpick-row input[type=range]{width:100%;accent-color:var(--sage)}
+.cpick-out{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:8px}
+.cpick-cell{background:var(--sage-m);border-radius:10px;padding:10px;text-align:center}
+.cpick-cell .lbl{font-family:var(--fb);font-size:.7rem;color:var(--slate);text-transform:uppercase;letter-spacing:.05em}
+.cpick-cell .val{font-family:var(--fb);font-weight:700;font-size:1.05rem;color:var(--forest);margin-top:3px}
+.cpick-svg{margin-top:14px;background:var(--white);border:1.5px dashed var(--sage-l);border-radius:10px;padding:10px;text-align:center}
+.cpick-svg svg{max-width:100%;height:auto}
+
+/* Representation toggle */
+.rep-stage{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:18px;text-align:center;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.rep-stage .rep-title{font-family:var(--fb);font-weight:700;color:var(--slate);font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.rep-stage .rep-content{font-family:var(--fb);font-size:1.4rem;color:var(--forest);line-height:1.4}
+.rep-stage svg{max-width:100%;height:auto}
+.rep-note{font-family:var(--fp);color:var(--slate);font-size:.88rem;margin-top:10px;text-align:center;line-height:1.5}
+
+/* Carbon classifier */
+.cc-stage{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:18px;text-align:center}
+.cc-stage svg{max-width:100%;height:auto}
+.cc-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:10px}
+.cc-key{display:flex;align-items:center;gap:6px;font-family:var(--fp);font-size:.88rem;color:var(--forest)}
+.cc-key .dot{width:14px;height:14px;border-radius:50%;display:inline-block}
+.cc-info{font-family:var(--fp);color:var(--forest);background:var(--sage-m);border-radius:10px;padding:10px 14px;margin-top:10px;font-size:.92rem;line-height:1.5;min-height:32px;text-align:center}
+
+/* Naming walkthrough */
+.nw-stage{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:18px;text-align:center}
+.nw-stage svg{max-width:100%;height:auto}
+.nw-controls{display:flex;justify-content:center;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center}
+.nw-step-label{font-family:var(--fb);font-weight:700;color:var(--sage);font-size:.95rem;min-width:90px}
+.nw-info{font-family:var(--fp);color:var(--forest);background:var(--sage-m);border-radius:10px;padding:12px 16px;margin-top:10px;font-size:.95rem;line-height:1.6;min-height:60px}
+.nw-info strong{color:var(--forest)}
+
+/* Branch shortcut box (MEMORIZE-style flashcards) */
+.bs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:10px 0}
+.bs-card{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:14px;text-align:center;transition:transform .15s}
+.bs-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(20,49,9,0.08)}
+.bs-card svg{width:100%;height:90px}
+.bs-common{font-family:var(--fh);font-size:1.05rem;color:var(--forest);margin-top:6px}
+.bs-iupac{font-family:var(--fb);font-size:.86rem;color:var(--sage);margin-top:2px}
+.bs-formula{font-family:var(--fp);font-size:.82rem;color:var(--slate);margin-top:2px}
+
+/* Cycloalkane locant visualizer */
+.cy-stage{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:18px;text-align:center}
+.cy-stage svg{max-width:100%;height:auto}
+.cy-info{font-family:var(--fp);color:var(--forest);background:var(--sage-m);border-radius:10px;padding:10px 14px;margin-top:10px;font-size:.92rem;line-height:1.5;text-align:center}
+
+/* Saturation toggle */
+.sat-stage{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:18px;text-align:center}
+.sat-stage svg{max-width:100%;height:auto}
+.sat-info{font-family:var(--fp);color:var(--forest);background:var(--sage-m);border-radius:10px;padding:10px 14px;margin-top:10px;font-size:.92rem;line-height:1.5;text-align:center}
+
+/* Class chart */
+.class-chart{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:10px 0}
+.class-card{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:14px;text-align:center}
+.class-card .cname{font-family:var(--fh);font-size:1.05rem;color:var(--forest)}
+.class-card .cbond{font-family:var(--fb);font-size:1.1rem;color:var(--sage);margin:6px 0}
+.class-card .cnote{font-family:var(--fp);color:var(--slate);font-size:.85rem;line-height:1.5}
+.class-card.alkane{border-left:4px solid var(--sage)}
+.class-card.alkene{border-left:4px solid var(--slate)}
+.class-card.alkyne{border-left:4px solid var(--hydrogen)}
+
+/* 3Dmol.js viewer cards */
+.viewer-3d{width:100%;height:380px;position:relative;background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;overflow:hidden}
+.viewer-3d canvas{outline:none}
+.three-d-grid{display:grid;grid-template-columns:1fr;gap:14px;margin:12px 0}
+.three-d-card{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:14px}
+.three-d-title{font-family:var(--fh);font-size:1.05rem;color:var(--forest);text-align:center;margin-bottom:8px}
+.three-d-controls{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:10px}
+.three-d-controls .style-btn{font-family:var(--fb);font-size:.78rem;background:var(--white);color:var(--forest);border:1.5px solid var(--sage-l);border-radius:18px;padding:5px 12px;cursor:pointer;transition:all .15s}
+.three-d-controls .style-btn:hover{background:var(--sage-m)}
+.three-d-controls .style-btn.active{background:var(--sage);color:var(--white);border-color:var(--sage)}
+.three-d-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.three-d-pair .viewer-3d{height:300px}
+.chirality-tag{display:inline-block;font-family:var(--fb);font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:3px 12px;border-radius:12px;color:var(--white);margin-bottom:6px}
+.chirality-tag.R{background:#5b8a3f}
+.chirality-tag.S{background:#b5503e}
+.three-d-note{font-family:var(--fp);color:var(--slate);font-size:.88rem;text-align:center;margin-top:8px;line-height:1.5}
+[data-theme="dark"] .viewer-3d,[data-theme="dark"] .three-d-card{background:#14170F;border-color:#3A4A2E}
+[data-theme="dark"] .three-d-controls .style-btn{background:#1E2416;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .three-d-controls .style-btn:hover{background:#2A3421}
+[data-theme="dark"] .three-d-title,[data-theme="dark"] .three-d-note{color:var(--forest)}
+
+/* RDKit-rendered molecule SVG wrapper */
+.mol-svg{display:flex;justify-content:center;align-items:center;padding:8px}
+.mol-svg svg{max-width:100%;height:auto;display:block}
+.mol-svg svg path[class*="atom-"]{fill:var(--carbon) !important}
+.mol-svg svg path[class*="bond-"]{stroke:var(--carbon) !important;fill:none !important}
+[data-theme="dark"] .mol-svg svg path[class*="atom-"]{fill:var(--forest) !important}
+[data-theme="dark"] .mol-svg svg path[class*="bond-"]{stroke:var(--forest) !important}
+.mol-caption{font-family:var(--fp);color:var(--slate);font-size:.86rem;text-align:center;margin-top:4px;line-height:1.5}
+
+/* Red callout for important rules */
+.red-note{background:#fdeae6;border:2px solid var(--bad);border-left:6px solid var(--bad);border-radius:12px;padding:14px 18px;margin:14px 0;color:#7a2517;font-family:var(--fp);line-height:1.65;font-size:.98rem}
+.red-note strong{color:var(--bad)}
+.red-note .rn-title{font-family:var(--fb);font-weight:700;color:var(--bad);text-transform:uppercase;letter-spacing:.06em;font-size:.78rem;margin-bottom:6px;display:block}
+.red-note ul{margin:6px 0 0 0;padding:0 0 0 22px}
+.red-note li{margin:6px 0;color:#7a2517}
+[data-theme="dark"] .red-note{background:#3a1a14;border-color:#d57a64;border-left-color:#d57a64;color:#f5d4cc}
+[data-theme="dark"] .red-note strong,[data-theme="dark"] .red-note .rn-title,[data-theme="dark"] .red-note li{color:#f5d4cc}
+
+/* Naming step list */
+.steps-list{counter-reset:step;list-style:none;padding:0;margin:14px auto;display:flex;flex-direction:column;gap:10px;max-width:780px}
+.steps-list li{counter-increment:step;display:flex;align-items:flex-start;gap:14px;background:var(--sage-m);border-radius:12px;padding:14px 20px;font-family:var(--fp);font-size:1rem;line-height:1.65;color:var(--forest);width:100%}
+.steps-list li::before{content:counter(step);font-family:var(--fb);font-weight:700;color:var(--white);background:var(--sage);border-radius:50%;width:34px;height:34px;min-width:34px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;margin-top:1px}
+.steps-list li > *{flex:1 1 auto}
+
+/* Static naming step-by-step diagram (4 panels) */
+.naming-diagram{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
+.nd-panel{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:14px;display:flex;flex-direction:column;align-items:center}
+.nd-step{display:inline-block;font-family:var(--fb);font-weight:700;font-size:.7rem;color:var(--white);background:var(--sage);border-radius:10px;padding:3px 10px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px;align-self:flex-start}
+.nd-panel svg{width:100%;height:auto;max-height:160px}
+.nd-cap{font-family:var(--fp);font-size:.92rem;color:var(--forest);text-align:center;margin-top:8px;line-height:1.5}
+.nd-cap strong{color:var(--forest)}
+.nd-final{background:linear-gradient(135deg,var(--good),#3d6a28);color:#fff;border:none}
+.nd-final .nd-step{background:var(--white);color:var(--good)}
+.nd-final .nd-cap{color:#fff;font-family:var(--fh);font-size:1.1rem;font-weight:700}
+
+/* Wedge demo grid */
+.wedge-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:12px 0}
+.wedge-card{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:14px;text-align:center}
+.wedge-card svg{width:auto;max-width:100%;height:110px;display:block;margin:0 auto}
+.wedge-name{font-family:var(--fh);font-size:1rem;color:var(--forest);margin-top:6px}
+.wedge-note{font-family:var(--fp);color:var(--slate);font-size:.86rem;margin-top:4px;line-height:1.5}
+
+/* Naming quiz difficulty badges */
+.diff-badge{display:inline-block;font-family:var(--fb);font-weight:700;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;padding:2px 9px;border-radius:10px;color:var(--white);vertical-align:middle;margin-right:6px}
+.diff-easy{background:var(--good)}
+.diff-medium{background:var(--slate)}
+.diff-hard{background:var(--bad)}
+
+/* Naming quiz */
+.nq-card{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:18px}
+.nq-meta{display:flex;justify-content:space-between;align-items:center;font-family:var(--fb);font-size:.88rem;color:var(--slate);margin-bottom:10px}
+.nq-meta .progress{flex:1;height:6px;background:var(--sage-l);border-radius:5px;margin:0 12px;overflow:hidden}
+.nq-meta .progress > i{display:block;height:100%;background:var(--sage);border-radius:5px;transition:width .3s}
+.nq-stage{background:var(--sage-m);border-radius:14px;padding:18px;text-align:center;margin:10px 0}
+.nq-stage svg{max-width:100%;height:auto}
+.nq-prompt{font-family:var(--fp);font-size:1rem;color:var(--forest);text-align:center;margin:6px 0 10px;line-height:1.5}
+.nq-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:10px 0}
+.nq-opt{font-family:var(--fp);font-weight:600;font-size:.95rem;background:var(--white);color:var(--forest);border:2px solid var(--sage-l);border-radius:12px;padding:12px 14px;cursor:pointer;text-align:center;transition:all .15s}
+.nq-opt:hover:not(:disabled){background:var(--sage-m);transform:translateY(-1px)}
+.nq-opt:disabled{cursor:default}
+.nq-opt.correct{background:var(--good);color:#fff;border-color:var(--good)}
+.nq-opt.wrong{background:var(--bad);color:#fff;border-color:var(--bad)}
+.nq-opt.reveal{background:var(--good);color:#fff;border-color:var(--good)}
+.nq-feedback{font-family:var(--fp);font-size:.95rem;color:var(--forest);background:var(--sage-m);border-radius:12px;padding:12px 16px;margin-top:10px;line-height:1.6;display:none}
+.nq-feedback.show{display:block;animation:fadeIn .25s ease}
+.nq-feedback strong{color:var(--forest)}
+.nq-controls{display:flex;justify-content:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+.nq-result{font-family:var(--fh);font-size:1.2rem;color:var(--forest);text-align:center;padding:20px;background:var(--sage-m);border-radius:14px}
+.nq-result .score{display:block;font-family:var(--fb);font-size:2rem;color:var(--sage);margin:8px 0}
+[data-theme="dark"] .nq-card,[data-theme="dark"] .nq-opt{background:#14170F;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .nq-stage,[data-theme="dark"] .nq-feedback,[data-theme="dark"] .nq-result{background:#1E2416;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .nq-opt:hover:not(:disabled){background:#2A3421}
+
+/* Locant comparison */
+.loc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:12px 0}
+.loc-card{background:var(--white);border:2px solid var(--sage-l);border-radius:14px;padding:16px;text-align:center;position:relative}
+.loc-card.wrong{border-color:var(--bad)}
+.loc-card.right{border-color:var(--good)}
+.loc-card svg{width:100%;height:120px}
+.loc-tag{display:inline-block;font-family:var(--fb);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;border-radius:10px;color:var(--white);margin-bottom:8px}
+.loc-tag.wrong{background:var(--bad)}
+.loc-tag.right{background:var(--good)}
+.loc-card .loc-set{font-family:var(--fb);font-size:1rem;color:var(--forest);margin-top:8px}
+.loc-card .loc-name{font-family:var(--fp);font-size:.92rem;color:var(--slate);margin-top:6px;line-height:1.5}
+
+/* Flashcards */
+.fc-card{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:18px}
+.fc-stage{perspective:1400px;height:230px;margin:6px auto;max-width:480px}
+.fc-tile{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,.0,.2,1);cursor:pointer;border-radius:18px}
+.fc-tile.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:2px solid var(--sage-l);border-radius:18px;padding:22px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;box-shadow:0 6px 16px rgba(20,49,9,0.06)}
+.fc-front{background:var(--sage-m)}
+.fc-back{background:var(--white);transform:rotateY(180deg)}
+.fc-face .lbl{font-family:var(--fb);font-weight:700;font-size:.7rem;color:var(--slate);text-transform:uppercase;letter-spacing:.06em}
+.fc-face .term{font-family:var(--fh);font-size:1.5rem;color:var(--forest);line-height:1.2}
+.fc-face .def{font-family:var(--fp);font-size:1rem;color:var(--forest);line-height:1.55}
+.fc-face .hint{font-family:var(--fp);font-size:.78rem;color:var(--slate);margin-top:6px}
+.fc-meta{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:var(--fb);font-size:.88rem;color:var(--slate)}
+.fc-meta .progress{flex:1;height:6px;background:var(--sage-l);border-radius:5px;margin:0 12px;overflow:hidden}
+.fc-meta .progress > i{display:block;height:100%;background:var(--sage);border-radius:5px;transition:width .3s}
+.fc-controls{display:flex;justify-content:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+.fc-nav-btn{font-family:var(--fb);font-weight:700;font-size:1rem;background:var(--white);color:var(--forest);border:2px solid var(--sage-l);border-radius:50%;width:38px;height:38px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.fc-nav-btn:hover{background:var(--sage-m)}
+.fc-nav-btn:disabled{opacity:.4;cursor:not-allowed}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:640px){
+  .pg-head{padding:26px 18px}.pg-head h1{font-size:1.55rem}
+  .card{padding:22px 16px}.card-title{font-size:1.15rem}
+  .term-grid{grid-template-columns:110px 1fr}
+  .topics-list{grid-template-columns:1fr}
+  .unit-tab{font-size:.72rem;padding:6px 9px}
+}
+
+/* ===== LWS SHELL (v2 UI) ===== */
+body{padding:0;background:var(--bg);overflow-x:auto;font-feature-settings:"ss01","cv11"}
+.unit-nav{display:none}
+.page{max-width:none;margin:0;display:block}
+.lws-backdrop{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(1200px 600px at 8% -10%,rgba(228,232,204,.7) 0%,transparent 60%),
+             radial-gradient(900px 500px at 110% 0%,rgba(208,214,179,.5) 0%,transparent 55%),
+             radial-gradient(800px 400px at 50% 120%,rgba(228,232,204,.6) 0%,transparent 55%),
+             var(--bg)}
+.app{position:relative;z-index:1;display:grid;grid-template-columns:264px 1fr;grid-template-rows:64px 1fr;grid-template-areas:"side top" "side main";min-height:100vh}
+.side{grid-area:side;padding:16px 14px 14px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:14px;background:rgba(255,255,255,0.62);backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);border-right:1px solid var(--sage-l);overflow-y:auto;box-shadow:0 1px 0 rgba(255,255,255,0.9) inset}
+.top{grid-area:top;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(255,255,255,0.62);backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);border-bottom:1px solid var(--sage-l);position:sticky;top:0;z-index:15}
+.main{grid-area:main;padding:24px 28px 56px;max-width:1320px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.brand{display:flex;align-items:center;gap:10px;padding:8px 12px}
+.brand-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--sage),var(--forest));color:#fff;display:grid;place-items:center;font-family:var(--fh);font-size:1.1rem;line-height:1;box-shadow:0 6px 20px -6px rgba(20,49,9,0.35)}
+.brand-name{font-family:var(--fh);color:var(--forest);font-size:1.05rem;line-height:1.05}
+.brand-name small{display:block;font-family:var(--fb);font-style:italic;color:#7C8172;font-size:.7rem;margin-top:3px}
+.ws-switch{margin:0 4px}
+.ws-switch-btn{width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.62);border:1px solid rgba(255,255,255,0.55);border-radius:12px;backdrop-filter:blur(14px);text-align:left;transition:background .15s}
+.ws-switch-btn .ico{width:30px;height:30px;border-radius:8px;background:var(--sage-m);color:var(--forest);display:grid;place-items:center;flex-shrink:0;font-family:var(--fb);font-weight:700;font-size:.78rem}
+.ws-switch-btn .meta{flex:1;min-width:0}
+.ws-switch-btn .lbl{font-family:var(--fh);color:var(--forest);font-size:.95rem;line-height:1.1}
+.ws-switch-btn .sub{font-family:var(--fb);color:#7C8172;font-size:.68rem;margin-top:3px}
+.side-section-label{font-family:var(--fb);font-size:.66rem;letter-spacing:.14em;color:#7C8172;text-transform:uppercase;padding:14px 12px 4px}
+.side-nav{display:flex;flex-direction:column;gap:1px;padding:0 4px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;cursor:pointer;text-decoration:none;color:var(--forest);transition:background .15s;font-family:var(--fp);font-size:.86rem;font-weight:500}
+.nav-item .num{font-family:var(--fb);color:var(--sage);font-weight:700;font-size:.78rem;min-width:30px}
+.nav-item .t{flex:1;color:var(--forest)}
+.nav-item:hover{background:var(--sage-m)}
+.nav-item.active{background:var(--white);box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 12px 40px -12px rgba(20,49,9,0.18),0 2px 8px rgba(20,49,9,0.06);border:1px solid var(--sage-l)}
+.nav-item.active .t{color:var(--forest);font-weight:700}
+.nav-item.locked{color:#a3a89a;cursor:not-allowed}
+.nav-item.locked:hover{background:transparent}
+.nav-item.locked .num,.nav-item.locked .t{color:#a3a89a}
+.bread{display:flex;flex-direction:column;gap:0;flex:0 0 auto;min-width:0}
+.bread-trail{font-family:var(--fp);color:var(--slate);font-size:.78rem}
+.bread-now{font-family:var(--fp);font-weight:700;color:var(--forest);font-size:1rem;line-height:1.1}
+.search{flex:1;max-width:520px;min-width:120px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.62);border:1px solid var(--sage-l);border-radius:99px;padding:8px 16px;color:var(--slate);backdrop-filter:blur(14px)}
+.search input{border:0;background:transparent;outline:none;flex:1;font-family:var(--fp);font-size:.9rem;color:var(--forest);min-width:0}
+.search svg{flex-shrink:0;color:var(--slate)}
+.top-actions{display:flex;align-items:center;gap:8px}
+.btn-icon{width:38px;height:38px;border-radius:50%;background:var(--white);border:1px solid var(--sage-l);color:var(--slate);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s;font-size:1rem;padding:0}
+.btn-icon:hover{background:var(--sage-m);color:var(--forest)}
+.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#d9c59a,#b08868);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-weight:700;font-size:1rem;cursor:pointer;border:1px solid var(--sage-l)}
+.pg-head{margin-top:0}
+@media(max-width:980px){
+  .app{grid-template-columns:1fr;grid-template-rows:auto auto 1fr;grid-template-areas:"side" "top" "main"}
+  .side{height:auto;position:relative;border-right:0;border-bottom:1px solid var(--sage-l);max-height:none}
+  .top{padding:10px 18px;flex-wrap:wrap}
+  .main{padding:16px 18px 48px}
+  .search{order:3;flex-basis:100%;max-width:none}
+}
+
+/* Dark mode */
+[data-theme="dark"]{
+  --white:#14170F; --sage-l:#2B3320; --sage:#A9B07A; --sage-m:#1E2416;
+  --slate:#AEB5C8; --forest:#E8EBDA; --bg:#0E1108;
+}
+[data-theme="dark"] body{color:var(--forest)}
+[data-theme="dark"] .lws-backdrop{
+  background:radial-gradient(1200px 600px at 8% -10%,rgba(43,51,32,.7) 0%,transparent 60%),
+             radial-gradient(900px 500px at 110% 0%,rgba(30,36,22,.55) 0%,transparent 55%),
+             radial-gradient(800px 400px at 50% 120%,rgba(43,51,32,.7) 0%,transparent 55%),
+             var(--bg)
+}
+[data-theme="dark"] .side,[data-theme="dark"] .top{background:rgba(20,23,15,0.7);border-color:#2B3320}
+[data-theme="dark"] .ws-switch-btn,[data-theme="dark"] .search,[data-theme="dark"] .btn-icon{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .ws-switch-btn .lbl,[data-theme="dark"] .ws-switch-btn .ico{color:var(--forest)}
+[data-theme="dark"] .ws-switch-btn .ico{background:#2A3421}
+[data-theme="dark"] .nav-item{color:var(--forest)}
+[data-theme="dark"] .nav-item .t{color:var(--forest)}
+[data-theme="dark"] .nav-item:hover{background:#2A3421}
+[data-theme="dark"] .nav-item.active{background:#2A3421;border-color:#3A4A2E;box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 12px 40px -12px rgba(0,0,0,0.55),0 2px 8px rgba(0,0,0,0.35)}
+[data-theme="dark"] .btn-icon:hover{background:#2A3421;color:var(--forest)}
+[data-theme="dark"] .search input{color:var(--forest)}
+[data-theme="dark"] .search input::placeholder{color:#7e8775}
+[data-theme="dark"] .pg-head{background:#1E2416;border-color:#3A4A2E}
+[data-theme="dark"] .pg-head h1,[data-theme="dark"] .pg-head .sub,[data-theme="dark"] .pg-head .topic-badge{color:var(--forest)}
+[data-theme="dark"] .pg-head .topic-badge{background:#2A3421;border-color:#3A4A2E}
+[data-theme="dark"] .card{background:#14170F;border-color:#2B3320;color:var(--forest)}
+[data-theme="dark"] .card-title,[data-theme="dark"] .sub-title,[data-theme="dark"] .body-text,[data-theme="dark"] .term-def,[data-theme="dark"] .term-sym{color:var(--forest)}
+[data-theme="dark"] .card-title .num{background:#2A3421;color:var(--sage)}
+[data-theme="dark"] .highlight-box{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .interactive-area{background:#1E2416;border-color:#3A4A2E}
+[data-theme="dark"] .ia-label{color:var(--forest)}
+[data-theme="dark"] .practice-box{background:#14170F;border-color:#3A4A2E}
+[data-theme="dark"] .practice-box .q,[data-theme="dark"] .practice-box .a{color:var(--forest)}
+[data-theme="dark"] .practice-box .a{background:#1E2416;border-color:#3A4A2E}
+[data-theme="dark"] .show-ans-btn{background:#1E2416;color:var(--sage);border-color:#3A4A2E}
+[data-theme="dark"] .worked-example{background:#1A1F11;border-left-color:var(--sage);color:var(--forest)}
+[data-theme="dark"] .site-btn.secondary{background:#1E2416;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .topics-list .row.current{background:#2A3421}
+[data-theme="dark"] .fc-card,[data-theme="dark"] .fc-face,[data-theme="dark"] .fc-front{background:#14170F;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .fc-front{background:#1E2416}
+[data-theme="dark"] .fc-back{background:#14170F}
+[data-theme="dark"] .fc-face .term,[data-theme="dark"] .fc-face .def{color:var(--forest)}
+[data-theme="dark"] .fc-nav-btn{background:#14170F;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .fc-nav-btn:hover{background:#2A3421}
+[data-theme="dark"] .pcell,[data-theme="dark"] .cpick-stage,[data-theme="dark"] .cpick-cell,[data-theme="dark"] .cpick-svg,[data-theme="dark"] .rep-stage,[data-theme="dark"] .cc-stage,[data-theme="dark"] .nw-stage,[data-theme="dark"] .bs-card,[data-theme="dark"] .cy-stage,[data-theme="dark"] .sat-stage,[data-theme="dark"] .class-card,[data-theme="dark"] .wedge-card,[data-theme="dark"] .loc-card{background:#14170F;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .steps-list li{background:#1E2416;color:var(--forest)}
+[data-theme="dark"] .nd-panel{background:#14170F;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .nd-cap,[data-theme="dark"] .nd-cap strong{color:var(--forest)}
+[data-theme="dark"] .nd-panel svg line{stroke:var(--forest)}
+[data-theme="dark"] .nd-final{background:linear-gradient(135deg,#3d6a28,#2a4a1c)}
+[data-theme="dark"] .nd-final .nd-cap{color:#fff}
+[data-theme="dark"] .wedge-card svg line{stroke:var(--forest)}
+[data-theme="dark"] .wedge-card svg polygon{fill:var(--forest);stroke:none}
+[data-theme="dark"] .wedge-card svg circle{fill:var(--white);stroke:var(--forest)}
+[data-theme="dark"] .wedge-card svg text{fill:var(--forest)}
+[data-theme="dark"] .pcell:hover{background:#2A3421}
+[data-theme="dark"] .pcell.active{background:var(--sage);color:#0E1108}
+[data-theme="dark"] .pcell .pn,[data-theme="dark"] .pcell .pc{color:var(--forest)}
+[data-theme="dark"] .cpick-cell{background:#1E2416}
+[data-theme="dark"] .cc-info,[data-theme="dark"] .nw-info,[data-theme="dark"] .cy-info,[data-theme="dark"] .sat-info{background:#1E2416;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .rep-stage svg text,[data-theme="dark"] .cc-stage svg text,[data-theme="dark"] .nw-stage svg text,[data-theme="dark"] .bs-card svg text,[data-theme="dark"] .cy-stage svg text,[data-theme="dark"] .sat-stage svg text,[data-theme="dark"] .cpick-svg svg text{fill:var(--forest)}
+[data-theme="dark"] .rep-stage svg line,[data-theme="dark"] .cc-stage svg line,[data-theme="dark"] .nw-stage svg line,[data-theme="dark"] .bs-card svg line,[data-theme="dark"] .cy-stage svg line,[data-theme="dark"] .sat-stage svg line,[data-theme="dark"] .cpick-svg svg line{stroke:var(--forest)}
+</style>
+</head>
+<body data-theme="light">
+<div class="lws-backdrop"></div>
+<div class="app">
+
+<aside class="side">
+  <div class="brand">
+    <div class="brand-mark">L</div>
+    <div class="brand-name">learningwithsruthi <small>chemistry notes</small></div>
+  </div>
+  <div class="ws-switch">
+    <div class="ws-switch-btn">
+      <div class="ico">VII</div>
+      <div class="meta">
+        <div class="lbl">Organic Chemistry</div>
+        <div class="sub">Unit 7 of 10 &middot; Chemistry</div>
+      </div>
+    </div>
+  </div>
+  <div class="side-section-label">Units</div>
+  <div class="side-nav">
+    <a class="nav-item" href="atomic-structure.html"><span class="num">I.</span><span class="t">Atomic Structure</span></a>
+    <a class="nav-item" href="periodic-table.html"><span class="num">II.</span><span class="t">The Periodic Table</span></a>
+    <a class="nav-item" href="stoichiometry.html"><span class="num">III.</span><span class="t">Stoichiometry</span></a>
+    <a class="nav-item locked"><span class="num">IV.</span><span class="t">Chemical Bonding</span></a>
+    <a class="nav-item locked"><span class="num">V.</span><span class="t">Physical Behavior</span></a>
+    <a class="nav-item locked"><span class="num">VI.</span><span class="t">Equilibrium</span></a>
+    <a class="nav-item active" href="unit-7-organic-chem.html"><span class="num">VII.</span><span class="t">Organic Chemistry</span></a>
+    <a class="nav-item locked"><span class="num">VIII.</span><span class="t">Redox</span></a>
+    <a class="nav-item locked"><span class="num">IX.</span><span class="t">Acids, Bases, Salts</span></a>
+    <a class="nav-item locked"><span class="num">X.</span><span class="t">Nuclear Chemistry</span></a>
+  </div>
+</aside>
+
+<header class="top">
+  <div class="bread">
+    <span class="bread-trail">Chemistry &middot; Unit 7 of 10</span>
+    <span class="bread-now">Organic Chemistry</span>
+  </div>
+  <div class="search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg>
+    <input placeholder="Search topics, lessons, questions...">
+  </div>
+  <div class="top-actions">
+    <button class="btn-icon" id="themeBtn" title="Toggle theme" onclick="toggleLwsTheme()">&#9790;</button>
+  </div>
+</header>
+
+<main class="main">
+
+<!-- ======== HEADER ======== -->
+<div class="pg-head">
+  <div class="topic-badge">Organic Chemistry Notes &middot; Unit 11</div>
+  <h1>Organic Chemistry</h1>
+  <p class="sub">Hydrocarbons, naming rules, isomers, branches, and rings. Carbon plays by its own rules, and once you see the pattern it all clicks.</p>
+</div>
+
+<!-- ======== OVERVIEW ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">0</span>Where This Unit Fits</div>
+  <p class="body-text">Up to now, chemistry has been about atoms and small molecules. Organic chemistry zooms in on one element, <strong>carbon</strong>, and the huge family of molecules it builds with hydrogen. Carbon makes 4 bonds, chains beautifully, and shows up in everything from gasoline to glucose.</p>
+  <div class="highlight-box">
+    <div class="topics-list">
+      <div class="row"><span class="rn">I.</span> Atomic Structure</div>
+      <div class="row"><span class="rn">II.</span> The Periodic Table</div>
+      <div class="row"><span class="rn">III.</span> Stoichiometry</div>
+      <div class="row"><span class="rn">IV.</span> Chemical Bonding</div>
+      <div class="row"><span class="rn">V.</span> Physical Behavior of Matter</div>
+      <div class="row"><span class="rn">VI.</span> Equilibrium</div>
+      <div class="row current"><span class="rn">VII.</span> Organic Chemistry</div>
+      <div class="row"><span class="rn">VIII.</span> Oxidation-Reduction</div>
+      <div class="row"><span class="rn">IX.</span> Acids, Bases, and Salts</div>
+      <div class="row"><span class="rn">X.</span> Nuclear Chemistry</div>
+    </div>
+  </div>
+  <p class="body-text">By the end of this page you should be able to recognize an organic molecule, draw it four different ways, name an alkane with branches, identify constitutional isomers, name cycloalkanes, and tell the difference between alkanes, alkenes, and alkynes.</p>
+</div>
+
+<!-- ======== 1. WHAT IS ORGANIC ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">1</span>What Makes a Molecule Organic?</div>
+  <p class="body-text">An <strong>organic molecule</strong> is a molecule built mostly out of <strong>carbon</strong> and <strong>hydrogen</strong>. Carbon sits in group 4 (the 4th family) on the periodic table, so it needs 4 bonds to fill its octet, with 0 lone pairs.</p>
+
+  <div class="highlight-box">
+    <strong>Carbon's bonding rules:</strong>
+    <br>&middot; Group 4 &rarr; needs 4 electrons &rarr; forms <strong>4 bonds</strong>, 0 lone pairs.
+    <br>&middot; Single bond = 1 sigma ($\sigma$) bond.
+    <br>&middot; Double bond = 1 sigma + 1 pi ($\pi$) bond.
+    <br>&middot; Triple bond = 1 sigma + 2 pi bonds.
+    <br><br>
+    Hydrogen always makes exactly 1 bond.
+  </div>
+
+  <div class="sub-title">Hydrocarbons</div>
+  <p class="body-text">A <strong>hydrocarbon</strong> is a molecule that contains <em>only</em> carbon and hydrogen, with C&minus;C and C&minus;H bonds. They split into two big classes:</p>
+
+  <div class="class-chart">
+    <div class="class-card alkane">
+      <div class="cname">Alkane</div>
+      <div class="cbond">C&minus;C</div>
+      <div class="cnote">All single bonds. Saturated. Aliphatic.</div>
+    </div>
+    <div class="class-card alkene">
+      <div class="cname">Alkene</div>
+      <div class="cbond">C=C</div>
+      <div class="cnote">At least one double bond. Unsaturated. Aliphatic.</div>
+    </div>
+    <div class="class-card alkyne">
+      <div class="cname">Alkyne</div>
+      <div class="cbond">C&equiv;C</div>
+      <div class="cnote">At least one triple bond. Unsaturated. Aliphatic.</div>
+    </div>
+    <div class="class-card">
+      <div class="cname">Arene</div>
+      <div class="cbond" style="font-size:1.5rem">&#9711;</div>
+      <div class="cnote">Aromatic ring (like benzene). Special class.</div>
+    </div>
+  </div>
+
+  <p class="body-text"><strong>Saturated</strong> means every C&minus;C bond is single. The molecule is "full" of hydrogens. <strong>Unsaturated</strong> means there is at least one double or triple bond, so the molecule has fewer hydrogens than a saturated one with the same number of carbons.</p>
+</div>
+
+<!-- ======== 2. REPRESENTATIONS ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">2</span>Four Ways to Draw a Molecule</div>
+  <p class="body-text">The same molecule can be written in multiple ways. They all describe the same compound, but they hide or show different details. Knowing how to switch between them is half the battle.</p>
+
+  <div class="term-grid">
+    <span class="term-sym">Molecular formula</span><span class="term-def">Just the count of each atom. Hides connectivity. e.g. $\ce{C4H10}$.</span>
+    <span class="term-sym">Structural formula</span><span class="term-def">Every atom and every bond shown explicitly. Bulky but clear.</span>
+    <span class="term-sym">Condensed formula</span><span class="term-def">A linear text version. Bonds are implied. e.g. CH3CH2$\ce{CH2}$$\ce{CH3}$.</span>
+    <span class="term-sym">Skeletal (line-angle)</span><span class="term-def">Just the carbon skeleton as zigzag lines. Carbons are at ends and joints. Hydrogens on carbon are not drawn.</span>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Compare All Four Representations of n-Butane</div>
+    <div class="btn-row">
+      <button class="site-btn active" id="repBtnMol" onclick="repShow('mol')">Molecular</button>
+      <button class="site-btn secondary" id="repBtnStr" onclick="repShow('str')">Structural</button>
+      <button class="site-btn secondary" id="repBtnCon" onclick="repShow('con')">Condensed</button>
+      <button class="site-btn secondary" id="repBtnSke" onclick="repShow('ske')">Skeletal</button>
+    </div>
+    <div class="rep-stage" id="repStage">
+      <div class="rep-title">Molecular formula</div>
+      <div class="rep-content">$\ce{C4H10}$</div>
+    </div>
+    <div class="rep-note" id="repNote">Just the atom counts. Tells you what is in the molecule, not how it is connected.</div>
+  </div>
+
+  <div class="sub-title">3D Cues in 2D Drawings</div>
+  <p class="body-text">Real molecules are 3D, but paper is flat. We use three bond styles to fake depth:</p>
+  <div class="wedge-grid">
+    <div class="wedge-card">
+      <svg viewBox="0 0 110 110">
+        <g transform="translate(55,90)">
+          <g transform="rotate(270)">
+            <line x1="14" y1="0" x2="60" y2="0" stroke="var(--carbon)" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+          <circle cx="0" cy="0" r="11" fill="var(--white)" stroke="var(--carbon)" stroke-width="1.5"/>
+          <text x="0" y="4" text-anchor="middle" font-family="Bitter" font-size="11" font-weight="700" fill="var(--carbon)">C</text>
+        </g>
+      </svg>
+      <div class="wedge-name">Plain line</div>
+      <div class="wedge-note">In the plane of the page.</div>
+    </div>
+
+    <div class="wedge-card">
+      <svg viewBox="0 0 110 110">
+        <g transform="translate(55,90)">
+          <g transform="rotate(270)">
+            <polygon points="14,0 60,7 60,-7" fill="var(--carbon)"/>
+          </g>
+          <circle cx="0" cy="0" r="11" fill="var(--white)" stroke="var(--carbon)" stroke-width="1.5"/>
+          <text x="0" y="4" text-anchor="middle" font-family="Bitter" font-size="11" font-weight="700" fill="var(--carbon)">C</text>
+        </g>
+      </svg>
+      <div class="wedge-name">Solid wedge</div>
+      <div class="wedge-note">Comes <em>out</em> of the page, toward you.</div>
+    </div>
+
+    <div class="wedge-card">
+      <svg viewBox="0 0 110 110">
+        <g transform="translate(55,90)">
+          <g transform="rotate(270)">
+            <line x1="14"    y1="-1"   x2="14"    y2="1"   stroke="var(--carbon)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="25.5"  y1="-2.5" x2="25.5"  y2="2.5" stroke="var(--carbon)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="37"    y1="-4"   x2="37"    y2="4"   stroke="var(--carbon)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="48.5"  y1="-5.5" x2="48.5"  y2="5.5" stroke="var(--carbon)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="60"    y1="-7"   x2="60"    y2="7"   stroke="var(--carbon)" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+          <circle cx="0" cy="0" r="11" fill="var(--white)" stroke="var(--carbon)" stroke-width="1.5"/>
+          <text x="0" y="4" text-anchor="middle" font-family="Bitter" font-size="11" font-weight="700" fill="var(--carbon)">C</text>
+        </g>
+      </svg>
+      <div class="wedge-name">Dashed wedge</div>
+      <div class="wedge-note">Goes <em>behind</em> the page, away from you.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 3. ALKANES ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">3</span>Alkanes: The Simplest Hydrocarbons</div>
+  <p class="body-text">An <strong>alkane</strong> is a hydrocarbon where every C&minus;C bond is a single bond. The name always ends in <strong>-ane</strong>. Alkanes are the backbone family. Almost everything else is built off them by adding a feature.</p>
+
+  <div class="highlight-box" style="text-align:center;font-family:var(--fb);font-size:1.1rem">
+    Alkane formula: $\ce{C_nH_{2n+2}}$
+    <br><span style="font-size:.85rem;font-family:var(--fp);color:var(--slate)">where $n$ is the number of carbons</span>
+  </div>
+
+  <p class="body-text">The first part of an alkane's name comes from a <strong>prefix table</strong> that tells you how many carbons are in the chain. Click any prefix to see the matching name and formula.</p>
+
+  <div class="prefix-grid" id="prefixGrid"></div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Carbon Count &rarr; Name + Formula</div>
+    <div class="cpick-stage">
+      <div class="cpick-row">
+        <label>Carbons (n):</label>
+        <input id="cpickRange" type="range" min="1" max="10" value="4">
+      </div>
+      <div class="cpick-out">
+        <div class="cpick-cell"><div class="lbl">Prefix</div><div class="val" id="cpickPrefix">but</div></div>
+        <div class="cpick-cell"><div class="lbl">Alkane</div><div class="val" id="cpickAlkane">butane</div></div>
+        <div class="cpick-cell"><div class="lbl">Alkene</div><div class="val" id="cpickAlkene">butene</div></div>
+        <div class="cpick-cell"><div class="lbl">Alkyne</div><div class="val" id="cpickAlkyne">butyne</div></div>
+        <div class="cpick-cell"><div class="lbl">Formula (alkane)</div><div class="val" id="cpickFormula">$\ce{C4H10}$</div></div>
+      </div>
+      <div class="cpick-svg" id="cpickSvg"></div>
+    </div>
+  </div>
+
+  <div class="sub-title">Three Group Names to Memorize</div>
+  <div class="term-grid">
+    <span class="term-sym">methyl</span><span class="term-def">$\ce{CH3}$ &mdash; a carbon with 3 hydrogens, bonded to one other thing. Always at the end of a chain or as a branch.</span>
+    <span class="term-sym">methylene</span><span class="term-def">$\ce{CH2}$ &mdash; a carbon with 2 hydrogens, bonded to two other carbons. The repeating "middle" piece in a chain.</span>
+    <span class="term-sym">methine</span><span class="term-def">CH &mdash; a carbon with 1 hydrogen, bonded to three other carbons. Shows up at branch points.</span>
+  </div>
+
+  <p class="body-text">A <strong>straight-chain alkane</strong> contains only methyl groups (the two ends) and methylene groups (everything between). The general condensed formula is $\ce{CH3(CH2)_xCH3}$. This family is called the <strong>homologous series</strong> &mdash; each member differs from the next by exactly one $\ce{CH2}$.</p>
+</div>
+
+<!-- ======== 4. ISOMERS ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">4</span>Isomers: Same Atoms, Different Layout</div>
+  <p class="body-text"><strong>Constitutional isomers</strong> are two molecules with the <em>same molecular formula</em> but a <em>different structure</em>. They have different names, different condensed formulas, and usually different physical properties.</p>
+
+  <div class="highlight-box">
+    <strong>Same molecular formula. Different connectivity.</strong>
+    <br>
+    Both have $\ce{C4H10}$, but the way the atoms are arranged is different. That makes them isomers.
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">n-Butane vs Isobutane &mdash; Same $\ce{C4H10}$, Different Structure</div>
+    <div class="rep-stage" style="display:flex;justify-content:space-around;flex-wrap:wrap;gap:18px">
+      <div style="text-align:center">
+        <div class="rep-title">n-butane (straight)</div>
+        <div class="mol-svg" id="isoButaneSvg"></div>
+        <div class="rep-note">$\ce{CH3CH2CH2CH3}$<br>4 carbons</div>
+      </div>
+      <div style="text-align:center">
+        <div class="rep-title">isobutane (2-methylpropane)</div>
+        <div class="mol-svg" id="isoIsobutaneSvg"></div>
+        <div class="rep-note">$\ce{(CH3)3CH}$<br>4 carbons, branched</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-title">Carbon Classification: 1&deg;, 2&deg;, 3&deg;, 4&deg;</div>
+  <p class="body-text">Each carbon in an alkane gets a label based on how many <em>other carbons</em> it is bonded to.</p>
+  <div class="term-grid">
+    <span class="term-sym">primary (1&deg;)</span><span class="term-def">Bonded to <strong>one</strong> other carbon. The end of a chain.</span>
+    <span class="term-sym">secondary (2&deg;)</span><span class="term-def">Bonded to <strong>two</strong> other carbons. Middle of a straight chain.</span>
+    <span class="term-sym">tertiary (3&deg;)</span><span class="term-def">Bonded to <strong>three</strong> other carbons. A branch point.</span>
+    <span class="term-sym">quaternary (4&deg;)</span><span class="term-def">Bonded to <strong>four</strong> other carbons. Branch point with no hydrogens.</span>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Click a Carbon to Classify It</div>
+    <div class="cc-stage">
+      <svg id="ccSvg" viewBox="0 0 380 200"></svg>
+    </div>
+    <div class="cc-legend">
+      <span class="cc-key"><span class="dot" style="background:#5b8a3f"></span> 1&deg; primary</span>
+      <span class="cc-key"><span class="dot" style="background:#525B76"></span> 2&deg; secondary</span>
+      <span class="cc-key"><span class="dot" style="background:#b5503e"></span> 3&deg; tertiary</span>
+      <span class="cc-key"><span class="dot" style="background:#8a2f8a"></span> 4&deg; quaternary</span>
+    </div>
+    <div class="cc-info" id="ccInfo">Tap any carbon vertex to see its classification.</div>
+  </div>
+
+  <p class="body-text">The prefixes <strong>n-</strong> (normal, no branching) and <strong>iso-</strong> (one methyl branch creating a methine carbon) are old common names. Modern naming gives every isomer a unique systematic name instead. We learn the systematic rules next.</p>
+</div>
+
+<!-- ======== 5. NAMING ALKANES ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">5</span>Naming an Alkane: Step-by-Step Walkthrough</div>
+  <p class="body-text">Click <strong>Next</strong> to walk through every rule on a worked example. Each step highlights the part of the molecule the rule is about.</p>
+
+  <div class="red-note">
+    <span class="rn-title">Two rules students miss most</span>
+    <ul>
+      <li><strong>Number the longest chain so the branches get the lowest possible numbers.</strong> Always check both directions and pick the one that gives the lowest set of locants at the first point of difference.</li>
+      <li><strong>Count prefixes (di-, tri-, tetra-, etc.) in front of branch names DO NOT count when alphabetizing.</strong> "dimethyl" alphabetizes under <em>m</em>, not <em>d</em>. Same for "triethyl" under <em>e</em>, and so on. The hyphenated prefixes <em>tert-</em> and <em>sec-</em> are also ignored when alphabetizing.</li>
+    </ul>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Naming Walkthrough</div>
+    <div class="nw-stage">
+      <svg id="nwSvg" viewBox="0 0 460 290"></svg>
+    </div>
+    <div class="nw-controls">
+      <button class="site-btn secondary" onclick="nwPrev()">&lsaquo; Back</button>
+      <span class="nw-step-label" id="nwStepLabel">Step 0 / 7</span>
+      <button class="site-btn" onclick="nwNext()">Next &rsaquo;</button>
+    </div>
+    <div class="nw-info" id="nwInfo">Click <strong>Next</strong> to start. We will name this molecule one rule at a time.</div>
+  </div>
+</div>
+
+<!-- ======== 6. BRANCHES & COMPLEX BRANCHES ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">6</span>Branches and Complex Branches</div>
+  <p class="body-text">A <strong>branch</strong> (also called a substituent) is anything sticking off the parent chain that is not part of it. Simple branches like methyl ($\ce{CH3-}$) and ethyl (CH3CH2&minus;) are easy. Bigger branches can themselves have branches &mdash; those need parentheses and an internal locant.</p>
+
+  <div class="highlight-box">
+    Just like a carbon can be 1&deg;, 2&deg;, 3&deg;, or 4&deg;, an <strong>alkyl branch</strong> can be 1&deg; or 2&deg; depending on which kind of carbon it attaches through.
+    <br><br>
+    When the branch itself has branches, write the branch name in <strong>parentheses</strong> with its own internal numbering.
+  </div>
+
+  <div class="sub-title">Common-Name Shortcuts to Memorize</div>
+  <p class="body-text">Five branched alkyl groups have short common names that show up everywhere. Knowing them on sight saves time. The systematic name is in parentheses.</p>
+
+  <div class="bs-grid">
+    <div class="bs-card">
+      <div class="mol-svg" data-mol="isopropyl"></div>
+      <div class="bs-common">isopropyl</div>
+      <div class="bs-iupac">(1-methylethyl)</div>
+      <div class="bs-formula">$\ce{(CH3)2CH-}$</div>
+    </div>
+    <div class="bs-card">
+      <div class="mol-svg" data-mol="sec-butyl"></div>
+      <div class="bs-common">sec-butyl</div>
+      <div class="bs-iupac">(1-methylpropyl)</div>
+      <div class="bs-formula">$\ce{CH3CH2CH(CH3)-}$</div>
+    </div>
+    <div class="bs-card">
+      <div class="mol-svg" data-mol="isobutyl"></div>
+      <div class="bs-common">isobutyl</div>
+      <div class="bs-iupac">(2-methylpropyl)</div>
+      <div class="bs-formula">$\ce{(CH3)2CHCH2-}$</div>
+    </div>
+    <div class="bs-card">
+      <div class="mol-svg" data-mol="tert-butyl"></div>
+      <div class="bs-common">tert-butyl</div>
+      <div class="bs-iupac">(1,1-dimethylethyl)</div>
+      <div class="bs-formula">$\ce{(CH3)3C-}$</div>
+    </div>
+    <div class="bs-card">
+      <div class="mol-svg" data-mol="neopentyl"></div>
+      <div class="bs-common">neopentyl</div>
+      <div class="bs-iupac">(2,2-dimethylpropyl)</div>
+      <div class="bs-formula">$\ce{(CH3)3CCH2-}$</div>
+    </div>
+  </div>
+  <p class="body-text" style="text-align:center;font-size:.88rem;color:var(--slate)">The asterisk (*) marks the connection point where the branch attaches to the parent chain.</p>
+
+  <div class="highlight-box">
+    <strong>Alphabetizing rule:</strong> when sorting branches alphabetically, treat <em>iso-</em> and <em>neo-</em> as part of the name (they count). But hyphenated prefixes like <em>tert-</em> and <em>sec-</em> are <strong>ignored</strong> when alphabetizing. <em>tert</em>-butyl files under <em>b</em>.
+  </div>
+</div>
+
+<!-- ======== 7. CYCLOALKANES ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">7</span>Cycloalkanes: Carbon Chains in a Ring</div>
+  <p class="body-text">A <strong>cycloalkane</strong> is a hydrocarbon where the carbon chain closes back on itself to form a ring. The naming follows the same rules as a chain alkane, with two twists: the prefix <em>cyclo-</em> goes in front of the parent name, and the locant rules for substituents are slightly different.</p>
+
+  <div class="highlight-box">
+    <strong>Locant rules for cycloalkanes:</strong>
+    <br>&middot; <strong>Mono-substituted</strong> cycloalkane (just one branch) &rarr; <em>no locant needed</em>. Example: methylcyclohexane.
+    <br>&middot; <strong>Di-substituted (or more)</strong> &rarr; locants required. Number to give the lowest set, regardless of branch identity.
+    <br>&middot; A <strong>chain alkane with one branch</strong> still needs a locant (the chain is not symmetric).
+    <br>&middot; When you have a chain attached to a ring, the parent is whichever has <strong>more carbons</strong>.
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Cycloalkane Numbering: Mono vs Di-Substituted</div>
+    <div class="btn-row">
+      <button class="site-btn active" id="cyBtnMono" onclick="cyShow('mono')">Mono</button>
+      <button class="site-btn secondary" id="cyBtnDi" onclick="cyShow('di')">Di-substituted</button>
+    </div>
+    <div class="cy-stage">
+      <div class="mol-svg" id="cyMol"></div>
+    </div>
+    <div class="cy-info" id="cyInfo"></div>
+  </div>
+
+  <p class="body-text">A few cycloalkanes worth recognizing on sight: cyclopropane (3-carbon triangle), cyclobutane (square), cyclopentane (pentagon), cyclohexane (hexagon). Cyclohexane is by far the most common ring in organic chemistry.</p>
+</div>
+
+<!-- ======== 8. ALKENES & ALKYNES ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">8</span>Alkenes and Alkynes: Multiple Bonds</div>
+  <p class="body-text">When a hydrocarbon has a double or triple bond between carbons, it is <strong>unsaturated</strong>. The suffix changes to reflect the bond type:</p>
+
+  <div class="highlight-box">
+    <strong>-ane</strong> &rarr; saturated, all single bonds (alkane).
+    <br>
+    <strong>-ene</strong> &rarr; at least one double bond (alkene).
+    <br>
+    <strong>-yne</strong> &rarr; at least one triple bond (alkyne).
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Same 3-Carbon Skeleton, Three Saturation States</div>
+    <div class="btn-row">
+      <button class="site-btn active" id="satBtnA" onclick="satShow('a')">Propane</button>
+      <button class="site-btn secondary" id="satBtnE" onclick="satShow('e')">Propene</button>
+      <button class="site-btn secondary" id="satBtnY" onclick="satShow('y')">Propyne</button>
+    </div>
+    <div class="sat-stage">
+      <div class="mol-svg" id="satMol"></div>
+    </div>
+    <div class="sat-info" id="satInfo"></div>
+  </div>
+
+  <p class="body-text">For alkenes and alkynes, when you number the parent chain, the multiple bond gets the <strong>lowest possible number</strong>. The locant for the multiple bond goes right before the suffix. e.g. <em>but-2-ene</em> means the double bond starts at carbon 2.</p>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">Example. </span>$\ce{CH3-CH=CH-CH3}$.</div>
+    <div class="step"><span class="step-label">Parent. </span>4 carbons &rarr; <em>but-</em>.</div>
+    <div class="step"><span class="step-label">Suffix. </span>One double bond &rarr; <em>-ene</em>.</div>
+    <div class="step"><span class="step-label">Locant. </span>Number from the end giving the double bond the lowest number. The C=C starts at carbon 2.</div>
+    <div class="step"><span class="step-label">Final name. </span><strong>but-2-ene</strong> (also written 2-butene).</div>
+  </div>
+</div>
+
+<!-- ======== 9. SEE IT IN 3D ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">9</span>See It in 3D</div>
+  <p class="body-text">Skeletal structures are flat, but real molecules are 3D. The zigzag in a hydrocarbon chain isn't artistic license &mdash; it shows that carbon is <strong>tetrahedral</strong>, with bond angles of about 109.5&deg;. Drag any model below to rotate, scroll to zoom.</p>
+
+  <div class="three-d-card">
+    <div class="three-d-title">Hydrocarbon chains: pick a molecule</div>
+    <div class="btn-row">
+      <button class="site-btn secondary" id="td3BtnEthane" onclick="td3Show('ethane')">ethane</button>
+      <button class="site-btn secondary" id="td3BtnPropane" onclick="td3Show('propane')">propane</button>
+      <button class="site-btn secondary" id="td3BtnButane" onclick="td3Show('butane')">butane</button>
+      <button class="site-btn" id="td3BtnPentane" onclick="td3Show('pentane')">pentane</button>
+      <button class="site-btn secondary" id="td3BtnHexane" onclick="td3Show('hexane')">hexane</button>
+      <button class="site-btn secondary" id="td3BtnCyclohexane" onclick="td3Show('cyclohexane')">cyclohexane</button>
+    </div>
+    <div class="viewer-3d" id="td3Viewer"></div>
+    <div class="three-d-controls">
+      <button class="style-btn active" id="td3StyleStick" onclick="td3Style('stick')">stick</button>
+      <button class="style-btn" id="td3StyleBall" onclick="td3Style('ball')">ball &amp; stick</button>
+      <button class="style-btn" id="td3StyleSpace" onclick="td3Style('space')">space-filling</button>
+      <button class="style-btn" id="td3StyleLine" onclick="td3Style('line')">wireframe</button>
+    </div>
+    <div class="three-d-note" id="td3Note">Carbon is tetrahedral &mdash; every C&minus;C&minus;C angle is roughly 109.5&deg;. The zigzag in a 2D drawing is a flat shadow of that 3D geometry. Try cyclohexane to see the famous "chair" shape.</div>
+  </div>
+
+  <div class="three-d-card" style="margin-top:14px">
+    <div class="three-d-title">Stereochemistry: (R) vs (S)-2-bromobutane</div>
+    <p class="body-text" style="text-align:center;font-size:.94rem">When a carbon has four different substituents (a <strong>stereocenter</strong>), the molecule has two non-superimposable mirror-image forms. The wedges and dashes encode which one. Rotate each model below to see how the wedge means "out of the page" in real 3D.</p>
+    <div class="three-d-pair">
+      <div>
+        <div style="text-align:center"><span class="chirality-tag R">(R)</span></div>
+        <div class="viewer-3d" id="td3R"></div>
+        <div class="three-d-note">Bromine, methyl, ethyl, and H attached to one carbon. Priority order Br &gt; ethyl &gt; methyl &gt; H rotates <em>clockwise</em> = R.</div>
+      </div>
+      <div>
+        <div style="text-align:center"><span class="chirality-tag S">(S)</span></div>
+        <div class="viewer-3d" id="td3S"></div>
+        <div class="three-d-note">Same atoms, mirror image. Priority order rotates <em>counter-clockwise</em> = S. Hold them up to a mirror in your head &mdash; they cannot be superimposed.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 10. FLASHCARDS ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">10</span>Flashcards: Self-Quiz Yourself</div>
+  <p class="body-text">Click the card to flip. Use the arrows to move through the deck. Shuffle whenever you want a fresh order.</p>
+  <div class="fc-card">
+    <div class="fc-stage">
+      <div class="fc-tile" id="fcTile" onclick="fcFlip()">
+        <div class="fc-face fc-front">
+          <span class="lbl">term</span>
+          <span class="term" id="fcFront"></span>
+          <span class="hint">tap to reveal</span>
+        </div>
+        <div class="fc-face fc-back">
+          <span class="lbl">definition</span>
+          <span class="def" id="fcBack"></span>
+          <span class="hint">tap to flip back</span>
+        </div>
+      </div>
+    </div>
+    <div class="fc-meta">
+      <span id="fcCount">1 / 16</span>
+      <div class="progress"><i id="fcProg"></i></div>
+      <button class="site-btn secondary" onclick="fcShuffle()" style="padding:5px 12px;font-size:.82rem">Shuffle</button>
+    </div>
+    <div class="fc-controls">
+      <button class="fc-nav-btn" id="fcPrev" onclick="fcPrev()">&lsaquo;</button>
+      <button class="site-btn" onclick="fcFlip()">Flip</button>
+      <button class="fc-nav-btn" id="fcNext" onclick="fcNext()">&rsaquo;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 10. NAMING QUIZ ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">11</span>Naming Practice Quiz</div>
+  <p class="body-text">Look at the structure, pick the correct name. Click <em>Next</em> to advance after each answer.</p>
+  <div class="nq-card" id="nqCard">
+    <div class="nq-meta">
+      <span id="nqCount">Question 1 / 7</span>
+      <div class="progress"><i id="nqProg"></i></div>
+      <span id="nqScore">Score: 0</span>
+    </div>
+    <div class="nq-stage">
+      <div class="mol-svg" id="nqMol"></div>
+      <div class="nq-prompt" id="nqPrompt">What is the correct name for this molecule?</div>
+    </div>
+    <div class="nq-options" id="nqOptions"></div>
+    <div class="nq-feedback" id="nqFeedback"></div>
+    <div class="nq-controls">
+      <button class="site-btn secondary" onclick="nqRestart()">Restart</button>
+      <button class="site-btn" id="nqNextBtn" onclick="nqNext()" disabled>Next &rsaquo;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 11. PRACTICE ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">12</span>Practice Problems</div>
+  <p class="body-text">Try each one before opening the answer.</p>
+
+  <div class="practice-box">
+    <div class="q"><strong>1.</strong> An alkane has 7 carbons. What is its name and molecular formula?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p1')">Show Answer</button>
+    <div class="a" id="p1">Prefix for 7 carbons is <em>hept-</em>. Suffix for an alkane is <em>-ane</em>. Name: <strong>heptane</strong>. Formula: $\ce{C_nH_{2n+2}}$ with $n=7$ gives <strong>$\ce{C7H16}$</strong>.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>2.</strong> Which pair below shows constitutional isomers?
+      <br>(A) $\ce{C2H6}$ and $\ce{C3H8}$
+      <br>(B) n-butane and isobutane
+      <br>(C) methane and ethene
+      <br>(D) propane and propene</div>
+    <button class="show-ans-btn" onclick="toggleAns('p2')">Show Answer</button>
+    <div class="a" id="p2"><strong>(B).</strong> Both n-butane and isobutane have the same molecular formula ($\ce{C4H10}$) but different structures (straight vs branched). That is the definition of constitutional isomers. (A) different formulas. (C) different formulas, different families. (D) different formulas ($\ce{C3H8}$ vs $\ce{C3H6}$).</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>3.</strong> Name the molecule: $\ce{CH3-CH(CH3)-CH2-CH2-CH3}$.</div>
+    <button class="show-ans-btn" onclick="toggleAns('p3')">Show Answer</button>
+    <div class="a" id="p3">Longest chain: 5 carbons &rarr; pentane. Number from the end closest to the branch: the methyl branch is on carbon 2. Name: <strong>2-methylpentane</strong>.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>4.</strong> What is the difference between an alkene and an alkyne?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p4')">Show Answer</button>
+    <div class="a" id="p4">An <strong>alkene</strong> has at least one carbon-carbon <em>double</em> bond (C=C) and ends in <em>-ene</em>. An <strong>alkyne</strong> has at least one carbon-carbon <em>triple</em> bond (C&equiv;C) and ends in <em>-yne</em>. Both are unsaturated hydrocarbons.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>5.</strong> An alkane has 12 hydrogens. How many carbons does it have?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p5')">Show Answer</button>
+    <div class="a" id="p5">Use $\ce{C_nH_{2n+2}}$. Set $2n+2 = 12$, so $n = 5$. The alkane is <strong>pentane</strong>, $\ce{C5H12}$.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>6.</strong> A carbon is bonded to three other carbons and one hydrogen. Classify it.</div>
+    <button class="show-ans-btn" onclick="toggleAns('p6')">Show Answer</button>
+    <div class="a" id="p6">Bonded to 3 other carbons makes it a <strong>tertiary (3&deg;) carbon</strong>. The single H confirms it &mdash; this is a methine carbon.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>7.</strong> An alkane has the structure: a 5-carbon chain with a methyl branch on C2 and an ethyl branch on C3. What is its name?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p7')">Show Answer</button>
+    <div class="a" id="p7">Parent: pentane. Branches: 2-methyl, 3-ethyl. Alphabetize (ethyl before methyl): <strong>3-ethyl-2-methylpentane</strong>. Notice "ethyl" comes first because <em>e</em> is before <em>m</em>.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>8.</strong> What does the prefix <em>cyclo-</em> tell you about a hydrocarbon?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p8')">Show Answer</button>
+    <div class="a" id="p8">The carbon chain forms a <strong>closed ring</strong> instead of an open chain. For example, cyclohexane is a 6-carbon ring (a hexagon).</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>9.</strong> In a cyclopentane with one methyl group attached, do you need to give the methyl a locant number? Why or why not?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p9')">Show Answer</button>
+    <div class="a" id="p9"><strong>No locant needed.</strong> When a cycloalkane has only one substituent, the molecule is symmetric and any starting point gives the same name. The compound is just <strong>methylcyclopentane</strong>. Locants are required only when there are 2 or more substituents.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>10.</strong> Which name is correct for an alkane with two methyl branches both on carbon 2 of butane?
+      <br>(A) 2,2-methylmethylbutane
+      <br>(B) 2,2-dimethylbutane
+      <br>(C) 2-dimethylbutane
+      <br>(D) bismethyl-2-butane</div>
+    <button class="show-ans-btn" onclick="toggleAns('p10')">Show Answer</button>
+    <div class="a" id="p10"><strong>(B) 2,2-dimethylbutane.</strong> When the same branch repeats, condense with the prefix <em>di-</em> (or tri-, tetra-, etc.) and stack the locants separated by commas. Each methyl still needs its own locant, even when they share a carbon.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>11.</strong> Draw or describe the difference in structural formula between propene and propyne.</div>
+    <button class="show-ans-btn" onclick="toggleAns('p11')">Show Answer</button>
+    <div class="a" id="p11"><strong>Propene</strong> ($\ce{C3H6}$): $\ce{CH2=CH-CH3}$, has a C=C double bond. <strong>Propyne</strong> ($\ce{C3H4}$): $\ce{CH#C-CH3}$, has a C&equiv;C triple bond. Same 3-carbon skeleton, different bond order at the front, different number of hydrogens.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>12.</strong> The common name <em>isopropyl</em> corresponds to which systematic branch name?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p12')">Show Answer</button>
+    <div class="a" id="p12"><strong>(1-methylethyl).</strong> Isopropyl is a 3-carbon branch attached through the middle carbon: $\ce{(CH3)2CH-}$.</div>
+  </div>
+</div>
+
+<!-- ======== 11. CHEAT SHEET ======== -->
+<div class="card">
+  <div class="card-title"><span class="num">13</span>Quick Review Cheat Sheet</div>
+  <div class="term-grid">
+    <span class="term-sym">Organic molecule</span><span class="term-def">Built from carbon and hydrogen, sometimes with extra elements.</span>
+    <span class="term-sym">Hydrocarbon</span><span class="term-def">Only C and H. C&minus;C and C&minus;H bonds.</span>
+    <span class="term-sym">Saturated</span><span class="term-def">All single bonds. The molecule is "full" of hydrogens.</span>
+    <span class="term-sym">Unsaturated</span><span class="term-def">Has at least one double or triple bond.</span>
+    <span class="term-sym">Alkane</span><span class="term-def">All single bonds. Suffix <em>-ane</em>. Formula $\ce{C_nH_{2n+2}}$.</span>
+    <span class="term-sym">Alkene</span><span class="term-def">At least one C=C. Suffix <em>-ene</em>.</span>
+    <span class="term-sym">Alkyne</span><span class="term-def">At least one C&equiv;C. Suffix <em>-yne</em>.</span>
+    <span class="term-sym">Cycloalkane</span><span class="term-def">Ring of carbons. Prefix <em>cyclo-</em>.</span>
+    <span class="term-sym">Constitutional isomer</span><span class="term-def">Same molecular formula, different connectivity.</span>
+    <span class="term-sym">Methyl / methylene / methine</span><span class="term-def">$\ce{CH3}$ / $\ce{CH2}$ / CH groups.</span>
+    <span class="term-sym">1&deg; / 2&deg; / 3&deg; / 4&deg;</span><span class="term-def">Carbon classified by how many other carbons it is bonded to.</span>
+    <span class="term-sym">Branch / substituent</span><span class="term-def">Anything sticking off the parent chain.</span>
+    <span class="term-sym">Lowest locant rule</span><span class="term-def">Number the parent so branches get the lowest possible numbers (first point of difference).</span>
+    <span class="term-sym">Alphabetize branches</span><span class="term-def">Ignore prefix counts (di-, tri-) and hyphenated prefixes (tert-, sec-) when sorting.</span>
+    <span class="term-sym">Skeletal structure</span><span class="term-def">Carbon at every end and joint, hydrogens not drawn.</span>
+    <span class="term-sym">isopropyl</span><span class="term-def">$\ce{(CH3)2CH-}$ = (1-methylethyl).</span>
+    <span class="term-sym">sec-butyl</span><span class="term-def">$\ce{CH3CH2CH(CH3)-}$ = (1-methylpropyl).</span>
+    <span class="term-sym">isobutyl</span><span class="term-def">$\ce{(CH3)2CHCH2-}$ = (2-methylpropyl).</span>
+    <span class="term-sym">tert-butyl</span><span class="term-def">$\ce{(CH3)3C-}$ = (1,1-dimethylethyl).</span>
+    <span class="term-sym">neopentyl</span><span class="term-def">$\ce{(CH3)3CCH2-}$ = (2,2-dimethylpropyl).</span>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+/* ============== Practice toggle ============== */
+function toggleAns(id){ document.getElementById(id).classList.toggle('show'); }
+window.toggleAns = toggleAns;
+
+/* ============== RDKit molecule injector ============== */
+/* Fill any element with [data-mol="name"] from window.MOLECULES (loaded via molecules.js) */
+function injectMolecules(){
+  if(!window.MOLECULES) return;
+  document.querySelectorAll('[data-mol]').forEach(el=>{
+    const k = el.getAttribute('data-mol');
+    if(window.MOLECULES[k]) el.innerHTML = window.MOLECULES[k];
+  });
+  // Specific id'd containers (interactive widgets fill on event, but seed initial state)
+  const map = {
+    'isoButaneSvg':   'butane',
+    'isoIsobutaneSvg':'isobutane',
+    'satMol':         'propane',
+    'cyMol':          'methylcyclohexane'
+  };
+  Object.entries(map).forEach(([id, key])=>{
+    const el = document.getElementById(id);
+    if(el && window.MOLECULES[key]) el.innerHTML = window.MOLECULES[key];
+  });
+}
+injectMolecules();
+
+/* ============== Theme toggle ============== */
+function toggleLwsTheme(){
+  const cur = document.body.getAttribute('data-theme');
+  document.body.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+}
+window.toggleLwsTheme = toggleLwsTheme;
+
+/* ============== Carbon prefixes ============== */
+const PREFIXES = [
+  {n:1, p:'meth', f:'\\ce{CH4}'},
+  {n:2, p:'eth',  f:'\\ce{C2H6}'},
+  {n:3, p:'prop', f:'\\ce{C3H8}'},
+  {n:4, p:'but',  f:'\\ce{C4H10}'},
+  {n:5, p:'pent', f:'\\ce{C5H12}'},
+  {n:6, p:'hex',  f:'\\ce{C6H14}'},
+  {n:7, p:'hept', f:'\\ce{C7H16}'},
+  {n:8, p:'oct',  f:'\\ce{C8H18}'},
+  {n:9, p:'non',  f:'\\ce{C9H20}'},
+  {n:10,p:'dec',  f:'\\ce{C10H22}'}
+];
+
+/* Build prefix grid */
+(function buildPrefixGrid(){
+  const grid = document.getElementById('prefixGrid');
+  PREFIXES.forEach(p=>{
+    const el = document.createElement('div');
+    el.className = 'pcell';
+    el.dataset.n = p.n;
+    el.innerHTML = '<span class="pn">'+p.p+'-</span><span class="pc">'+p.n+' carbon'+(p.n>1?'s':'')+' &middot; '+p.p+'ane</span>';
+    el.onclick = ()=>{ document.getElementById('cpickRange').value = p.n; cpickUpdate(); highlightPrefix(p.n); };
+    grid.appendChild(el);
+  });
+})();
+function highlightPrefix(n){
+  document.querySelectorAll('.pcell').forEach(el=>{
+    el.classList.toggle('active', +el.dataset.n === n);
+  });
+}
+
+/* ============== Carbon picker ============== */
+function cpickUpdate(){
+  const n = +document.getElementById('cpickRange').value;
+  const p = PREFIXES.find(x=>x.n===n);
+  document.getElementById('cpickPrefix').textContent = p.p+'-';
+  document.getElementById('cpickAlkane').textContent = p.p+'ane';
+  // ethene/ethyne (drop the leading "eth"+"a"? simply: prefix + ene/yne)
+  // For n=1, methene/methyne don't exist (would need 2 carbons for a C=C). Show em-dash.
+  if(n===1){
+    document.getElementById('cpickAlkene').textContent = '—';
+    document.getElementById('cpickAlkyne').textContent = '—';
+  } else {
+    document.getElementById('cpickAlkene').textContent = p.p+'ene';
+    document.getElementById('cpickAlkyne').textContent = p.p+'yne';
+  }
+  document.getElementById('cpickFormula').innerHTML = '$'+p.f+'$';
+  if(window.renderMathInElement){ renderMathInElement(document.getElementById('cpickFormula'), {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]}); }
+  drawAlkaneSkeleton(n);
+  highlightPrefix(n);
+}
+function drawAlkaneSkeleton(n){
+  const names = ['methane','ethane','propane','butane','pentane','hexane','heptane','octane','nonane','decane'];
+  const key = names[n-1];
+  const svg = (window.MOLECULES && window.MOLECULES[key]) || '';
+  document.getElementById('cpickSvg').innerHTML = '<div class="mol-svg">'+svg+'</div>';
+}
+document.getElementById('cpickRange').addEventListener('input', cpickUpdate);
+cpickUpdate();
+
+/* ============== Representation toggle (n-butane) ============== */
+const REPS = {
+  mol: {
+    title:'Molecular formula',
+    html:'<div class="rep-content">$\\ce{C4H10}$</div>',
+    note:'Just the atom counts. Tells you what is in the molecule, not how it is connected.'
+  },
+  str: {
+    title:'Structural formula',
+    html: '<div class="rep-content">$\\ce{H3C-CH2-CH2-CH3}$</div>',
+    note:'Every atom and every bond shown. Bulky but unambiguous.'
+  },
+  con: {
+    title:'Condensed formula',
+    html:'<div class="rep-content">$\\ce{CH3CH2CH2CH3}$</div>',
+    note:'A linear text version. Bonds are implied by adjacency. Compact and the most common way to type out an alkane.'
+  },
+  ske: {
+    title:'Skeletal (line-angle)',
+    html: '<div class="mol-svg">'+(window.MOLECULES?window.MOLECULES['butane']:'')+'</div>',
+    note:'Each end and each joint is a carbon. Hydrogens on carbon are not drawn. Fastest to sketch.'
+  }
+};
+function repShow(k){
+  const r = REPS[k];
+  const stage = document.getElementById('repStage');
+  // refresh skeletal HTML in case MOLECULES wasn't loaded at object literal time
+  if(k==='ske' && window.MOLECULES){
+    REPS.ske.html = '<div class="mol-svg">'+window.MOLECULES['butane']+'</div>';
+  }
+  stage.innerHTML = '<div class="rep-title">'+r.title+'</div>'+r.html;
+  document.getElementById('repNote').textContent = r.note;
+  if(window.renderMathInElement){ renderMathInElement(stage, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]}); }
+  ['mol','str','con','ske'].forEach(x=>{
+    const b = document.getElementById('repBtn'+x.charAt(0).toUpperCase()+x.slice(1));
+    if(b){
+      if(x===k){ b.classList.remove('secondary'); b.classList.add('active'); }
+      else { b.classList.add('secondary'); b.classList.remove('active'); }
+    }
+  });
+}
+window.repShow = repShow;
+
+/* ============== Carbon classifier (2,2,4-trimethylpentane) ============== */
+/* Using 2,3,4-trimethylpentane variant + adjustment to show all 4 types is tricky.
+   To show 1°, 2°, 3°, 4° all at once we'll use 2,2,3-trimethylpentane:
+   Structure (skeletal): C1-C2-C3-C4-C5 with two methyls on C2 (making C2 quaternary, 4°)
+   and one methyl on C3 (making C3 tertiary, 3°).
+   C1 = methyl end (1°), C4 = secondary (2°, between C3 and C5), C5 = methyl end (1°).
+*/
+const CC_NODES = [
+  {id:'c1', x:30,  y:120, type:1, label:'C1', desc:'End of chain &mdash; bonded to only 1 other carbon (C2). <strong>Primary (1&deg;)</strong>.'},
+  {id:'c2', x:90,  y:80,  type:4, label:'C2', desc:'Bonded to 4 carbons (C1, C3, and two methyl branches). <strong>Quaternary (4&deg;)</strong>. No hydrogens on this carbon.'},
+  {id:'c3', x:150, y:120, type:3, label:'C3', desc:'Bonded to 3 carbons (C2, C4, and one methyl branch). <strong>Tertiary (3&deg;)</strong>. One H.'},
+  {id:'c4', x:210, y:80,  type:2, label:'C4', desc:'Bonded to 2 carbons (C3 and C5). <strong>Secondary (2&deg;)</strong>. Two Hs &mdash; this is a methylene group.'},
+  {id:'c5', x:270, y:120, type:1, label:'C5', desc:'End of chain &mdash; bonded to only 1 other carbon (C4). <strong>Primary (1&deg;)</strong>.'},
+  {id:'m2a', x:60,  y:30, type:1, label:'CH<tspan font-size="9" baseline-shift="sub">3</tspan>', desc:'Methyl branch on C2. The carbon in this branch is bonded to only 1 other carbon (C2). <strong>Primary (1&deg;)</strong>.'},
+  {id:'m2b', x:120, y:30, type:1, label:'CH<tspan font-size="9" baseline-shift="sub">3</tspan>', desc:'Second methyl branch on C2. <strong>Primary (1&deg;)</strong>.'},
+  {id:'m3',  x:150, y:170,type:1, label:'CH<tspan font-size="9" baseline-shift="sub">3</tspan>', desc:'Methyl branch on C3. <strong>Primary (1&deg;)</strong>.'}
+];
+const CC_BONDS = [['c1','c2'],['c2','c3'],['c3','c4'],['c4','c5'],['c2','m2a'],['c2','m2b'],['c3','m3']];
+const CC_COLORS = {1:'#5b8a3f', 2:'#525B76', 3:'#b5503e', 4:'#8a2f8a'};
+function buildCC(){
+  const svg = document.getElementById('ccSvg');
+  let html = '';
+  CC_BONDS.forEach(([a,b])=>{
+    const A = CC_NODES.find(n=>n.id===a), B = CC_NODES.find(n=>n.id===b);
+    html += '<line x1="'+A.x+'" y1="'+A.y+'" x2="'+B.x+'" y2="'+B.y+'" stroke="var(--carbon)" stroke-width="2.2" stroke-linecap="round"/>';
+  });
+  CC_NODES.forEach(n=>{
+    const fill = CC_COLORS[n.type];
+    html += '<circle cx="'+n.x+'" cy="'+n.y+'" r="13" fill="'+fill+'" stroke="var(--forest)" stroke-width="1.5" style="cursor:pointer" data-id="'+n.id+'"/>';
+    if(n.label.length<=2 && !n.label.includes('tspan')){
+      html += '<text x="'+n.x+'" y="'+(n.y+4)+'" text-anchor="middle" font-family="Bitter" font-size="11" font-weight="700" fill="#fff" pointer-events="none">'+n.label+'</text>';
+    } else if(n.label.includes('tspan')){
+      html += '<text x="'+n.x+'" y="'+(n.y+4)+'" text-anchor="middle" font-family="Bitter" font-size="10" font-weight="700" fill="#fff" pointer-events="none">'+n.label+'</text>';
+    }
+  });
+  svg.innerHTML = html;
+  svg.querySelectorAll('circle').forEach(c=>{
+    c.addEventListener('click', e=>{
+      const id = c.getAttribute('data-id');
+      const node = CC_NODES.find(n=>n.id===id);
+      document.getElementById('ccInfo').innerHTML = node.desc;
+    });
+  });
+}
+buildCC();
+
+/* ============== Naming walkthrough (3-ethyl-2-methylpentane) ============== */
+/* Skeletal layout: 5-carbon chain (C1..C5) horizontal-ish, methyl on C2, ethyl on C3.
+   Coordinates (parent chain):
+   C1=(40,120), C2=(90,80), C3=(150,120), C4=(210,80), C5=(270,120)
+   Methyl on C2 going up: M=(90,30)
+   Ethyl on C3 going down: Ea=(150,170), Eb=(190,200)
+*/
+const NW_PARENT = [[40,120],[90,80],[150,120],[210,80],[270,120]];
+const NW_M = [90,30];
+const NW_EA = [150,170];
+const NW_EB = [190,200];
+const NW_BONDS_BASE = [
+  ['p',0,1],['p',1,2],['p',2,3],['p',3,4],
+  ['m',0,0], // C2 to methyl
+  ['ea',0,0],['eb',0,0] // C3-Ea, Ea-Eb
+];
+function nwDraw(stage){
+  let lines = '';
+  // parent chain
+  for(let i=0;i<4;i++){
+    const a = NW_PARENT[i], b = NW_PARENT[i+1];
+    const color = (stage>=1 ? 'var(--sage)' : 'var(--carbon)');
+    const w = (stage>=1 ? 3 : 2.2);
+    lines += '<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="'+color+'" stroke-width="'+w+'" stroke-linecap="round"/>';
+  }
+  // methyl bond
+  lines += '<line x1="'+NW_PARENT[1][0]+'" y1="'+NW_PARENT[1][1]+'" x2="'+NW_M[0]+'" y2="'+NW_M[1]+'" stroke="var(--carbon)" stroke-width="2.2" stroke-linecap="round"/>';
+  // ethyl bonds
+  lines += '<line x1="'+NW_PARENT[2][0]+'" y1="'+NW_PARENT[2][1]+'" x2="'+NW_EA[0]+'" y2="'+NW_EA[1]+'" stroke="var(--carbon)" stroke-width="2.2" stroke-linecap="round"/>';
+  lines += '<line x1="'+NW_EA[0]+'" y1="'+NW_EA[1]+'" x2="'+NW_EB[0]+'" y2="'+NW_EB[1]+'" stroke="var(--carbon)" stroke-width="2.2" stroke-linecap="round"/>';
+  // parent label appears at stage 2 (pentane)
+  if(stage===2){
+    lines += '<text x="40" y="45" font-family="Young Serif" font-size="16" fill="var(--good)" font-weight="700">parent: pentane</text>';
+  }
+  // numbering circles appear at stage 3
+  if(stage>=3){
+    NW_PARENT.forEach((p,i)=>{
+      lines += '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="11" fill="var(--good)" stroke="var(--forest)" stroke-width="1.2"/>';
+      lines += '<text x="'+p[0]+'" y="'+(p[1]+4)+'" text-anchor="middle" font-family="Bitter" font-size="11" font-weight="700" fill="#fff">'+(i+1)+'</text>';
+    });
+  }
+  // step 3: also show the wrong/right comparison hint as small numbers above
+  if(stage===3){
+    NW_PARENT.forEach((p,i)=>{
+      lines += '<text x="'+p[0]+'" y="'+(p[1]-18)+'" text-anchor="middle" font-family="Bitter" font-size="9" fill="var(--bad)" opacity="0.8">'+(5-i)+'</text>';
+    });
+    lines += '<text x="40" y="20" font-family="Bitter" font-size="11" fill="var(--bad)">x other direction: {3,4}</text>';
+    lines += '<text x="40" y="248" font-family="Bitter" font-size="11" fill="var(--good)" font-weight="700">&check; this direction: {2,3} &mdash; lower wins</text>';
+  }
+  // branch labels appear at stage 4
+  if(stage>=4){
+    lines += '<circle cx="'+NW_M[0]+'" cy="'+NW_M[1]+'" r="14" fill="#b5503e" stroke="var(--forest)" stroke-width="1.2"/>';
+    lines += '<text x="'+NW_M[0]+'" y="'+(NW_M[1]+4)+'" text-anchor="middle" font-family="Bitter" font-size="9" font-weight="700" fill="#fff">Me</text>';
+    lines += '<circle cx="'+NW_EA[0]+'" cy="'+NW_EA[1]+'" r="14" fill="#b5503e" stroke="var(--forest)" stroke-width="1.2"/>';
+    lines += '<text x="'+NW_EA[0]+'" y="'+(NW_EA[1]+4)+'" text-anchor="middle" font-family="Bitter" font-size="9" font-weight="700" fill="#fff">Et</text>';
+    lines += '<circle cx="'+NW_EB[0]+'" cy="'+NW_EB[1]+'" r="9" fill="#b5503e" stroke="var(--forest)" stroke-width="1.2"/>';
+  }
+  // locant text labels appear at stage 5 (positioned to avoid collisions)
+  if(stage>=5){
+    lines += '<text x="'+(NW_M[0]+22)+'" y="'+(NW_M[1]+5)+'" font-family="Bitter" font-size="13" font-weight="700" fill="var(--forest)">2-methyl</text>';
+    lines += '<text x="'+(NW_EB[0]+18)+'" y="'+(NW_EB[1]+5)+'" font-family="Bitter" font-size="13" font-weight="700" fill="var(--forest)">3-ethyl</text>';
+  }
+  // alphabetize hint at stage 6 (above the final pill)
+  if(stage===6){
+    lines += '<text x="230" y="248" text-anchor="middle" font-family="Bitter" font-size="13" font-weight="700" fill="var(--forest)">ethyl (e) &lt; methyl (m) &mdash; ethyl listed first</text>';
+  }
+  // final name pill at stage 7 (well below the molecule)
+  if(stage>=7){
+    lines += '<rect x="80" y="258" width="300" height="28" rx="14" fill="var(--good)"/>';
+    lines += '<text x="230" y="277" text-anchor="middle" font-family="Bitter" font-size="14" font-weight="700" fill="#fff">3-ethyl-2-methylpentane</text>';
+  }
+  document.getElementById('nwSvg').innerHTML = lines;
+}
+const NW_STEPS = [
+  {label:'Step 0 / 7', info:'Click <strong>Next</strong> to begin. We will name this molecule one rule at a time.'},
+  {label:'Step 1 / 7', info:'<strong>Step 1: Find the longest chain.</strong> Trace through the carbons &mdash; the longest path is highlighted in green. It has <strong>5 carbons</strong>, so the parent prefix is <em>pent-</em>.'},
+  {label:'Step 2 / 7', info:'<strong>Step 2: Pick the suffix.</strong> All bonds in the parent are single &rarr; suffix is <em>-ane</em>. So the parent name is <strong>pentane</strong>.'},
+  {label:'Step 3 / 7', info:'<strong>Step 3: Number to lowest locants.</strong> Numbering left &rarr; right gives branches at {2, 3}. Right &rarr; left gives {3, 4}. <strong>{2, 3} is lower at the first position</strong>, so we number left to right.'},
+  {label:'Step 4 / 7', info:'<strong>Step 4: Identify each branch.</strong> A 1-carbon branch off C2 is a <em>methyl</em>. A 2-carbon branch off C3 is an <em>ethyl</em>.'},
+  {label:'Step 5 / 7', info:'<strong>Step 5-6: Attach locants.</strong> Methyl is on carbon <strong>2</strong> &rarr; <em>2-methyl</em>. Ethyl is on carbon <strong>3</strong> &rarr; <em>3-ethyl</em>. Hyphens between locants and names.'},
+  {label:'Step 6 / 7', info:'<strong>Step 7: Alphabetize.</strong> Ethyl (<em>e</em>) comes before methyl (<em>m</em>). So <em>3-ethyl</em> goes first in the final name.'},
+  {label:'Step 7 / 7', info:'<strong>Final name: 3-ethyl-2-methylpentane.</strong> Parent <em>pentane</em>, ethyl at C3, methyl at C2, alphabetical order. Done.'}
+];
+let nwIdx = 0;
+function nwRender(){
+  nwDraw(nwIdx);
+  document.getElementById('nwStepLabel').textContent = NW_STEPS[nwIdx].label;
+  document.getElementById('nwInfo').innerHTML = NW_STEPS[nwIdx].info;
+}
+function nwNext(){ if(nwIdx < NW_STEPS.length-1){ nwIdx++; nwRender(); } }
+function nwPrev(){ if(nwIdx > 0){ nwIdx--; nwRender(); } }
+window.nwNext = nwNext; window.nwPrev = nwPrev;
+nwRender();
+
+/* ============== Cycloalkane locant visualizer ============== */
+function cyShow(mode){
+  const map = {mono:'methylcyclohexane', di:'1-ethyl-2-methylcyclohexane'};
+  const info = {
+    mono:'<strong>methylcyclohexane</strong> &mdash; only one substituent, so no locant is needed. The "1" is implicit.',
+    di:  '<strong>1-ethyl-2-methylcyclohexane</strong> &mdash; two substituents need locants. Number to give the lowest set, then alphabetize the branch names.'
+  };
+  const wrap = document.getElementById('cyMol');
+  if(wrap && window.MOLECULES) wrap.innerHTML = window.MOLECULES[map[mode]] || '';
+  document.getElementById('cyInfo').innerHTML = info[mode];
+  document.getElementById('cyBtnMono').classList.toggle('secondary', mode!=='mono');
+  document.getElementById('cyBtnMono').classList.toggle('active', mode==='mono');
+  document.getElementById('cyBtnDi').classList.toggle('secondary', mode!=='di');
+  document.getElementById('cyBtnDi').classList.toggle('active', mode==='di');
+}
+window.cyShow = cyShow;
+
+/* ============== Saturation toggle (propane / propene / propyne) ============== */
+function satShow(mode){
+  const map = {a:'propane', e:'propene', y:'propyne'};
+  const info = {
+    a:'<strong>Propane (alkane).</strong> All single bonds. Saturated. Formula $\\ce{C3H8}$. Suffix <em>-ane</em>.',
+    e:'<strong>Propene (alkene).</strong> One $\\ce{C=C}$ double bond between C1 and C2. Unsaturated. Formula $\\ce{C3H6}$ (two fewer H than propane). Suffix <em>-ene</em>.',
+    y:'<strong>Propyne (alkyne).</strong> One $\\ce{C#C}$ triple bond between C1 and C2. Unsaturated. Formula $\\ce{C3H4}$ (four fewer H than propane). Suffix <em>-yne</em>.'
+  };
+  const wrap = document.getElementById('satMol');
+  if(wrap && window.MOLECULES) wrap.innerHTML = window.MOLECULES[map[mode]] || '';
+  const infoEl = document.getElementById('satInfo');
+  infoEl.innerHTML = info[mode];
+  if(window.renderMathInElement){ renderMathInElement(infoEl, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]}); }
+  ['a','e','y'].forEach(k=>{
+    const b = document.getElementById('satBtn'+k.toUpperCase());
+    if(b){
+      b.classList.toggle('active', k===mode);
+      b.classList.toggle('secondary', k!==mode);
+    }
+  });
+}
+window.satShow = satShow;
+
+/* Init the two molecule-toggle widgets to their default mode */
+satShow('a');
+cyShow('mono');
+
+/* ============== Flashcards ============== */
+const FLASHCARDS = [
+  {t:'Hydrocarbon', d:'A molecule containing only carbon and hydrogen, with C&minus;C and C&minus;H bonds.'},
+  {t:'Alkane', d:'A saturated hydrocarbon with all single bonds. Suffix -ane. Formula CₙH₂ₙ₊₂.'},
+  {t:'Alkene', d:'A hydrocarbon with at least one C=C double bond. Suffix -ene.'},
+  {t:'Alkyne', d:'A hydrocarbon with at least one C≡C triple bond. Suffix -yne.'},
+  {t:'Constitutional isomer', d:'Two molecules with the same molecular formula but different structure (different connectivity).'},
+  {t:'Saturated', d:'All carbon-carbon bonds are single. The molecule is full of hydrogens.'},
+  {t:'Unsaturated', d:'Contains at least one double or triple bond. Has fewer hydrogens than the saturated version.'},
+  {t:'Cycloalkane', d:'A hydrocarbon where the carbon chain forms a closed ring. Prefix cyclo-.'},
+  {t:'Skeletal structure', d:'A line-angle drawing where each end and joint is a carbon and hydrogens on carbon are not drawn.'},
+  {t:'Methyl group', d:'CH₃ &mdash; a carbon with three hydrogens attached, bonded to one other thing.'},
+  {t:'Methylene group', d:'CH₂ &mdash; a carbon with two hydrogens, in the middle of a chain.'},
+  {t:'Methine group', d:'CH &mdash; a carbon with one hydrogen, at a branch point.'},
+  {t:'Primary carbon', d:'A carbon bonded to only one other carbon. Notated 1°.'},
+  {t:'Tertiary carbon', d:'A carbon bonded to three other carbons. Notated 3°.'},
+  {t:'Branch (substituent)', d:'Anything sticking off the parent chain. Sometimes called a side chain.'},
+  {t:'Lowest-locant rule', d:'Number the parent chain so that branches get the lowest possible numbers, comparing at the first point of difference.'}
+];
+let fcIdx = 0;
+let fcOrder = FLASHCARDS.map((_,i)=>i);
+function fcRender(){
+  const card = FLASHCARDS[fcOrder[fcIdx]];
+  document.getElementById('fcFront').textContent = card.t;
+  document.getElementById('fcBack').innerHTML = card.d;
+  document.getElementById('fcCount').textContent = (fcIdx+1)+' / '+FLASHCARDS.length;
+  document.getElementById('fcProg').style.width = ((fcIdx+1)/FLASHCARDS.length*100)+'%';
+  document.getElementById('fcTile').classList.remove('flipped');
+  document.getElementById('fcPrev').disabled = (fcIdx===0);
+  document.getElementById('fcNext').disabled = (fcIdx===FLASHCARDS.length-1);
+}
+function fcFlip(){ document.getElementById('fcTile').classList.toggle('flipped'); }
+function fcNext(){ if(fcIdx < FLASHCARDS.length-1){ fcIdx++; fcRender(); } }
+function fcPrev(){ if(fcIdx > 0){ fcIdx--; fcRender(); } }
+function fcShuffle(){
+  for(let i=fcOrder.length-1; i>0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [fcOrder[i], fcOrder[j]] = [fcOrder[j], fcOrder[i]];
+  }
+  fcIdx = 0; fcRender();
+}
+window.fcFlip = fcFlip; window.fcNext = fcNext; window.fcPrev = fcPrev; window.fcShuffle = fcShuffle;
+fcRender();
+
+/* ============== Naming quiz ============== */
+const NQ_QUESTIONS = [
+  /* ===== EASY (2) — 10% ===== */
+  {
+    mol: 'butane', difficulty:'Easy',
+    prompt: 'Name this straight-chain alkane:',
+    options: ['propane', 'butane', 'pentane', 'methane'],
+    correct: 1,
+    why: '4 carbons in an unbranched chain &rarr; <em>but-</em> prefix. All single bonds &rarr; <em>-ane</em>. <strong>butane</strong>.'
+  },
+  {
+    mol: 'propene', difficulty:'Easy',
+    prompt: 'Name this hydrocarbon:',
+    options: ['propane', 'propyne', 'propene', 'ethene'],
+    correct: 2,
+    why: '3 carbons (<em>prop-</em>) and one C=C double bond (<em>-ene</em>). <strong>propene</strong>. Note the difference from propane (all single) and propyne (triple bond).'
+  },
+
+  /* ===== MEDIUM (10) — 50% ===== */
+  {
+    mol: 'pentane', difficulty:'Medium',
+    prompt: 'Name this molecule:',
+    options: ['butane', 'pentane', 'hexane', 'propane'],
+    correct: 1,
+    why: '5 carbons in a single chain &rarr; <em>pent-</em>. All single bonds &rarr; <em>-ane</em>. <strong>pentane</strong>.'
+  },
+  {
+    mol: '2-methylbutane', difficulty:'Medium',
+    prompt: 'Name this branched alkane:',
+    options: ['methylbutane', '2-methylbutane', '3-methylbutane', '2,2-dimethylpropane'],
+    correct: 1,
+    why: 'Longest chain = 4 carbons (butane). Methyl branch on C2 (numbered from the closer end). <strong>2-methylbutane</strong>. Chain alkanes always need a locant, so "methylbutane" alone is wrong.'
+  },
+  {
+    mol: '3-methylpentane', difficulty:'Medium',
+    prompt: 'Name this alkane:',
+    options: ['2-methylpentane', '3-methylpentane', 'methylpentane', '3-ethylbutane'],
+    correct: 1,
+    why: 'Parent = 5-carbon chain (pentane). The methyl branch sits on the middle carbon (C3) regardless of which end you number from &mdash; the molecule is symmetric. <strong>3-methylpentane</strong>.'
+  },
+  {
+    mol: '2-methylhexane', difficulty:'Medium',
+    prompt: 'Name this alkane:',
+    options: ['5-methylhexane', 'methylhexane', '2-methylhexane', '2-methylpentane'],
+    correct: 2,
+    why: 'Parent = 6 carbons (hexane). Numbering from the nearer end puts the methyl on C2; numbering from the far end would give C5. <strong>Lowest locant wins &rarr; 2-methylhexane</strong>.'
+  },
+  {
+    mol: '2,3-dimethylbutane', difficulty:'Medium',
+    prompt: 'Name this branched alkane:',
+    options: ['2,3-dimethylbutane', '2,3-methylmethylbutane', '1,2-dimethylbutane', '2-methylpentane'],
+    correct: 0,
+    why: 'Parent = 4-carbon chain (butane). One methyl on C2, one on C3. Two methyls on different carbons &rarr; <em>2,3-dimethyl</em>. <strong>2,3-dimethylbutane</strong>.'
+  },
+  {
+    mol: '2,4-dimethylpentane', difficulty:'Medium',
+    prompt: 'Name this molecule:',
+    options: ['2,4-dimethylpentane', '3,3-dimethylpentane', '2,2-dimethylpentane', '2,4-methylmethylpentane'],
+    correct: 0,
+    why: 'Parent = 5-carbon chain (pentane). Methyls on C2 and C4. The molecule is symmetric, so numbering either way gives {2, 4}. <strong>2,4-dimethylpentane</strong>.'
+  },
+  {
+    mol: '3-ethylpentane', difficulty:'Medium',
+    prompt: 'Name this alkane:',
+    options: ['3-ethylpentane', 'ethylpentane', '3-methylhexane', '3-ethylpropane'],
+    correct: 0,
+    why: 'Parent = 5-carbon chain (pentane). A 2-carbon (ethyl) branch on the middle carbon C3. <strong>3-ethylpentane</strong>. Tempting trap: you might count the ethyl into the parent and call it "3-methylhexane", but that gives 6 carbons in the parent &mdash; the actual longest chain through this molecule is 5.'
+  },
+  {
+    mol: 'but-2-ene', difficulty:'Medium',
+    prompt: 'Name this hydrocarbon:',
+    options: ['butane', '2-butene', '1-butene', '2-butyne'],
+    correct: 1,
+    why: 'Parent = 4 carbons (<em>but-</em>). One double bond between C2 and C3, so suffix is <em>-ene</em> with the locant for the double bond placed before the suffix. <strong>2-butene</strong> (also written <em>but-2-ene</em>).'
+  },
+  {
+    mol: 'methylcyclohexane', difficulty:'Medium',
+    prompt: 'Name this cycloalkane:',
+    options: ['1-methylcyclohexane', 'methylcyclohexane', 'cyclohexylmethane', 'cyclohexane-methyl'],
+    correct: 1,
+    why: 'Cyclohexane (6-carbon ring) with one methyl branch. <strong>Mono-substituted cycloalkanes do not need a locant</strong> &mdash; the position is implicit. Just <strong>methylcyclohexane</strong>.'
+  },
+  {
+    mol: '2,2-dimethylbutane', difficulty:'Medium',
+    prompt: 'Name this branched alkane:',
+    options: ['2,2-dimethylbutane', '2,2-methylmethylbutane', '3,3-dimethylbutane', '2-dimethylbutane'],
+    correct: 0,
+    why: 'Parent = 4-carbon chain (butane). Two methyls both on C2. Repeated branches use prefix <em>di-</em> with both locants stacked. <strong>2,2-dimethylbutane</strong>. Never write "methylmethyl" or skip a locant.'
+  },
+
+  /* ===== HARD (8) — 40% ===== */
+  {
+    mol: '3-ethyl-2-methylpentane', difficulty:'Hard',
+    prompt: 'Name this molecule:',
+    options: ['2-ethyl-3-methylpentane', '3-ethyl-2-methylpentane', '2-methyl-3-ethylpentane', '3-methyl-2-ethylpentane'],
+    correct: 1,
+    why: 'Parent = 5-carbon chain (pentane). Methyl on C2, ethyl on C3 (number left &rarr; right for the lowest locants {2, 3}). <strong>Alphabetize: ethyl (e) before methyl (m)</strong> &rarr; <strong>3-ethyl-2-methylpentane</strong>.'
+  },
+  {
+    mol: '2,2,3-trimethylbutane', difficulty:'Hard',
+    prompt: 'Name this molecule:',
+    options: ['2,2,3-trimethylbutane', '2,3,3-trimethylbutane', '3,3,4-trimethylbutane', '2-tri-methylbutane'],
+    correct: 0,
+    why: 'Parent = 4-carbon chain (butane). Three methyls: two on the same carbon (C2) and one on the next (C3). Compare locants from each end: this end gives {2,2,3}, the other gives {2,3,3}. {2,2,3} is lower at the second position. <strong>2,2,3-trimethylbutane</strong>.'
+  },
+  {
+    mol: '4-ethyl-2,3-dimethylhexane', difficulty:'Hard',
+    prompt: 'Name this molecule:',
+    options: ['4-ethyl-2,3-dimethylhexane', '2,3-dimethyl-4-ethylhexane', '3-ethyl-4,5-dimethylhexane', '4-ethyl-2,3-dimethylheptane'],
+    correct: 0,
+    why: 'Parent = 6-carbon chain (hexane). Methyls on C2 and C3, ethyl on C4 (numbered for lowest locants {2,3,4}). <strong>Alphabetizing the prefix di- DOES NOT count</strong> &mdash; "dimethyl" sorts as <em>m</em>, so <em>ethyl</em> (e) still comes first. <strong>4-ethyl-2,3-dimethylhexane</strong>.'
+  },
+  {
+    mol: '3-ethyl-2,2-dimethylpentane', difficulty:'Hard',
+    prompt: 'Name this molecule:',
+    options: ['3-ethyl-2,2-dimethylpentane', '2,2-dimethyl-3-ethylpentane', '3-ethyl-4,4-dimethylpentane', '2,2-diethyl-3-methylpentane'],
+    correct: 0,
+    why: 'Parent = 5-carbon chain (pentane). Two methyls on C2, ethyl on C3 (lowest locants {2,2,3}). For alphabetizing, ignore <em>di-</em> &mdash; sort by "ethyl" vs "methyl": e &lt; m, so ethyl comes first. <strong>3-ethyl-2,2-dimethylpentane</strong>.'
+  },
+  {
+    mol: '1-ethyl-3-methylcyclohexane', difficulty:'Hard',
+    prompt: 'Name this disubstituted cycloalkane:',
+    options: ['1-ethyl-3-methylcyclohexane', '3-ethyl-1-methylcyclohexane', '1-methyl-3-ethylcyclohexane', '1,3-ethylmethylcyclohexane'],
+    correct: 0,
+    why: 'Cyclohexane ring, two substituents at positions 1 and 3 (lowest locant set). Alphabetical order: <em>ethyl</em> (e) before <em>methyl</em> (m), so <strong>ethyl gets locant 1</strong>. <strong>1-ethyl-3-methylcyclohexane</strong>. Disubstituted cycloalkanes need locants (unlike mono-substituted).'
+  },
+  {
+    mol: '4-isopropylheptane', difficulty:'Hard',
+    prompt: 'Name this molecule (the branch is a common-name shortcut):',
+    options: ['4-isopropylheptane', '4-propylheptane', '3-isopropylheptane', '4-tert-butylheptane'],
+    correct: 0,
+    why: 'Parent = 7-carbon chain (heptane). The branch is a 3-carbon group attached through its middle carbon &mdash; that\'s <em>isopropyl</em>, not <em>propyl</em>. Locant 4 (the middle of the symmetric chain). <strong>4-isopropylheptane</strong>. The systematic equivalent is 4-(1-methylethyl)heptane.'
+  },
+  {
+    mol: '2,2,3,3-tetramethylbutane', difficulty:'Hard',
+    prompt: 'Name this highly branched alkane:',
+    options: ['2,2,3,3-tetramethylbutane', '2,2,3,3-tetramethylpropane', '2,3-tetramethylbutane', '2,2,3,3-trimethylbutane'],
+    correct: 0,
+    why: 'Parent = 4-carbon chain (butane). Two methyls on C2, two methyls on C3 &mdash; four methyls total &rarr; prefix <em>tetra-</em>. All four locants must be listed: <strong>2,2,3,3-tetramethylbutane</strong>.'
+  },
+  {
+    mol: '3-ethyl-3-methylhexane', difficulty:'Hard',
+    prompt: 'Name this molecule (two different branches share the same carbon):',
+    options: ['3-ethyl-3-methylhexane', '3-methyl-3-ethylhexane', '4-ethyl-4-methylhexane', '3-ethyl-3-methylpentane'],
+    correct: 0,
+    why: 'Parent = 6-carbon chain (hexane). An ethyl AND a methyl, both attached to C3 (the same carbon &mdash; making it quaternary). Each branch keeps its own locant: <em>3-ethyl-3-methyl</em>. Alphabetize: ethyl (e) before methyl (m). <strong>3-ethyl-3-methylhexane</strong>.'
+  }
+];
+let nqIdx = 0, nqScore = 0, nqAnswered = false;
+function nqRender(){
+  const q = NQ_QUESTIONS[nqIdx];
+  document.getElementById('nqCount').textContent = 'Question '+(nqIdx+1)+' / '+NQ_QUESTIONS.length;
+  document.getElementById('nqProg').style.width = ((nqIdx)/NQ_QUESTIONS.length*100)+'%';
+  document.getElementById('nqScore').textContent = 'Score: '+nqScore;
+  const diffBadge = q.difficulty ? '<span class="diff-badge diff-'+q.difficulty.toLowerCase()+'">'+q.difficulty+'</span> ' : '';
+  document.getElementById('nqPrompt').innerHTML = diffBadge + q.prompt;
+  const molWrap = document.getElementById('nqMol');
+  molWrap.innerHTML = (window.MOLECULES && window.MOLECULES[q.mol]) || '';
+  const opts = document.getElementById('nqOptions');
+  opts.innerHTML = '';
+  q.options.forEach((opt, i)=>{
+    const b = document.createElement('button');
+    b.className = 'nq-opt';
+    b.textContent = opt;
+    b.onclick = ()=>nqAnswer(i);
+    opts.appendChild(b);
+  });
+  document.getElementById('nqFeedback').classList.remove('show');
+  document.getElementById('nqFeedback').innerHTML = '';
+  document.getElementById('nqNextBtn').disabled = true;
+  nqAnswered = false;
+}
+function nqAnswer(i){
+  if(nqAnswered) return;
+  nqAnswered = true;
+  const q = NQ_QUESTIONS[nqIdx];
+  const buttons = document.querySelectorAll('#nqOptions .nq-opt');
+  buttons.forEach((b, idx)=>{
+    b.disabled = true;
+    if(idx === q.correct) b.classList.add(idx===i ? 'correct' : 'reveal');
+    else if(idx === i) b.classList.add('wrong');
+  });
+  const fb = document.getElementById('nqFeedback');
+  if(i === q.correct){
+    nqScore++;
+    fb.innerHTML = '<strong style="color:var(--good)">&check; Correct.</strong> '+q.why;
+  } else {
+    fb.innerHTML = '<strong style="color:var(--bad)">&times; Not quite.</strong> The right answer is <strong>'+q.options[q.correct]+'</strong>. '+q.why;
+  }
+  fb.classList.add('show');
+  document.getElementById('nqScore').textContent = 'Score: '+nqScore;
+  document.getElementById('nqProg').style.width = ((nqIdx+1)/NQ_QUESTIONS.length*100)+'%';
+  document.getElementById('nqNextBtn').disabled = false;
+  if(nqIdx === NQ_QUESTIONS.length-1){
+    document.getElementById('nqNextBtn').textContent = 'See score';
+  }
+}
+function nqNext(){
+  if(nqIdx < NQ_QUESTIONS.length-1){
+    nqIdx++;
+    nqRender();
+  } else {
+    // Show final result
+    const card = document.getElementById('nqCard');
+    const pct = Math.round(nqScore/NQ_QUESTIONS.length*100);
+    let msg = 'Solid work.';
+    if(pct === 100) msg = 'Perfect score.';
+    else if(pct >= 80) msg = 'Strong &mdash; review the misses.';
+    else if(pct >= 50) msg = 'Decent &mdash; worth another pass.';
+    else msg = 'Try again, focus on the rules first.';
+    card.innerHTML = '<div class="nq-result">You got<span class="score">'+nqScore+' / '+NQ_QUESTIONS.length+'</span>'+msg+'<br><br><button class="site-btn" onclick="nqRestart()">Try again</button></div>';
+  }
+}
+function nqRestart(){
+  nqIdx = 0; nqScore = 0; nqAnswered = false;
+  // rebuild card body in case it was replaced by result
+  document.getElementById('nqCard').innerHTML = '<div class="nq-meta"><span id="nqCount">Question 1 / '+NQ_QUESTIONS.length+'</span><div class="progress"><i id="nqProg"></i></div><span id="nqScore">Score: 0</span></div><div class="nq-stage"><div class="mol-svg" id="nqMol"></div><div class="nq-prompt" id="nqPrompt"></div></div><div class="nq-options" id="nqOptions"></div><div class="nq-feedback" id="nqFeedback"></div><div class="nq-controls"><button class="site-btn secondary" onclick="nqRestart()">Restart</button><button class="site-btn" id="nqNextBtn" onclick="nqNext()" disabled>Next &rsaquo;</button></div>';
+  nqRender();
+}
+window.nqAnswer = nqAnswer; window.nqNext = nqNext; window.nqRestart = nqRestart;
+nqRender();
+
+/* ============== 3Dmol.js viewers ============== */
+let td3Viewer = null;
+let td3CurrentMol = 'pentane';
+let td3CurrentStyle = 'stick';
+
+function td3Init(){
+  if(typeof $3Dmol === 'undefined' || !window.MOLECULES_3D) return;
+  // Main hydrocarbon viewer
+  td3Viewer = $3Dmol.createViewer('td3Viewer', { backgroundColor: 'rgba(0,0,0,0)' });
+  td3LoadMol(td3CurrentMol);
+  // Stereochemistry pair
+  ['R','S'].forEach(handed=>{
+    const v = $3Dmol.createViewer('td3'+handed, { backgroundColor: 'rgba(0,0,0,0)' });
+    const key = handed + '-2-bromobutane';
+    if(window.MOLECULES_3D[key]){
+      v.addModel(window.MOLECULES_3D[key], 'mol');
+      v.setStyle({}, { stick: { radius: 0.15 }, sphere: { scale: 0.25 } });
+      v.zoomTo();
+      v.render();
+    }
+  });
+}
+
+function td3LoadMol(name){
+  if(!td3Viewer || !window.MOLECULES_3D[name]) return;
+  td3Viewer.removeAllModels();
+  td3Viewer.addModel(window.MOLECULES_3D[name], 'mol');
+  td3ApplyStyle();
+  td3Viewer.zoomTo();
+  td3Viewer.render();
+}
+
+function td3ApplyStyle(){
+  if(!td3Viewer) return;
+  td3Viewer.setStyle({}, {});  // clear
+  switch(td3CurrentStyle){
+    case 'stick':
+      td3Viewer.setStyle({}, { stick: { radius: 0.15 } });
+      break;
+    case 'ball':
+      td3Viewer.setStyle({}, { stick: { radius: 0.12 }, sphere: { scale: 0.25 } });
+      break;
+    case 'space':
+      td3Viewer.setStyle({}, { sphere: { scale: 0.7 } });
+      break;
+    case 'line':
+      td3Viewer.setStyle({}, { line: { linewidth: 2 } });
+      break;
+  }
+  td3Viewer.render();
+}
+
+function td3Show(name){
+  td3CurrentMol = name;
+  td3LoadMol(name);
+  ['ethane','propane','butane','pentane','hexane','cyclohexane'].forEach(k=>{
+    const id = 'td3Btn' + k.charAt(0).toUpperCase() + k.slice(1);
+    const b = document.getElementById(id);
+    if(b){
+      b.classList.toggle('active', k===name);
+      b.classList.toggle('secondary', k!==name);
+    }
+  });
+  const notes = {
+    ethane: 'Ethane has a single C&minus;C bond that rotates freely. The two methyls (CH<sub>3</sub>) can spin past each other &mdash; that rotation is what gives ethane its conformations.',
+    propane: 'Three carbons in a row. The C&minus;C&minus;C bond angle is 109.5&deg; (tetrahedral). Drag to rotate and confirm the angle isn\'t flat.',
+    butane: 'Four carbons. In its lowest-energy conformation the chain is in <em>anti</em> form (zigzag). The 2D zigzag drawing matches this 3D arrangement directly.',
+    pentane: 'Pentane in the all-anti conformation. Each carbon is tetrahedral. This is the classic zigzag you see in skeletal drawings.',
+    hexane: 'Hexane &mdash; the all-anti zigzag continues. Notice how the chain stays roughly planar in this conformation but each carbon is still pyramidal.',
+    cyclohexane: 'The famous <strong>chair conformation</strong>. The 6-carbon ring is not a flat hexagon &mdash; it puckers to keep all bond angles at 109.5&deg;. Half the H atoms point straight up/down (axial), half point outward (equatorial).'
+  };
+  document.getElementById('td3Note').innerHTML = notes[name] || '';
+}
+
+function td3Style(s){
+  td3CurrentStyle = s;
+  td3ApplyStyle();
+  ['stick','ball','space','line'].forEach(k=>{
+    const id = 'td3Style' + k.charAt(0).toUpperCase() + k.slice(1);
+    const b = document.getElementById(id);
+    if(b) b.classList.toggle('active', k===s);
+  });
+}
+
+window.td3Show = td3Show; window.td3Style = td3Style;
+// Wait until 3Dmol script is loaded (it's the only non-deferred external script)
+if(typeof $3Dmol !== 'undefined'){ td3Init(); }
+else { window.addEventListener('load', td3Init); }
+
+</script>
+</body>
+</html>
