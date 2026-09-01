@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systems of Equations (Integrated Math 1, Unit 5)</title>
+<meta name="description" content="Interactive Integrated Math 1 notes on systems of equations: why elimination works, solving by graphing, substitution and elimination, systems with no solution or infinitely many, writing systems from context, and systems of inequalities as overlapping regions. By tutoringwithsruthi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Dosis:wght@400;500;600;700&family=Bitter:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+:root{
+  --white:#FFFFFF;--sage-l:#D0D6B3;--sage:#9BA06A;--slate:#525B76;--forest:#143109;
+  --bg:#f5f6ee;--sage-m:#e4e8cc;
+  --good:#5b8a3f;--bad:#b5503e;
+  --arith:#5b7fa8;--geo:#a86b5b;
+  --fh:'Young Serif',Georgia,serif;--fp:'Dosis','Trebuchet MS',Arial,sans-serif;--fb:'Bitter',Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:18px 16px 52px;overflow-x:hidden}
+.page{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.pg-head{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:20px;padding:36px 28px;text-align:center}
+.pg-head .topic-badge{display:inline-block;font-family:var(--fb);font-weight:700;color:var(--slate);background:var(--white);border:1.5px solid var(--sage-l);padding:4px 14px;border-radius:20px;font-size:.82rem;margin-bottom:12px;letter-spacing:.04em}
+.pg-head h1{font-family:var(--fh);font-size:2.2rem;color:var(--forest);margin-bottom:6px}
+.pg-head .sub{font-family:var(--fp);color:var(--slate);font-size:1rem}
+.card{background:var(--white);border:2px solid var(--sage-l);border-radius:20px;padding:28px 26px;box-shadow:0 2px 12px rgba(20,49,9,0.06);scroll-margin-top:84px}
+.card-title{font-family:var(--fh);font-size:1.4rem;color:var(--forest);margin-bottom:14px}
+.card-title .num{font-family:var(--fb);font-weight:700;color:var(--sage);font-size:.9rem;background:var(--sage-m);border-radius:8px;padding:2px 10px;margin-right:8px;vertical-align:middle}
+.body-text{font-family:var(--fp);font-size:1.04rem;color:var(--forest);line-height:1.7;margin-bottom:12px}
+.body-text:last-child{margin-bottom:0}
+.highlight-box{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:14px;padding:18px 22px;margin:14px 0}
+.sub-title{font-family:var(--fh);font-size:1.1rem;color:var(--forest);margin:18px 0 8px}
+.term-grid{display:grid;grid-template-columns:180px 1fr;gap:8px 16px;margin:12px 0}
+.term-sym{font-family:var(--fb);font-weight:700;color:var(--sage);text-align:right;font-size:1rem}
+.term-def{font-family:var(--fp);font-size:.98rem;color:var(--forest);line-height:1.6}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.site-btn{font-family:var(--fp);font-weight:600;font-size:.92rem;border:none;border-radius:30px;padding:8px 18px;cursor:pointer;transition:background .18s,transform .18s;background:var(--sage);color:var(--white)}
+.site-btn:hover{background:var(--forest);transform:translateY(-1px)}
+.site-btn.secondary{background:var(--white);color:var(--forest);border:2px solid var(--sage-l)}
+.site-btn.secondary:hover{background:var(--sage-m)}
+.interactive-area{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:16px;padding:20px 18px;margin:16px 0}
+.ia-label{font-family:var(--fb);font-size:1rem;color:var(--slate);margin-bottom:10px;text-align:center;font-weight:700}
+.practice-box{background:var(--white);border:2px dashed var(--sage-l);border-radius:14px;padding:16px 20px;margin:10px 0}
+.practice-box .q{font-family:var(--fp);font-size:1rem;color:var(--forest);margin-bottom:8px;line-height:1.6}
+.practice-box .a{font-family:var(--fp);font-size:.95rem;color:var(--forest);display:none;margin-top:8px;padding:12px 14px;background:var(--sage-m);border:1.5px solid var(--sage-l);border-radius:10px;line-height:1.65}
+.practice-box .a.show{display:block;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.show-ans-btn{font-family:var(--fp);font-weight:600;font-size:.85rem;border:2px solid var(--sage-l);border-radius:20px;padding:5px 14px;cursor:pointer;background:var(--white);color:var(--sage);transition:background .18s}
+.show-ans-btn:hover{background:var(--sage-m)}
+.worked-example{background:#f9faf4;border-left:4px solid var(--sage);border-radius:0 14px 14px 0;padding:16px 22px;margin:14px 0}
+.worked-example .step{font-family:var(--fp);font-size:.98rem;color:var(--forest);margin-bottom:6px;line-height:1.65}
+.worked-example .step-label{font-family:var(--fb);font-weight:700;color:var(--sage)}
+.topics-list{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 18px;margin-top:8px}
+.topics-list .row{font-family:var(--fp);color:var(--forest);display:flex;gap:10px;font-size:.98rem;padding:3px 0}
+.topics-list .row .rn{font-family:var(--fb);color:var(--sage);min-width:32px;font-weight:700}
+.topics-list .row.current{background:var(--sage-m);border-radius:8px;padding:3px 8px;font-weight:600}
+.pick-row{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:8px 0}
+.pick-btn{font-family:var(--fb);font-size:.82rem;background:var(--white);border:1.5px solid var(--sage-l);border-radius:18px;padding:5px 12px;cursor:pointer;color:var(--forest);transition:background .15s}
+.pick-btn:hover{background:var(--sage-m)}
+.pick-btn.active{background:var(--sage);color:var(--white);border-color:var(--sage)}
+.stage{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:14px;text-align:center}
+.stage svg{max-width:100%;height:auto;display:block;margin:0 auto}
+.readout{font-family:var(--fp);font-size:.95rem;color:var(--forest);background:var(--sage-m);border:1.5px solid var(--sage-l);border-radius:10px;padding:12px 16px;margin-top:10px;line-height:1.6;text-align:left}
+.readout strong{font-family:var(--fb)}
+.ctrl-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;margin:10px 0}
+.ctrl{display:flex;align-items:center;gap:8px;font-family:var(--fp);font-size:.9rem;color:var(--forest)}
+.ctrl label{font-family:var(--fb);font-weight:700;font-size:.82rem;color:var(--slate)}
+.ctrl input[type=range]{width:140px;accent-color:var(--sage)}
+.ctrl input[type=number]{width:76px;font-family:var(--fb);font-size:.92rem;padding:5px 8px;border:1.5px solid var(--sage-l);border-radius:8px;background:var(--white);color:var(--forest)}
+.val-chip{font-family:var(--fb);font-weight:700;background:var(--white);border:1.5px solid var(--sage-l);border-radius:10px;padding:2px 10px;min-width:38px;display:inline-block;text-align:center}
+.seq-table{width:100%;border-collapse:collapse;font-family:var(--fb);font-size:.9rem;margin:10px 0;background:var(--white)}
+.seq-table th,.seq-table td{border:1.5px solid var(--sage-l);padding:7px 9px;text-align:center;color:var(--forest)}
+.seq-table th{background:var(--sage-m);font-weight:700;font-size:.82rem}
+.seq-table td.diff{color:var(--arith);font-weight:700}
+.seq-table td.ratio{color:var(--geo);font-weight:700}
+.fb{font-family:var(--fp);font-size:.95rem;border-radius:10px;padding:11px 14px;margin-top:10px;line-height:1.6;display:none;text-align:left}
+.fb.show{display:block;animation:fadeIn .2s ease}
+.fb.ok{background:#eaf3e2;border:1.5px solid var(--good);color:#2f4d1c}
+.fb.no{background:#f7e9e6;border:1.5px solid var(--bad);color:#6d2d21}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.cmp-col{border:2px solid var(--sage-l);border-radius:14px;padding:16px 18px;background:var(--white)}
+.cmp-col.a{border-color:var(--arith)}
+.cmp-col.g{border-color:var(--geo)}
+.cmp-col h4{font-family:var(--fh);font-size:1.05rem;margin-bottom:8px;color:var(--forest)}
+.cmp-col.a h4{color:var(--arith)}
+.cmp-col.g h4{color:var(--geo)}
+.cmp-col p{font-family:var(--fp);font-size:.94rem;line-height:1.6;margin-bottom:7px}
+.cmp-col p:last-child{margin-bottom:0}
+.map-table{width:100%;border-collapse:collapse;font-family:var(--fp);font-size:.93rem;margin:12px 0;background:var(--white)}
+.map-table th,.map-table td{border:1.5px solid var(--sage-l);padding:9px 11px;text-align:left;color:var(--forest);vertical-align:top;line-height:1.55}
+.map-table th{background:var(--sage-m);font-family:var(--fb);font-weight:700;font-size:.82rem}
+.map-table td.code{font-family:var(--fb);font-weight:700;color:var(--sage);white-space:nowrap;font-size:.85rem}
+.map-table td.ctr{text-align:center}
+.note-flag{border-left:4px solid var(--bad);background:#fbf3f1;border-radius:0 12px 12px 0;padding:14px 18px;margin:14px 0;font-family:var(--fp);font-size:.97rem;line-height:1.65;color:var(--forest)}
+.note-flag .flag-label{font-family:var(--fb);font-weight:700;color:var(--bad);display:block;margin-bottom:4px}
+.fwd{border-left:4px solid var(--arith);background:#f2f6fa;border-radius:0 12px 12px 0;padding:14px 18px;margin:14px 0;font-family:var(--fp);font-size:.97rem;line-height:1.65;color:var(--forest)}
+.fwd .fwd-label{font-family:var(--fb);font-weight:700;color:var(--arith);display:block;margin-bottom:4px}
+.fwd a{color:var(--forest);font-weight:600}
+/* 2x2 grid */
+.quad{display:grid;grid-template-columns:auto 1fr 1fr;gap:8px;margin:14px 0;font-family:var(--fp)}
+.quad .qh{font-family:var(--fb);font-weight:700;font-size:.84rem;color:var(--slate);display:flex;align-items:center;justify-content:center;text-align:center;padding:6px}
+.quad .qcell{border:2px solid var(--sage-l);border-radius:12px;padding:12px 14px;background:var(--white);font-size:.92rem;line-height:1.55}
+.quad .qcell .qt{font-family:var(--fb);font-weight:700;color:var(--forest);display:block;margin-bottom:4px}
+.quad .qcell .qs{color:var(--slate);font-size:.86rem}
+.quad .qcell.lin{border-color:var(--arith)}
+.quad .qcell.exp{border-color:var(--geo)}
+
+/* ===== LWS SHELL (v2 UI) ===== */
+body{padding:0;background:var(--bg);overflow-x:auto;font-feature-settings:"ss01","cv11"}
+.page{max-width:none;margin:0;display:block}
+.lws-backdrop{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(1200px 600px at 8% -10%,rgba(228,232,204,.7) 0%,transparent 60%),
+             radial-gradient(900px 500px at 110% 0%,rgba(208,214,179,.5) 0%,transparent 55%),
+             radial-gradient(800px 400px at 50% 120%,rgba(228,232,204,.6) 0%,transparent 55%),
+             var(--bg)}
+.app{position:relative;z-index:1;display:grid;grid-template-columns:264px 1fr;grid-template-rows:64px 1fr;grid-template-areas:"side top" "side main";min-height:100vh}
+.side{grid-area:side;padding:16px 14px 14px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:14px;background:rgba(255,255,255,0.62);backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);border-right:1px solid var(--sage-l);overflow-y:auto;box-shadow:0 1px 0 rgba(255,255,255,0.9) inset}
+.top{grid-area:top;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(255,255,255,0.62);backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);border-bottom:1px solid var(--sage-l);position:sticky;top:0;z-index:15}
+.main{grid-area:main;padding:24px 28px 56px;max-width:1320px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.brand{display:flex;align-items:center;gap:10px;padding:8px 12px}
+.brand-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--sage),var(--forest));color:#fff;display:grid;place-items:center;font-family:var(--fh);font-size:1.1rem;line-height:1;box-shadow:0 6px 20px -6px rgba(20,49,9,0.35)}
+.brand-name{font-family:var(--fh);color:var(--forest);font-size:1.05rem;line-height:1.05}
+.brand-name small{display:block;font-family:var(--fb);font-style:italic;color:#7C8172;font-size:.7rem;margin-top:3px}
+.ws-switch{margin:0 4px}
+.ws-switch-btn{width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.62);border:1px solid rgba(255,255,255,0.55);border-radius:12px;backdrop-filter:blur(14px);text-align:left;transition:background .15s}
+.ws-switch-btn .ico{width:30px;height:30px;border-radius:8px;background:var(--sage-m);color:var(--forest);display:grid;place-items:center;flex-shrink:0;font-family:var(--fb);font-weight:700;font-size:.78rem}
+.ws-switch-btn .meta{flex:1;min-width:0}
+.ws-switch-btn .lbl{font-family:var(--fh);color:var(--forest);font-size:.95rem;line-height:1.1}
+.ws-switch-btn .sub{font-family:var(--fb);color:#7C8172;font-size:.68rem;margin-top:3px}
+.side-section-label{font-family:var(--fb);font-size:.66rem;letter-spacing:.14em;color:#7C8172;text-transform:uppercase;padding:14px 12px 4px}
+.side-nav{display:flex;flex-direction:column;gap:1px;padding:0 4px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;cursor:pointer;text-decoration:none;color:var(--forest);transition:background .15s;font-family:var(--fp);font-size:.86rem;font-weight:500}
+.nav-item .num{font-family:var(--fb);color:var(--sage);font-weight:700;font-size:.78rem;min-width:30px}
+.nav-item .t{flex:1;color:var(--forest)}
+.nav-item:hover{background:var(--sage-m)}
+.nav-item.active{background:var(--white);box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 12px 40px -12px rgba(20,49,9,0.18),0 2px 8px rgba(20,49,9,0.06);border:1px solid var(--sage-l)}
+.nav-item.active .t{color:var(--forest);font-weight:700}
+.nav-item.locked{color:#a3a89a;cursor:not-allowed}
+.nav-item.locked:hover{background:transparent}
+.nav-item.locked .num,.nav-item.locked .t{color:#a3a89a}
+.bread{display:flex;flex-direction:column;gap:0;flex:0 0 auto;min-width:0}
+.bread-trail{font-family:var(--fp);color:var(--slate);font-size:.78rem}
+.bread-now{font-family:var(--fp);font-weight:700;color:var(--forest);font-size:1rem;line-height:1.1}
+.search{flex:1;max-width:520px;min-width:120px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.62);border:1px solid var(--sage-l);border-radius:99px;padding:8px 16px;color:var(--slate);backdrop-filter:blur(14px)}
+.search input{border:0;background:transparent;outline:none;flex:1;font-family:var(--fp);font-size:.9rem;color:var(--forest);min-width:0}
+.search svg{flex-shrink:0;color:var(--slate)}
+.top-actions{display:flex;align-items:center;gap:8px}
+.btn-icon{width:38px;height:38px;border-radius:50%;background:var(--white);border:1px solid var(--sage-l);color:var(--slate);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s;font-size:1rem;padding:0}
+.btn-icon:hover{background:var(--sage-m);color:var(--forest)}
+.pg-head{margin-top:0}
+@media(max-width:980px){
+  .app{grid-template-columns:1fr;grid-template-rows:auto auto 1fr;grid-template-areas:"side" "top" "main"}
+  .side{height:auto;position:relative;border-right:0;border-bottom:1px solid var(--sage-l);max-height:none}
+  .top{padding:10px 18px;flex-wrap:wrap}
+  .main{padding:16px 18px 48px}
+  .search{order:3;flex-basis:100%;max-width:none}
+  .cmp{grid-template-columns:1fr}
+  .topics-list{grid-template-columns:1fr}
+  .term-grid{grid-template-columns:1fr}
+  .term-sym{text-align:left}
+  .quad{grid-template-columns:1fr}
+  .quad .qh{justify-content:flex-start}
+}
+[data-theme="dark"]{
+  --white:#14170F; --sage-l:#2B3320; --sage:#A9B07A; --sage-m:#1E2416;
+  --slate:#AEB5C8; --forest:#E8EBDA; --bg:#0E1108;
+  --arith:#8fb4dd; --geo:#dda28f;
+}
+[data-theme="dark"] body{color:var(--forest)}
+[data-theme="dark"] .lws-backdrop{
+  background:radial-gradient(1200px 600px at 8% -10%,rgba(43,51,32,.7) 0%,transparent 60%),
+             radial-gradient(900px 500px at 110% 0%,rgba(30,36,22,.55) 0%,transparent 55%),
+             radial-gradient(800px 400px at 50% 120%,rgba(43,51,32,.7) 0%,transparent 55%),
+             var(--bg)
+}
+[data-theme="dark"] .side,[data-theme="dark"] .top{background:rgba(20,23,15,0.7);border-color:#2B3320}
+[data-theme="dark"] .ws-switch-btn,[data-theme="dark"] .search,[data-theme="dark"] .btn-icon{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .ws-switch-btn .lbl,[data-theme="dark"] .ws-switch-btn .ico{color:var(--forest)}
+[data-theme="dark"] .ws-switch-btn .ico{background:#2A3421}
+[data-theme="dark"] .nav-item,[data-theme="dark"] .nav-item .t{color:var(--forest)}
+[data-theme="dark"] .nav-item:hover{background:#2A3421}
+[data-theme="dark"] .nav-item.active{background:#2A3421;border-color:#3A4A2E}
+[data-theme="dark"] .btn-icon:hover{background:#2A3421;color:var(--forest)}
+[data-theme="dark"] .search input{color:var(--forest)}
+[data-theme="dark"] .search input::placeholder{color:#7e8775}
+[data-theme="dark"] .pg-head{background:#1E2416;border-color:#3A4A2E}
+[data-theme="dark"] .pg-head h1,[data-theme="dark"] .pg-head .sub,[data-theme="dark"] .pg-head .topic-badge{color:var(--forest)}
+[data-theme="dark"] .pg-head .topic-badge{background:#2A3421;border-color:#3A4A2E}
+[data-theme="dark"] .card{background:#14170F;border-color:#2B3320;color:var(--forest)}
+[data-theme="dark"] .card-title,[data-theme="dark"] .sub-title,[data-theme="dark"] .body-text,[data-theme="dark"] .term-def,[data-theme="dark"] .term-sym{color:var(--forest)}
+[data-theme="dark"] .card-title .num{background:#2A3421;color:var(--sage)}
+[data-theme="dark"] .highlight-box{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .interactive-area{background:#1E2416;border-color:#3A4A2E}
+[data-theme="dark"] .ia-label{color:var(--forest)}
+[data-theme="dark"] .practice-box{background:#14170F;border-color:#3A4A2E}
+[data-theme="dark"] .practice-box .q,[data-theme="dark"] .practice-box .a{color:var(--forest)}
+[data-theme="dark"] .practice-box .a{background:#1E2416;border-color:#3A4A2E}
+[data-theme="dark"] .show-ans-btn{background:#1E2416;color:var(--sage);border-color:#3A4A2E}
+[data-theme="dark"] .worked-example{background:#1A1F11;border-left-color:var(--sage);color:var(--forest)}
+[data-theme="dark"] .site-btn.secondary{background:#1E2416;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .topics-list .row.current{background:#2A3421}
+[data-theme="dark"] .pick-btn{background:#14170F;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .pick-btn:hover{background:#2A3421}
+[data-theme="dark"] .stage{background:#14170F;border-color:#3A4A2E}
+[data-theme="dark"] .readout{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .seq-table,[data-theme="dark"] .map-table{background:#14170F}
+[data-theme="dark"] .seq-table th,[data-theme="dark"] .map-table th{background:#1E2416}
+[data-theme="dark"] .seq-table th,[data-theme="dark"] .seq-table td,[data-theme="dark"] .map-table th,[data-theme="dark"] .map-table td{border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .cmp-col,[data-theme="dark"] .quad .qcell{background:#14170F}
+[data-theme="dark"] .ctrl input[type=number]{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .val-chip{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .note-flag{background:#241a17;color:var(--forest)}
+[data-theme="dark"] .fwd{background:#161d24;color:var(--forest)}
+[data-theme="dark"] .fwd a{color:var(--forest)}
+[data-theme="dark"] .fb.ok{background:#1d2a15;color:#cfe4bd}
+[data-theme="dark"] .fb.no{background:#2c1a16;color:#e8c3b9}
+[data-theme="dark"] .katex{color:var(--forest)}
+
+/* feature toggles */
+.feat-row{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0}
+.feat-btn{font-family:var(--fb);font-size:.8rem;background:var(--white);border:1.5px solid var(--sage-l);border-radius:18px;padding:6px 13px;cursor:pointer;color:var(--forest);transition:background .15s}
+.feat-btn:hover{background:var(--sage-m)}
+.feat-btn.on{background:var(--forest);color:var(--white);border-color:var(--forest)}
+.notation-grid{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;margin:12px 0;align-items:start}
+.notation-grid .nsym{font-family:var(--fb);font-weight:700;color:var(--forest);background:var(--sage-m);border:1.5px solid var(--sage-l);border-radius:9px;padding:6px 12px;white-space:nowrap;text-align:center}
+.notation-grid .nmean{font-family:var(--fp);font-size:.97rem;color:var(--forest);line-height:1.6;padding-top:6px}
+[data-theme="dark"] .feat-btn{background:#14170F;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .feat-btn:hover{background:#2A3421}
+[data-theme="dark"] .feat-btn.on{background:var(--sage);color:#0E1108;border-color:var(--sage)}
+[data-theme="dark"] .notation-grid .nsym{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .notation-grid .nmean{color:var(--forest)}
+@media(max-width:640px){ .notation-grid{grid-template-columns:1fr} }
+
+/* justification table */
+.just-table{width:100%;border-collapse:collapse;font-family:var(--fp);font-size:.95rem;margin:12px 0;background:var(--white)}
+.just-table th,.just-table td{border:1.5px solid var(--sage-l);padding:9px 12px;color:var(--forest);vertical-align:middle;line-height:1.55}
+.just-table th{background:var(--sage-m);font-family:var(--fb);font-weight:700;font-size:.82rem;text-align:left}
+.just-table td.eq{font-family:var(--fb);text-align:center;white-space:nowrap}
+.just-table td.why{font-size:.9rem;color:var(--slate)}
+.just-table tr.hl td{background:var(--sage-m)}
+[data-theme="dark"] .just-table{background:#14170F}
+[data-theme="dark"] .just-table th{background:#1E2416}
+[data-theme="dark"] .just-table th,[data-theme="dark"] .just-table td{border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .just-table td.why{color:var(--slate)}
+[data-theme="dark"] .just-table tr.hl td{background:#2A3421}
+.numline{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:10px 6px}
+[data-theme="dark"] .numline{background:#14170F;border-color:#3A4A2E}
+
+/* system method cards */
+.meth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.meth-card{border:2px solid var(--sage-l);border-radius:14px;padding:14px 16px;background:var(--white)}
+.meth-card h4{font-family:var(--fh);font-size:1rem;color:var(--forest);margin-bottom:7px}
+.meth-card p{font-family:var(--fp);font-size:.9rem;line-height:1.55;margin-bottom:6px}
+.meth-card p:last-child{margin-bottom:0}
+.meth-card .best{font-family:var(--fb);font-size:.76rem;font-weight:700;color:var(--white);background:var(--sage);border-radius:6px;padding:2px 8px;display:inline-block;margin-bottom:6px}
+[data-theme="dark"] .meth-card{background:#14170F;border-color:#3A4A2E}
+@media(max-width:820px){ .meth-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body data-theme="light">
+<div class="lws-backdrop"></div>
+<div class="app">
+
+<aside class="side">
+  <div class="brand">
+    <div class="brand-mark">L</div>
+    <div class="brand-name">learningwithsruthi <small>nc math 1 notes</small></div>
+  </div>
+  <div class="ws-switch">
+    <div class="ws-switch-btn">
+      <div class="ico">5</div>
+      <div class="meta">
+        <div class="lbl">Systems of Equations</div>
+        <div class="sub">Unit 5 of 8 &middot; NC Math 1</div>
+      </div>
+    </div>
+  </div>
+  <div class="side-section-label">Start here</div>
+  <div class="side-nav">
+    <a class="nav-item" href="unit-0-eighth-grade-recap.html"><span class="num">0.</span><span class="t">8th Grade Recap</span></a>
+  </div>
+  <div class="side-section-label">Units</div>
+  <div class="side-nav">
+    <a class="nav-item" href="unit-1-sequences.html"><span class="num">1.</span><span class="t">Sequences</span></a>
+    <a class="nav-item" href="unit-2-linear-exponential.html"><span class="num">2.</span><span class="t">Linear &amp; Exponential Functions</span></a>
+    <a class="nav-item" href="unit-3-features-of-functions.html"><span class="num">3.</span><span class="t">Features of Functions</span></a>
+    <a class="nav-item" href="unit-4-equations-inequalities.html"><span class="num">4.</span><span class="t">Equations &amp; Inequalities</span></a>
+    <a class="nav-item active" href="unit-5-systems.html"><span class="num">5.</span><span class="t">Systems of Equations</span></a>
+    <a class="nav-item locked"><span class="num">6.</span><span class="t">Quadratic Functions</span></a>
+    <a class="nav-item locked"><span class="num">7.</span><span class="t">Structures of Expressions</span></a>
+    <a class="nav-item locked"><span class="num">8.</span><span class="t">Modeling Data</span></a>
+  </div>
+</aside>
+
+<header class="top">
+  <div class="bread">
+    <span class="bread-trail">NC Math 1 &middot; Unit 5 of 8</span>
+    <span class="bread-now">Systems of Equations</span>
+  </div>
+  <div class="search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg>
+    <input placeholder="Search topics, lessons, questions...">
+  </div>
+  <div class="top-actions">
+    <button class="btn-icon" id="themeBtn" title="Toggle theme" onclick="toggleLwsTheme()">&#9790;</button>
+  </div>
+</header>
+
+<main class="main">
+
+<div class="pg-head">
+  <div class="topic-badge">Systems &middot; NC Math 1, Unit 5</div>
+  <h1>Systems of Equations</h1>
+  <p class="sub">Two conditions at once &mdash; and a surprisingly beautiful reason why elimination is allowed to work.</p>
+</div>
+
+<!-- ======== MAP ======== -->
+<div class="card">
+  <h2 class="card-title"><span class="num">Map</span>What this unit covers</h2>
+  <p class="body-text">Unit 4 ended with the idea that two graphs crossing tells you where two expressions agree. A <strong>system</strong> makes that the whole question: find the values satisfying both equations at the same time.</p>
+  <div class="topics-list">
+    <div class="row current"><span class="rn">L1</span><span>What a system is, and what solving means</span></div>
+    <div class="row current"><span class="rn">L2</span><span>Why elimination works</span></div>
+    <div class="row current"><span class="rn">L3</span><span>Three methods, and choosing between them</span></div>
+    <div class="row current"><span class="rn">L4</span><span>None, one, or infinitely many</span></div>
+    <div class="row current"><span class="rn">L5</span><span>Writing a system from a context</span></div>
+    <div class="row current"><span class="rn">L6</span><span>Systems of inequalities</span></div>
+  </div>
+  <div class="highlight-box" style="margin-top:16px">
+    <p class="body-text" style="margin:0"><strong>The one genuinely new idea:</strong> NC asks you to <em>explain why</em> elimination is legal, not just perform it. The answer has a geometric picture that makes the whole method obvious, and it is in L2.</p>
+  </div>
+</div>
+
+<!-- ======== L1: WHAT A SYSTEM IS ======== -->
+<div class="card" id="sec-what">
+  <h2 class="card-title"><span class="num">L1</span>What a system is</h2>
+  <p class="body-text">A <strong>system</strong> of linear equations is two or more equations that must hold simultaneously. A <strong>solution</strong> is an ordered pair making <em>every</em> equation true &mdash; not just one of them.</p>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0">In Unit 4 you learned that a line <em>is</em> the set of all solutions to its equation. So the solutions common to two equations are the points common to two lines &mdash; which is exactly where they cross.</p>
+  </div>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">The simplest possible system.</span> Two numbers add to 10 and differ by 4. What are they?</div>
+    <div class="step">$x + y = 10$ &nbsp;and&nbsp; $x - y = 4$</div>
+    <div class="step"><span class="step-label">Add the two equations:</span> the $y$ terms cancel, leaving $2x = 14$, so $x = 7$.</div>
+    <div class="step"><span class="step-label">Substitute back:</span> $7 + y = 10$, so $y = 3$.</div>
+    <div class="step"><span class="step-label">Check both:</span> $7 + 3 = 10$ &nbsp;and&nbsp; $7 - 3 = 4$. Both true, so $(7, 3)$ is the solution.</div>
+  </div>
+
+  <div class="note-flag">
+    <span class="flag-label">Checking means checking both</span>
+    A value that satisfies one equation and not the other is not a solution. Every check in this unit has to run through <em>every</em> equation in the system.
+  </div>
+</div>
+
+<!-- ======== L2: WHY ELIMINATION WORKS ======== -->
+<div class="card" id="sec-why">
+  <h2 class="card-title"><span class="num">L2</span>Why elimination works</h2>
+  <p class="body-text">Elimination looks like a trick: add two equations together and a variable vanishes. NC asks you to justify it, and the justification rests on two facts.</p>
+
+  <div class="term-grid">
+    <div class="term-sym">Fact 1</div><div class="term-def">Multiplying an equation by a nonzero constant does not change its solutions. Graphically it is <em>the same line</em>, just written differently.</div>
+    <div class="term-sym">Fact 2</div><div class="term-def">Adding two equations produces a third equation whose graph passes through <em>their intersection point</em>.</div>
+  </div>
+
+  <p class="body-text">Fact 2 is the interesting one. If a point satisfies both originals, then adding the left sides and adding the right sides keeps it true &mdash; so the new line must pass through that point too. Play with it:</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Combine the two equations however you like &mdash; the new line always passes through the same point</div>
+    <div class="ctrl-row">
+      <div class="ctrl"><label>$a \times$ (first)</label><input type="range" id="combA" min="-3" max="3" step="1" value="1"><span class="val-chip" id="combAVal">1</span></div>
+      <div class="ctrl"><label>$b \times$ (second)</label><input type="range" id="combB" min="-3" max="3" step="1" value="1"><span class="val-chip" id="combBVal">1</span></div>
+    </div>
+    <div class="btn-row">
+      <button class="site-btn secondary" id="combV">Make it vertical</button>
+      <button class="site-btn secondary" id="combH">Make it horizontal</button>
+    </div>
+    <div class="stage"><svg id="combSvg" viewBox="0 0 640 330" role="img" aria-label="Combining two equations of a system"></svg></div>
+    <div class="readout" id="combOut"></div>
+  </div>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0"><strong>Now the method makes sense.</strong> Elimination is not a trick for making letters disappear. It is a deliberate search for the combination that produces a <em>vertical</em> line ($x = $ something) or a <em>horizontal</em> one ($y = $ something) through the intersection &mdash; because reading a coordinate off those is trivial.</p>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Which student wrote an equivalent system?</strong> The original is $x - 2y = 4$ and $3x + y = 9$. Four students each replaced one equation:<br>
+      Brenda: $x - 2y = 4$, &nbsp;$6x + 2y = 9$<br>
+      Evan: $x - 2y = 4$, &nbsp;$6x - 2y = 18$<br>
+      Kevon: $-3x + 6y = 4$, &nbsp;$3x + y = 9$<br>
+      Brie: $\frac{1}{2}x - y = 2$, &nbsp;$3x + y = 9$</div>
+    <button class="show-ans-btn" onclick="toggleAns('p1')">Show answer</button>
+    <div class="a" id="p1">
+      <strong>Brie.</strong> Her first equation is exactly $\frac{1}{2}$ times $x - 2y = 4$, and multiplying an equation by a nonzero constant preserves its solutions.<br><br>
+      <strong>Brenda</strong> doubled the left side of the second equation but not the right &mdash; $2(3x + y)$ is $6x + 2y = 18$, not 9.<br>
+      <strong>Evan</strong> wrote $6x - 2y = 18$, which is not any multiple of either original equation.<br>
+      <strong>Kevon</strong> multiplied the left side of the first by $-3$ but left the right side as 4; it should have become $-12$.<br><br>
+      <em>The pattern in every wrong answer: the constant was applied to one side only. Multiplying an equation means multiplying <strong>everything</strong>.</em>
+    </div>
+  </div>
+</div>
+
+<!-- ======== L3: THREE METHODS ======== -->
+<div class="card" id="sec-methods">
+  <h2 class="card-title"><span class="num">L3</span>Three methods, and when each is easiest</h2>
+  <p class="body-text">NC is explicit that you are not required to use any particular method &mdash; you choose, and you justify the choice. Here is when each one is the least work.</p>
+
+  <div class="meth-grid">
+    <div class="meth-card">
+      <span class="best">Best when</span>
+      <h4>Graphing</h4>
+      <p>you want to <em>see</em> the situation, or an approximate answer is enough</p>
+      <p><strong>How:</strong> graph both lines, read the crossing point.</p>
+      <p><strong>Weakness:</strong> awkward when the solution is not at neat coordinates.</p>
+    </div>
+    <div class="meth-card">
+      <span class="best">Best when</span>
+      <h4>Substitution</h4>
+      <p>one equation already has a variable alone, or is easy to isolate</p>
+      <p><strong>How:</strong> solve one equation for one variable, put that expression into the other.</p>
+      <p><strong>Weakness:</strong> creates fractions when no coefficient is 1.</p>
+    </div>
+    <div class="meth-card">
+      <span class="best">Best when</span>
+      <h4>Elimination</h4>
+      <p>both equations are in the form $ax + by = c$</p>
+      <p><strong>How:</strong> scale one or both equations so a variable cancels when you add.</p>
+      <p><strong>Weakness:</strong> needs a scaling step when coefficients do not already match.</p>
+    </div>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">The same system solved three ways</div>
+    <div class="pick-row">
+      <button class="pick-btn active" data-sm="graph">Graphing</button>
+      <button class="pick-btn" data-sm="sub">Substitution</button>
+      <button class="pick-btn" data-sm="elim">Elimination</button>
+    </div>
+    <div id="smWrap"></div>
+    <div class="readout" id="smOut"></div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Restaurant specials.</strong> On Thursday the restaurant took \$467 for 21 vegetarian and 40 chicken specials. On Friday it took \$484 for 28 vegetarian and 36 chicken. What does each special cost?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p2')">Show answer</button>
+    <div class="a" id="p2">
+      Let $v$ and $c$ be the two prices.<br>
+      $21v + 40c = 467$ &nbsp;and&nbsp; $28v + 36c = 484$<br><br>
+      Neither coefficient is 1, so elimination beats substitution here. Multiply the first by 4 and the second by 3 to match the $v$ terms:<br>
+      $84v + 160c = 1868$<br>
+      $84v + 108c = 1452$<br>
+      Subtract: $52c = 416$, so $c = 8$.<br>
+      Then $21v + 320 = 467$, giving $21v = 147$ and $v = 7$.<br><br>
+      <strong>Vegetarian \$7, chicken \$8.</strong> Check Friday: $28(7) + 36(8) = 196 + 288 = 484$. Correct.
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Trading cards.</strong> José had 4 times as many cards as Philippe. After José gave away 50 and Philippe gave away 5, they had equal numbers. How many did each start with?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p3')">Show answer</button>
+    <div class="a" id="p3">
+      $j = 4p$ &nbsp;and&nbsp; $j - 50 = p - 5$<br><br>
+      The first equation already has $j$ alone, so substitution is the obvious choice:<br>
+      $4p - 50 = p - 5$<br>
+      $3p = 45$, so $p = 15$ and $j = 60$.<br><br>
+      Check: $60 - 50 = 10$ and $15 - 5 = 10$. Equal, as required.
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Math club.</strong> 60 candy bars and 110 drinks sell for \$265. 120 candy bars and 90 drinks sell for \$270. What does one candy bar cost?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p4')">Show answer</button>
+    <div class="a" id="p4">
+      $60b + 110d = 265$ &nbsp;and&nbsp; $120b + 90d = 270$<br><br>
+      Double the first equation so the bar terms match: $120b + 220d = 530$.<br>
+      Subtract the second: $130d = 260$, so $d = 2$.<br>
+      Then $60b + 220 = 265$, giving $60b = 45$ and $b = 0.75$.<br><br>
+      <strong>Candy bars are \$0.75, drinks are \$2.00.</strong> Check: $120(0.75) + 90(2) = 90 + 180 = 270$. Correct.
+    </div>
+  </div>
+</div>
+
+<!-- ======== L4: HOW MANY SOLUTIONS ======== -->
+<div class="card" id="sec-howmany">
+  <h2 class="card-title"><span class="num">L4</span>None, one, or infinitely many</h2>
+  <p class="body-text">Two lines can relate in exactly three ways, and each has an algebraic fingerprint you will meet before you ever draw the picture.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Move the second line and watch the case change</div>
+    <div class="ctrl-row">
+      <div class="ctrl"><label>Line 2 slope</label><input type="range" id="hmM" min="-2" max="4" step="0.5" value="-1"><span class="val-chip" id="hmMVal">-1</span></div>
+      <div class="ctrl"><label>Line 2 intercept</label><input type="range" id="hmB" min="-4" max="10" step="1" value="7"><span class="val-chip" id="hmBVal">7</span></div>
+    </div>
+    <div class="stage"><svg id="hmSvg" viewBox="0 0 640 320" role="img" aria-label="Systems with none, one, or infinitely many solutions"></svg></div>
+    <div class="readout" id="hmOut"></div>
+  </div>
+
+  <table class="map-table">
+    <tr><th>Case</th><th>The lines</th><th>What the algebra does</th><th>Answer</th></tr>
+    <tr><td class="code">One solution</td><td>cross at a point</td><td>you get a value for each variable</td><td>a single ordered pair</td></tr>
+    <tr><td class="code">No solution</td><td>parallel, never meet</td><td>variables vanish, leaving something false like $0 = 6$</td><td>no solution</td></tr>
+    <tr><td class="code">Infinitely many</td><td>identical, lying on top of each other</td><td>variables vanish, leaving something true like $0 = 0$</td><td>every point on the line</td></tr>
+  </table>
+
+  <div class="note-flag">
+    <span class="flag-label">Vanishing variables are information, not failure</span>
+    When both variables disappear you have not made a mistake &mdash; you have found the answer. A false leftover means the lines are parallel; a true one means they are the same line. The trap is writing "no solution" for both.
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Solve</strong> $2x + 4y = 8$ and $x + 2y = 4$.</div>
+    <button class="show-ans-btn" onclick="toggleAns('p5')">Show answer</button>
+    <div class="a" id="p5">
+      Multiply the second by 2: $2x + 4y = 8$ &mdash; identical to the first.<br>
+      Subtracting gives $0 = 0$, which is true.<br>
+      <strong>Infinitely many solutions.</strong> The two equations describe the same line, so every point on $x + 2y = 4$ works.<br>
+      <em>The second equation added no new information. It was the first one in disguise.</em>
+    </div>
+  </div>
+</div>
+
+<!-- ======== L5: WRITING SYSTEMS ======== -->
+<div class="card" id="sec-writing">
+  <h2 class="card-title"><span class="num">L5</span>Writing a system from a context</h2>
+  <p class="body-text">Two unknowns need two independent facts. Finding both facts in the wording is usually the hard part.</p>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">1.</span> Name both unknowns with units. "Let $d$ be the number of dimes and $q$ the number of quarters."</div>
+    <div class="step"><span class="step-label">2.</span> Find the two <em>different</em> facts. Usually one counts things and the other totals a value, a cost, or a weight.</div>
+    <div class="step"><span class="step-label">3.</span> Write one equation per fact.</div>
+    <div class="step"><span class="step-label">4.</span> Solve, then check against the story.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Alexis has only dimes and quarters.</strong> They are worth \$5.80 in total, and she has 40 coins. How many of each?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p6')">Show answer</button>
+    <div class="a" id="p6">
+      Counting fact: $d + q = 40$.<br>
+      Value fact: $0.10d + 0.25q = 5.80$.<br><br>
+      Substituting $d = 40 - q$:<br>
+      $0.10(40 - q) + 0.25q = 5.80$<br>
+      $4 - 0.10q + 0.25q = 5.80$<br>
+      $0.15q = 1.80$, so $q = 12$ and $d = 28$.<br><br>
+      Check: 28 dimes is \$2.80, 12 quarters is \$3.00, totalling \$5.80 across 40 coins. Correct.<br>
+      <em>Notice the two equations measure different things &mdash; one counts coins, the other adds up money. Two facts about the same quantity would not have been enough.</em>
+    </div>
+  </div>
+
+  <div class="note-flag">
+    <span class="flag-label">The most common modelling error</span>
+    Writing the same fact twice. "She has 40 coins" and "there are 40 coins in total" are one fact, not two, and a system built from them has infinitely many solutions. If your equations turn out to be multiples of each other, go back to the wording &mdash; you have missed the second fact.
+  </div>
+</div>
+
+<!-- ======== L6: SYSTEMS OF INEQUALITIES ======== -->
+<div class="card" id="sec-inequalities">
+  <h2 class="card-title"><span class="num">L6</span>Systems of inequalities</h2>
+  <p class="body-text">Unit 4 ended with a single inequality shading half the plane. A <strong>system</strong> of inequalities shades several, and the solution is the region where <em>all</em> of them overlap.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">A fundraiser with three constraints &mdash; the dark region satisfies all of them</div>
+    <div class="stage"><svg id="feasSvg" viewBox="0 0 640 380" role="img" aria-label="Feasible region for a system of inequalities"></svg></div>
+    <div class="feat-row" id="feasBtns">
+      <button class="feat-btn on" data-con="0">Budget: $5h + 8j \le 1500$</button>
+      <button class="feat-btn on" data-con="1">At least 250 items: $h + j \ge 250$</button>
+      <button class="feat-btn on" data-con="2">Hats &ge; jackets: $h \ge j$</button>
+    </div>
+    <div class="readout" id="feasOut"></div>
+  </div>
+
+  <div class="worked-example">
+    <div class="step"><span class="step-label">The situation.</span> A club sells hats and jackets. The budget is \$1500, they want at least 250 items, and they must order at least as many hats as jackets. Hats cost \$5, jackets \$8.</div>
+    <div class="step"><span class="step-label">Budget:</span> $5h + 8j \le 1500$</div>
+    <div class="step"><span class="step-label">Quantity:</span> $h + j \ge 250$</div>
+    <div class="step"><span class="step-label">Ratio:</span> $h \ge j$</div>
+    <div class="step"><span class="step-label">Hidden constraints:</span> $h \ge 0$ and $j \ge 0$. You cannot order a negative number of hats, and forgetting to say so is a common omission.</div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Is 125 hats and 125 jackets a workable order?</strong></div>
+    <button class="show-ans-btn" onclick="toggleAns('p7')">Show answer</button>
+    <div class="a" id="p7">
+      Quantity: $125 + 125 = 250 \ge 250$. Fine.<br>
+      Ratio: $125 \ge 125$. Fine.<br>
+      Budget: $5(125) + 8(125) = 625 + 1000 = \$1625$, which is <strong>over</strong> the \$1500 budget.<br><br>
+      So no &mdash; it fails one constraint, and failing one is enough. A point must satisfy <em>every</em> inequality to be in the solution region.<br>
+      <em>Try 167 hats and 83 jackets instead: 250 items, hats outnumber jackets, and the cost is \$1499.</em>
+    </div>
+  </div>
+
+  <div class="note-flag">
+    <span class="flag-label">A note on what comes next</span>
+    Finding the <em>best</em> point in a feasible region &mdash; cheapest, most profitable &mdash; is called linear programming. NC states explicitly that it is <strong>not</strong> expected in Math 1. Here you only need to describe the region and test whether a point is in it.
+  </div>
+</div>
+
+<!-- ======== QUICK REVIEW ======== -->
+<div class="card">
+  <h2 class="card-title"><span class="num">&#10003;</span>Quick review</h2>
+  <div class="term-grid">
+    <div class="term-sym">System</div><div class="term-def">two or more equations that must all hold at once</div>
+    <div class="term-sym">Solution</div><div class="term-def">an ordered pair making <em>every</em> equation true; graphically, the intersection</div>
+    <div class="term-sym">Why elimination works</div><div class="term-def">scaling an equation keeps the same line; adding two equations gives a line through their intersection. Elimination hunts for the combination that is vertical or horizontal.</div>
+    <div class="term-sym">Substitution</div><div class="term-def">best when a variable is already isolated or easy to isolate</div>
+    <div class="term-sym">Elimination</div><div class="term-def">best when both equations are in $ax + by = c$ form</div>
+    <div class="term-sym">No solution</div><div class="term-def">parallel lines; the algebra leaves something false like $0 = 6$</div>
+    <div class="term-sym">Infinitely many</div><div class="term-def">the same line twice; the algebra leaves something true like $0 = 0$</div>
+    <div class="term-sym">Two unknowns</div><div class="term-def">need two <em>different</em> facts; the same fact written twice is not a system</div>
+    <div class="term-sym">Feasible region</div><div class="term-def">where every inequality in a system overlaps; failing one constraint is enough to be outside it</div>
+  </div>
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0"><strong>If you remember one thing:</strong> a solution has to survive every equation. Whichever method you pick, the final step is substituting back into <em>both</em> originals &mdash; and for a word problem, checking it against the story as well.</p>
+  </div>
+  <div class="btn-row" style="margin-top:16px">
+    <a class="site-btn secondary" href="unit-4-equations-inequalities.html" style="text-decoration:none;display:inline-block">&larr; Unit 4</a>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+function toggleAns(id){ const a=document.getElementById(id); a.classList.toggle('show'); }
+window.toggleAns=toggleAns;
+function mathify(el){ if(window.renderMathInElement&&el){ try{ renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]}); }catch(e){} } }
+function fmt(x){ if(!isFinite(x)) return '?'; if(Number.isInteger(x)) return x.toLocaleString('en-US'); return (Math.round(x*1000)/1000).toString(); }
+function toggleLwsTheme(){
+  const cur=document.body.dataset.theme||'light', next=cur==='dark'?'light':'dark';
+  document.body.dataset.theme=next;
+  try{ localStorage.setItem('lws-theme',next); }catch(e){}
+  const b=document.getElementById('themeBtn'); if(b) b.innerHTML=next==='dark'?'&#9728;':'&#9790;';
+}
+window.toggleLwsTheme=toggleLwsTheme;
+try{ if(localStorage.getItem('lws-theme')==='dark'){ document.body.dataset.theme='dark'; const b=document.getElementById('themeBtn'); if(b) b.innerHTML='&#9728;'; } }catch(e){}
+
+(function setupSearch(){
+  const input=document.querySelector('.search input'); if(!input) return;
+  const cards=Array.from(document.querySelectorAll('.main .card'));
+  const pgHead=document.querySelector('.main .pg-head'); let em=null;
+  input.addEventListener('input',e=>{
+    const q=e.target.value.toLowerCase().trim(); let n=0;
+    cards.forEach(c=>{ if(!q){c.style.display='';n++;return;} const hit=c.textContent.toLowerCase().includes(q); c.style.display=hit?'':'none'; if(hit)n++; });
+    if(pgHead) pgHead.style.display=q?'none':'';
+    if(q&&n===0){ if(!em){ em=document.createElement('div'); em.className='card'; em.style.textAlign='center';
+      em.innerHTML='<div class="body-text" style="color:var(--slate)">No sections match that search.</div>'; document.querySelector('.main').appendChild(em);} em.style.display=''; }
+    else if(em){ em.style.display='none'; }
+  });
+  input.addEventListener('keydown',e=>{ if(e.key==='Escape'){input.value='';input.dispatchEvent(new Event('input'));} });
+})();
+
+/* ============================================================ */
+/* ===== W1: combining equations of a system ================== */
+/* ============================================================ */
+(function combine(){
+  const svg=document.getElementById('combSvg'), out=document.getElementById('combOut');
+  const aEl=document.getElementById('combA'), bEl=document.getElementById('combB');
+  const aV=document.getElementById('combAVal'), bV=document.getElementById('combBVal');
+  if(!svg) return;
+  // System:  x + y = 10   and   x - y = 4   ->  solution (7, 3)
+  const E1={a:1,b:1,c:10}, E2={a:1,b:-1,c:4}, SOL=[7,3];
+
+  document.getElementById('combV').addEventListener('click',()=>{ aEl.value=1; bEl.value=1; draw(); });
+  document.getElementById('combH').addEventListener('click',()=>{ aEl.value=1; bEl.value=-1; draw(); });
+
+  function lineOn(eq,xMin,xMax){
+    // returns drawable endpoints, or null when the line is vertical
+    if(Math.abs(eq.b)<1e-9) return null;
+    return [[xMin,(eq.c-eq.a*xMin)/eq.b],[xMax,(eq.c-eq.a*xMax)/eq.b]];
+  }
+
+  function draw(){
+    const A=+aEl.value, B=+bEl.value;
+    aV.textContent=A; bV.textContent=B;
+    const C={a:A*E1.a+B*E2.a, b:A*E1.b+B*E2.b, c:A*E1.c+B*E2.c};
+
+    const L=56,R=600,T=22,B2=272, xMin=-2,xMax=14,yMin=-6,yMax=14;
+    const sx=x=>L+((x-xMin)/(xMax-xMin))*(R-L);
+    const sy=y=>B2-((y-yMin)/(yMax-yMin))*(B2-T);
+    const clampY=y=>Math.max(yMin,Math.min(yMax,y));
+    let s='';
+    for(let g=xMin;g<=xMax;g+=2) s+='<line x1="'+sx(g)+'" y1="'+T+'" x2="'+sx(g)+'" y2="'+B2+'" stroke="var(--sage-l)" stroke-width="0.6" opacity="0.55"/>';
+    for(let g=yMin;g<=yMax;g+=2) s+='<line x1="'+L+'" y1="'+sy(g)+'" x2="'+R+'" y2="'+sy(g)+'" stroke="var(--sage-l)" stroke-width="0.6" opacity="0.55"/>';
+    s+='<line x1="'+L+'" y1="'+sy(0)+'" x2="'+R+'" y2="'+sy(0)+'" stroke="var(--forest)" stroke-width="2"/>';
+    s+='<line x1="'+sx(0)+'" y1="'+T+'" x2="'+sx(0)+'" y2="'+B2+'" stroke="var(--forest)" stroke-width="2"/>';
+
+    const drawEq=(eq,col,w,dash)=>{
+      if(Math.abs(eq.b)<1e-9){
+        if(Math.abs(eq.a)<1e-9) return;           // 0 = c, nothing to draw
+        const xv=eq.c/eq.a;
+        if(xv<xMin||xv>xMax) return;
+        s+='<line x1="'+sx(xv)+'" y1="'+T+'" x2="'+sx(xv)+'" y2="'+B2+'" stroke="'+col+'" stroke-width="'+w+'"'+(dash?' stroke-dasharray="8 5"':'')+'/>';
+      } else {
+        const p=lineOn(eq,xMin,xMax);
+        s+='<line x1="'+sx(p[0][0])+'" y1="'+sy(clampY(p[0][1]))+'" x2="'+sx(p[1][0])+'" y2="'+sy(clampY(p[1][1]))+'" stroke="'+col+'" stroke-width="'+w+'"'+(dash?' stroke-dasharray="8 5"':'')+'/>';
+      }
+    };
+    drawEq(E1,'var(--arith)',2.4,false);
+    drawEq(E2,'var(--geo)',2.4,false);
+    const degenerate = Math.abs(C.a)<1e-9 && Math.abs(C.b)<1e-9;
+    if(!degenerate) drawEq(C,'var(--forest)',3,true);
+
+    s+='<circle cx="'+sx(SOL[0])+'" cy="'+sy(SOL[1])+'" r="8" fill="var(--good)" stroke="var(--white)" stroke-width="2"/>';
+    s+='<text x="'+(sx(SOL[0])+13)+'" y="'+(sy(SOL[1])-11)+'" font-family="Bitter,serif" font-size="13" font-weight="700" fill="var(--good)">(7, 3)</text>';
+    s+='<text x="'+(sx(11.5))+'" y="'+(sy(-1.5))+'" font-family="Dosis,sans-serif" font-size="12.5" fill="var(--arith)">x + y = 10</text>';
+    s+='<text x="'+(sx(11.5))+'" y="'+(sy(9.2))+'" font-family="Dosis,sans-serif" font-size="12.5" fill="var(--geo)">x - y = 4</text>';
+    s+='<text x="'+((L+R)/2)+'" y="312" text-anchor="middle" font-family="Dosis,sans-serif" font-size="13" fill="var(--slate)">the dashed line is your combination</text>';
+    svg.innerHTML=s;
+
+    const term=(k,txt)=>{
+      if(k===0) return '';
+      const sign = k>0 ? ' + ' : ' - ';
+      const mag = Math.abs(k)===1 ? '' : Math.abs(k);
+      return sign+mag+'('+txt+')';
+    };
+    let expr=(term(A,'x+y-10')+term(B,'x-y-4')).replace(/^ \+ /,'').replace(/^ - /,'-');
+    let msg='<strong>Your combination:</strong> $'+A+'(x + y) '+(B>=0?'+ '+B:'- '+Math.abs(B))+'(x - y) = '+A+'(10) '+(B>=0?'+ '+B:'- '+Math.abs(B))+'(4)$<br>';
+    if(degenerate){
+      msg+='Both coefficients came out zero, so the equation collapses to $0 = '+fmt(C.c)+'$. There is no line left to draw.<br>'
+         + (Math.abs(C.c)<1e-9 ? 'It reduced to $0 = 0$, which is true but says nothing.' : 'It reduced to a false statement, which happens when you subtract an equation from itself after scaling.');
+    } else {
+      // drop a coefficient of 1, and omit a term whose coefficient is 0
+      const lead=k=>Math.abs(k)===1?(k<0?'-':''):fmt(k);
+      const tail=(k,v)=>k===0?'':(k>0?' + ':' - ')+(Math.abs(k)===1?'':fmt(Math.abs(k)))+v;
+      const lhs=(C.a===0?'':lead(C.a)+'x')+(C.a===0?(C.b<0?'-':'')+(Math.abs(C.b)===1?'':fmt(Math.abs(C.b)))+'y':tail(C.b,'y'));
+      msg+='<strong>Which simplifies to:</strong> $'+lhs+' = '+fmt(C.c)+'$<br>';
+      const passes=Math.abs(C.a*SOL[0]+C.b*SOL[1]-C.c)<1e-9;
+      msg+='<strong>Does it pass through (7, 3)?</strong> Substituting gives $'+fmt(C.a*7+C.b*3)+'$, and the right side is $'+fmt(C.c)+'$. '
+        + (passes?'<strong>Yes.</strong>':'No.')+'<br><br>';
+      if(Math.abs(C.b)<1e-9) msg+='The $y$ terms cancelled, leaving a <strong>vertical</strong> line $x = '+fmt(C.c/C.a)+'$. That reads off the x-coordinate of the solution directly &mdash; this is elimination.';
+      else if(Math.abs(C.a)<1e-9) msg+='The $x$ terms cancelled, leaving a <strong>horizontal</strong> line $y = '+fmt(C.c/C.b)+'$. That reads off the y-coordinate directly &mdash; elimination again, aimed the other way.';
+      else msg+='A slanted line, and it still goes through the solution. Every combination does. Elimination is just choosing the multipliers that make one variable drop out.';
+    }
+    out.innerHTML=msg; mathify(out);
+  }
+  [aEl,bEl].forEach(e=>e.addEventListener('input',draw));
+  draw();
+})();
+
+/* ============================================================ */
+/* ===== W2: same system, three methods ======================= */
+/* ============================================================ */
+(function methods(){
+  const wrap=document.getElementById('smWrap'), out=document.getElementById('smOut');
+  if(!wrap) return;
+  // System: y = 2x + 1 and 3x + y = 11  ->  (2, 5)
+  const M={
+    graph:{ steps:[
+        ['Graph $y = 2x + 1$ and $3x + y = 11$.','Rewrite the second as $y = -3x + 11$ so both are easy to plot.'],
+        ['Read the crossing point.','They meet at $(2, 5)$.'],
+        ['Check in both originals.','$5 = 2(2)+1$ and $3(2)+5 = 11$. Both true.']],
+      note:'Fast and visual, but only exact because the answer landed on whole numbers. Had it been $(2.37, 5.74)$ you could only estimate.'},
+    sub:{ steps:[
+        ['The first equation already has $y$ alone.','That makes substitution the least work.'],
+        ['Replace $y$ in the second: $3x + (2x + 1) = 11$.','Only one variable left now.'],
+        ['$5x + 1 = 11$, so $5x = 10$ and $x = 2$.',''],
+        ['Back-substitute: $y = 2(2) + 1 = 5$.','Solution $(2, 5)$.']],
+      note:'Substitution shines exactly here, because one equation was already solved for a variable. No scaling, no fractions.'},
+    elim:{ steps:[
+        ['Put both in $ax + by = c$ form.','$-2x + y = 1$ and $3x + y = 11$.'],
+        ['The $y$ coefficients already match, so subtract.','$(3x + y) - (-2x + y) = 11 - 1$'],
+        ['$5x = 10$, so $x = 2$.','The $y$ terms cancelled, exactly as designed.'],
+        ['Back-substitute: $3(2) + y = 11$, so $y = 5$.','Solution $(2, 5)$.']],
+      note:'Elimination needed a rearrangement first, but then the matching $y$ coefficients made it very quick. Worth spotting before you start.'}
+  };
+  let cur='graph';
+  document.querySelectorAll('button[data-sm]').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('button[data-sm]').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active'); cur=b.dataset.sm; render();
+    });
+  });
+  function render(){
+    const m=M[cur];
+    let h='<table class="just-table"><tr><th style="width:52%">Step</th><th>Note</th></tr>';
+    m.steps.forEach(s=>{ h+='<tr><td>'+s[0]+'</td><td class="why">'+s[1]+'</td></tr>'; });
+    h+='</table>';
+    wrap.innerHTML=h; mathify(wrap);
+    out.innerHTML='<strong>All three give $(2, 5)$.</strong> '+m.note;
+    mathify(out);
+  }
+  render();
+})();
+
+/* ============================================================ */
+/* ===== W3: none, one, infinitely many ======================= */
+/* ============================================================ */
+(function howMany(){
+  const svg=document.getElementById('hmSvg'), out=document.getElementById('hmOut');
+  const mEl=document.getElementById('hmM'), bEl=document.getElementById('hmB');
+  const mV=document.getElementById('hmMVal'), bV=document.getElementById('hmBVal');
+  if(!svg) return;
+  const M1=2, B1=1;   // fixed line y = 2x + 1
+
+  function draw(){
+    const m=+mEl.value, b=+bEl.value; mV.textContent=m; bV.textContent=b;
+    const L=56,R=600,T=22,B2=262, xMin=-4,xMax=8,yMin=-6,yMax=14;
+    const sx=x=>L+((x-xMin)/(xMax-xMin))*(R-L);
+    const sy=y=>B2-((y-yMin)/(yMax-yMin))*(B2-T);
+    const cl=y=>Math.max(yMin,Math.min(yMax,y));
+    let s='';
+    for(let g=xMin;g<=xMax;g+=2) s+='<line x1="'+sx(g)+'" y1="'+T+'" x2="'+sx(g)+'" y2="'+B2+'" stroke="var(--sage-l)" stroke-width="0.6" opacity="0.55"/>';
+    for(let g=yMin;g<=yMax;g+=2) s+='<line x1="'+L+'" y1="'+sy(g)+'" x2="'+R+'" y2="'+sy(g)+'" stroke="var(--sage-l)" stroke-width="0.6" opacity="0.55"/>';
+    s+='<line x1="'+L+'" y1="'+sy(0)+'" x2="'+R+'" y2="'+sy(0)+'" stroke="var(--forest)" stroke-width="2"/>';
+    s+='<line x1="'+sx(0)+'" y1="'+T+'" x2="'+sx(0)+'" y2="'+B2+'" stroke="var(--forest)" stroke-width="2"/>';
+    const same = (m===M1 && b===B1);
+    s+='<line x1="'+sx(xMin)+'" y1="'+sy(cl(M1*xMin+B1))+'" x2="'+sx(xMax)+'" y2="'+sy(cl(M1*xMax+B1))+'" stroke="var(--arith)" stroke-width="'+(same?6:2.6)+'"/>';
+    s+='<line x1="'+sx(xMin)+'" y1="'+sy(cl(m*xMin+b))+'" x2="'+sx(xMax)+'" y2="'+sy(cl(m*xMax+b))+'" stroke="var(--geo)" stroke-width="2.6"'+(same?' stroke-dasharray="9 6"':'')+'/>';
+
+    let kind, msg;
+    if(m===M1 && b===B1){
+      kind='infinitely many';
+      msg='<strong>Infinitely many solutions.</strong> The two equations describe the <em>same line</em> &mdash; the dashed one lies exactly on top of the solid one.<br>'
+        + 'Algebraically the variables vanish and you are left with $0 = 0$, which is true but tells you nothing new. Every point on $y = 2x + 1$ is a solution.';
+    } else if(m===M1){
+      kind='none';
+      msg='<strong>No solution.</strong> Equal slopes and different intercepts means the lines are <em>parallel</em> &mdash; they never meet, so no pair satisfies both.<br>'
+        + 'Algebraically the variables vanish leaving something false, here $'+fmt(B1)+' = '+fmt(b)+'$.';
+    } else {
+      const x=(b-B1)/(M1-m), y=M1*x+B1;
+      kind='one';
+      if(x>=xMin&&x<=xMax&&y>=yMin&&y<=yMax){
+        s+='<circle cx="'+sx(x)+'" cy="'+sy(y)+'" r="7.5" fill="var(--good)" stroke="var(--white)" stroke-width="2"/>';
+        s+='<text x="'+(sx(x)+12)+'" y="'+(sy(y)-11)+'" font-family="Bitter,serif" font-size="12.5" font-weight="700" fill="var(--good)">('+fmt(Math.round(x*100)/100)+', '+fmt(Math.round(y*100)/100)+')</text>';
+      }
+      msg='<strong>Exactly one solution.</strong> Different slopes guarantee the lines cross, and they cross once.<br>'
+        + 'Setting them equal: $2x + 1 = '+fmt(m)+'x '+(b>=0?'+ '+fmt(b):'- '+fmt(Math.abs(b)))+'$ gives $x = '+fmt(Math.round(x*1000)/1000)+'$, and then $y = '+fmt(Math.round(y*1000)/1000)+'$.'
+        + (x>=xMin&&x<=xMax&&y>=yMin&&y<=yMax ? '' : ' The crossing point is outside the visible grid.');
+    }
+    svg.innerHTML=s;
+    out.innerHTML='<strong>Line 1 is fixed at $y = 2x + 1$.</strong> Line 2 is $y = '+fmt(m)+'x '+(b>=0?'+ '+fmt(b):'- '+fmt(Math.abs(b)))+'$.<br><br>'+msg
+      + '<br><br><em>Try matching the slope to 2 to see the other two cases: same intercept gives infinitely many, a different one gives none.</em>';
+    mathify(out);
+  }
+  [mEl,bEl].forEach(e=>e.addEventListener('input',draw));
+  draw();
+})();
+
+/* ============================================================ */
+/* ===== W4: feasible region ================================== */
+/* ============================================================ */
+(function feasible(){
+  const svg=document.getElementById('feasSvg'), out=document.getElementById('feasOut');
+  if(!svg) return;
+  const on=[true,true,true];
+  // constraints on (h, j):  5h+8j<=1500 ,  h+j>=250 ,  h>=j
+  const CONS=[
+    {test:(h,j)=>5*h+8*j<=1500, label:'5h + 8j \\le 1500'},
+    {test:(h,j)=>h+j>=250,      label:'h + j \\ge 250'},
+    {test:(h,j)=>h>=j,          label:'h \\ge j'}
+  ];
+  document.querySelectorAll('#feasBtns .feat-btn').forEach(b=>{
+    b.addEventListener('click',()=>{ const i=+b.dataset.con; on[i]=!on[i]; b.classList.toggle('on',on[i]); draw(); });
+  });
+  mathify(document.getElementById('feasBtns'));
+
+  function draw(){
+    const L=64,R=600,T=22,B=310, hMax=320, jMax=220;
+    const sx=h=>L+(h/hMax)*(R-L);
+    const sy=j=>B-(j/jMax)*(B-T);
+    let s='';
+    // shade the region cell by cell so overlapping constraints are unambiguous
+    const step=4;
+    for(let h=0;h<=hMax;h+=step){
+      for(let j=0;j<=jMax;j+=step){
+        let cnt=0, act=0;
+        CONS.forEach((c,i)=>{ if(on[i]){ act++; if(c.test(h,j)) cnt++; } });
+        if(act===0) continue;
+        if(cnt===act){
+          s+='<rect x="'+sx(h)+'" y="'+sy(j+step)+'" width="'+(sx(step)-sx(0))+'" height="'+(sy(0)-sy(step))+'" fill="var(--sage)" opacity="0.45"/>';
+        } else if(cnt>0){
+          s+='<rect x="'+sx(h)+'" y="'+sy(j+step)+'" width="'+(sx(step)-sx(0))+'" height="'+(sy(0)-sy(step))+'" fill="var(--sage)" opacity="0.10"/>';
+        }
+      }
+    }
+    for(let g=0;g<=hMax;g+=40) s+='<line x1="'+sx(g)+'" y1="'+T+'" x2="'+sx(g)+'" y2="'+B+'" stroke="var(--sage-l)" stroke-width="0.6" opacity="0.6"/>';
+    for(let g=0;g<=jMax;g+=40) s+='<line x1="'+L+'" y1="'+sy(g)+'" x2="'+R+'" y2="'+sy(g)+'" stroke="var(--sage-l)" stroke-width="0.6" opacity="0.6"/>';
+    s+='<line x1="'+L+'" y1="'+B+'" x2="'+R+'" y2="'+B+'" stroke="var(--forest)" stroke-width="2"/>';
+    s+='<line x1="'+L+'" y1="'+T+'" x2="'+L+'" y2="'+B+'" stroke="var(--forest)" stroke-width="2"/>';
+    // boundary lines
+    const seg=(f,col)=>{
+      const pts=[];
+      for(let h=0;h<=hMax;h+=2){ const j=f(h); if(j>=0&&j<=jMax) pts.push([sx(h),sy(j)]); }
+      if(pts.length>1) s+='<polyline points="'+pts.map(p=>p[0]+','+p[1]).join(' ')+'" fill="none" stroke="'+col+'" stroke-width="2.4"/>';
+    };
+    if(on[0]) seg(h=>(1500-5*h)/8,'var(--geo)');
+    if(on[1]) seg(h=>250-h,'var(--arith)');
+    if(on[2]) seg(h=>h,'var(--slate)');
+    // the two tested points
+    const pts=[[125,125,false],[167,83,true]];
+    pts.forEach(([h,j,good])=>{
+      s+='<circle cx="'+sx(h)+'" cy="'+sy(j)+'" r="7" fill="'+(good?'var(--good)':'var(--bad)')+'" stroke="var(--white)" stroke-width="1.8"/>';
+      s+='<text x="'+(sx(h)+11)+'" y="'+(sy(j)-9)+'" font-family="Bitter,serif" font-size="11.5" font-weight="700" fill="'+(good?'var(--good)':'var(--bad)')+'">('+h+', '+j+')</text>';
+    });
+    for(let g=0;g<=hMax;g+=80) s+='<text x="'+sx(g)+'" y="'+(B+18)+'" text-anchor="middle" font-family="Bitter,serif" font-size="11" fill="var(--slate)">'+g+'</text>';
+    for(let g=0;g<=jMax;g+=40) s+='<text x="'+(L-8)+'" y="'+(sy(g)+4)+'" text-anchor="end" font-family="Bitter,serif" font-size="11" fill="var(--slate)">'+g+'</text>';
+    s+='<text x="'+((L+R)/2)+'" y="'+(B+38)+'" text-anchor="middle" font-family="Dosis,sans-serif" font-size="13" fill="var(--slate)">hats</text>';
+    s+='<text x="'+(L-40)+'" y="'+((T+B)/2)+'" text-anchor="middle" font-family="Dosis,sans-serif" font-size="13" fill="var(--slate)" transform="rotate(-90 '+(L-40)+' '+((T+B)/2)+')">jackets</text>';
+    svg.innerHTML=s;
+
+    const active=CONS.filter((c,i)=>on[i]);
+    let count=0;
+    for(let h=0;h<=hMax;h++) for(let j=0;j<=jMax;j++) if(active.every(c=>c.test(h,j))) count++;
+    let msg='';
+    if(active.length===0){
+      msg='No constraints selected, so every order is allowed. Turn one on to start narrowing the region.';
+    } else {
+      msg='<strong>Active constraints:</strong> '+active.map(c=>'$'+c.label+'$').join(', ')+'<br>';
+      msg+='The <strong>darker</strong> region satisfies all of them at once; the pale region satisfies some but not all.<br><br>';
+      msg+='<strong>'+count.toLocaleString()+'</strong> whole-number orders work with these constraints.<br><br>';
+      const p1=active.every(c=>c.test(125,125)), p2=active.every(c=>c.test(167,83));
+      msg+='$(125, 125)$: '+(p1?'satisfies all active constraints':'<strong>fails</strong> at least one')
+        +' &nbsp;&middot;&nbsp; $(167, 83)$: '+(p2?'satisfies all active constraints':'<strong>fails</strong> at least one')+'.';
+      if(on[0]) msg+='<br><em>With the budget on, $(125,125)$ is excluded &mdash; it costs \$1625.</em>';
+    }
+    out.innerHTML=msg; mathify(out);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
