@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modeling Data (Integrated Math 1, Unit 8)</title>
+<meta name="description" content="Interactive Integrated Math 1 notes on modeling data: histograms and box plots, comparing center and spread, the effect of outliers, scatter plots and least squares lines, reading residual plots, interpolation versus extrapolation, and why association is not causation. By tutoringwithsruthi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Dosis:wght@400;500;600;700&family=Bitter:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+:root{
+  --white:#FFFFFF;--sage-l:#D0D6B3;--sage:#9BA06A;--slate:#525B76;--forest:#143109;
+  --bg:#f5f6ee;--sage-m:#e4e8cc;
+  --good:#5b8a3f;--bad:#b5503e;
+  --arith:#5b7fa8;--geo:#a86b5b;
+  --fh:'Young Serif',Georgia,serif;--fp:'Dosis','Trebuchet MS',Arial,sans-serif;--fb:'Bitter',Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:var(--fp);color:var(--forest);padding:18px 16px 52px;overflow-x:hidden}
+.page{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.pg-head{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:20px;padding:36px 28px;text-align:center}
+.pg-head .topic-badge{display:inline-block;font-family:var(--fb);font-weight:700;color:var(--slate);background:var(--white);border:1.5px solid var(--sage-l);padding:4px 14px;border-radius:20px;font-size:.82rem;margin-bottom:12px;letter-spacing:.04em}
+.pg-head h1{font-family:var(--fh);font-size:2.2rem;color:var(--forest);margin-bottom:6px}
+.pg-head .sub{font-family:var(--fp);color:var(--slate);font-size:1rem}
+.card{background:var(--white);border:2px solid var(--sage-l);border-radius:20px;padding:28px 26px;box-shadow:0 2px 12px rgba(20,49,9,0.06);scroll-margin-top:84px}
+.card-title{font-family:var(--fh);font-size:1.4rem;color:var(--forest);margin-bottom:14px}
+.card-title .num{font-family:var(--fb);font-weight:700;color:var(--sage);font-size:.9rem;background:var(--sage-m);border-radius:8px;padding:2px 10px;margin-right:8px;vertical-align:middle}
+.body-text{font-family:var(--fp);font-size:1.04rem;color:var(--forest);line-height:1.7;margin-bottom:12px}
+.body-text:last-child{margin-bottom:0}
+.highlight-box{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:14px;padding:18px 22px;margin:14px 0}
+.sub-title{font-family:var(--fh);font-size:1.1rem;color:var(--forest);margin:18px 0 8px}
+.term-grid{display:grid;grid-template-columns:180px 1fr;gap:8px 16px;margin:12px 0}
+.term-sym{font-family:var(--fb);font-weight:700;color:var(--sage);text-align:right;font-size:1rem}
+.term-def{font-family:var(--fp);font-size:.98rem;color:var(--forest);line-height:1.6}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.site-btn{font-family:var(--fp);font-weight:600;font-size:.92rem;border:none;border-radius:30px;padding:8px 18px;cursor:pointer;transition:background .18s,transform .18s;background:var(--sage);color:var(--white)}
+.site-btn:hover{background:var(--forest);transform:translateY(-1px)}
+.site-btn.secondary{background:var(--white);color:var(--forest);border:2px solid var(--sage-l)}
+.site-btn.secondary:hover{background:var(--sage-m)}
+.interactive-area{background:var(--sage-m);border:2px solid var(--sage-l);border-radius:16px;padding:20px 18px;margin:16px 0}
+.ia-label{font-family:var(--fb);font-size:1rem;color:var(--slate);margin-bottom:10px;text-align:center;font-weight:700}
+.practice-box{background:var(--white);border:2px dashed var(--sage-l);border-radius:14px;padding:16px 20px;margin:10px 0}
+.practice-box .q{font-family:var(--fp);font-size:1rem;color:var(--forest);margin-bottom:8px;line-height:1.6}
+.practice-box .a{font-family:var(--fp);font-size:.95rem;color:var(--forest);display:none;margin-top:8px;padding:12px 14px;background:var(--sage-m);border:1.5px solid var(--sage-l);border-radius:10px;line-height:1.65}
+.practice-box .a.show{display:block;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.show-ans-btn{font-family:var(--fp);font-weight:600;font-size:.85rem;border:2px solid var(--sage-l);border-radius:20px;padding:5px 14px;cursor:pointer;background:var(--white);color:var(--sage);transition:background .18s}
+.show-ans-btn:hover{background:var(--sage-m)}
+.worked-example{background:#f9faf4;border-left:4px solid var(--sage);border-radius:0 14px 14px 0;padding:16px 22px;margin:14px 0}
+.worked-example .step{font-family:var(--fp);font-size:.98rem;color:var(--forest);margin-bottom:6px;line-height:1.65}
+.worked-example .step-label{font-family:var(--fb);font-weight:700;color:var(--sage)}
+.topics-list{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 18px;margin-top:8px}
+.topics-list .row{font-family:var(--fp);color:var(--forest);display:flex;gap:10px;font-size:.98rem;padding:3px 0}
+.topics-list .row .rn{font-family:var(--fb);color:var(--sage);min-width:32px;font-weight:700}
+.topics-list .row.current{background:var(--sage-m);border-radius:8px;padding:3px 8px;font-weight:600}
+.pick-row{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:8px 0}
+.pick-btn{font-family:var(--fb);font-size:.82rem;background:var(--white);border:1.5px solid var(--sage-l);border-radius:18px;padding:5px 12px;cursor:pointer;color:var(--forest);transition:background .15s}
+.pick-btn:hover{background:var(--sage-m)}
+.pick-btn.active{background:var(--sage);color:var(--white);border-color:var(--sage)}
+.stage{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:14px;text-align:center}
+.stage svg{max-width:100%;height:auto;display:block;margin:0 auto}
+.readout{font-family:var(--fp);font-size:.95rem;color:var(--forest);background:var(--sage-m);border:1.5px solid var(--sage-l);border-radius:10px;padding:12px 16px;margin-top:10px;line-height:1.6;text-align:left}
+.readout strong{font-family:var(--fb)}
+.ctrl-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;margin:10px 0}
+.ctrl{display:flex;align-items:center;gap:8px;font-family:var(--fp);font-size:.9rem;color:var(--forest)}
+.ctrl label{font-family:var(--fb);font-weight:700;font-size:.82rem;color:var(--slate)}
+.ctrl input[type=range]{width:140px;accent-color:var(--sage)}
+.ctrl input[type=number]{width:76px;font-family:var(--fb);font-size:.92rem;padding:5px 8px;border:1.5px solid var(--sage-l);border-radius:8px;background:var(--white);color:var(--forest)}
+.val-chip{font-family:var(--fb);font-weight:700;background:var(--white);border:1.5px solid var(--sage-l);border-radius:10px;padding:2px 10px;min-width:38px;display:inline-block;text-align:center}
+.seq-table{width:100%;border-collapse:collapse;font-family:var(--fb);font-size:.9rem;margin:10px 0;background:var(--white)}
+.seq-table th,.seq-table td{border:1.5px solid var(--sage-l);padding:7px 9px;text-align:center;color:var(--forest)}
+.seq-table th{background:var(--sage-m);font-weight:700;font-size:.82rem}
+.seq-table td.diff{color:var(--arith);font-weight:700}
+.seq-table td.ratio{color:var(--geo);font-weight:700}
+.fb{font-family:var(--fp);font-size:.95rem;border-radius:10px;padding:11px 14px;margin-top:10px;line-height:1.6;display:none;text-align:left}
+.fb.show{display:block;animation:fadeIn .2s ease}
+.fb.ok{background:#eaf3e2;border:1.5px solid var(--good);color:#2f4d1c}
+.fb.no{background:#f7e9e6;border:1.5px solid var(--bad);color:#6d2d21}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.cmp-col{border:2px solid var(--sage-l);border-radius:14px;padding:16px 18px;background:var(--white)}
+.cmp-col.a{border-color:var(--arith)}
+.cmp-col.g{border-color:var(--geo)}
+.cmp-col h4{font-family:var(--fh);font-size:1.05rem;margin-bottom:8px;color:var(--forest)}
+.cmp-col.a h4{color:var(--arith)}
+.cmp-col.g h4{color:var(--geo)}
+.cmp-col p{font-family:var(--fp);font-size:.94rem;line-height:1.6;margin-bottom:7px}
+.cmp-col p:last-child{margin-bottom:0}
+.map-table{width:100%;border-collapse:collapse;font-family:var(--fp);font-size:.93rem;margin:12px 0;background:var(--white)}
+.map-table th,.map-table td{border:1.5px solid var(--sage-l);padding:9px 11px;text-align:left;color:var(--forest);vertical-align:top;line-height:1.55}
+.map-table th{background:var(--sage-m);font-family:var(--fb);font-weight:700;font-size:.82rem}
+.map-table td.code{font-family:var(--fb);font-weight:700;color:var(--sage);white-space:nowrap;font-size:.85rem}
+.map-table td.ctr{text-align:center}
+.note-flag{border-left:4px solid var(--bad);background:#fbf3f1;border-radius:0 12px 12px 0;padding:14px 18px;margin:14px 0;font-family:var(--fp);font-size:.97rem;line-height:1.65;color:var(--forest)}
+.note-flag .flag-label{font-family:var(--fb);font-weight:700;color:var(--bad);display:block;margin-bottom:4px}
+.fwd{border-left:4px solid var(--arith);background:#f2f6fa;border-radius:0 12px 12px 0;padding:14px 18px;margin:14px 0;font-family:var(--fp);font-size:.97rem;line-height:1.65;color:var(--forest)}
+.fwd .fwd-label{font-family:var(--fb);font-weight:700;color:var(--arith);display:block;margin-bottom:4px}
+.fwd a{color:var(--forest);font-weight:600}
+/* 2x2 grid */
+.quad{display:grid;grid-template-columns:auto 1fr 1fr;gap:8px;margin:14px 0;font-family:var(--fp)}
+.quad .qh{font-family:var(--fb);font-weight:700;font-size:.84rem;color:var(--slate);display:flex;align-items:center;justify-content:center;text-align:center;padding:6px}
+.quad .qcell{border:2px solid var(--sage-l);border-radius:12px;padding:12px 14px;background:var(--white);font-size:.92rem;line-height:1.55}
+.quad .qcell .qt{font-family:var(--fb);font-weight:700;color:var(--forest);display:block;margin-bottom:4px}
+.quad .qcell .qs{color:var(--slate);font-size:.86rem}
+.quad .qcell.lin{border-color:var(--arith)}
+.quad .qcell.exp{border-color:var(--geo)}
+
+/* ===== LWS SHELL (v2 UI) ===== */
+body{padding:0;background:var(--bg);overflow-x:auto;font-feature-settings:"ss01","cv11"}
+.page{max-width:none;margin:0;display:block}
+.lws-backdrop{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(1200px 600px at 8% -10%,rgba(228,232,204,.7) 0%,transparent 60%),
+             radial-gradient(900px 500px at 110% 0%,rgba(208,214,179,.5) 0%,transparent 55%),
+             radial-gradient(800px 400px at 50% 120%,rgba(228,232,204,.6) 0%,transparent 55%),
+             var(--bg)}
+.app{position:relative;z-index:1;display:grid;grid-template-columns:264px 1fr;grid-template-rows:64px 1fr;grid-template-areas:"side top" "side main";min-height:100vh}
+.side{grid-area:side;padding:16px 14px 14px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:14px;background:rgba(255,255,255,0.62);backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);border-right:1px solid var(--sage-l);overflow-y:auto;box-shadow:0 1px 0 rgba(255,255,255,0.9) inset}
+.top{grid-area:top;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(255,255,255,0.62);backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);border-bottom:1px solid var(--sage-l);position:sticky;top:0;z-index:15}
+.main{grid-area:main;padding:24px 28px 56px;max-width:1320px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.brand{display:flex;align-items:center;gap:10px;padding:8px 12px}
+.brand-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--sage),var(--forest));color:#fff;display:grid;place-items:center;font-family:var(--fh);font-size:1.1rem;line-height:1;box-shadow:0 6px 20px -6px rgba(20,49,9,0.35)}
+.brand-name{font-family:var(--fh);color:var(--forest);font-size:1.05rem;line-height:1.05}
+.brand-name small{display:block;font-family:var(--fb);font-style:italic;color:#7C8172;font-size:.7rem;margin-top:3px}
+.ws-switch{margin:0 4px}
+.ws-switch-btn{width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.62);border:1px solid rgba(255,255,255,0.55);border-radius:12px;backdrop-filter:blur(14px);text-align:left;transition:background .15s}
+.ws-switch-btn .ico{width:30px;height:30px;border-radius:8px;background:var(--sage-m);color:var(--forest);display:grid;place-items:center;flex-shrink:0;font-family:var(--fb);font-weight:700;font-size:.78rem}
+.ws-switch-btn .meta{flex:1;min-width:0}
+.ws-switch-btn .lbl{font-family:var(--fh);color:var(--forest);font-size:.95rem;line-height:1.1}
+.ws-switch-btn .sub{font-family:var(--fb);color:#7C8172;font-size:.68rem;margin-top:3px}
+.side-section-label{font-family:var(--fb);font-size:.66rem;letter-spacing:.14em;color:#7C8172;text-transform:uppercase;padding:14px 12px 4px}
+.side-nav{display:flex;flex-direction:column;gap:1px;padding:0 4px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;cursor:pointer;text-decoration:none;color:var(--forest);transition:background .15s;font-family:var(--fp);font-size:.86rem;font-weight:500}
+.nav-item .num{font-family:var(--fb);color:var(--sage);font-weight:700;font-size:.78rem;min-width:30px}
+.nav-item .t{flex:1;color:var(--forest)}
+.nav-item:hover{background:var(--sage-m)}
+.nav-item.active{background:var(--white);box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 12px 40px -12px rgba(20,49,9,0.18),0 2px 8px rgba(20,49,9,0.06);border:1px solid var(--sage-l)}
+.nav-item.active .t{color:var(--forest);font-weight:700}
+.nav-item.locked{color:#a3a89a;cursor:not-allowed}
+.nav-item.locked:hover{background:transparent}
+.nav-item.locked .num,.nav-item.locked .t{color:#a3a89a}
+.bread{display:flex;flex-direction:column;gap:0;flex:0 0 auto;min-width:0}
+.bread-trail{font-family:var(--fp);color:var(--slate);font-size:.78rem}
+.bread-now{font-family:var(--fp);font-weight:700;color:var(--forest);font-size:1rem;line-height:1.1}
+.search{flex:1;max-width:520px;min-width:120px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.62);border:1px solid var(--sage-l);border-radius:99px;padding:8px 16px;color:var(--slate);backdrop-filter:blur(14px)}
+.search input{border:0;background:transparent;outline:none;flex:1;font-family:var(--fp);font-size:.9rem;color:var(--forest);min-width:0}
+.search svg{flex-shrink:0;color:var(--slate)}
+.top-actions{display:flex;align-items:center;gap:8px}
+.btn-icon{width:38px;height:38px;border-radius:50%;background:var(--white);border:1px solid var(--sage-l);color:var(--slate);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s;font-size:1rem;padding:0}
+.btn-icon:hover{background:var(--sage-m);color:var(--forest)}
+.pg-head{margin-top:0}
+@media(max-width:980px){
+  .app{grid-template-columns:1fr;grid-template-rows:auto auto 1fr;grid-template-areas:"side" "top" "main"}
+  .side{height:auto;position:relative;border-right:0;border-bottom:1px solid var(--sage-l);max-height:none}
+  .top{padding:10px 18px;flex-wrap:wrap}
+  .main{padding:16px 18px 48px}
+  .search{order:3;flex-basis:100%;max-width:none}
+  .cmp{grid-template-columns:1fr}
+  .topics-list{grid-template-columns:1fr}
+  .term-grid{grid-template-columns:1fr}
+  .term-sym{text-align:left}
+  .quad{grid-template-columns:1fr}
+  .quad .qh{justify-content:flex-start}
+}
+[data-theme="dark"]{
+  --white:#14170F; --sage-l:#2B3320; --sage:#A9B07A; --sage-m:#1E2416;
+  --slate:#AEB5C8; --forest:#E8EBDA; --bg:#0E1108;
+  --arith:#8fb4dd; --geo:#dda28f;
+}
+[data-theme="dark"] body{color:var(--forest)}
+[data-theme="dark"] .lws-backdrop{
+  background:radial-gradient(1200px 600px at 8% -10%,rgba(43,51,32,.7) 0%,transparent 60%),
+             radial-gradient(900px 500px at 110% 0%,rgba(30,36,22,.55) 0%,transparent 55%),
+             radial-gradient(800px 400px at 50% 120%,rgba(43,51,32,.7) 0%,transparent 55%),
+             var(--bg)
+}
+[data-theme="dark"] .side,[data-theme="dark"] .top{background:rgba(20,23,15,0.7);border-color:#2B3320}
+[data-theme="dark"] .ws-switch-btn,[data-theme="dark"] .search,[data-theme="dark"] .btn-icon{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .ws-switch-btn .lbl,[data-theme="dark"] .ws-switch-btn .ico{color:var(--forest)}
+[data-theme="dark"] .ws-switch-btn .ico{background:#2A3421}
+[data-theme="dark"] .nav-item,[data-theme="dark"] .nav-item .t{color:var(--forest)}
+[data-theme="dark"] .nav-item:hover{background:#2A3421}
+[data-theme="dark"] .nav-item.active{background:#2A3421;border-color:#3A4A2E}
+[data-theme="dark"] .btn-icon:hover{background:#2A3421;color:var(--forest)}
+[data-theme="dark"] .search input{color:var(--forest)}
+[data-theme="dark"] .search input::placeholder{color:#7e8775}
+[data-theme="dark"] .pg-head{background:#1E2416;border-color:#3A4A2E}
+[data-theme="dark"] .pg-head h1,[data-theme="dark"] .pg-head .sub,[data-theme="dark"] .pg-head .topic-badge{color:var(--forest)}
+[data-theme="dark"] .pg-head .topic-badge{background:#2A3421;border-color:#3A4A2E}
+[data-theme="dark"] .card{background:#14170F;border-color:#2B3320;color:var(--forest)}
+[data-theme="dark"] .card-title,[data-theme="dark"] .sub-title,[data-theme="dark"] .body-text,[data-theme="dark"] .term-def,[data-theme="dark"] .term-sym{color:var(--forest)}
+[data-theme="dark"] .card-title .num{background:#2A3421;color:var(--sage)}
+[data-theme="dark"] .highlight-box{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .interactive-area{background:#1E2416;border-color:#3A4A2E}
+[data-theme="dark"] .ia-label{color:var(--forest)}
+[data-theme="dark"] .practice-box{background:#14170F;border-color:#3A4A2E}
+[data-theme="dark"] .practice-box .q,[data-theme="dark"] .practice-box .a{color:var(--forest)}
+[data-theme="dark"] .practice-box .a{background:#1E2416;border-color:#3A4A2E}
+[data-theme="dark"] .show-ans-btn{background:#1E2416;color:var(--sage);border-color:#3A4A2E}
+[data-theme="dark"] .worked-example{background:#1A1F11;border-left-color:var(--sage);color:var(--forest)}
+[data-theme="dark"] .site-btn.secondary{background:#1E2416;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .topics-list .row.current{background:#2A3421}
+[data-theme="dark"] .pick-btn{background:#14170F;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .pick-btn:hover{background:#2A3421}
+[data-theme="dark"] .stage{background:#14170F;border-color:#3A4A2E}
+[data-theme="dark"] .readout{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .seq-table,[data-theme="dark"] .map-table{background:#14170F}
+[data-theme="dark"] .seq-table th,[data-theme="dark"] .map-table th{background:#1E2416}
+[data-theme="dark"] .seq-table th,[data-theme="dark"] .seq-table td,[data-theme="dark"] .map-table th,[data-theme="dark"] .map-table td{border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .cmp-col,[data-theme="dark"] .quad .qcell{background:#14170F}
+[data-theme="dark"] .ctrl input[type=number]{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .val-chip{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .note-flag{background:#241a17;color:var(--forest)}
+[data-theme="dark"] .fwd{background:#161d24;color:var(--forest)}
+[data-theme="dark"] .fwd a{color:var(--forest)}
+[data-theme="dark"] .fb.ok{background:#1d2a15;color:#cfe4bd}
+[data-theme="dark"] .fb.no{background:#2c1a16;color:#e8c3b9}
+[data-theme="dark"] .katex{color:var(--forest)}
+
+/* feature toggles */
+.feat-row{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0}
+.feat-btn{font-family:var(--fb);font-size:.8rem;background:var(--white);border:1.5px solid var(--sage-l);border-radius:18px;padding:6px 13px;cursor:pointer;color:var(--forest);transition:background .15s}
+.feat-btn:hover{background:var(--sage-m)}
+.feat-btn.on{background:var(--forest);color:var(--white);border-color:var(--forest)}
+.notation-grid{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;margin:12px 0;align-items:start}
+.notation-grid .nsym{font-family:var(--fb);font-weight:700;color:var(--forest);background:var(--sage-m);border:1.5px solid var(--sage-l);border-radius:9px;padding:6px 12px;white-space:nowrap;text-align:center}
+.notation-grid .nmean{font-family:var(--fp);font-size:.97rem;color:var(--forest);line-height:1.6;padding-top:6px}
+[data-theme="dark"] .feat-btn{background:#14170F;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .feat-btn:hover{background:#2A3421}
+[data-theme="dark"] .feat-btn.on{background:var(--sage);color:#0E1108;border-color:var(--sage)}
+[data-theme="dark"] .notation-grid .nsym{background:#1E2416;border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .notation-grid .nmean{color:var(--forest)}
+@media(max-width:640px){ .notation-grid{grid-template-columns:1fr} }
+
+/* justification table */
+.just-table{width:100%;border-collapse:collapse;font-family:var(--fp);font-size:.95rem;margin:12px 0;background:var(--white)}
+.just-table th,.just-table td{border:1.5px solid var(--sage-l);padding:9px 12px;color:var(--forest);vertical-align:middle;line-height:1.55}
+.just-table th{background:var(--sage-m);font-family:var(--fb);font-weight:700;font-size:.82rem;text-align:left}
+.just-table td.eq{font-family:var(--fb);text-align:center;white-space:nowrap}
+.just-table td.why{font-size:.9rem;color:var(--slate)}
+.just-table tr.hl td{background:var(--sage-m)}
+[data-theme="dark"] .just-table{background:#14170F}
+[data-theme="dark"] .just-table th{background:#1E2416}
+[data-theme="dark"] .just-table th,[data-theme="dark"] .just-table td{border-color:#3A4A2E;color:var(--forest)}
+[data-theme="dark"] .just-table td.why{color:var(--slate)}
+[data-theme="dark"] .just-table tr.hl td{background:#2A3421}
+.numline{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:10px 6px}
+[data-theme="dark"] .numline{background:#14170F;border-color:#3A4A2E}
+
+/* system method cards */
+.meth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.meth-card{border:2px solid var(--sage-l);border-radius:14px;padding:14px 16px;background:var(--white)}
+.meth-card h4{font-family:var(--fh);font-size:1rem;color:var(--forest);margin-bottom:7px}
+.meth-card p{font-family:var(--fp);font-size:.9rem;line-height:1.55;margin-bottom:6px}
+.meth-card p:last-child{margin-bottom:0}
+.meth-card .best{font-family:var(--fb);font-size:.76rem;font-weight:700;color:var(--white);background:var(--sage);border-radius:6px;padding:2px 8px;display:inline-block;margin-bottom:6px}
+[data-theme="dark"] .meth-card{background:#14170F;border-color:#3A4A2E}
+@media(max-width:820px){ .meth-grid{grid-template-columns:1fr} }
+
+.scope-box{border:2px dashed var(--slate);border-radius:14px;padding:16px 20px;margin:14px 0;background:var(--white)}
+.scope-box .sl{font-family:var(--fb);font-weight:700;color:var(--slate);display:block;margin-bottom:6px;letter-spacing:.03em;font-size:.8rem;text-transform:uppercase}
+.scope-box p{font-family:var(--fp);font-size:.97rem;line-height:1.65;color:var(--forest);margin-bottom:6px}
+.scope-box p:last-child{margin-bottom:0}
+[data-theme="dark"] .scope-box{background:#14170F;border-color:var(--slate)}
+[data-theme="dark"] .scope-box p{color:var(--forest)}
+
+.parts-svg{background:var(--white);border:1.5px solid var(--sage-l);border-radius:14px;padding:18px 12px}
+[data-theme="dark"] .parts-svg{background:#14170F;border-color:#3A4A2E}
+.part-btn{font-family:var(--fb);font-size:.8rem;background:var(--white);border:1.5px solid var(--sage-l);border-radius:18px;padding:6px 13px;cursor:pointer;color:var(--forest);transition:background .15s}
+.part-btn:hover{background:var(--sage-m)}
+.part-btn.on{background:var(--forest);color:var(--white);border-color:var(--forest)}
+[data-theme="dark"] .part-btn{background:#14170F;color:var(--forest);border-color:#3A4A2E}
+[data-theme="dark"] .part-btn.on{background:var(--sage);color:#0E1108;border-color:var(--sage)}
+</style>
+</head>
+<body data-theme="light">
+<div class="lws-backdrop"></div>
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="brand-mark">L</div><div class="brand-name">learningwithsruthi <small>nc math 1 notes</small></div></div>
+  <div class="ws-switch"><div class="ws-switch-btn"><div class="ico">8</div><div class="meta"><div class="lbl">Modeling Data</div><div class="sub">Unit 8 of 8 &middot; NC Math 1</div></div></div></div>
+  <div class="side-section-label">Start here</div>
+  <div class="side-nav"><a class="nav-item" href="unit-0-eighth-grade-recap.html"><span class="num">0.</span><span class="t">8th Grade Recap</span></a></div>
+  <div class="side-section-label">Units</div>
+  <div class="side-nav">
+    <a class="nav-item" href="unit-1-sequences.html"><span class="num">1.</span><span class="t">Sequences</span></a>
+    <a class="nav-item" href="unit-2-linear-exponential.html"><span class="num">2.</span><span class="t">Linear &amp; Exponential Functions</span></a>
+    <a class="nav-item" href="unit-3-features-of-functions.html"><span class="num">3.</span><span class="t">Features of Functions</span></a>
+    <a class="nav-item" href="unit-4-equations-inequalities.html"><span class="num">4.</span><span class="t">Equations &amp; Inequalities</span></a>
+    <a class="nav-item" href="unit-5-systems.html"><span class="num">5.</span><span class="t">Systems of Equations</span></a>
+    <a class="nav-item" href="unit-6-quadratics.html"><span class="num">6.</span><span class="t">Quadratic Functions</span></a>
+    <a class="nav-item" href="unit-7-structures.html"><span class="num">7.</span><span class="t">Structures of Expressions</span></a>
+    <a class="nav-item active" href="unit-8-modeling-data.html"><span class="num">8.</span><span class="t">Modeling Data</span></a>
+  </div>
+</aside>
+<header class="top">
+  <div class="bread"><span class="bread-trail">NC Math 1 &middot; Unit 8 of 8</span><span class="bread-now">Modeling Data</span></div>
+  <div class="search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg>
+    <input placeholder="Search topics, lessons, questions...">
+  </div>
+  <div class="top-actions"><button class="btn-icon" id="themeBtn" title="Toggle theme" onclick="toggleLwsTheme()">&#9790;</button></div>
+</header>
+
+<main class="main">
+<div class="pg-head">
+  <div class="topic-badge">Modeling Data &middot; NC Math 1, Unit 8</div>
+  <h1>Modeling Data</h1>
+  <p class="sub">Fitting functions to real measurements &mdash; and being honest about how much the fit is worth.</p>
+</div>
+
+<div class="card">
+  <h2 class="card-title"><span class="num">Map</span>What this unit covers</h2>
+  <p class="body-text">Every unit so far handed you a clean function. Real data is messy, and this unit is about choosing a model for it, judging whether the model fits, and saying carefully what it does and does not license you to claim.</p>
+  <div class="topics-list">
+    <div class="row current"><span class="rn">L1</span><span>One variable: shape, center, spread</span></div>
+    <div class="row current"><span class="rn">L2</span><span>What outliers do to each statistic</span></div>
+    <div class="row current"><span class="rn">L3</span><span>Scatter plots and the least squares line</span></div>
+    <div class="row current"><span class="rn">L4</span><span>Residuals, and whether a line was the right choice</span></div>
+    <div class="row current"><span class="rn">L5</span><span>Interpreting and using a linear model</span></div>
+    <div class="row current"><span class="rn">L6</span><span>Association is not causation</span></div>
+  </div>
+  <div class="highlight-box" style="margin-top:16px">
+    <p class="body-text" style="margin:0"><strong>The habit this unit builds:</strong> a model is a claim, and every claim needs a caveat. How well does it fit? Over what range? And does it justify saying one thing <em>caused</em> another? Almost always the answer to the last one is no.</p>
+  </div>
+</div>
+
+<div class="card" id="sec-onevar">
+  <h2 class="card-title"><span class="num">L1</span>One variable: shape, center, spread</h2>
+  <p class="body-text">Given a single list of measurements, describe it in three parts. Answering all three is what a complete description means.</p>
+  <div class="term-grid">
+    <div class="term-sym">Shape</div><div class="term-def">symmetric, skewed left, skewed right, or roughly uniform. Read it off a histogram.</div>
+    <div class="term-sym">Center</div><div class="term-def">mean or median &mdash; a typical value</div>
+    <div class="term-sym">Spread</div><div class="term-def">interquartile range or standard deviation &mdash; how tightly packed the values are</div>
+  </div>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin-bottom:6px"><strong>Shape decides which pair to quote.</strong></p>
+    <p class="body-text" style="margin-bottom:6px">Roughly symmetric with no outliers: use the <strong>mean and standard deviation</strong>.</p>
+    <p class="body-text" style="margin:0">Skewed, or containing outliers: use the <strong>median and IQR</strong>, because they are resistant to extreme values.</p>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">The same data as a histogram and a box plot</div>
+    <div class="pick-row">
+      <button class="pick-btn active" data-ds="0">Roughly symmetric</button>
+      <button class="pick-btn" data-ds="1">Skewed right</button>
+    </div>
+    <div class="stage"><svg id="dsSvg" viewBox="0 0 640 300" role="img" aria-label="Histogram and box plot of a data set"></svg></div>
+    <div class="readout" id="dsOut"></div>
+  </div>
+
+  <div class="note-flag">
+    <span class="flag-label">What a box plot hides</span>
+    A box plot shows five numbers and nothing else. Two very different distributions &mdash; one with a gap in the middle, one without &mdash; can produce identical box plots. When shape matters, look at a histogram.
+  </div>
+</div>
+
+<div class="card" id="sec-outliers">
+  <h2 class="card-title"><span class="num">L2</span>What an outlier does to each statistic</h2>
+  <p class="body-text">An <strong>outlier</strong> is a value sitting far from the rest. It does not affect every statistic equally, and knowing which ones it moves is the whole point of this standard.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Drag the last value away from the group and watch each statistic react</div>
+    <div class="ctrl-row">
+      <div class="ctrl"><label>last value</label><input type="range" id="olV" min="20" max="200" step="5" value="30"><span class="val-chip" id="olVVal">30</span></div>
+    </div>
+    <div class="stage"><svg id="olSvg" viewBox="0 0 640 200" role="img" aria-label="Effect of an outlier"></svg></div>
+    <div id="olTableWrap"></div>
+    <div class="readout" id="olOut"></div>
+  </div>
+
+  <div class="cmp">
+    <div class="cmp-col g">
+      <h4>Sensitive to outliers</h4>
+      <p><strong>Mean</strong> &mdash; every value contributes, so one extreme value drags it.</p>
+      <p><strong>Standard deviation</strong> &mdash; measures distance from the mean, so an outlier inflates it sharply.</p>
+      <p><strong>Range</strong> &mdash; defined by the extremes, so an outlier <em>is</em> the range.</p>
+    </div>
+    <div class="cmp-col a">
+      <h4>Resistant to outliers</h4>
+      <p><strong>Median</strong> &mdash; only the middle position matters, not how far the ends reach.</p>
+      <p><strong>IQR</strong> &mdash; built from the quartiles, ignoring the outer quarters entirely.</p>
+      <p>This is why skewed data gets described with the median and IQR.</p>
+    </div>
+  </div>
+
+  <div class="note-flag">
+    <span class="flag-label">Do not delete an outlier because it is inconvenient</span>
+    An outlier can be a recording error, or it can be the most interesting value in the set. Investigate before removing, and if you do remove one, say so. Quietly dropping data is how a model comes to look better than it is.
+  </div>
+</div>
+
+<div class="card" id="sec-scatter">
+  <h2 class="card-title"><span class="num">L3</span>Scatter plots and the least squares line</h2>
+  <p class="body-text">With two quantitative variables per individual, plot one against the other and describe what you see: <strong>direction</strong>, <strong>form</strong>, <strong>strength</strong>, and any <strong>outliers</strong> &mdash; the same four words from the 8th grade recap.</p>
+
+  <p class="body-text">When the form looks linear, technology fits a <strong>least squares regression line</strong>: the line making the total squared vertical distance to the points as small as possible.</p>
+
+  <div class="interactive-area">
+    <div class="ia-label">Two data sets, one fitted line each</div>
+    <div class="pick-row">
+      <button class="pick-btn active" data-sc="0">Roughly linear data</button>
+      <button class="pick-btn" data-sc="1">Curved data</button>
+    </div>
+    <div class="stage"><svg id="scSvg" viewBox="0 0 640 320" role="img" aria-label="Scatter plot with least squares line"></svg></div>
+    <div class="readout" id="scOut"></div>
+  </div>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0">A least squares line can be fitted to <em>any</em> scatter plot, including one with no linear pattern at all. Technology never refuses. Deciding whether the line deserves to be there is your job, and that is what residuals are for.</p>
+  </div>
+</div>
+
+<div class="card" id="sec-residuals">
+  <h2 class="card-title"><span class="num">L4</span>Residuals: was a line the right choice?</h2>
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0">A <strong>residual</strong> is what the model missed: $$\text{residual} = \text{actual} - \text{predicted}$$</p>
+  </div>
+  <p class="body-text">Positive means the model under-predicted; negative means it over-predicted. Plot the residuals against the input and the pattern &mdash; or lack of one &mdash; tells you whether the line was appropriate.</p>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin-bottom:6px"><strong>Randomly scattered around zero:</strong> a linear model is appropriate. The leftovers are just noise.</p>
+    <p class="body-text" style="margin:0"><strong>Any visible pattern, such as a curve:</strong> a linear model is <em>not</em> appropriate. The data has structure the line failed to capture.</p>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">The same two data sets, now as residual plots</div>
+    <div class="pick-row">
+      <button class="pick-btn active" data-rs="0">Roughly linear data</button>
+      <button class="pick-btn" data-rs="1">Curved data</button>
+    </div>
+    <div class="stage"><svg id="rsSvg" viewBox="0 0 640 300" role="img" aria-label="Residual plot"></svg></div>
+    <div id="rsTableWrap"></div>
+    <div class="readout" id="rsOut"></div>
+  </div>
+
+  <div class="note-flag">
+    <span class="flag-label">The residual plot is more honest than the scatter plot</span>
+    On the curved data, the fitted line looks passable at a glance &mdash; it rises through the middle of the cloud. The residual plot removes the overall trend and magnifies what is left, and the U-shape it exposes is unmistakable. Always look at the residuals before trusting a line.
+  </div>
+
+  <p class="body-text">When residuals reveal a curve, fit a different family instead. NC expects you to fit an <strong>exponential</strong> model with technology when the data calls for one &mdash; the same functions from Unit 2, now serving real measurements.</p>
+</div>
+
+<div class="card" id="sec-interpret">
+  <h2 class="card-title"><span class="num">L5</span>Using a linear model, carefully</h2>
+  <p class="body-text">Once a line fits, interpret its parts in context &mdash; the same job as Unit 2's parameters, now with data behind it.</p>
+  <div class="term-grid">
+    <div class="term-sym">Slope</div><div class="term-def">"for each additional unit of $x$, $y$ changes by about $m$" &mdash; stated with units, and hedged with "about"</div>
+    <div class="term-sym">Intercept</div><div class="term-def">the predicted $y$ when $x = 0$, which is sometimes meaningless in context. Saying so is a correct answer.</div>
+  </div>
+
+  <div class="highlight-box">
+    <p class="body-text" style="margin-bottom:6px"><strong>Interpolation:</strong> predicting inside the range of the data. Usually reasonable.</p>
+    <p class="body-text" style="margin:0"><strong>Extrapolation:</strong> predicting outside it. Increasingly unreliable the further you go, because nothing guarantees the pattern continues.</p>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">Slide the prediction point in and out of the data range</div>
+    <div class="ctrl-row">
+      <div class="ctrl"><label>predict at $x =$</label><input type="range" id="prX" min="-6" max="26" step="1" value="6"><span class="val-chip" id="prXVal">6</span></div>
+    </div>
+    <div class="stage"><svg id="prSvg" viewBox="0 0 640 300" role="img" aria-label="Interpolation and extrapolation"></svg></div>
+    <div class="readout" id="prOut"></div>
+  </div>
+
+  <div class="practice-box">
+    <div class="q"><strong>Assess the prediction.</strong> A model of a child's height against age, built from ages 2 to 12, gives $h = 6a + 30$ in inches. What does it predict at age 40, and should you believe it?</div>
+    <button class="show-ans-btn" onclick="toggleAns('p1')">Show answer</button>
+    <div class="a" id="p1">
+      $h = 6(40) + 30 = 270$ inches, which is 22 feet 6 inches.<br><br>
+      <strong>The arithmetic is right and the prediction is worthless.</strong> Age 40 is far outside the 2-to-12 range the model was built from, and people stop growing in their late teens &mdash; the linear pattern does not continue.<br>
+      <em>Assessing validity means checking the input against the data range and against what you know about the situation, not just checking the arithmetic.</em>
+    </div>
+  </div>
+</div>
+
+<div class="card" id="sec-causation">
+  <h2 class="card-title"><span class="num">L6</span>Association is not causation</h2>
+  <p class="body-text">This is the last idea in the course and arguably the most useful outside it.</p>
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0">A strong association means two variables <strong>move together</strong>. It does not mean one <strong>causes</strong> the other. A line through data is a description of a pattern, not an explanation of it.</p>
+  </div>
+  <p class="body-text">When two things are associated, at least four explanations are available, and the data alone cannot distinguish them:</p>
+  <div class="term-grid">
+    <div class="term-sym">$x$ causes $y$</div><div class="term-def">the explanation people jump to</div>
+    <div class="term-sym">$y$ causes $x$</div><div class="term-def">the arrow could point the other way</div>
+    <div class="term-sym">A third factor</div><div class="term-def">something else drives both &mdash; a lurking variable</div>
+    <div class="term-sym">Coincidence</div><div class="term-def">with enough variables, some will line up by chance</div>
+  </div>
+
+  <div class="interactive-area">
+    <div class="ia-label">For each association, which explanation is most plausible?</div>
+    <div id="caQ" style="font-family:var(--fp);font-size:1.02rem;text-align:center;padding:16px 10px;line-height:1.65"></div>
+    <div class="btn-row">
+      <button class="site-btn" data-ca="cause">One causes the other</button>
+      <button class="site-btn" data-ca="third">A third factor</button>
+      <button class="site-btn" data-ca="chance">Coincidence</button>
+    </div>
+    <div class="fb" id="caFb"></div>
+    <div class="readout" id="caScore" style="text-align:center"></div>
+    <div class="btn-row"><button class="site-btn secondary" id="caNext">New example</button></div>
+  </div>
+
+  <div class="note-flag">
+    <span class="flag-label">What would settle it</span>
+    Only a well-designed <strong>experiment</strong>, where the researcher assigns the treatment at random, supports a causal claim. Observational data &mdash; measuring what already happened &mdash; can establish association and nothing stronger, no matter how tight the fit.
+  </div>
+</div>
+
+<div class="card">
+  <h2 class="card-title"><span class="num">&#10003;</span>Quick review</h2>
+  <div class="term-grid">
+    <div class="term-sym">Describe one variable</div><div class="term-def">shape, center, and spread &mdash; all three</div>
+    <div class="term-sym">Which center</div><div class="term-def">mean and standard deviation if symmetric; median and IQR if skewed or containing outliers</div>
+    <div class="term-sym">Outliers</div><div class="term-def">move the mean, standard deviation, and range; leave the median and IQR largely alone</div>
+    <div class="term-sym">Residual</div><div class="term-def">actual minus predicted; positive means the model under-predicted</div>
+    <div class="term-sym">Residual plot</div><div class="term-def">scattered means the line is appropriate; any pattern means it is not</div>
+    <div class="term-sym">Slope in context</div><div class="term-def">the change in $y$ per one-unit change in $x$, with units and an "about"</div>
+    <div class="term-sym">Extrapolation</div><div class="term-def">predicting outside the data range; check it against the situation before believing it</div>
+    <div class="term-sym">Association</div><div class="term-def">is not causation; only a randomised experiment supports a causal claim</div>
+  </div>
+  <div class="highlight-box">
+    <p class="body-text" style="margin:0"><strong>If you remember one thing:</strong> the arithmetic being right does not make the conclusion right. Every model in this unit needs a sentence about how well it fits, over what range it applies, and what it does not prove.</p>
+  </div>
+  <div class="btn-row" style="margin-top:16px">
+    <a class="site-btn secondary" href="unit-7-structures.html" style="text-decoration:none;display:inline-block">&larr; Unit 7</a>
+    <a class="site-btn secondary" href="unit-0-eighth-grade-recap.html" style="text-decoration:none;display:inline-block">Back to the start</a>
+  </div>
+</div>
+</main>
+</div>
+
+<script>
+function toggleAns(id){ const a=document.getElementById(id); a.classList.toggle('show'); }
+window.toggleAns=toggleAns;
+function mathify(el){ if(window.renderMathInElement&&el){ try{ renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]}); }catch(e){} } }
+function fmt(x){ if(!isFinite(x)) return '?'; if(Number.isInteger(x)) return x.toLocaleString('en-US'); return (Math.round(x*100)/100).toString(); }
+function toggleLwsTheme(){
+  const cur=document.body.dataset.theme||'light', next=cur==='dark'?'light':'dark';
+  document.body.dataset.theme=next; try{ localStorage.setItem('lws-theme',next); }catch(e){}
+  const b=document.getElementById('themeBtn'); if(b) b.innerHTML=next==='dark'?'&#9728;':'&#9790;';
+}
+window.toggleLwsTheme=toggleLwsTheme;
+try{ if(localStorage.getItem('lws-theme')==='dark'){ document.body.dataset.theme='dark'; const b=document.getElementById('themeBtn'); if(b) b.innerHTML='&#9728;'; } }catch(e){}
+(function setupSearch(){
+  const input=document.querySelector('.search input'); if(!input) return;
+  const cards=Array.from(document.querySelectorAll('.main .card'));
+  const pgHead=document.querySelector('.main .pg-head'); let em=null;
+  input.addEventListener('input',e=>{
+    const q=e.target.value.toLowerCase().trim(); let n=0;
+    cards.forEach(c=>{ if(!q){c.style.display='';n++;return;} const hit=c.textContent.toLowerCase().includes(q); c.style.display=hit?'':'none'; if(hit)n++; });
+    if(pgHead) pgHead.style.display=q?'none':'';
+    if(q&&n===0){ if(!em){ em=document.createElement('div'); em.className='card'; em.style.textAlign='center';
+      em.innerHTML='<div class="body-text" style="color:var(--slate)">No sections match that search.</div>'; document.querySelector('.main').appendChild(em);} em.style.display=''; }
+    else if(em){ em.style.display='none'; }
+  });
+  input.addEventListener('keydown',e=>{ if(e.key==='Escape'){input.value='';input.dispatchEvent(new Event('input'));} });
+})();
+
+/* ===== shared stats helpers ===== */
+function mean(a){ return a.reduce((s,v)=>s+v,0)/a.length; }
+function median(a){ const s=a.slice().sort((x,y)=>x-y), n=s.length;
+  return n%2 ? s[(n-1)/2] : (s[n/2-1]+s[n/2])/2; }
+function quart(a){ const s=a.slice().sort((x,y)=>x-y), n=s.length;
+  const lo=s.slice(0,Math.floor(n/2)), hi=s.slice(Math.ceil(n/2));
+  return {q1:median(lo), q2:median(s), q3:median(hi)}; }
+function sd(a){ const m=mean(a); return Math.sqrt(a.reduce((s,v)=>s+(v-m)*(v-m),0)/a.length); }
+function lsrl(xs,ys){
+  const n=xs.length, sx=xs.reduce((a,b)=>a+b,0), sy=ys.reduce((a,b)=>a+b,0);
+  const sxy=xs.reduce((a,x,i)=>a+x*ys[i],0), sxx=xs.reduce((a,x)=>a+x*x,0);
+  const m=(n*sxy-sx*sy)/(n*sxx-sx*sx);
+  return {m, b:(sy-m*sx)/n};
+}
+const XS=[1,2,3,4,5,6,7,8,9,10];
+const LINEAR=[8,11,15,17,21,23,27,29,33,35];
+const CURVED=[3,4,7,10,15,22,33,50,74,111];
+
+/* ===== W1: histogram + box plot ===== */
+(function dist(){
+  const svg=document.getElementById('dsSvg'), out=document.getElementById('dsOut');
+  if(!svg) return;
+  const SETS=[
+    {name:'roughly symmetric', data:[3,4,4,5,5,5,6,6,6,6,7,7,7,8,8,9],
+     note:'The bars rise to a middle peak and fall away evenly. Mean and median land in nearly the same place, so quoting the <strong>mean and standard deviation</strong> is appropriate.'},
+    {name:'skewed right', data:[2,2,3,3,3,3,4,4,4,5,5,6,8,11,14,18],
+     note:'A long tail stretches to the right. The few large values drag the <strong>mean above the median</strong>, so the <strong>median and IQR</strong> describe this set more honestly.'}
+  ];
+  let i=0;
+  document.querySelectorAll('button[data-ds]').forEach(b=>{
+    b.addEventListener('click',()=>{ document.querySelectorAll('button[data-ds]').forEach(x=>x.classList.remove('active')); b.classList.add('active'); i=+b.dataset.ds; draw(); });
+  });
+  function draw(){
+    const D=SETS[i].data, lo=0, hi=20;
+    const L=56,R=600,T=20,HB=170, BX=225, BY=262;
+    const sx=v=>L+((v-lo)/(hi-lo))*(R-L);
+    const counts={}; D.forEach(v=>counts[v]=(counts[v]||0)+1);
+    const maxC=Math.max.apply(null,Object.values(counts));
+    let s='';
+    for(let v=lo;v<=hi;v+=2) s+='<text x="'+sx(v)+'" y="'+(HB+16)+'" text-anchor="middle" font-family="Bitter,serif" font-size="10.5" fill="var(--slate)">'+v+'</text>';
+    s+='<line x1="'+L+'" y1="'+HB+'" x2="'+R+'" y2="'+HB+'" stroke="var(--forest)" stroke-width="2"/>';
+    const bw=(sx(1)-sx(0))*0.9;
+    Object.keys(counts).forEach(k=>{
+      const v=+k, c=counts[k], h=(c/maxC)*(HB-T-6);
+      s+='<rect x="'+(sx(v)-bw/2)+'" y="'+(HB-h)+'" width="'+bw+'" height="'+h+'" fill="var(--sage)" opacity="0.75" stroke="var(--forest)" stroke-width="1"/>';
+    });
+    s+='<text x="'+(L-6)+'" y="'+(T+12)+'" text-anchor="end" font-family="Dosis,sans-serif" font-size="11.5" fill="var(--slate)">count</text>';
+    const {q1,q2,q3}=quart(D), mn=Math.min.apply(null,D), mx=Math.max.apply(null,D);
+    s+='<line x1="'+sx(mn)+'" y1="'+BY+'" x2="'+sx(q1)+'" y2="'+BY+'" stroke="var(--forest)" stroke-width="2"/>';
+    s+='<line x1="'+sx(q3)+'" y1="'+BY+'" x2="'+sx(mx)+'" y2="'+BY+'" stroke="var(--forest)" stroke-width="2"/>';
+    [mn,mx].forEach(v=>s+='<line x1="'+sx(v)+'" y1="'+(BY-11)+'" x2="'+sx(v)+'" y2="'+(BY+11)+'" stroke="var(--forest)" stroke-width="2"/>');
+    s+='<rect x="'+sx(q1)+'" y="'+(BY-19)+'" width="'+(sx(q3)-sx(q1))+'" height="38" fill="var(--sage)" opacity="0.5" stroke="var(--forest)" stroke-width="2"/>';
+    s+='<line x1="'+sx(q2)+'" y1="'+(BY-19)+'" x2="'+sx(q2)+'" y2="'+(BY+19)+'" stroke="var(--forest)" stroke-width="3"/>';
+    s+='<circle cx="'+sx(mean(D))+'" cy="'+BY+'" r="5" fill="var(--bad)"/>';
+    s+='<text x="'+sx(mean(D))+'" y="'+(BY+34)+'" text-anchor="middle" font-family="Bitter,serif" font-size="10.5" font-weight="700" fill="var(--bad)">mean</text>';
+    s+='<text x="'+sx(q2)+'" y="'+(BY-25)+'" text-anchor="middle" font-family="Bitter,serif" font-size="10.5" font-weight="700" fill="var(--forest)">median</text>';
+    s+='<text x="'+(L-6)+'" y="'+(BY+4)+'" text-anchor="end" font-family="Dosis,sans-serif" font-size="11.5" fill="var(--slate)">box</text>';
+    svg.innerHTML=s;
+    out.innerHTML='<strong>Shape:</strong> '+SETS[i].name+'.<br>'
+      +'<strong>Mean</strong> '+fmt(mean(D))+' &nbsp;&middot;&nbsp; <strong>Median</strong> '+fmt(q2)
+      +' &nbsp;&middot;&nbsp; <strong>IQR</strong> '+fmt(q3-q1)+' &nbsp;&middot;&nbsp; <strong>SD</strong> '+fmt(sd(D))+'<br><br>'
+      +SETS[i].note
+      +'<br><br><em>The gap between the mean and median is itself a clue: they separate when the data is skewed and sit together when it is symmetric.</em>';
+    mathify(out);
+  }
+  draw();
+})();
+
+/* ===== W2: outlier effect ===== */
+(function outlier(){
+  const svg=document.getElementById('olSvg'), tw=document.getElementById('olTableWrap'), out=document.getElementById('olOut');
+  const V=document.getElementById('olV'), VV=document.getElementById('olVVal');
+  if(!svg) return;
+  const BASE=[22,24,25,26,27,28,29,31,33];
+  function draw(){
+    const last=+V.value; VV.textContent=last;
+    const D=BASE.concat([last]);
+    const lo=15, hi=210, L=50,R=600,Y=92;
+    const sx=v=>L+((v-lo)/(hi-lo))*(R-L);
+    let s='<line x1="'+L+'" y1="'+Y+'" x2="'+R+'" y2="'+Y+'" stroke="var(--forest)" stroke-width="2"/>';
+    for(let v=25;v<=200;v+=25) s+='<text x="'+sx(v)+'" y="'+(Y+22)+'" text-anchor="middle" font-family="Bitter,serif" font-size="10.5" fill="var(--slate)">'+v+'</text>';
+    BASE.forEach(v=>{ s+='<circle cx="'+sx(v)+'" cy="'+Y+'" r="6" fill="var(--sage)" stroke="var(--forest)" stroke-width="1.2"/>'; });
+    const far = last>45;
+    s+='<circle cx="'+sx(last)+'" cy="'+Y+'" r="7.5" fill="'+(far?'var(--bad)':'var(--sage)')+'" stroke="var(--forest)" stroke-width="1.4"/>';
+    s+='<line x1="'+sx(mean(D))+'" y1="'+(Y-30)+'" x2="'+sx(mean(D))+'" y2="'+(Y-8)+'" stroke="var(--bad)" stroke-width="2.5"/>';
+    s+='<text x="'+sx(mean(D))+'" y="'+(Y-36)+'" text-anchor="middle" font-family="Bitter,serif" font-size="11" font-weight="700" fill="var(--bad)">mean</text>';
+    s+='<line x1="'+sx(median(D))+'" y1="'+(Y+8)+'" x2="'+sx(median(D))+'" y2="'+(Y+30)+'" stroke="var(--arith)" stroke-width="2.5"/>';
+    s+='<text x="'+sx(median(D))+'" y="'+(Y+48)+'" text-anchor="middle" font-family="Bitter,serif" font-size="11" font-weight="700" fill="var(--arith)">median</text>';
+    svg.innerHTML=s;
+
+    const D0=BASE.concat([30]);
+    const {q1,q3}=quart(D), q0=quart(D0);
+    let h='<table class="seq-table"><tr><th>Statistic</th><th>last value 30</th><th>last value '+last+'</th><th>change</th></tr>';
+    const rows=[['Mean',mean(D0),mean(D)],['Median',median(D0),median(D)],['IQR',q0.q3-q0.q1,q3-q1],
+                ['Standard deviation',sd(D0),sd(D)],['Range',Math.max.apply(null,D0)-Math.min.apply(null,D0),Math.max.apply(null,D)-Math.min.apply(null,D)]];
+    rows.forEach(([n,a,b])=>{
+      const d=b-a;
+      h+='<tr><th>'+n+'</th><td>'+fmt(a)+'</td><td>'+fmt(b)+'</td><td style="color:'+(Math.abs(d)<0.05?'var(--slate)':'var(--bad)')+';font-weight:700">'+(Math.abs(d)<0.05?'none':(d>0?'+':'')+fmt(d))+'</td></tr>';
+    });
+    h+='</table>';
+    tw.innerHTML=h;
+
+    out.innerHTML = far
+      ? 'With the last value out at <strong>'+last+'</strong>, the <strong>mean, standard deviation and range have all moved a long way</strong>, while the <strong>median and IQR have barely shifted</strong>.<br><br>'
+        +'That is the whole distinction: the mean adds every value, so an extreme one pulls it. The median only asks which value sits in the middle position, and one large number does not change who is in the middle.'
+      : 'The last value is still sitting with the group, so every statistic agrees. Slide it to the right and watch which ones move and which stay put.';
+    mathify(out);
+  }
+  V.addEventListener('input',draw); draw();
+})();
+
+/* ===== W3 + W4: scatter, line, residuals ===== */
+function scatterFig(svgId,outId,which,showResid){
+  const svg=document.getElementById(svgId), out=document.getElementById(outId);
+  if(!svg) return null;
+  const Y = which===0 ? LINEAR : CURVED;
+  const {m,b}=lsrl(XS,Y);
+  const res=XS.map((x,i)=>Y[i]-(m*x+b));
+  return {Y,m,b,res,svg,out};
+}
+(function scatter(){
+  const svg=document.getElementById('scSvg'), out=document.getElementById('scOut');
+  if(!svg) return;
+  let w=0;
+  document.querySelectorAll('button[data-sc]').forEach(btn=>{
+    btn.addEventListener('click',()=>{ document.querySelectorAll('button[data-sc]').forEach(x=>x.classList.remove('active')); btn.classList.add('active'); w=+btn.dataset.sc; draw(); });
+  });
+  function draw(){
+    const Y = w===0?LINEAR:CURVED;
+    const {m,b}=lsrl(XS,Y);
+    const yMax=Math.max.apply(null,Y)*1.12, yMin=Math.min(0,b);
+    const L=58,R=600,T=20,B=258;
+    const sx=x=>L+((x-0)/11)*(R-L), sy=y=>B-((y-yMin)/(yMax-yMin))*(B-T);
+    let s='';
+    for(let g=0;g<=10;g+=2) s+='<line x1="'+sx(g)+'" y1="'+T+'" x2="'+sx(g)+'" y2="'+B+'" stroke="var(--sage-l)" stroke-width="0.6" opacity="0.55"/>';
+    s+='<line x1="'+L+'" y1="'+B+'" x2="'+R+'" y2="'+B+'" stroke="var(--forest)" stroke-width="2"/>';
+    s+='<line x1="'+L+'" y1="'+T+'" x2="'+L+'" y2="'+B+'" stroke="var(--forest)" stroke-width="2"/>';
+    s+='<line x1="'+sx(0)+'" y1="'+sy(b)+'" x2="'+sx(11)+'" y2="'+sy(m*11+b)+'" stroke="var(--arith)" stroke-width="2.6"/>';
+    XS.forEach((x,i)=>{
+      const pred=m*x+b;
+      s+='<line x1="'+sx(x)+'" y1="'+sy(Y[i])+'" x2="'+sx(x)+'" y2="'+sy(pred)+'" stroke="var(--bad)" stroke-width="1.6" opacity="0.6"/>';
+      s+='<circle cx="'+sx(x)+'" cy="'+sy(Y[i])+'" r="5.5" fill="var(--forest)"/>';
+    });
+    for(let g=0;g<=10;g+=2) s+='<text x="'+sx(g)+'" y="'+(B+18)+'" text-anchor="middle" font-family="Bitter,serif" font-size="11" fill="var(--slate)">'+g+'</text>';
+    s+='<text x="'+((L+R)/2)+'" y="'+(B+38)+'" text-anchor="middle" font-family="Dosis,sans-serif" font-size="13" fill="var(--slate)">x</text>';
+    s+='<text x="'+(R-6)+'" y="'+(T+14)+'" text-anchor="end" font-family="Dosis,sans-serif" font-size="12" fill="var(--bad)">red segments are the residuals</text>';
+    svg.innerHTML=s;
+    out.innerHTML='<strong>Fitted line:</strong> $y = '+fmt(m)+'x '+(b>=0?'+ '+fmt(b):'- '+fmt(Math.abs(b)))+'$<br><br>'
+      +(w===0
+        ? 'The points sit close to the line and fall on both sides of it fairly evenly. This looks like a reasonable fit &mdash; but the residual plot below is what confirms it.'
+        : 'Technology fitted this line without complaint, and at a glance it passes through the cloud. Look closely though: the points are <strong>above</strong> the line at both ends and <strong>below</strong> it in the middle. That is a pattern, and patterns mean a line is the wrong family.');
+    mathify(out);
+  }
+  draw();
+})();
+
+(function residuals(){
+  const svg=document.getElementById('rsSvg'), tw=document.getElementById('rsTableWrap'), out=document.getElementById('rsOut');
+  if(!svg) return;
+  let w=0;
+  document.querySelectorAll('button[data-rs]').forEach(btn=>{
+    btn.addEventListener('click',()=>{ document.querySelectorAll('button[data-rs]').forEach(x=>x.classList.remove('active')); btn.classList.add('active'); w=+btn.dataset.rs; draw(); });
+  });
+  function draw(){
+    const Y=w===0?LINEAR:CURVED;
+    const {m,b}=lsrl(XS,Y);
+    const res=XS.map((x,i)=>Y[i]-(m*x+b));
+    const amp=Math.max.apply(null,res.map(Math.abs))*1.25;
+    const L=58,R=600,T=20,B=238, MID=(T+B)/2;
+    const sx=x=>L+((x-0)/11)*(R-L), sy=r=>MID-(r/amp)*((B-T)/2);
+    let s='';
+    s+='<line x1="'+L+'" y1="'+MID+'" x2="'+R+'" y2="'+MID+'" stroke="var(--forest)" stroke-width="2.5"/>';
+    s+='<text x="'+(L+6)+'" y="'+(MID-8)+'" font-family="Bitter,serif" font-size="11" fill="var(--slate)">residual = 0</text>';
+    XS.forEach((x,i)=>{
+      s+='<line x1="'+sx(x)+'" y1="'+MID+'" x2="'+sx(x)+'" y2="'+sy(res[i])+'" stroke="var(--slate)" stroke-width="1.4" opacity="0.6"/>';
+      s+='<circle cx="'+sx(x)+'" cy="'+sy(res[i])+'" r="6" fill="'+(res[i]>=0?'var(--good)':'var(--bad)')+'"/>';
+    });
+    for(let g=0;g<=10;g+=2) s+='<text x="'+sx(g)+'" y="'+(B+18)+'" text-anchor="middle" font-family="Bitter,serif" font-size="11" fill="var(--slate)">'+g+'</text>';
+    s+='<text x="'+((L+R)/2)+'" y="'+(B+40)+'" text-anchor="middle" font-family="Dosis,sans-serif" font-size="13" fill="var(--slate)">x</text>';
+    svg.innerHTML=s;
+
+    let h='<table class="seq-table"><tr><th>$x$</th>';
+    XS.forEach(x=>h+='<th>'+x+'</th>'); h+='</tr><tr><th>residual</th>';
+    res.forEach(r=>h+='<td style="color:'+(r>=0?'var(--good)':'var(--bad)')+';font-weight:700">'+fmt(r)+'</td>');
+    h+='</tr></table>';
+    tw.innerHTML=h; mathify(tw);
+
+    let flips=0; for(let i=1;i<res.length;i++) if((res[i]>0)!==(res[i-1]>0)) flips++;
+    const signs=res.map(r=>r>0?'+':'&minus;').join(' ');
+    out.innerHTML='<strong>Signs across the plot:</strong> '+signs+'<br>'
+      +'<strong>Sign changes:</strong> '+flips+'<br><br>'
+      +(w===0
+        ? 'The residuals bounce above and below zero with no shape to them, changing sign '+flips+' times across ten points. <strong>Randomly scattered, so a linear model is appropriate here.</strong>'
+        : 'The residuals start high, dive below zero through the middle, and climb back up &mdash; only '+flips+' sign changes across ten points. That is a clear <strong>U-shape</strong>, and a pattern in the residuals means <strong>a linear model is not appropriate</strong>. This data is exponential, and NC expects an exponential model to be fitted instead.');
+    mathify(out);
+  }
+  draw();
+})();
+
+/* ===== W5: interpolation vs extrapolation ===== */
+(function predict(){
+  const svg=document.getElementById('prSvg'), out=document.getElementById('prOut');
+  const X=document.getElementById('prX'), XV=document.getElementById('prXVal');
+  if(!svg) return;
+  const {m,b}=lsrl(XS,LINEAR);
+  function draw(){
+    const px=+X.value; XV.textContent=px;
+    const xMin=-7,xMax=27;
+    const yAll=[0, m*xMin+b, m*xMax+b].concat(LINEAR);
+    const yMin=Math.min.apply(null,yAll)-5, yMax=Math.max.apply(null,yAll)+5;
+    const L=58,R=600,T=20,B=248;
+    const sx=x=>L+((x-xMin)/(xMax-xMin))*(R-L), sy=y=>B-((y-yMin)/(yMax-yMin))*(B-T);
+    let s='';
+    // the range the data actually covers
+    s+='<rect x="'+sx(1)+'" y="'+T+'" width="'+(sx(10)-sx(1))+'" height="'+(B-T)+'" fill="var(--sage)" opacity="0.16"/>';
+    s+='<text x="'+((sx(1)+sx(10))/2)+'" y="'+(T+15)+'" text-anchor="middle" font-family="Bitter,serif" font-size="11.5" font-weight="700" fill="var(--sage)">data range</text>';
+    s+='<line x1="'+L+'" y1="'+sy(0)+'" x2="'+R+'" y2="'+sy(0)+'" stroke="var(--forest)" stroke-width="2"/>';
+    s+='<line x1="'+sx(xMin)+'" y1="'+sy(m*xMin+b)+'" x2="'+sx(xMax)+'" y2="'+sy(m*xMax+b)+'" stroke="var(--arith)" stroke-width="2.4" stroke-dasharray="7 5"/>';
+    s+='<line x1="'+sx(1)+'" y1="'+sy(m*1+b)+'" x2="'+sx(10)+'" y2="'+sy(m*10+b)+'" stroke="var(--arith)" stroke-width="3"/>';
+    XS.forEach((x,i)=>s+='<circle cx="'+sx(x)+'" cy="'+sy(LINEAR[i])+'" r="5" fill="var(--forest)"/>');
+    const inside = px>=1 && px<=10;
+    const py=m*px+b;
+    s+='<line x1="'+sx(px)+'" y1="'+B+'" x2="'+sx(px)+'" y2="'+sy(py)+'" stroke="'+(inside?'var(--good)':'var(--bad)')+'" stroke-width="1.8" stroke-dasharray="4 3"/>';
+    s+='<circle cx="'+sx(px)+'" cy="'+sy(py)+'" r="8" fill="'+(inside?'var(--good)':'var(--bad)')+'" stroke="var(--white)" stroke-width="2"/>';
+    for(let g=-5;g<=25;g+=5) s+='<text x="'+sx(g)+'" y="'+(B+18)+'" text-anchor="middle" font-family="Bitter,serif" font-size="11" fill="var(--slate)">'+g+'</text>';
+    s+='<text x="'+((L+R)/2)+'" y="'+(B+40)+'" text-anchor="middle" font-family="Dosis,sans-serif" font-size="13" fill="var(--slate)">x</text>';
+    svg.innerHTML=s;
+    const dist = inside ? 0 : (px<1 ? 1-px : px-10);
+    out.innerHTML='<strong>Model:</strong> $y = '+fmt(m)+'x '+(b>=0?'+ '+fmt(b):'- '+fmt(Math.abs(b)))+'$, built from data covering $x$ from 1 to 10.<br>'
+      +'<strong>Prediction at $x = '+px+'$:</strong> about '+fmt(py)+'<br><br>'
+      +(inside
+        ? '<strong style="color:var(--good)">Interpolation.</strong> This input sits inside the range the data covers, so the prediction rests on evidence either side of it. Reasonable to use.'
+        : '<strong style="color:var(--bad)">Extrapolation.</strong> This is '+fmt(dist)+' units beyond the edge of the data. The dashed line is the model still obeying its own equation, but nothing was measured out here &mdash; the pattern is assumed, not observed.<br><br>'
+          +'The further out you go, the less it is worth. Always check the prediction against what you know about the situation as well as against the range.');
+    mathify(out);
+  }
+  X.addEventListener('input',draw); draw();
+})();
+
+/* ===== W6: association vs causation ===== */
+(function causation(){
+  const q=document.getElementById('caQ'), fb=document.getElementById('caFb'), sc=document.getElementById('caScore');
+  if(!q) return;
+  const ITEMS=[
+    {t:'Ice cream sales and drowning deaths both rise and fall together across the year.', a:'third',
+     w:'Hot weather drives both &mdash; more ice cream bought, more people swimming. A classic lurking variable.'},
+    {t:'Students who study more hours tend to score higher on tests.', a:'cause',
+     w:'Studying plausibly does improve scores. Even so, observational data alone cannot prove it &mdash; motivated students may both study more and test better for other reasons.'},
+    {t:'Shoe size and reading ability are strongly associated among primary school children.', a:'third',
+     w:'Age drives both. Older children have bigger feet and read better. Nothing about feet affects reading.'},
+    {t:'The number of films Nicolas Cage appeared in tracks swimming pool drownings by year.', a:'chance',
+     w:'Pure coincidence. Compare enough unrelated series and some will line up; this is why a tight fit alone proves nothing.'},
+    {t:'Houses with more bedrooms sell for more money.', a:'cause',
+     w:'More bedrooms means more house, which genuinely raises the price. Size is doing real causal work here.'},
+    {t:'Countries that eat more chocolate per person win more Nobel Prizes.', a:'third',
+     w:'National wealth drives both &mdash; richer countries buy more chocolate and fund more research. Chocolate is not making anyone win prizes.'},
+    {t:'Children with larger vocabularies tend to be taller.', a:'third',
+     w:'Age again. Both grow together through childhood, with no direct link between them.'}
+  ];
+  let right=0, asked=0, ans=false, order=[], i=0;
+  function sh(){ order=ITEMS.map((_,k)=>k); for(let k=order.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));const t=order[k];order[k]=order[j];order[j]=t;} i=0; }
+  function show(){ if(i>=order.length) sh(); q.innerHTML=ITEMS[order[i]].t; fb.className='fb'; fb.innerHTML=''; ans=false; }
+  document.querySelectorAll('button[data-ca]').forEach(b=>{
+    b.addEventListener('click',()=>{
+      if(ans) return; ans=true; asked++;
+      const it=ITEMS[order[i]], okk=b.dataset.ca===it.a;
+      if(okk) right++;
+      const names={cause:'one causing the other',third:'a third factor',chance:'coincidence'};
+      fb.className='fb show '+(okk?'ok':'no');
+      fb.innerHTML=(okk?'<strong>Correct.</strong> ':'<strong>The most plausible explanation is '+names[it.a]+'.</strong> ')+it.w;
+      sc.textContent='Score: '+right+' of '+asked; mathify(fb);
+    });
+  });
+  document.getElementById('caNext').addEventListener('click',()=>{i++;show();});
+  sh(); sc.textContent='Score: 0 of 0'; show();
+})();
+</script>
+</body>
+</html>
